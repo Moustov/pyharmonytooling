@@ -1,6 +1,7 @@
 from pychord import Chord
 
-from src.harmony.harmony_tools import LOD_ALL, find_substitutes
+from src.harmony.harmony_tools import find_substitutes
+from src.output.console import LOD_ALL
 
 # song = """
 #               A           E

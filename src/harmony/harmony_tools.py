@@ -1,11 +1,6 @@
 from pychord import ChordProgression, Chord
 
-LOD_NONE = 0
-LOD_TONE = 1
-LOD_CHORD = 2
-LOD_NOTE = 3
-LOD_ALL = 4
-outcome_level_of_detail = LOD_ALL
+from src.output.console import LOD_TONE, LOD_CHORD, LOD_NOTE, print_detail
 
 chromatic_scale = ["A", "B", "C", "D", "E", "F", "G", "A#", "C#", "D#", "F#", "G#"]
 circle_of_fifths_natural_majors = {
@@ -52,11 +47,6 @@ circle_of_fifths_melodic_minors = {  # todo
     "Bb": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
     "F": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
 }
-
-
-def print_detail(expected_level_of_detail, message: str):
-    if expected_level_of_detail <= outcome_level_of_detail:
-        print(message)
 
 
 def get_compliance_note_presence(tone: [str], cp: ChordProgression) -> float:
