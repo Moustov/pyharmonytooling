@@ -50,6 +50,12 @@ def get_compliance_chord_presence(tone: [str], cp: ChordProgression) -> float:
 
 
 def get_borrowed_chords(tone: [str], song_chord_progression: ChordProgression) -> {}:
+    """
+    returns borrowed chords the song_chord_progression involves from a given tone
+    :param tone: array of chord names
+    :param song_chord_progression:
+    :return:
+    """
     borrowed_chords = {}
     colors = []
     for chord_tone in tone:
@@ -72,6 +78,7 @@ def get_borrowed_chords(tone: [str], song_chord_progression: ChordProgression) -
 
 def get_chord_names_possible_qualities(chord: str) -> [str]:
     """
+    returns the list of strings with possible qualities a chord may have
     see https://www.oolimo.com/guitarchords/find
     :param chord:
     :return:
@@ -110,21 +117,19 @@ def get_chord_names_possible_qualities(chord: str) -> [str]:
                         enriched_with_quality_with_bass.append(a)
                     except Exception as err:
                         print(err, c, cs)
-                else:
-                    pass    # todo: remove this part - just for break point matters
         except Exception as err:
             print(err)
     return enriched_with_quality_with_bass
 
 
-
 def get_chord_possible_qualities(chord: str) -> [str]:
     """
-    see https://www.oolimo.com/guitarchords/find
+    returns the list of Chord with possible qualities a chord may have
     :param chord:
     :return:
     """
     res = []
+    # print("get_chord_possible_qualities from ", chord)
     possible_chords = get_chord_names_possible_qualities(chord)
     for c in possible_chords:
         try:
@@ -135,6 +140,11 @@ def get_chord_possible_qualities(chord: str) -> [str]:
 
 
 def digest_song(song: str) -> ChordProgression:
+    """
+    return a ChordProgression object from a song
+    :param song:
+    :return:
+    """
     cp = None
     possible_chords = []
     lines = song.split("\n")
@@ -219,8 +229,6 @@ def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}) -> []:
         compliances[tone] = compliance_level
         if compliance_level > compliance_level_max[0]:
             compliance_level_max = [compliance_level, tone]
-        borrowed_chords = get_borrowed_chords(tone, cp)
-        print("   Borrowed chords:", borrowed_chords.keys())
     return compliance_level_max
 
 
