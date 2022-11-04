@@ -44,3 +44,26 @@ ouput:
 ouput:
 
     Borrowed chords: dict_keys(['Cm'])
+
+### Find substitutes from a chord ###
+    from pychord import Chord 
+    from src.harmony.harmony_tools import LOD_ALL, find_substitutes
+
+    outcome_level_of_detail = LOD_ALL
+    chord = "G6"
+    print("substitutes from :", chord, find_substitutes(Chord(chord)))
+ouput:
+
+    Number of existing chords: 5772
+    Em7/9 == G6
+    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
+    Em7/13 == G6
+    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
+    Em7/9/G == G6
+    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
+    Em7/13/G == G6
+    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
+    G6/9/G == G6
+    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
+    substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
+

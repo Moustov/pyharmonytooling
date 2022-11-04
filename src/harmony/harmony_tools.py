@@ -1,5 +1,63 @@
 from pychord import ChordProgression, Chord
 
+LOD_NONE = 0
+LOD_TONE = 1
+LOD_CHORD = 2
+LOD_NOTE = 3
+LOD_ALL = 4
+outcome_level_of_detail = LOD_ALL
+
+chromatic_scale = ["A", "B", "C", "D", "E", "F", "G", "A#", "C#", "D#", "F#", "G#"]
+circle_of_fifths_natural_majors = {
+    "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
+    "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
+    "D": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
+    "A": ["A", "Bm", "C#m", "D", "E", "Fm", "G#dim"],
+    "E": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
+    "B": ["B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"],
+    "F#": ["F#", "G#m", "Abm", "Bb", "C#", "D#m", "Fdim"],
+    "Db": ["Db", "Ebm", "F#m", "G#", "Ab", "Bbm", "C#dim"],
+    "Ab": ["Ab", "Bbm", "Cm", "Db", "Eb", "Fm", "Gdim"],
+    "Eb": ["Eb", "Fm", "Gm", "Ab", "Bb", "Cm", "Ddim"],
+    "Bb": ["Bb", "Cm", "Dm", "Eb", "F", "Gm", "Adim"],
+    "F": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"]
+}
+circle_of_fifths_church_modes = circle_of_fifths_natural_majors
+circle_of_fifths_major_modes = circle_of_fifths_natural_majors
+circle_of_fifths_harmonic_minors = {  # todo
+    "C": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "G": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "D": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "A": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "E": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "B": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "F#": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "Db": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "Ab": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "Eb": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "Bb": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+    "F": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
+}
+circle_of_fifths_melodic_minors = {  # todo
+    "C": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "G": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "D": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "E": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "A": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "B": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "F#": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "Dd": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "Ab": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "Eb": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "Bb": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+    "F": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
+}
+
+
+def print_detail(expected_level_of_detail, message: str):
+    if expected_level_of_detail <= outcome_level_of_detail:
+        print(message)
+
 
 def get_compliance_note_presence(tone: [str], cp: ChordProgression) -> float:
     """
@@ -21,6 +79,38 @@ def get_compliance_chord_frequency(tone: [str], cp: ChordProgression) -> float:
     :return:
     """
     return 0.0
+
+def all_existing_chords() -> [Chord]:
+    possible_chords_from_note = []
+    for note in chromatic_scale:
+        possible_chords_from_note += get_chord_names_possible_qualities(note)
+        possible_chords_from_note += get_chord_names_possible_qualities(note+"m")
+    print_detail(LOD_TONE, f"Number of existing chords: {len(possible_chords_from_note)}")
+    return possible_chords_from_note
+
+
+def find_substitutes(chord: Chord) -> [Chord]:
+    similar_chords = []
+    possible_chords = all_existing_chords()
+    for pc in possible_chords:
+        if pc != chord and pc.components() == chord.components():
+            similar_chords.append(pc)
+            print_detail(LOD_CHORD, f"{pc} == {chord}")
+            print_detail(LOD_NOTE, f"{pc.components()} vs {chord.components()}")
+    return similar_chords
+
+
+
+def find_similar_chords() -> []:
+    similar_chords = []
+    possible_chords_from_note = all_existing_chords()
+    for chord1 in possible_chords_from_note:
+        for chord2 in possible_chords_from_note:
+            if chord1 != chord2 and chord1.components() == chord2.components():
+                similar_chords.append([chord1, chord2])
+                print_detail(LOD_CHORD, f"{chord1} == {chord2}")
+                print_detail(LOD_NOTE, f"{chord1.components()} vs {chord2.components()}")
+    return similar_chords
 
 
 def get_compliance_chord_presence(tone: [str], cp: ChordProgression) -> float:
@@ -144,7 +234,6 @@ def get_chord_names_possible_qualities(chord: str) -> [str]:
             # print("Chord", chord+c, "is invalid", err)
             pass
     enriched_with_quality_with_bass = enriched_with_quality.copy()
-    chromatic_scale = ["A", "B", "C", "D", "E", "F", "G", "A#", "C#", "D#", "F#", "G#"]
     for c in enriched_with_quality:
         for cs in chromatic_scale:
             try:
@@ -236,64 +325,6 @@ def generate_circle_of_fifths(intervals, qualities, cycle_sequence):
     """
     cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
     return {}
-
-
-circle_of_fifths_natural_majors = {
-    "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
-    "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
-    "D": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
-    "A": ["A", "Bm", "C#m", "D", "E", "Fm", "G#dim"],
-    "E": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
-    "B": ["B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"],
-    "F#": ["F#", "G#m", "Abm", "Bb", "C#", "D#m", "Fdim"],
-    "Db": ["Db", "Ebm", "F#m", "G#", "Ab", "Bbm", "C#dim"],
-    "Ab": ["Ab", "Bbm", "Cm", "Db", "Eb", "Fm", "Gdim"],
-    "Eb": ["Eb", "Fm", "Gm", "Ab", "Bb", "Cm", "Ddim"],
-    "Bb": ["Bb", "Cm", "Dm", "Eb", "F", "Gm", "Adim"],
-    "F": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"]
-}
-circle_of_fifths_church_modes = circle_of_fifths_natural_majors
-circle_of_fifths_major_modes = circle_of_fifths_natural_majors
-circle_of_fifths_harmonic_minors = {  # todo
-    "C": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "G": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "D": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "A": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "E": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "B": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "F#": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "Db": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "Ab": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "Eb": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "Bb": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    "F": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-}
-circle_of_fifths_melodic_minors = {  # todo
-    "C": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "G": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "D": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "E": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "A": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "B": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "F#": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "Dd": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "Ab": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "Eb": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "Bb": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    "F": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-}
-
-LOD_NONE = 0
-LOD_TONE = 1
-LOD_CHORD = 2
-LOD_NOTE = 3
-LOD_ALL = 4
-outcome_level_of_detail = LOD_ALL
-
-
-def print_detail(expected_level_of_detail, message: str):
-    if expected_level_of_detail >= outcome_level_of_detail:
-        print(message)
 
 
 def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}, cof_name: str) -> []:
