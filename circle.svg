@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkpad (http://www.taptrix.com/) -->
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkpad="http://taptrix.com/inkpad/svg_extensions" xmlns:ns1="http://sozi.baierouge.fr" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" id="svg2" sodipodi:docname="Circle of Fifths.svg" version="1.1" inkscape:version="0.48.4 r9939" viewBox="0,0,792,792">
+  <sodipodi:namedview id="namedview514" bordercolor="#666666" inkscape:pageshadow="2" guidetolerance="10" pagecolor="#ffffff" gridtolerance="10" inkscape:window-maximized="1" inkscape:zoom="0.54545455" objecttolerance="10" borderopacity="1" inkscape:current-layer="svg2" inkscape:cx="495" inkscape:cy="495" inkscape:window-y="-8" inkscape:window-x="-8" inkscape:window-width="1366" showgrid="false" inkscape:pageopacity="0" inkscape:window-height="705"/>
+  <defs id="defs8">
+    <radialGradient id="RadialGradient" cx="356.84" gradientUnits="userSpaceOnUse" cy="121.63" r="14.09" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop17" stop-color="#ffffff" stop-opacity=".82618" offset="0"/>
+      <stop id="stop19" stop-color="#000000" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_2" cx="368.94" gradientUnits="userSpaceOnUse" cy="122.66" r="15.117" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop22" stop-color="#ffffff" stop-opacity=".82618" offset="0"/>
+      <stop id="stop24" stop-color="#000000" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_3" cx="370.48" gradientUnits="userSpaceOnUse" cy="122.66" r=".27704" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop27" stop-color="#ffffff" stop-opacity=".82618" offset="0"/>
+      <stop id="stop29" stop-color="#000000" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_4" cx="354.96" gradientUnits="userSpaceOnUse" cy="79.301" r="14.101" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop32" stop-color="#ffffff" offset="0"/>
+      <stop id="stop34" stop-color="#000000" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_5" cx="367.07" gradientUnits="userSpaceOnUse" cy="79.393" r="15.003" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop37" stop-color="#ffffff" offset="0"/>
+      <stop id="stop39" stop-color="#000000" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_6" cx="368.5" gradientUnits="userSpaceOnUse" cy="79.396" r=".40024" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop42" stop-color="#ffffff" offset="0"/>
+      <stop id="stop44" stop-color="#000000" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_7" cx="443.88" gradientUnits="userSpaceOnUse" cy="125.25" r="14.091" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop47" stop-color="#ffffff" offset="0"/>
+      <stop id="stop49" stop-color="#000000" stop-opacity=".84978" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_8" cx="430.76" gradientUnits="userSpaceOnUse" cy="124.1" r="15.117" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop52" stop-color="#ffffff" offset="0"/>
+      <stop id="stop54" stop-color="#000000" stop-opacity=".84978" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_9" cx="444.06" gradientUnits="userSpaceOnUse" cy="124.1" r=".27704" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop57" stop-color="#ffffff" offset="0"/>
+      <stop id="stop59" stop-color="#000000" stop-opacity=".84978" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_10" cx="447.48" gradientUnits="userSpaceOnUse" cy="79.809" r="14.09" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop62" stop-color="#ffffff" offset="0"/>
+      <stop id="stop64" stop-color="#000000" stop-opacity=".85622" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_11" cx="434.36" gradientUnits="userSpaceOnUse" cy="79.692" r="15.117" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop67" stop-color="#ffffff" offset="0"/>
+      <stop id="stop69" stop-color="#000000" stop-opacity=".85622" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_12" cx="447.66" gradientUnits="userSpaceOnUse" cy="79.692" r=".27704" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop72" stop-color="#ffffff" offset="0"/>
+      <stop id="stop74" stop-color="#000000" stop-opacity=".85622" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_13" cx="390.07" gradientUnits="userSpaceOnUse" cy="85.822" r="8.3187" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop84" stop-color="#ffffff" offset="0"/>
+      <stop id="stop86" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_14" cx="389.87" gradientUnits="userSpaceOnUse" cy="85.822" r="3.897" gradientTransform="matrix(.21877 0 0 .21877 307.94 294.24)">
+      <stop id="stop89" stop-color="#ffffff" offset="0"/>
+      <stop id="stop91" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_15" cx="390.07" gradientUnits="userSpaceOnUse" cy="85.822" r="8.3187" gradientTransform="matrix(.21877 0 0 .21877 315.54 303.68)">
+      <stop id="stop94" stop-color="#ffffff" offset="0"/>
+      <stop id="stop96" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_16" cx="389.87" gradientUnits="userSpaceOnUse" cy="85.822" r="3.897" gradientTransform="matrix(.21877 0 0 .21877 315.54 303.68)">
+      <stop id="stop99" stop-color="#ffffff" offset="0"/>
+      <stop id="stop101" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_17" cx="390.07" gradientUnits="userSpaceOnUse" cy="85.822" r="8.3187" gradientTransform="matrix(.21877 0 0 .21877 308.45 303.58)">
+      <stop id="stop104" stop-color="#ffffff" offset="0"/>
+      <stop id="stop106" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_18" cx="389.87" gradientUnits="userSpaceOnUse" cy="85.822" r="3.897" gradientTransform="matrix(.21877 0 0 .21877 308.45 303.58)">
+      <stop id="stop109" stop-color="#ffffff" offset="0"/>
+      <stop id="stop111" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_19" cx="390.07" gradientUnits="userSpaceOnUse" cy="85.822" r="8.3187" gradientTransform="matrix(.21877 0 0 .21877 316.08 294.23)">
+      <stop id="stop114" stop-color="#ffffff" offset="0"/>
+      <stop id="stop116" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <radialGradient id="RadialGradient_20" cx="389.87" gradientUnits="userSpaceOnUse" cy="85.822" r="3.897" gradientTransform="matrix(.21877 0 0 .21877 316.08 294.23)">
+      <stop id="stop119" stop-color="#ffffff" offset="0"/>
+      <stop id="stop121" stop-color="#000000" stop-opacity=".22318" offset="1"/>
+    </radialGradient>
+    <linearGradient id="linearGradient3292" y2="703.4" gradientUnits="userSpaceOnUse" x2="414.75" gradientTransform="matrix(.23931 0 0 .23558 296.54 293.85)" y1="672.18" x1="414.32">
+      <stop id="stop77" stop-color="#533200" offset="0"/>
+      <stop id="stop79" stop-color="#ffffff" stop-opacity=".54506" offset=".47744"/>
+      <stop id="stop81" stop-color="#523100" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient3433" y2="828.96" gradientUnits="userSpaceOnUse" x2="414.48" gradientTransform="matrix(1.1509 0 0 1.1329 -63.124 -130.75)" y1="90.42" x1="409.2" >
+      <stop id="stop11" stop-color="#7a90ff" stop-opacity=".20172" offset="0"/>
+      <stop id="stop13" stop-color="#7a90ff" stop-opacity=".010730" offset="1"/>
+    </linearGradient>
+  </defs>
+  <path id="path126" d="m33.761 298.43c52.937-196.48 257.65-313.51 457.24-261.4 199.59 52.113 318.48 253.63 265.54 450.11-52.94 196.47-257.65 313.5-457.24 261.39s-318.48-253.63-265.54-450.1z" style="stroke:#000000;stroke-width:3.7987;fill:url(#linearGradient3433)" />
+  <path id="path128" d="m86.662 312.24c45.188-167.72 219.94-267.62 390.31-223.13 170.37 44.48 271.86 216.5 226.67 384.21-45.19 167.72-219.94 267.62-390.31 223.13-170.37-44.48-271.86-216.5-226.67-384.21z" style="stroke:#000000;stroke-width:3.7987;fill:#fff8ff" />
+  <path id="path130" d="m195.05 340.48c29.345-108.92 142.83-173.79 253.47-144.9 110.64 28.887 176.55 140.6 147.2 249.52-29.34 108.9-142.83 173.78-253.47 144.89s-176.55-140.6-147.2-249.51z" style="fill-opacity:.20172;stroke:#000000;stroke-dasharray:3.79865914,7.59731826;stroke-width:3.7987;fill:#7accff" />
+  <path id="path132" d="m477.53 91.678-164.76 602.2" style="stroke:#000000;stroke-dasharray:7.2,2.4;stroke-width:2.4;fill:#ffffff" />
+  <path id="path134" d="m476.74 694.09-163.18-602.62" style="stroke:#000000;stroke-dasharray:7.2,2.4;stroke-width:2.4;fill:#ffffff" />
+  <path id="path136" d="m619.43 172.57-448.56 440.43" style="stroke:#000000;stroke-dasharray:7.2,2.4;stroke-width:2.4;fill:#ffffff" />
+  <path id="path138" d="m89.062 473.1 612.18-160.64" style="stroke:#000000;stroke-dasharray:7.2,2.4;stroke-width:2.4;fill:#ffffff" />
+  <path id="path140" d="m89.273 311.68 611.76 162.2" style="stroke:#000000;stroke-dasharray:7.2,2.4;stroke-width:2.4;fill:#ffffff" />
+  <path id="path142" d="m171.44 172 447.42 441.56" style="stroke:#000000;stroke-dasharray:7.2,2.4;stroke-width:2.4;fill:#ffffff" />
+  <text id="text168" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="37.8969" font-size="45" inkpad:text="G" transform="scale(1.0079 .99217)" y="613.9729" x="375.31915">
+    <tspan id="tspan170" y="671.05493" x="375.31915" style="font-family:Cambria" textLength="35.01">G</tspan>
+  </text>
+  <g id="g172" transform="matrix(1.0939 0 0 1.0768 -49.114 -24.465)">
+    <path id="path174" d="m429.62 584.22-0.103 36.63" style="stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+    <path id="path176" d="m429.81 604.81s9.066-3.536 9.141 0.373c0.088 4.597-9.405 15.961-9.405 15.961s7.145-9.454 7.397-14.551c0.236-4.772-7.133-1.783-7.133-1.783z" style="stroke-linejoin:round;stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+  </g>
+  <text id="text178" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="37.9431" font-size="45" inkpad:text="D" transform="scale(1.0079 .99217)" y="579.61676" x="223.07213">
+    <tspan id="tspan180" y="636.69873" x="223.07213" style="font-family:Cambria" textLength="36.675">D</tspan>
+  </text>
+  <g id="g182" transform="matrix(1.0939 0 0 1.0768 -46.714 -24.598)">
+    <path id="path184" d="m292.01 556.2-0.103 36.63" style="stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+    <path id="path186" d="m292.2 576.79s9.066-3.535 9.14 0.374c0.088 4.597-9.405 15.96-9.405 15.96s7.145-9.453 7.397-14.55c0.236-4.772-7.132-1.784-7.132-1.784z" style="stroke-linejoin:round;stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+  </g>
+  <g id="g188" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path190" d="m367.59 624.39-0.161 22.476" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path192" d="m372.19 623.26 0.118 23.159" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path194" d="m365.29 632.48 9.385-3.585" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path196" d="m365.12 641.56 9.643-3.593" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+  </g>
+  <text id="text198" style="font-size:31.117px;font-family:Didot-Bold;fill:#000000" inkpad:width="25.2201" font-size="40" inkpad:text="F" transform="scale(1.0079 .99217)" y="658.54529" x="332.68948">
+    <tspan id="tspan200" y="688.88464" x="332.68948" textLength="27.4">F</tspan>
+  </text>
+  <text id="text202" style="font-size:31.117px;font-family:Didot-Bold;fill:#000000" inkpad:width="32.5072" font-size="40" inkpad:text="C" transform="scale(1.0079 .99217)" y="640.90649" x="269.24429">
+    <tspan id="tspan204" y="671.24585" x="269.24429" textLength="28.88">C</tspan>
+  </text>
+  <g id="g206" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path208" d="m309.67 607.83-0.161 22.477" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path210" d="m314.28 606.7 0.118 23.159" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path212" d="m307.38 615.91 9.385-3.585" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path214" d="m307.2 625 9.642-3.593" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+  </g>
+  <text id="text216" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="57.6815" font-size="45" inkpad:text="A" transform="scale(1.0079 .99217)" y="356.20676" x="627.09747">
+    <tspan id="tspan218" y="413.28873" x="627.09747" style="font-family:Cambria" textLength="34.155">A</tspan>
+  </text>
+  <text id="text220" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="59.3613" font-size="45" inkpad:text="D" transform="scale(1.0079 .99217)" y="226.43588" x="596.96442">
+    <tspan id="tspan222" y="283.51785" x="596.96442" style="font-family:Cambria" textLength="36.675">D</tspan>
+  </text>
+  <text id="text224" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="51.4268" font-size="45" inkpad:text="E" transform="scale(1.0079 .99217)" y="493.62595" x="592.03912">
+    <tspan id="tspan226" y="550.70795" x="592.03912" style="font-family:Cambria" textLength="32.49">E</tspan>
+  </text>
+  <text id="text228" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="25.2201" font-size="45" inkpad:text="F" transform="scale(1.0079 .99217)" y="134.32597" x="243.11821">
+    <tspan id="tspan230" y="191.40797" x="243.11821" style="font-family:Cambria" textLength="30.825">F</tspan>
+  </text>
+  <text id="text232" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="57.6815" font-size="45" inkpad:text="G" transform="scale(1.0079 .99217)" y="130.13226" x="496.96848">
+    <tspan id="tspan234" y="187.21426" x="496.96848" style="font-family:Cambria" textLength="35.01">G</tspan>
+  </text>
+  <text id="text236" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="30.8705" font-size="45" inkpad:text="C" transform="scale(1.0079 .99217)" y="97.29882" x="370.69348">
+    <tspan id="tspan238" y="154.38083" x="370.69348" style="font-family:Cambria" textLength="32.49">C</tspan>
+  </text>
+  <text id="text240" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="41.999" font-size="45" inkpad:text="B" transform="scale(1.0079 .99217)" y="228.32761" x="138.89928">
+    <tspan id="tspan242" y="285.40961" x="138.89928" style="font-family:Cambria" textLength="30.825">B</tspan>
+  </text>
+  <g id="g244" transform="matrix(1.0939 0 0 1.0768 -41.914 -22.998)">
+    <path id="path246" d="m205.7 229.45-0.103 36.63" style="stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+    <path id="path248" d="m205.89 250.04s9.066-3.536 9.14 0.373c0.088 4.597-9.405 15.961-9.405 15.961s7.145-9.454 7.397-14.551c0.236-4.772-7.132-1.783-7.132-1.783z" style="stroke-linejoin:round;stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+  </g>
+  <text id="text250" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="41.999" font-size="45" inkpad:text="B" transform="scale(1.0079 .99217)" y="584.5224" x="492.3949">
+    <tspan id="tspan252" y="641.60443" x="492.3949" style="font-family:Cambria" textLength="30.825">B</tspan>
+  </text>
+  <g id="g254" transform="matrix(1.0939 0 0 1.0768 -47.781 -24.465)">
+    <path id="path256" d="m172.63 352.47-0.103 36.63" style="stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+    <path id="path258" d="m172.82 373.06s9.066-3.535 9.141 0.373c0.088 4.598-9.405 15.961-9.405 15.961s7.145-9.454 7.397-14.55c0.236-4.772-7.133-1.784-7.133-1.784z" style="stroke-linejoin:round;stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+  </g>
+  <text id="text260" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="35.0057" font-size="45" inkpad:text="E" transform="scale(1.0079 .99217)" y="359.70044" x="98.887466">
+    <tspan id="tspan262" y="416.78244" x="98.887466" style="font-family:Cambria" textLength="32.49">E</tspan>
+  </text>
+  <g id="g264" transform="matrix(1.0939 0 0 1.0768 -43.514 -26.198)">
+    <path id="path266" d="m202.68 471.71-0.103 36.631" style="stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+    <path id="path268" d="m202.87 492.3s9.066-3.535 9.14 0.373c0.088 4.598-9.405 15.961-9.405 15.961s7.145-9.454 7.397-14.551c0.236-4.771-7.132-1.783-7.132-1.783z" style="stroke-linejoin:round;stroke:#000000;stroke-width:2;stroke-linecap:round;fill:#000000" />
+  </g>
+  <text id="text270" style="font-size:58.379px;font-family:Cambria;fill:#000000" inkpad:width="32.1391" font-size="45" inkpad:text="A" transform="scale(1.0079 .99217)" y="487.92798" x="137.22136">
+    <tspan id="tspan272" y="545.00995" x="137.22136" style="font-family:Cambria" textLength="34.155">A</tspan>
+  </text>
+  <text id="text274" style="font-size:31.117px;font-family:Didot-Bold;fill:#000000" inkpad:width="30.8705" font-size="40" inkpad:text="C" transform="scale(1.0079 .99217)" y="608.46271" x="552.875">
+    <tspan id="tspan276" y="638.80206" x="552.875" textLength="28.88">C</tspan>
+  </text>
+  <g id="g278" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path280" d="m570.03 577.41-0.061 21.965" style="stroke:#000000;stroke-width:1.5;stroke-linecap:round;fill:#000000" />
+    <path id="path282" d="m570.14 589.76s5.437-2.12 5.481 0.224c0.053 2.757-5.64 9.571-5.64 9.571s4.285-5.669 4.436-8.725c0.142-2.862-4.277-1.07-4.277-1.07z" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;stroke-linecap:round;fill:#000000" />
+  </g>
+  <g id="g284" transform="matrix(1.0939 0 0 1.0768 -45.114 -27.798)">
+    <path id="path286" d="m319.42 483.3-0.071 25.026" style="stroke:#000000;stroke-width:1.5;stroke-linecap:round;fill:#000000" />
+    <path id="path288" d="m319.55 497.37s6.194-2.416 6.245 0.255c0.06 3.141-6.426 10.904-6.426 10.904s4.882-6.459 5.054-9.941c0.161-3.26-4.873-1.218-4.873-1.218z" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;stroke-linecap:round;fill:#000000" />
+  </g>
+  <text id="text290" style="font-size:31.136px;font-family:Cambria;fill:#000000" inkpad:width="53.8449" font-size="24" inkpad:text="B  m" transform="scale(1.0079 .99217)" y="509.40994" x="281.24155">
+    <tspan id="tspan292" y="539.24823" x="281.24155" style="font-family:Cambria" textLength="51.12">B m</tspan>
+  </text>
+  <g id="g294" transform="matrix(1.0939 0 0 1.0768 -45.114 -29.398)">
+    <path id="path296" d="m394.04 509.88-0.07 25.027" style="stroke:#000000;stroke-width:1.5;stroke-linecap:round;fill:#000000" />
+    <path id="path298" d="m394.17 523.94s6.193-2.416 6.244 0.255c0.06 3.141-6.425 10.904-6.425 10.904s4.881-6.459 5.054-9.941c0.161-3.26-4.873-1.218-4.873-1.218z" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;stroke-linecap:round;fill:#000000" />
+  </g>
+  <text id="text300" style="font-size:31.136px;font-family:Cambria;fill:#000000" inkpad:width="59.0488" font-size="24" inkpad:text="E  m" transform="scale(1.0079 .99217)" y="537.16187" x="361.79373">
+    <tspan id="tspan302" y="567.00018" x="361.79373" style="font-family:Cambria" textLength="52.008">E m</tspan>
+  </text>
+  <text id="text304" style="font-size:31.136px;font-family:Cambria;fill:#000000" inkpad:width="56.2834" font-size="24" inkpad:text="F  m" transform="scale(1.0079 .99217)" y="375.73511" x="518.69031">
+    <tspan id="tspan306" y="405.57343" x="518.69031" style="font-family:Cambria" textLength="51.12">F m</tspan>
+  </text>
+  <g id="g308" transform="matrix(1.0939 0 0 1.0768 -46.714 -29.398)">
+    <path id="path310" d="m539.68 363.77-0.172 23.866" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path312" d="m544.57 362.57 0.125 24.591" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path314" d="m537.25 372.35 9.965-3.806" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path316" d="m537.06 382 10.24-3.81" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+  </g>
+  <g id="g318" transform="matrix(1.0939 0 0 1.0768 -46.714 -27.798)">
+    <path id="path320" d="m467.88 490.66-0.172 23.866" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path322" d="m472.77 489.46 0.125 24.59" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path324" d="m465.45 499.24 9.965-3.807" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path326" d="m465.26 508.89 10.238-3.816" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+  </g>
+  <text id="text328" style="font-size:31.136px;font-family:Cambria;fill:#000000" inkpad:width="68.3518" font-size="24" inkpad:text="G  m" transform="scale(1.0079 .99217)" y="517.7442" x="441.58026">
+    <tspan id="tspan330" y="547.58252" x="441.58026" style="font-family:Cambria" textLength="53.352">G m</tspan>
+  </text>
+  <g id="g346" transform="matrix(1.0939 0 0 1.0768 -46.714 -29.398)">
+    <path id="path348" d="m522.1 435.01-0.172 23.866" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path350" d="m526.98 433.81 0.125 24.591" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path352" d="m519.66 443.6 9.965-3.806" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+    <path id="path354" d="m519.47 453.25 10.238-3.815" style="stroke-linejoin:round;stroke:#000000;stroke-width:1.5;fill:#000000" />
+  </g>
+  <text id="text356" style="font-size:31.136px;font-family:Cambria;fill:#000000" inkpad:width="53.7146" font-size="24" inkpad:text="C  m" transform="scale(1.0079 .99217)" y="459.22757" x="500.38702">
+    <tspan id="tspan358" y="489.06586" x="500.38702" style="font-family:Cambria" textLength="52.008">C m</tspan>
+  </text>
+  <path id="path364" d="m488.69 417.14c13.667-50.726-17.027-102.75-68.556-116.21-51.53-13.454-104.38 16.761-118.05 67.486-13.667 50.726 17.027 102.75 68.556 116.21 51.53 13.454 104.38-16.761 118.05-67.486z" style="stroke:#000000;stroke-width:2.4963;fill:#c9dbfd" />
+  <path id="path366" d="m395.25 396.83c-0.0295 0-6.9408 0.13353-8.003 0.30905-6.0952 1.0036-25.568 6.1433-11.412 29.829 0.0306 0.0312 2.412 3.5794-4.0092 10.682-7.8586 8.6954-8.2108 18.935-8.2108 18.935s-0.69901 21.723 31.904 21.629v-0.008c32.563 0.0765 31.678-21.622 31.678-21.622s-0.35224-10.24-8.2108-18.935c-6.4212-7.1028-4.0474-10.651-4.0168-10.682 14.809-24.778-7.1771-29.256-12.16-29.94-0.6104-0.0829-7.5184-0.19814-7.5457-0.19814h-0.0142z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill:#9a5840" />
+  <path id="path368" d="m395.21 401.09c-0.0284 0.001-6.9408 0.1346-8.0019 0.31013-6.0963 1.0036-25.569 6.1433-11.412 29.829 0.0306 0.0312 2.4121 3.5794-4.0091 10.682-7.8586 8.6943-8.2108 18.935-8.2108 18.935s-0.70009 21.722 31.904 21.628v-0.006c32.563 0.0754 31.678-21.622 31.678-21.622s-0.35224-10.241-8.2108-18.935c-6.4212-7.1028-4.0474-10.651-4.0168-10.682 14.809-24.778-7.1771-29.256-12.16-29.94-0.61039-0.084-7.5184-0.19813-7.5457-0.19921h-0.0153z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill:#9a7040" />
+  <g id="g370" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path372" d="m387.36 319c-0.971-0.015-1.338 0.836-1.356 1.995s0.334 1.684 1.305 1.699 1.758-0.409 1.776-1.568-0.754-2.11-1.725-2.126z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:#000000" />
+    <path id="path374" d="m388.67 320.25-0.026 1.645 3.132 0.003 0.175-1.567-3.281-0.081z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:#000000" />
+    <path id="path376" d="m388.98 320.25s0.059 0.381 0.061 0.792-0.045 0.851-0.045 0.851" style="stroke:#ffffff;stroke-width:0.6;fill:#000000" />
+  </g>
+  <g id="g378" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path380" d="m387.36 319c-0.971-0.015-1.338 0.836-1.356 1.995s0.334 1.684 1.305 1.699 1.758-0.409 1.776-1.568-0.754-2.11-1.725-2.126z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient)" />
+    <path id="path382" d="m388.67 320.25-0.026 1.645 3.132 0.003 0.175-1.567-3.281-0.081z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_2)" />
+    <path id="path384" d="m388.98 320.25s0.059 0.381 0.061 0.792-0.045 0.851-0.045 0.851" style="stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_3)" />
+  </g>
+  <g id="g386" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path388" d="m386.83 310.42c-0.971 0.014-1.252 0.04-1.236 1.199 0.017 1.159 0.291 1.147 1.262 1.134 0.971-0.014 1.839 0.064 1.822-1.095-0.016-1.159-0.877-1.252-1.848-1.238z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_4)" />
+    <path id="path390" d="m388.24 310.79 0.023 1.644 3.131-0.09 0.128-1.572-3.282 0.018z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_5)" />
+    <path id="path392" d="m388.55 310.79s0.07 0.379 0.084 0.79-0.02 0.852-0.02 0.852" style="stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_6)" />
+  </g>
+  <g id="g394" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path396" d="m406.54 319.77c0.971-0.015 1.565 0.383 1.583 1.542s-0.319 2.186-1.29 2.202c-0.971 0.015-1.773-0.912-1.791-2.071s0.527-1.657 1.498-1.673z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_7)" />
+    <path id="path398" d="m405.45 320.56 0.026 1.644-3.132 0.003-0.175-1.567 3.281-0.08z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_8)" />
+    <path id="path400" d="m405.14 320.57s-0.059 0.382-0.061 0.792c-0.002 0.411 0.045 0.851 0.045 0.851" style="stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_9)" />
+  </g>
+  <g id="g402" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <g id="g404">
+      <path id="path406" d="m407.56 309.6c0.971-0.015 1.338 0.836 1.357 1.995 0.018 1.159-0.32 2.187-1.291 2.202s-1.773-0.912-1.791-2.071 0.754-2.111 1.725-2.126z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_10)" />
+      <path id="path408" d="m406.24 310.85 0.025 1.644-3.132 0.004-0.175-1.568 3.282-0.08z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_11)" />
+    </g>
+    <path id="path410" d="m405.93 310.85s-0.059 0.382-0.061 0.793c-0.002 0.41 0.046 0.85 0.046 0.85" style="stroke:#ffffff;stroke-width:0.6;fill:url(#RadialGradient_12)" />
+  </g>
+  <path id="path412" d="m389.16 336.61 9.9294 0.084 2.2578 78.677-12.46-0.0237 0.27238-78.738z" style="stroke-opacity:0;fill:#380000" />
+  <path id="path414" d="m389.32 334.69 9.6898 0.0312 0.007 1.934-9.6963 0.001v-1.9663z" style="stroke-linejoin:round;stroke:#000000;stroke-width:.65120;fill:#ffffff" />
+  <path id="path416" d="m385.24 425.27c0-5.242 4.3176-9.4922 9.6427-9.4922s9.6427 4.2502 9.6427 9.4922-4.3176 9.4922-9.6427 9.4922-9.6427-4.2502-9.6427-9.4922z" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.95064;fill:#4f3600" />
+  <path id="path418" d="m380.2 452.2h31.477v7.3537h-31.477v-7.3537z" style="stroke-linejoin:round;stroke:#000400;stroke-width:.65120;stroke-opacity:.40987;fill:url(#linearGradient3292)" />
+  <path id="path420" d="m389.04 454.4 13.5-0.15184" style="stroke-linejoin:round;fill-opacity:.59657;stroke:#ffffff;stroke-linecap:round;stroke-width:.65120;fill:#92b0bb" />
+  <path id="path422" d="m388.82 457.25 14.083-0.0678" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path424" d="m389.08 334.65-2.0894-5.4778-1.3794-22.324s4.4533-0.27567 8.5226-3.7614c4.2487 3.6128 8.6276 3.4394 8.6276 3.4394l-1.4888 22.534-2.0664 5.6404-10.126-0.0506z" style="stroke-linejoin:round;stroke:#00271f;stroke-width:.65120;fill:#734e13" />
+  <path id="path426" d="m397.3 325.71 0.84996 9.307" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path428" d="m391.03 325.68-0.79746 9.3781" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <g id="g430" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path432" d="m391.66 313.05c0-0.848 0.687-1.535 1.535-1.535s1.535 0.687 1.535 1.535-0.687 1.535-1.535 1.535-1.535-0.687-1.535-1.535z" style="stroke-linejoin:round;stroke:#001815;stroke-width:0.6;stroke-opacity:.50429;fill:url(#RadialGradient_13)" />
+    <path id="path434" d="m392.31 313.05c0-0.488 0.396-0.883 0.884-0.883s0.883 0.395 0.883 0.883-0.395 0.884-0.883 0.884-0.884-0.396-0.884-0.884z" style="stroke-linejoin:round;stroke:#001d1f;stroke-width:0.6;stroke-opacity:.58369;fill:url(#RadialGradient_14)" />
+  </g>
+  <g id="g436" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path438" d="m399.26 322.49c0-0.847 0.687-1.535 1.535-1.535s1.535 0.688 1.535 1.535c0 0.848-0.687 1.535-1.535 1.535s-1.535-0.687-1.535-1.535z" style="stroke-linejoin:round;stroke:#001815;stroke-width:0.6;stroke-opacity:.50429;fill:url(#RadialGradient_15)" />
+    <path id="path440" d="m399.91 322.49c0-0.488 0.395-0.883 0.883-0.883s0.884 0.395 0.884 0.883-0.396 0.884-0.884 0.884-0.883-0.396-0.883-0.884z" style="stroke-linejoin:round;stroke:#001d1f;stroke-width:0.6;stroke-opacity:.58369;fill:url(#RadialGradient_16)" />
+  </g>
+  <g id="g442" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path444" d="m392.18 322.39c0-0.848 0.688-1.535 1.536-1.535 0.847 0 1.535 0.687 1.535 1.535 0 0.847-0.688 1.535-1.535 1.535-0.848 0-1.536-0.688-1.536-1.535z" style="stroke-linejoin:round;stroke:#001815;stroke-width:0.6;stroke-opacity:.50429;fill:url(#RadialGradient_17)" />
+    <path id="path446" d="m392.83 322.39c0-0.488 0.396-0.884 0.884-0.884s0.883 0.396 0.883 0.884-0.395 0.883-0.883 0.883-0.884-0.395-0.884-0.883z" style="stroke-linejoin:round;stroke:#001d1f;stroke-width:0.6;stroke-opacity:.58369;fill:url(#RadialGradient_18)" />
+  </g>
+  <g id="g448" transform="matrix(1.0939 0 0 1.0768 -40.314 -22.998)">
+    <path id="path450" d="m399.8 313.04c0-0.848 0.687-1.535 1.535-1.535s1.535 0.687 1.535 1.535-0.687 1.535-1.535 1.535-1.535-0.687-1.535-1.535z" style="stroke-linejoin:round;stroke:#001815;stroke-width:0.6;stroke-opacity:.50429;fill:url(#RadialGradient_19)" />
+    <path id="path452" d="m400.46 313.04c0-0.488 0.395-0.884 0.883-0.884s0.884 0.396 0.884 0.884-0.396 0.883-0.884 0.883-0.883-0.395-0.883-0.883z" style="stroke-linejoin:round;stroke:#001d1f;stroke-width:0.6;stroke-opacity:.58369;fill:url(#RadialGradient_20)" />
+  </g>
+  <path id="path454" d="m389.17 343.21 10.103-0.0485" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path456" d="m389.15 349.47 10.29-0.0118" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path458" d="m389.12 355.36 10.475 0.0301" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path460" d="m389.11 361.01 10.606 0.0194" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path462" d="m389.06 366.19 10.877 0.0118" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path464" d="m389.09 371.18 10.93-0.01" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path466" d="m389.08 375.86 11.031-0.0366" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path468" d="m389.05 380.23 11.194 0.0194" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path470" d="m388.98 384.39 11.348-0.0538" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path472" d="m388.98 388.14 11.531 0.0269" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path474" d="m389.14 391.85 11.337 0.0172" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path476" d="m389.01 395.28 11.578 0.0452" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path478" d="m389.04 398.63 11.695-0.005" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path480" d="m388.99 401.72 11.969-0.0915" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path482" d="m389.02 404.62 11.951-0.12168" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill-opacity:.45708;fill:#380000" />
+  <path id="path484" d="m389.01 407.34 12.014-0.0495" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill:#380000" />
+  <path id="path486" d="m389.08 409.97 12.031-0.1023" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill:#380000" />
+  <path id="path488" d="m389 412.43 12.215-0.07" style="stroke-linejoin:round;stroke:#8c8e8d;stroke-width:.65120;fill:#380000" />
+  <path id="path490" d="m394.05 459.55-1.07-123.48" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path492" d="m390.33 335.87 0.17284 123.71" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path494" d="m395.65 335.86 1.9515 123.7" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path496" d="m398.02 336.06 1.7842 66.124 1.5468 57.345" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path498" d="m390.87 315.38 1.7962 19.292" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path500" d="m397.4 315.12-1.7295 20.477" style="stroke-linejoin:round;stroke:#ffffff;stroke-width:.65120;fill-opacity:.59657;fill:#92b0bb" />
+  <path id="path502" d="m309.09 67.978 20.806 7.896-3.9971-22.291 3.9971 22.291-3.9971-22.291-16.809 14.395z" style="stroke-linejoin:round;stroke:#000000;stroke-width:.97680;fill-opacity:.29614;fill:#000000" />
+  <path id="path504" d="m477.86 67.175-20.806 7.8961 3.9971-22.291-3.9971 22.291 3.9971-22.291 16.809 14.395z" style="stroke-linejoin:round;stroke:#000000;stroke-width:.97680;fill-opacity:.29614;fill:#000000" />
+  <text id="text3247" style="font-size:38.4px;font-family:Gabriola;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" xml:space="preserve" y="737.86664" x="309.06665" sodipodi:linespacing="125%">
+    <tspan id="tspan3249" sodipodi:role="line" x="309.06665" y="737.86664">Circle of Fifths</tspan>
+  </text>
+  <text id="text3248" style="font-size:38.4px;font-family:Gabriola;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" xml:space="preserve" y="244.93332" x="371.06665" sodipodi:linespacing="125%">
+    <tspan id="tspan3250" sodipodi:role="line" x="371.06665" style="font-size:32px;font-family:Cambria" y="244.93332">Am</tspan>
+  </text>
+  <text id="text3252" style="font-size:32px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" xml:space="preserve" y="401.86667" x="217.06667" sodipodi:linespacing="125%">
+    <tspan id="tspan3254" sodipodi:role="line" x="217.06667" y="401.86667">Cm</tspan>
+  </text>
+  <text id="text3249" style="font-size:32px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" xml:space="preserve" y="327.06668" x="237.60001" sodipodi:linespacing="125%">
+    <tspan id="tspan3251" sodipodi:role="line" x="237.60001" y="327.06668">Gm</tspan>
+  </text>
+  <text id="text3253" style="font-size:32px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" sodipodi:linespacing="125%" y="271.33334" x="290.40002" xml:space="preserve">
+    <tspan id="tspan3255" y="271.33334" x="290.40002" sodipodi:role="line">Dm</tspan>
+  </text>
+  <text id="text3257" style="font-size:32px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" xml:space="preserve" y="325.60001" x="508.93332" sodipodi:linespacing="125%">
+    <tspan id="tspan3259" sodipodi:role="line" x="508.93332" y="325.60001">Bm</tspan>
+  </text>
+  <text id="text3265" style="font-size:32px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" xml:space="preserve" y="266.93335" x="451.73331" sodipodi:linespacing="125%">
+    <tspan id="tspan3267" sodipodi:role="line" x="451.73331" y="266.93335">Em</tspan>
+  </text>
+  <text id="text3250" xml:space="preserve" sodipodi:linespacing="125%" style="font-size:38.4px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" transform="matrix(-.027219 .99963 -.99963 -.027219 811.82 3.4334)">
+    <textPath id="textPath3254" xlink:href="#path128">
+      <tspan id="tspan3252" style="font-size:38.4px">Circle of Fifths</tspan>
+    </textPath>
+  </text>
+  <text id="text3251" xml:space="preserve" sodipodi:linespacing="125%" style="font-size:38.4px;font-family:Gabriola;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" transform="matrix(.98790 .15509 -.15509 .98790 55.299 -67.562)">
+    <textPath id="textPath3255" xlink:href="#path128">
+      <tspan id="tspan3253" style="font-size:38.4px;font-family:Cambria">Circle of Fourths</tspan>
+    </textPath>
+  </text>
+  <text id="text3254" style="font-size:32px;font-family:Cambria;letter-spacing:0px;word-spacing:0px;line-height:125%;fill:#000000" sodipodi:linespacing="125%" y="479.60001" x="236.13333" xml:space="preserve">
+    <tspan id="tspan3256" y="479.60001" x="236.13333" sodipodi:role="line">Fm</tspan>
+  </text>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
