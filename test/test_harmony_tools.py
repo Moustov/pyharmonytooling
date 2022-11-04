@@ -36,6 +36,7 @@ class Test(TestCase):
         """
         cp = digest_song(song)
         compliance_level_max = guess_tone_and_mode(cp)
+        print(compliance_level_max)
         assert(compliance_level_max == [1.0, 'A'])
 
     def test_get_chord_possible_qualities(self):
