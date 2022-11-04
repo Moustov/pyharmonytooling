@@ -1,5 +1,6 @@
 from pychord import Chord
 
+from src.guitar_neck.neck import get_fingering_from_chord
 from src.harmony.harmony_tools import find_substitutes
 from src.output.console import LOD_ALL
 
@@ -22,8 +23,10 @@ from src.output.console import LOD_ALL
 # borrowed_chords = get_borrowed_chords(tone, cp)
 # print("Borrowed chords:", borrowed_chords.keys())
 
-outcome_level_of_detail = LOD_ALL
-chord = "G6"
-print("substitutes from :", chord, find_substitutes(Chord(chord)))
+# chord = "G6"
+# print("substitutes from :", chord, find_substitutes(Chord(chord)))
 # print(find_similar_chords())
 
+outcome_level_of_detail = LOD_ALL
+f = get_fingering_from_chord(Chord("C"))
+print(f)
