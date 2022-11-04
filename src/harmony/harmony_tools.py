@@ -30,23 +30,43 @@ def get_compliance_chord_presence(tone: [str], cp: ChordProgression) -> float:
     :param cp:
     :return:
     """
-    compliance = {}
+    # init - synthesis of used chords in cp for quicker analysis
+    tone_compliance = {}
+    compliant_chords = []
     chord_song_list = []
     for chord_song in cp:
         if chord_song not in chord_song_list:
             chord_song_list.append(chord_song)
 
+    # check each chord in the tone and see if colored versions of the chord is used in chord_song_list
     for chord_tone in tone:
-        for chord_song in cp:
-            possible_chord_qualities = get_chord_possible_qualities(chord_tone)
-            for chord_color in possible_chord_qualities:
-                if chord_color.components() == chord_song.components():
-                    compliance[chord_tone] = True
+        print("  Check", chord_tone)
+        tone_compliance[chord_tone] = False
+        possible_chord_qualities = get_chord_names_possible_qualities(chord_tone)
+        for chord_song in chord_song_list:
+            if chord_song in possible_chord_qualities:
+                tone_compliance[chord_tone] = True
+                compliant_chords.append(chord_song)
+                print(f"    {chord_song} found in song")
+
+    # set compliance level
     compliance_level = 0
-    for chord_tone in tone:
-        if chord_tone in compliance.keys() and compliance[chord_tone]:
-            compliance_level += 1
-    return compliance_level / len(chord_song_list)
+    borrowed_chords_qty = 0
+    if len(compliant_chords) > 0:
+        for chord_song in chord_song_list:
+            if chord_song in compliant_chords:
+                compliance_level += 1
+            else:
+                borrowed_chords_qty += 1
+
+    if compliance_level == 0 or len(compliant_chords) == 0:
+        return 0.0
+    elif len(chord_song_list) > len(tone_compliance) and compliance_level == len(tone_compliance):
+        return 1.0
+    elif len(chord_song_list) <= len(tone_compliance) and borrowed_chords_qty == 0:
+        return 1.0
+    else:
+        return compliance_level / len(tone_compliance)
 
 
 def get_borrowed_chords(tone: [str], song_chord_progression: ChordProgression) -> {}:
@@ -59,7 +79,7 @@ def get_borrowed_chords(tone: [str], song_chord_progression: ChordProgression) -
     borrowed_chords = {}
     colors = []
     for chord_tone in tone:
-        possible_chord_qualities = get_chord_possible_qualities(chord_tone)
+        possible_chord_qualities = get_chord_names_possible_qualities(chord_tone)
         for chord_tone_color in possible_chord_qualities:
             colors.append(chord_tone_color)
 
@@ -79,69 +99,69 @@ def get_borrowed_chords(tone: [str], song_chord_progression: ChordProgression) -
 def get_chord_names_possible_qualities(chord: str) -> [str]:
     """
     returns the list of strings with possible qualities a chord may have
-    see https://www.oolimo.com/guitarchords/find
+    see
+        https://www.oolimo.com/guitarchords/find
+        https://www.musicnotes.com/now/tips/a-complete-guide-to-chord-symbols-in-music/
     :param chord:
     :return:
     """
-    c = Chord(chord)
-    enriched_with_quality = [(chord + "")]
-    if c.quality.quality == "m":
-        enriched_with_quality += [
-            (chord + "add9"), (chord + "6"), (chord + "6/9"), (chord + "7"), (chord + "9"),
-            # (chord + "7/b13"),
-        ]
-    elif c.quality.quality != "dim":
-        enriched_with_quality += [
-            (chord + "sus"), (chord + "sus2"), (chord + "7sus4"),
-            (chord + "7sus4/9"),
-            #   (chord + "7sus4/b9"),
-            (chord + "7sus4/13"),
-            (chord + "add9"), (chord + "6"), (chord + "6/9"), (chord + "7"), (chord + "9"),
-            (chord + "11"), (chord + "13"),
-            # (chord + "7/b13"),
-            (chord + "maj7"), (chord + "maj9"),
-            #   (chord + "maj7/#11"),
-            # (chord + "maj7/#5")
-        ]
+    base_chord = Chord(chord)
+    chord_qualities = []
+    if base_chord.quality.quality == "m":
+        chord_qualities = ["m", "5", "add9", "aug", "dim7",
+                           "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
+                           "madd9", "m6", "m6/9", "m7", "m7/9", "m7/11",
+                           "m7/13", "m7/b13", "m/maj7",
+                           "m7b5",
+                           "m7/11/b5", "dim/b13"
+                           ]
+    elif base_chord.quality.quality == "dim":
+        chord_qualities = ["dim", "dim7", "dim/b13"]
+    elif base_chord.quality.quality == "":
+        chord_qualities = ["", "5", "add9", "aug",
+                           "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
+                            "maj7", "maj7/9", "maj7/#11",
+                           "maj7/#5", "maj7/13", "maj7/9/13", "7", "7/b9", "7/9",
+                           "7/#9", "7/#11", "7/b5", "7/#5", "7/b13", "7/13",
+                           "7/9/13", "7/b9/b13", "7/13/b9", "6", "6/9"
+                           ]
+    else:
+        chord_qualities = ["", "m", "5", "add9", "aug", "dim7",
+                           "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
+                           "madd9", "m6", "m6/9", "m7", "m7/9", "m7/11",
+                           "m7/13", "m7/b13", "m/maj7", "maj7", "maj7/9", "maj7/#11",
+                           "maj7/#5", "maj7/13", "maj7/9/13", "7", "7/b9", "7/9",
+                           "7/#9", "7/#11", "7/b5", "7/#5", "7/b13", "7/13",
+                           "7/9/13", "7/b9/b13", "7/13/b9", "6", "6/9", "m7b5",
+                           "m7/11/b5", "dim7/b13"
+                           ]
+    enriched_with_quality = []
+    for c in chord_qualities:
+        try:
+            valid_chord = Chord(base_chord.root + c)
+            enriched_with_quality.append(valid_chord)
+        except ValueError as err:
+            # print("Chord", chord+c, "is invalid", err)
+            pass
     enriched_with_quality_with_bass = enriched_with_quality.copy()
     chromatic_scale = ["A", "B", "C", "D", "E", "F", "G", "A#", "C#", "D#", "F#", "G#"]
     for c in enriched_with_quality:
-        # print(c)
-        try:
-            ceq = Chord(c)
-            for cs in chromatic_scale:
-                if str(ceq.chord) != cs and ceq.on == "":
-                    # print(str(c.chord) + "/" + cs)
-                    try:
-                        a = (str(c) + "/" + cs)
-                        enriched_with_quality_with_bass.append(a)
-                    except Exception as err:
-                        print(err, c, cs)
-        except Exception as err:
-            print(err)
+        for cs in chromatic_scale:
+            try:
+                a = (str(c) + "/" + cs)
+                valid_chord = Chord(a)
+                enriched_with_quality_with_bass.append(valid_chord)
+            except ValueError as err:
+                # print("Chord", a, "is invalid", err)
+                pass
+    # print("All possible chords:", len(enriched_with_quality_with_bass))
     return enriched_with_quality_with_bass
-
-
-def get_chord_possible_qualities(chord: str) -> [str]:
-    """
-    returns the list of Chord with possible qualities a chord may have
-    :param chord:
-    :return:
-    """
-    res = []
-    # print("get_chord_possible_qualities from ", chord)
-    possible_chords = get_chord_names_possible_qualities(chord)
-    for c in possible_chords:
-        try:
-            res.append(Chord(c))
-        except Exception as err:
-            print(c, "cannot be turned into a Chord", err)
-    return res
 
 
 def digest_song(song: str) -> ChordProgression:
     """
     return a ChordProgression object from a song
+    todo make sure the captured chords are chords, not words (eg. "am", "a", ...)
     :param song:
     :return:
     """
@@ -152,20 +172,70 @@ def digest_song(song: str) -> ChordProgression:
         words = l.split(" ")
         for w in words:
             if w != "":
-                # print(f"'{w}'")
                 try:
                     c = Chord(w)
                     possible_chords.append(w)
                 except:
                     pass
     cp = ChordProgression(possible_chords)
-
-    # for c in cp.chords:
-    #     print(c.components())
-
-    # c = Chord("Fdim")
-    # print("----", c.components())
     return cp
+
+
+def generate_circle_of_fifths_natural_majors() -> {}:
+    """
+    generates the circle_of_fifths_natural_majors
+    https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
+    :return:
+    """
+    intervals = ["W", "W", "H", "W", "W", "W"]
+    qualities = ["", "m", "m", "", "", "m", "dim"]
+    return generate_circle_of_fifths(intervals, qualities)
+
+
+def generate_circle_of_fifths_harmonic_minors() -> {}:
+    """
+    generates the circle_of_fifths_natural_majors
+    https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
+    :return:
+    """
+    intervals = ["W", "H", "W", "W", "H", "W+H"]
+    qualities = ["m", "m7b5", "maj7/#5", "m7", "7", "maj7", "dim7"]
+    return generate_circle_of_fifths(intervals, qualities)
+
+
+def generate_circle_of_fifths_natural_minors() -> {}:
+    """
+    generates the circle_of_fifths_natural_majors
+    https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
+    :return:
+    """
+    intervals = ["W", "H", "W", "W", "H", "W"]
+    qualities = ["m", "m7b5", "maj7/#5", "m7", "7", "maj7", "dim7"]
+    return generate_circle_of_fifths(intervals, qualities)
+
+
+def generate_circle_of_fifths_melodic_minors() -> {}:
+    """
+    generates the circle_of_fifths_natural_majors
+    https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
+    :return:
+    """
+    intervals = ["W", "H", "W", "W", "W", "W"]
+    qualities = ["m", "m7b5", "maj7/#5", "m7", "7", "maj7", "dim7"]
+    return generate_circle_of_fifths(intervals, qualities)
+
+
+def generate_circle_of_fifths(intervals, qualities, cycle_sequence):
+    """
+    todo
+    generates a circle of fifths from intervals, qualities
+    :param intervals:
+    :param qualities:
+    :param cycle_sequence:
+    :return:
+    """
+    cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
+    return {}
 
 
 circle_of_fifths_natural_majors = {
@@ -214,7 +284,7 @@ circle_of_fifths_melodic_minors = {  # todo
 }
 
 
-def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}) -> []:
+def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}, cof_name: str) -> []:
     """
 
     :param cp:
@@ -224,8 +294,9 @@ def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}) -> []:
     compliance_level_max = [0, "?"]
     compliances = {}
     for tone in cof:
+        print("Check tone", tone, "in", cof_name)
         compliance_level = get_compliance_chord_presence(cof[tone], cp)
-        print(tone, "(major)", compliance_level * 100, "%")
+        print(tone, compliance_level * 100, "%")
         compliances[tone] = compliance_level
         if compliance_level > compliance_level_max[0]:
             compliance_level_max = [compliance_level, tone]
@@ -233,5 +304,5 @@ def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}) -> []:
 
 
 def guess_tone_and_mode(cp: ChordProgression) -> []:
-    guess = guess_tone_from_circle_of_fifths(cp, circle_of_fifths_natural_majors)
+    guess = guess_tone_from_circle_of_fifths(cp, circle_of_fifths_natural_majors, "Natural Major")
     return guess
