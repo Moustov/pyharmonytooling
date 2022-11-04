@@ -40,14 +40,14 @@ def get_compliance_chord_presence(tone: [str], cp: ChordProgression) -> float:
 
     # check each chord in the tone and see if colored versions of the chord is used in chord_song_list
     for chord_tone in tone:
-        print("  Check", chord_tone)
+        print_detail(LOD_CHORD, f"  Check {chord_tone}")
         tone_compliance[chord_tone] = False
         possible_chord_qualities = get_chord_names_possible_qualities(chord_tone)
         for chord_song in chord_song_list:
             if chord_song in possible_chord_qualities:
                 tone_compliance[chord_tone] = True
                 compliant_chords.append(chord_song)
-                print(f"    {chord_song} found in song")
+                print_detail(LOD_CHORD, f"    {chord_song} found in song")
 
     # set compliance level
     compliance_level = 0
@@ -120,7 +120,7 @@ def get_chord_names_possible_qualities(chord: str) -> [str]:
     elif base_chord.quality.quality == "":
         chord_qualities = ["", "5", "add9", "aug",
                            "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
-                            "maj7", "maj7/9", "maj7/#11",
+                           "maj7", "maj7/9", "maj7/#11",
                            "maj7/#5", "maj7/13", "maj7/9/13", "7", "7/b9", "7/9",
                            "7/#9", "7/#11", "7/b5", "7/#5", "7/b13", "7/13",
                            "7/9/13", "7/b9/b13", "7/13/b9", "6", "6/9"
@@ -283,10 +283,24 @@ circle_of_fifths_melodic_minors = {  # todo
     "F": ["Cm", "Dm7", "Ebmaj7-#5", "F7", "G7", "Abm7b5", "Bm7b5"],
 }
 
+LOD_NONE = 0
+LOD_TONE = 1
+LOD_CHORD = 2
+LOD_NOTE = 3
+LOD_ALL = 4
+outcome_level_of_detail = LOD_ALL
+
+
+def print_detail(expected_level_of_detail, message: str):
+    if expected_level_of_detail >= outcome_level_of_detail:
+        print(message)
+
 
 def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}, cof_name: str) -> []:
     """
 
+    :param outcome_level_of_detail:
+    :param cof_name:
     :param cp:
     :param cof:
     :return:
@@ -294,9 +308,9 @@ def guess_tone_from_circle_of_fifths(cp: ChordProgression, cof: {}, cof_name: st
     compliance_level_max = [0, "?"]
     compliances = {}
     for tone in cof:
-        print("Check tone", tone, "in", cof_name)
+        print_detail(LOD_TONE, f"Check tone {str(tone)} in {cof_name}")
         compliance_level = get_compliance_chord_presence(cof[tone], cp)
-        print(tone, compliance_level * 100, "%")
+        print_detail(LOD_TONE, f"{tone}, {compliance_level * 100}%")
         compliances[tone] = compliance_level
         if compliance_level > compliance_level_max[0]:
             compliance_level_max = [compliance_level, tone]
