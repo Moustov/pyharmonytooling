@@ -1,3 +1,6 @@
+
+<img src="circle_of_5th.png" width="200" alt="Circle of 5th">
+
 ## OVERVIEW ##
 Series of tools to handle harmony in music
 
