@@ -4,7 +4,8 @@ TUNNING = ["E", "A", "D", "G", "B", "e"]
 FRET_QUANTITY_STANDARD = 12
 FRET_QUANTITY_CLASSIC = 18
 FRET_QUANTITY = FRET_QUANTITY_STANDARD
-FINGERING_WIDTH = 4
+FINGERING_WIDTH = 3
+FINGERING_AVAILABLE_FINGERS = 4
 
 
 def find_note_from_position(string: str, fret: int) -> str:
@@ -53,6 +54,7 @@ def fingering_is_possible(fret_positions: [int]):
 def get_fingering_from_chord(chord: Chord) -> [[int]]:
     """
     https://www.musicnotes.com/now/tips/how-to-read-guitar-tabs/
+    # todo handle muted string with -1
     :param chord:
     :return:
     """
@@ -83,3 +85,4 @@ def get_fingering_from_chord(chord: Chord) -> [[int]]:
                             if fingering_is_possible(fingering):
                                 fingerings.append(fingering)
     return fingerings
+

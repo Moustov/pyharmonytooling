@@ -90,7 +90,6 @@ def find_substitutes(chord: Chord) -> [Chord]:
     return similar_chords
 
 
-
 def find_similar_chords() -> []:
     similar_chords = []
     possible_chords_from_note = all_existing_chords()

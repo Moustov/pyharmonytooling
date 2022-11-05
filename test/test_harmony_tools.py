@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from pychord import Chord
 
-from src.harmony.harmony_tools import digest_song, guess_tone_and_mode, \
+from src.harmony.circle_of_5th import digest_song, guess_tone_and_mode, \
     circle_of_fifths_natural_majors, get_chord_names_possible_qualities, get_borrowed_chords
 
 
