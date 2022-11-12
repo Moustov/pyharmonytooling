@@ -5,7 +5,7 @@ from deepdiff import DeepDiff
 from src.guitar_neck.fingering import Fingering
 
 
-class Test(TestCase):
+class TestFingering(TestCase):
     def test_same_finger_same_fret_with_lower_fingers_between1(self):
         f = Fingering()
         tab = {
@@ -32,7 +32,7 @@ class Test(TestCase):
         }
         chord_array = f.get_array_from_tab(tab)
         res = f.same_finger_same_fret_with_lower_fingers_between(tab, chord_array)
-        assert res
+        assert not res
 
     def test_get_array_from_tab(self):
         f = Fingering()
@@ -82,6 +82,18 @@ class Test(TestCase):
         }
         res = f.get_array_from_tab(tab)
         expected = ["2", "0", "0", "0", "3", "2"]
+        assert res == expected
+
+    def test_get_array_from_tab2(self):
+        f = Fingering()
+        tab = {'E': ['-', '-', '-', '2'],
+               'A': ['-', '-', '1', '-'],
+               'D': ['0', '-', '-', '-'],
+               'G': ['0', '-', '-', '-'],
+               'B': ['0', '-', '-', '-'],
+               'e': ['-', '-', '-', '2']}
+        res = f.get_array_from_tab(tab)
+        expected = ["3", "2", "0", "0", "0", "3"]
         assert res == expected
 
     def test_get_tab_from_array(self):
@@ -135,4 +147,59 @@ class Test(TestCase):
         }
         chord_array = f.get_array_from_tab(tab)
         res = f.same_finger_same_fret_with_lower_fingers_between(tab, chord_array)
-        self.assertTrue(res)
+        self.assertFalse(res)
+
+    def test_shift_fingering(self):
+        f = Fingering()
+        tab = {'E': ['-', '-', '-', '2'],
+               'A': ['-', '-', '1', '-'],
+               'D': ['0', '-', '-', '-'],
+               'G': ['0', '-', '-', '-'],
+               'B': ['0', '-', '-', '-'],
+               'e': ['-', '-', '-', '2']}
+        fret = 3
+        res = f.shift_fingering(tab)
+        expected_tab = {'E': ['-', '-', '-', '2'],
+                        'A': ['-', '-', '1', '-'],
+                        'D': ['0', '-', '-', '-'],
+                        'G': ['0', '-', '-', '-'],
+                        'B': ['0', '-', '-', '-'],
+                        'e': ['-', '-', '-', '3']}
+        diff = DeepDiff(res, expected_tab, ignore_order=True)
+        self.assertEqual(diff, {})
+
+    def test_is_string_index_between_before_fret(self):
+        f = Fingering()
+        tab = {'E': ['-', '-', '2', '-'],
+               'A': ['-', '1', '-', '-'],
+               'D': ['0', '-', '-', '-'],
+               'G': ['0', '-', '-', '-'],
+               'B': ['0', '-', '-', '-'],
+               'e': ['-', '-', '2', '-']}
+        chord_array = ['2', '1', '0', '0', '0', '2']
+        string_index_between = 1
+        string2 = 'e'
+        string_index1 = 0
+        res = f.is_string_index_between_fingered_before_fret(tab, chord_array, string_index_between, string_index1)
+        assert (res)
+
+
+class TestFingering(TestCase):
+    def test_get_max_finger(self):
+        tab = {'E': ['-', '-', '3', '-'],
+               'A': ['-', '1', '-', '-'],
+               'D': ['0', '-', '-', '-'],
+               'G': ['0', '-', '-', '-'],
+               'B': ['0', '-', '-', '-'],
+               'e': ['-', '-', '2', '-']}
+        res = Fingering.get_max_finger(tab)
+        assert res == 3
+
+        tab = {'E': ['-', '-', '2', '-'],
+               'A': ['-', '1', '-', '-'],
+               'D': ['0', '-', '-', '-'],
+               'G': ['X', '-', '-', '-'],
+               'B': ['0', '-', '-', '-'],
+               'e': ['-', '-', '?', '-']}
+        res = Fingering.get_max_finger(tab)
+        assert res == 2

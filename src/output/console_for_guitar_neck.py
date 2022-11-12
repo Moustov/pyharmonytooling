@@ -59,13 +59,13 @@ class GuitarNeck:
         fret = "-" * self.GRID_WIDTH
         fret = fret + "+"
         string = fret * self.GRID_FRETS
-        self.horizontal_grid = neck.TUNNING[5] + " |" + string + "\n"
+        self.horizontal_grid = neck.TUNING[5] + " |" + string + "\n"
         self.GRID_STRING_LEN = len(self.horizontal_grid)
-        self.horizontal_grid += neck.TUNNING[4] + " |" + string + "\n"
-        self.horizontal_grid += neck.TUNNING[3] + " |" + string + "\n"
-        self.horizontal_grid += neck.TUNNING[2] + " |" + string + "\n"
-        self.horizontal_grid += neck.TUNNING[1] + " |" + string + "\n"
-        self.horizontal_grid += neck.TUNNING[0] + " |" + string + "\n"
+        self.horizontal_grid += neck.TUNING[4] + " |" + string + "\n"
+        self.horizontal_grid += neck.TUNING[3] + " |" + string + "\n"
+        self.horizontal_grid += neck.TUNING[2] + " |" + string + "\n"
+        self.horizontal_grid += neck.TUNING[1] + " |" + string + "\n"
+        self.horizontal_grid += neck.TUNING[0] + " |" + string + "\n"
         return self.horizontal_grid
 
     def draw_fingering(self, fingering: [int], display_full_neck: bool = False) -> str:
