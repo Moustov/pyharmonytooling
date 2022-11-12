@@ -11,7 +11,8 @@ Series of tools to handle harmony in music
   * https://en.wikipedia.org/wiki/Circle_of_fifths
 
 ## Features ##
-### Guess the tone & mode of a song" ###
+### Features on Harmony
+#### Guess the tone & mode of a song"
     from src.harmony.harmony_tools import digest_song, guess_tone_and_mode, circle_of_fifths_natural_majors, \
         get_borrowed_chords, LOD_NONE
     
@@ -36,7 +37,7 @@ ouput:
 
     Compliance: [1.0, 'A']
 
-### Guess borrowed chords in a song from a tone point of view ###
+#### Guess borrowed chords in a song from a tone point of view
     song = """
             C Dm Em F G Am Bdim Cm
             """
@@ -48,7 +49,7 @@ ouput:
 
     Borrowed chords: dict_keys(['Cm'])
 
-### Find substitutes from a chord ###
+#### Find substitutes from a chord
     from pychord import Chord 
     from src.harmony.harmony_tools import LOD_ALL, find_substitutes
 
@@ -70,7 +71,8 @@ ouput:
     ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
     substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
 
-### Find chord fingering on a guitar ###
+### Guitar tools
+#### Find chord fingering on a guitar
 
     outcome_level_of_detail = LOD_ALL
     f = get_fingering_from_chord(Chord("C"))
