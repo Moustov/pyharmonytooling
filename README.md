@@ -73,10 +73,16 @@ ouput:
 
 ### Guitar tools
 #### Find chord fingering on a guitar
+    from src.guitar_neck.fingering import Fingering
 
     outcome_level_of_detail = LOD_ALL
-    f = get_fingering_from_chord(Chord("C"))
+    fng = Fingering()
+    f = fng.get_fingering_from_chord(Chord("C"))
     print(f)
 output:
 
-    [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], [3, 3, 2, 0, 1, 3], [3, 3, 2, 5, 1, 3], [3, 3, 2, 5, 5, 3], [3, 3, 5, 5, 1, 3], [3, 3, 5, 5, 5, 3], [3, 7, 5, 5, 5, 3], [8, 7, 5, 5, 5, 8], [8, 7, 5, 5, 8, 8], [8, 7, 5, 9, 5, 8], [8, 7, 5, 9, 8, 8], [8, 7, 10, 9, 8, 8], [8, 10, 10, 9, 8, 8], [8, 10, 10, 9, 8, 12], [8, 10, 10, 12, 8, 8], [8, 10, 10, 12, 8, 12], [12, 10, 10, 9, 8, 8], [12, 10, 10, 9, 8, 12], [12, 10, 10, 12, 8, 8], [12, 10, 10, 12, 8, 12]]
+    [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
+
+# Release Notes
+* 12/NOV: 
+  * bugs when finding chord fingering on a guitar on vertical fingering such a barres

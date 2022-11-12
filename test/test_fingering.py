@@ -183,8 +183,6 @@ class TestFingering(TestCase):
         res = f.is_string_index_between_fingered_before_fret(tab, chord_array, string_index_between, string_index1)
         assert (res)
 
-
-class TestFingering(TestCase):
     def test_get_max_finger(self):
         tab = {'E': ['-', '-', '3', '-'],
                'A': ['-', '1', '-', '-'],
