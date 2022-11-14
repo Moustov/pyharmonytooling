@@ -74,8 +74,9 @@ class Fingering:
         """
         eg. chord_layout = [1, 3, 3, 2, 1, 1]
         => {"1": [0, 1, 2, 3, 4, 5], "2": [3], "3": [1,2]}
-        keys are the fret numbers
-        lists : the fingered strings numbers
+        * keys are the fret numbers
+        * lists : the fingered strings numbers
+        todo : handle barres with lower frets inside (eg. open G chord)
         :param chord_layout:
         :return:
         """
