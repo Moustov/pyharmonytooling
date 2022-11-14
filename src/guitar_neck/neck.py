@@ -10,17 +10,10 @@ class Neck:
     def __init__(self):
         pass
 
-    def get_string_position_in_tunning(self, string: str) -> int:
-        if string == "E": return 0
-        if string == "A": return 1
-        if string == "D": return 2
-        if string == "G": return 3
-        if string == "B": return 4
-        if string == "e": return 5
-
     def find_note_from_position(self, string: str, fret: int) -> str:
         """
         https://www.musicnotes.com/now/tips/how-to-read-guitar-tabs/
+        # todo involve self.TUNING to alter the note
         :param fret:
         :param string:
         :return:
