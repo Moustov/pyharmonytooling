@@ -95,9 +95,9 @@ class TestFingering(TestCase):
         chord_array = f.get_array_from_tab(tab)
         barres = f.find_possible_barres(chord_array)
         string = 'A'
-        fret = 1
+        fret = chord_array[Neck.TUNING.index(string)]
         res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
-        assert res
+        assert not res
 
 #######
     def test_is_string_index_between_before_fret_C(self):
