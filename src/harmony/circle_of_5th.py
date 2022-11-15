@@ -107,7 +107,7 @@ def get_compliance_chord_presence(tone: [str], cp: ChordProgression) -> float:
     the distance is binary : if the chord is present => the chord will fully count
     :param tone:
     :param cp:
-    :return:
+    :return: 0.0 --> 1.0 (100% compliant)
     """
     # init - synthesis of used chords in cp for quicker analysis
     tone_compliance = {}

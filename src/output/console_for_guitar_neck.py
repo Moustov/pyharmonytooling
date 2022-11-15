@@ -23,7 +23,7 @@ class GuitarNeck:
         if string == "e":
             return 0
 
-    def set_finger(self, string: str, fret: int, finger: chr = "X") -> str:
+    def set_finger(self, string: str, fret: int, finger: chr = Fingering.TAB_MUTE) -> str:
         """
         returns a guitar grid with finger number
         :param string: E / A / D / G / B / e

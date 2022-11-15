@@ -143,7 +143,7 @@ class Test(TestCase):
         f = Fingering()
 
         # all muted
-        res = f.find_finger_layout(chord_layout=[-1, -1, -1, -1, -1, -1])
+        res = f.find_finger_layout(chord_layout=[-1, -1, -1, -1, -1, -1, ])
         expected_tab = {
             "e": ["X", "-", "-", "-"],
             "B": ["X", "-", "-", "-"],

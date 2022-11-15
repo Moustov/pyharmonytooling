@@ -5,6 +5,7 @@ class Neck:
     TUNING = ["E", "A", "D", "G", "B", "e"]
     FRET_QUANTITY_STANDARD = 12
     FRET_QUANTITY_CLASSIC = 18
+    FRET_QUANTITY_ELECTRIC = 24
     FRET_QUANTITY = FRET_QUANTITY_STANDARD
 
     def __init__(self):
