@@ -95,8 +95,9 @@ class TestFingering(TestCase):
         chord_array = f.get_array_from_tab(tab)
         barres = f.find_possible_barres(chord_array)
         string = 'A'
-        res = f.is_string_fingered_before_fret(barres, chord_array, string)
-        assert (res)
+        fret = 1
+        res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
+        assert res
 
 #######
     def test_is_string_index_between_before_fret_C(self):
@@ -110,7 +111,8 @@ class TestFingering(TestCase):
         chord_array = f.get_array_from_tab(tab)
         barres = f.find_possible_barres(chord_array)
         string = 'A'
-        res = f.is_string_fingered_before_fret(barres, chord_array, string)
+        fret = 3
+        res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
         assert (not res)
 
     def test_is_string_index_between_before_fret_partial_D(self):
@@ -124,7 +126,8 @@ class TestFingering(TestCase):
         chord_array = f.get_array_from_tab(tab)
         barres = f.find_possible_barres(chord_array)
         for string in Neck.TUNING:
-            res = f.is_string_fingered_before_fret(barres, chord_array, string)
+            fret = chord_array[Neck.TUNING.index(string)]
+            res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
             assert (not res)
 
     def test_is_string_index_between_before_fret_D(self):
@@ -138,7 +141,8 @@ class TestFingering(TestCase):
         chord_array = f.get_array_from_tab(tab)
         barres = f.find_possible_barres(chord_array)
         for string in Neck.TUNING:
-            res = f.is_string_fingered_before_fret(barres, chord_array, string)
+            fret = chord_array[Neck.TUNING.index(string)]
+            res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
             assert (not res)
 
     def test_get_max_finger(self):
