@@ -153,12 +153,10 @@ class Fingering:
         :param chord_layout:
         :return: X: mute / 0: open / T: thumb / 1: index / 2: major / 3:ring finger / 4: pinky
         """
-        if chord_layout in [[self.FRET_OPEN, self.FRET_OPEN, self.FRET_OPEN,
-                             self.FRET_OPEN, self.FRET_OPEN, self.FRET_OPEN],
-                            [self.FRET_MUTE, self.FRET_MUTE, self.FRET_MUTE,
-                             self.FRET_MUTE, self.FRET_MUTE, self.FRET_MUTE]]:
+        if self.all_chord_are_mute_or_open(chord_layout):
+            # convenient way to provide a tab with "0" & "X"
+            # since there is no fingering on cells
             return self.get_tab_from_array(chord_layout)
-
         used_neck_length = self.get_highest_used_neck(chord_layout)
         fret_start = self.get_lowest_used_fret(chord_layout)
         tab = {}
@@ -280,3 +278,9 @@ class Fingering:
             while self.FRET_OPEN in chord_layout: chord_layout.remove(self.FRET_OPEN)
         except Exception:
             pass
+
+    def all_chord_are_mute_or_open(self, chord_layout):
+        for cell in chord_layout:
+            if cell not in [self.FRET_OPEN, self.FRET_MUTE]:
+                return False
+        return True

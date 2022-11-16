@@ -128,12 +128,12 @@ class Test(TestCase):
 
         # G
         expected_tab = {
-            "e": ["-", "-", "3", "-"],
+            "e": ["-", "-", "-", "3"],
             "B": ["0", "-", "-", "-"],
             "G": ["0", "-", "-", "-"],
             "D": ["0", "-", "-", "-"],
-            "A": ["-", "1", "-", "-"],
-            "E": ["-", "-", "2", "-"]
+            "A": ["-", "-", "1", "-"],
+            "E": ["-", "-", "-", "2"]
         }
         res = f.find_finger_layout(chord_layout=[3, 2, 0, 0, 0, 3])
         diff = DeepDiff(res, expected_tab, ignore_order=True)
