@@ -8,6 +8,7 @@ class UltimateGuitarSong:
         self.song_title = ""
         self.page_title = ""
         self.html = ""
+        self.url = ""
 
     def digest_html(self, html):
         self.html = html
@@ -20,6 +21,7 @@ class UltimateGuitarSong:
     def get_string(self) -> str:
         res = f"Title: {self.song_title}\n"
         res += f"Artist: {self.artist}\n"
+        res += f"URL: {self.url}\n"
         res += "\n".join(self.tabs)
         return res
 
@@ -38,7 +40,12 @@ class UltimateGuitarSong:
         title = part[1].split("</title>")[0]
         return title
 
-    def extract_song_from_url(self, url: str) -> str:
+    def extract_song_from_url(self, url: str):
+        """
+        retrieve the song from the URL and digest it into self
+        :param url:
+        """
+        self.url = url
         req = urllib.request.Request(
             url,
             data=None,
