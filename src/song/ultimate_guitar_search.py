@@ -16,6 +16,7 @@ class UltimateGuitarSearch:
         :param limit:
         :return:
         """
+        query += " site:ultimate-guitar.com"
         res = []
         link_qty = 0
         page = 0

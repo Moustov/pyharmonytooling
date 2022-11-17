@@ -83,6 +83,41 @@ output:
 
     [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
 
+### Song search tools
+You may search and handle song lyrics & tabs
+
+    from src.song.song import UltimateGuitarSong
+    from src.song.ultimate_guitar_search import UltimateGuitarSearch
+    
+    ug_engine = UltimateGuitarSearch()
+    query = "D Dm A"
+    urls = ug_engine.search(query, 20)
+    song = UltimateGuitarSong()
+    for link in urls:
+        print("===================================")
+        print("===================================")
+        print("===================================")
+        song.extract_song_from_url(link)
+        print(song.get_string())
+
+This piece of code will display 20 songs matching the query (songs holding the "D/Dm/A" cadence)
+
+Output:
+
+    ===================================
+    ===================================
+    ===================================
+    Title: AUTREFOIS
+    Artist: Pink Martini
+    [tab][ch]A[/ch]                                     [ch]D[/ch]\r\nJ'ai ecris des mots doux а toutes les filles de France[/tab]\r\n
+    [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nJ'espere qu'elles y repondent[/tab]\r\n
+    [tab][ch]A[/ch]                  [ch]D[/ch]           [ch]Dm[/ch]               [ch]A[/ch]\r\nJ'ai jure que je serai content avant la fin de l'annee[/tab]\r\n
+    [tab][ch]A[/ch]                                     [ch]D[/ch]\r\nJ'ai ecris des mots doux а toutes les filles de France[/tab]\r\n
+    [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nChaque jour et chaque nuit[/tab]\r\n
+    ...
+
+    
+
 # Release Notes
 * 12/NOV: 
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
