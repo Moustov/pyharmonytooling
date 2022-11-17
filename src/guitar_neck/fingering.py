@@ -2,6 +2,7 @@ from pychord import Chord
 
 from src.guitar_neck.neck_exception import NeckException
 from src.guitar_neck.neck import Neck
+from src.output.console import print_detail, LOD_CHORD
 
 
 class Fingering:
@@ -46,14 +47,15 @@ class Fingering:
                 tab[string].append(Fingering.TAB_EMPTY)
 
         for string in self.neck.TUNING:
-            if chord_array[self.neck.TUNING.index(string)] in [1, 2, 3, 4]:
-                tab[string][int(chord_array[self.neck.TUNING.index(string)])] = Fingering.TAB_UNDEFINED
-            elif chord_array[self.neck.TUNING.index(string)] == self.FRET_OPEN:
-                tab[string][0] = Fingering.TAB_OPEN
-            elif chord_array[self.neck.TUNING.index(string)] == self.FRET_MUTE:
-                tab[string][0] = Fingering.TAB_MUTE
-            else:
-                raise Exception(f"incorrect Fret {chord_array[self.neck.TUNING.index(string)]}")
+            if chord_array[self.neck.TUNING.index(string)] <= Fingering.FINGERING_WIDTH:
+                if chord_array[self.neck.TUNING.index(string)] in [1, 2, 3, 4]:
+                    tab[string][int(chord_array[self.neck.TUNING.index(string)])] = Fingering.TAB_UNDEFINED
+                elif chord_array[self.neck.TUNING.index(string)] == self.FRET_OPEN:
+                    tab[string][0] = Fingering.TAB_OPEN
+                elif chord_array[self.neck.TUNING.index(string)] == self.FRET_MUTE:
+                    tab[string][0] = Fingering.TAB_MUTE
+                else:
+                    raise Exception(f"incorrect Fret {chord_array[self.neck.TUNING.index(string)]}")
         return tab
 
     def get_array_from_tab(self, tab: dict) -> [int]:
@@ -137,17 +139,17 @@ class Fingering:
                 else:
                     barres_found[str(fret_index)] = [Neck.TUNING.index(string)]
         self.remove_muted_strings(local_chord_layout)
-        for fret in range(min(local_chord_layout), max(local_chord_layout) + 1):
-            s_fret = str(fret)
-            if s_fret in barres_found.keys():
-                min_f = min(barres_found[s_fret])
-                max_f = max(barres_found[s_fret])
-                barres_found[s_fret] = []
-                for f in range(min_f, max_f + 1):
-                    barres_found[s_fret].append((f))
+        # for fret in range(min(local_chord_layout), max(local_chord_layout) + 1):
+        #     s_fret = str(fret)
+        #     if s_fret in barres_found.keys():
+        #         min_f = min(barres_found[s_fret])
+        #         max_f = max(barres_found[s_fret])
+        #         barres_found[s_fret] = []
+        #         for f in range(min_f, max_f + 1):
+        #             barres_found[s_fret].append((f))
         return barres_found
 
-    def find_finger_layout(self, chord_layout: [int]) -> [chr]:
+    def find_finger_layout_from_barres(self, chord_layout: [int]) -> [chr]:
         """
         finds an appropriate finger layout from a chord
         :param chord_layout:
@@ -218,7 +220,7 @@ class Fingering:
         x = max(fret_positions)
         return abs(x - m) <= Fingering.FINGERING_WIDTH
 
-    def get_fingering_from_chord(self, chord: Chord, all_strings: bool = True) -> [[int]]:
+    def get_fingering_from_chord_brute_force(self, chord: Chord, all_strings: bool = True) -> [[int]]:
         """
         https://www.musicnotes.com/now/tips/how-to-read-guitar-tabs/
         :param all_strings: # todo: True if all string are plucked/strummed
@@ -253,6 +255,47 @@ class Fingering:
                                     possible_fingerings.append(fingering_combination)
         return possible_fingerings
 
+    def get_chord_layouts_from_a_chord(self, chord: Chord, all_strings: bool = True) -> [[int]]:
+        """
+        while 1 fingered fret within NECK_SIZE:
+            retrieve cells from notes & mutes within a given FINGER_WIDTH
+            shift 1 fret
+        """
+        positions = {}
+        for note in chord.components():
+            positions[note] = self.neck.find_positions_from_note(note)
+
+        fingering = {str(Fingering.FRET_MUTE): []}
+        for fret in range(0, Neck.FRET_QUANTITY + 2):
+            fingering[str(fret)] = []
+
+        tab = {}
+        fret_options = {}
+        for string in Neck.TUNING:
+            tab[string] = []
+            fret_options[string] = [Fingering.FRET_MUTE]
+            for fret in range(0, Neck.FRET_QUANTITY + 2):   # +1 for nut / +1 to reach the last fret
+                tab[string].append(Fingering.FRET_MUTE)
+
+        for fret in range(0, Neck.FRET_QUANTITY + 2):  # +1 for nut / +1 to reach the last fret
+            for used_fret in range(fret, fret + Fingering.FINGERING_WIDTH + 1):
+                if used_fret < Neck.FRET_QUANTITY + 1:
+                    for string in Neck.TUNING:
+                        note = self.neck.find_note_from_position(string, used_fret)
+                        if note.upper() in positions.keys():
+                            fret_options[string].append(used_fret)
+                            try:
+                                tab[string][used_fret] = note
+                            except:
+                                pass
+            self.add_fingering_combinations(fingering, fret_options, fret)
+        res = []
+        for hash_code in fingering.keys():
+            for chord_layout in fingering[hash_code]:
+                if chord_layout != -1:
+                    res.append(chord_layout)
+        return res
+
     def get_highest_used_neck(self, layout: [int]) -> int:
         chord_layout = layout.copy()
         self.remove_muted_strings(chord_layout)
@@ -260,10 +303,17 @@ class Fingering:
         highest_used_neck = max(self.FINGERING_WIDTH + 1, highest_used_neck + 1)  # +1 due to the nut
         return highest_used_neck
 
-    def get_lowest_used_fret(self, layout: [int]) -> int:
-        chord_layout = layout.copy()
+    def get_lowest_used_fret(self, string_layout: [int]) -> int:
+        """
+        gives the lowest fingered fret across the string
+        :param string_layout:
+        :return: if string_layout is empty => return -1
+        """
+        chord_layout = string_layout.copy()
         self.remove_muted_strings(chord_layout)
         self.remove_open_strings(chord_layout)
+        if not chord_layout:
+            return -1
         lowest_used_fret = min(chord_layout)
         return lowest_used_fret
 
@@ -284,3 +334,43 @@ class Fingering:
             if cell not in [self.FRET_OPEN, self.FRET_MUTE]:
                 return False
         return True
+
+    def add_fingering_combinations(self, fingering: dict, positions: dict, fret_start: int) -> [[int]]:
+        """
+        returns a list of chord arrays from the notes in tab (or muted string)
+        :param fret_start:
+        :param positions: ex {'E': ['X', 0, 3],
+                        'A': ['X', 3],
+                        'D': ['X', 2],
+                        'G': ['X', 0],
+                        'B': ['X', 1],
+                        'e': ['X', 0, 3]}
+        :return: [... [-1, 3, 2, -1, -1, -1],
+                    [-1, 3, 2, -1, -1, 0],
+                    [-1, 3, 2, -1, -1, 3],
+                ...]
+        """
+        # handle when there is no position on a string
+        local_positions = positions.copy()
+        for string in Neck.TUNING:
+            local_positions[string].append(-1)
+        # manage string combinations
+        for s_E in local_positions[Neck.TUNING[0]]:
+            for s_A in local_positions[Neck.TUNING[1]]:
+                for s_D in local_positions[Neck.TUNING[2]]:
+                    for s_G in local_positions[Neck.TUNING[3]]:
+                        for s_B in local_positions[Neck.TUNING[4]]:
+                            for s_e in local_positions[Neck.TUNING[5]]:
+                                chord_array = [s_E, s_A, s_D, s_G, s_B, s_e]
+                                lower_fret = self.get_lowest_used_fret(chord_array)
+                                higher_fret = max(chord_array)
+                                if lower_fret != -1 \
+                                        and(higher_fret - lower_fret) <= Fingering.FINGERING_WIDTH \
+                                        and chord_array not in fingering[str(higher_fret)] \
+                                        and chord_array != [Fingering.FRET_MUTE, Fingering.FRET_MUTE,
+                                                            Fingering.FRET_MUTE, Fingering.FRET_MUTE,
+                                                            Fingering.FRET_MUTE, Fingering.FRET_MUTE]:
+                                    # todo: add option to also remove any chord_array when the bass not the bass part of the chord
+                                    print_detail(LOD_CHORD, str(chord_array))
+                                    fingering[str(max(chord_array))].append(chord_array)
+        pass

@@ -86,3 +86,7 @@ output:
 # Release Notes
 * 12/NOV: 
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
+
+# Additional links
+* https://codepen.io/2kool2/pen/bmVxpZ
+* https://github.com/victorfontes/python-ultimate-guitar

@@ -99,7 +99,6 @@ class TestFingering(TestCase):
         res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
         assert not res
 
-#######
     def test_is_string_index_between_before_fret_C(self):
         f = Fingering()
         tab = {'E': ['-', '-', '-', '3'],
@@ -168,7 +167,7 @@ class TestFingering(TestCase):
         f = Fingering()
         chord_layout = [1, 3, 3, 2, 1, 1]
         res = f.find_possible_barres(chord_layout)
-        expected = {"1": [0, 1, 2, 3, 4, 5], "2": [3], "3": [1, 2]}
+        expected = {"1": [0, 4, 5], "2": [3], "3": [1, 2]}
         diff = DeepDiff(res, expected, ignore_order=True)
         self.assertEqual(diff, {})
 
@@ -176,7 +175,7 @@ class TestFingering(TestCase):
         f = Fingering()
         chord_layout = [3, 5, 5, 4, 3, 3]
         res = f.find_possible_barres(chord_layout)
-        expected = {"3": [0, 1, 2, 3, 4, 5], "4": [3], "5": [1, 2]}
+        expected = {"3": [0, 4, 5], "4": [3], "5": [1, 2]}
         diff = DeepDiff(res, expected, ignore_order=True)
         self.assertEqual(diff, {})
 
@@ -192,6 +191,6 @@ class TestFingering(TestCase):
         f = Fingering()
         chord_layout = [-1, 0, 0, 1, 2, 1]
         res = f.find_possible_barres(chord_layout)
-        expected = {"2": [4], "1": [3, 4, 5]}
+        expected = {"2": [4], "1": [3, 5]}
         diff = DeepDiff(res, expected, ignore_order=True)
         self.assertEqual(diff, {})
