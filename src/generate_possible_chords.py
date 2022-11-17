@@ -16,7 +16,7 @@ def all_possible_chords_with_all_string(chord_name: str):
     assert True  # hardly testable
 
 
-all_possible_chords_with_all_string("C")
+all_possible_chords_with_all_string("D")
 all_possible_chords_with_all_string("Cm")
 all_possible_chords_with_all_string("Cmaj7")
 

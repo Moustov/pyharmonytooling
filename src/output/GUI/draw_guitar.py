@@ -48,7 +48,7 @@ def plot(key, intervals, night=True):
             ax.annotate(note, (i + 0.5, y_val), color='w', weight='bold',
                         fontsize=font, ha='center', va='center')
 
-    plt.title('_| _| _| _| _|' * 16)
+    plt.song_title('_| _| _| _| _|' * 16)
     plt.yticks(np.arange(1, 7), ['E', 'A', 'D', 'G', 'B', 'E'])
     plt.xticks(np.arange(21) + 0.5, np.arange(0, 22))
     plt.show()
