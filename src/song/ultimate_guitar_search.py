@@ -84,6 +84,8 @@ class UltimateGuitarSearch:
     def search(self, query: str, limit: int) -> [str]:
         """
         search from UG any string, not only the author / title
+        /!\ too many searches will result in a blocking HTTP ERROR 429
+        https://stackoverflow.com/questions/22786068/how-to-avoid-http-error-429-too-many-requests-python
         :param query:
         :param limit:
         :return:
