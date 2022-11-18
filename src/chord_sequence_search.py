@@ -2,8 +2,8 @@ from src.song.song import UltimateGuitarSong
 from src.song.ultimate_guitar_search import UltimateGuitarSearch
 
 ug_engine = UltimateGuitarSearch()
-query = "D Dm A"
-urls = ug_engine.search(query, 20)
+query = "C Cm G"
+urls = ug_engine.search(query, 3)
 song = UltimateGuitarSong()
 for link in urls:
     print("===================================")
