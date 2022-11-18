@@ -2,6 +2,16 @@ import urllib
 
 from pychord import Chord
 
+from src.harmony.circle_of_5th import CircleOf5th
+
+
+def turn_html_accents(tab: str) -> str:
+    tab = tab.replace("&egrave;", "è")
+    tab = tab.replace("&eacute;", "é")
+    tab = tab.replace("&Agrave;", "À")
+    tab = tab.replace('Ã‰', "É")
+    return tab
+
 
 class UltimateGuitarSong:
     def __init__(self):
@@ -11,6 +21,7 @@ class UltimateGuitarSong:
         self.page_title = ""
         self.html = ""
         self.url = ""
+        self.cof = CircleOf5th()
 
     def digest_html(self, html):
         self.html = html
@@ -21,7 +32,7 @@ class UltimateGuitarSong:
                 self.extract_tabs_without_tab(html)
             except:
                 print("Could not extract the song - format unknown")
-        self.page_title = self.turn_html_accents(self.extract_page_title(html))
+        self.page_title = turn_html_accents(self.extract_page_title(html))
         self.song_title = self.page_title.split("CHORDS")[0].strip()
         artist_and_site = self.page_title.split("by")[1]
         self.artist = artist_and_site.split("@")[0].strip()
@@ -42,7 +53,7 @@ class UltimateGuitarSong:
         song = tabs_with_extra[len(tabs_with_extra) - 1].split("&quot;,&quot;revision_id&quot;:")[0]
         lines = song.split(r"\r\n")
         for line in lines:
-            line = self.turn_html_accents(line)
+            line = turn_html_accents(line)
             chords_b = line.split("[ch]")
             if len(chords_b) > 1:
                 for c in chords_b:
@@ -73,7 +84,7 @@ class UltimateGuitarSong:
         tabs_with_extra = html.split("[tab]")[1:]
         for tab in tabs_with_extra:
             tab = "[tab]" + tab
-            tab = self.turn_html_accents(tab)
+            tab = turn_html_accents(tab)
             s = tab.split(r"\\r\\n")
             self.line_of_chords.append(s[0])
             loc = s[0].split()
@@ -109,13 +120,19 @@ class UltimateGuitarSong:
         self.digest_html(self.html)
         self.url = url
 
-    def turn_html_accents(self, tab: str) -> str:
-        tab = tab.replace("&egrave;", "è")
-        tab = tab.replace("&eacute;", "é")
-        tab = tab.replace("&Agrave;", "À")
-        tab = tab.replace('Ã‰', "É")
-        return tab
+    def get_tone_and_mode(self) -> [[]]:
+        song = " \n".join(self.lyrics)
+        cp = self.cof.digest_song(song)
+        compliance_level_max = self.cof.guess_tone_and_mode(cp)
+        return compliance_level_max
 
-
-
+    def get_borrowed_chords(self) -> dict:
+        song = ""
+        for cs in self.chords_sequence:
+            if type(cs) is Chord:
+                song += f" {cs} "
+        cp = self.cof.digest_song(song)
+        tone = self.cof.circle_of_fifths_natural_majors["C"]
+        borrowed_chords = self.cof.get_borrowed_chords(tone, cp)
+        print("   Borrowed chords:", borrowed_chords.keys())
 
