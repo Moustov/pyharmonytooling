@@ -13,9 +13,10 @@ Series of tools to handle harmony in music
 ## Features ##
 ### Features on Harmony
 #### Guess the tone & mode of a song"
-    from src.harmony.harmony_tools import digest_song, guess_tone_and_mode, circle_of_fifths_natural_majors, \
-        get_borrowed_chords, LOD_NONE
-    
+    from src.displays.console import HarmonyLogger
+    from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
+
+    HarmonyLogger.outcome_level_of_detail = HarmonyLogger.LOD_NONE
     song = """
                   A           E
             Happy Birthday to you
@@ -26,36 +27,36 @@ Series of tools to handle harmony in music
                   A        E    A
             Happy Birthday to you
             """
-    outcome_level_of_detail = LOD_NONE
-    cp = digest_song(song)
-    compliance_level_max = guess_tone_and_mode(cp)
-    print("Compliance:", compliance_level_max)
-    
-    tone = circle_of_fifths_natural_majors[compliance_level_max[1]]
+    cof = CircleOf5th()
+    cp = cof.digest_song(song)
+    compliance_level_max = cof.guess_tone_and_mode(cp)
+    print(compliance_level_max)
 
 ouput:
 
-    Compliance: [1.0, 'A']
+    [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
 
 #### Guess borrowed chords in a song from a tone point of view
     song = """
-            C Dm Em F G Am Bdim Cm
-            """
-    cp = digest_song(song)
-    tone = circle_of_fifths_natural_majors["C"]
-    borrowed_chords = get_borrowed_chords(tone, cp)
-    print("Borrowed chords:", borrowed_chords.keys())
+                C Dm Em F G Am Bdim Cm
+                """
+    cof = CircleOf5thNaturalMajor()
+    cp = cof.digest_song(song)
+    tone = cof.generate_circle_of_fifths()["C"]
+    borrowed_chords = cof.get_borrowed_chords(tone, cp)
+    print("   Borrowed chords:", borrowed_chords.keys())
 ouput:
 
     Borrowed chords: dict_keys(['Cm'])
 
 #### Find substitutes from a chord
     from pychord import Chord 
-    from src.harmony.harmony_tools import LOD_ALL, find_substitutes
+    from src.harmony.circle_of_5th import CircleOf5th
 
-    outcome_level_of_detail = LOD_ALL
+    cof = CircleOf5th()
     chord = "G6"
-    print("substitutes from :", chord, find_substitutes(Chord(chord)))
+    substitutes = cof.find_substitutes(Chord(chord))
+    print("substitutes from :", chord, substitutes)
 ouput:
 
     Number of existing chords: 5772
@@ -83,7 +84,8 @@ output:
 
     [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
 
-### Song search tools
+### Song Processing
+#### Song search & processing tools on Ultimate Guitar through Google.com
 You may search and handle song lyrics & tabs
 
     from src.song.song import UltimateGuitarSong
@@ -95,8 +97,6 @@ You may search and handle song lyrics & tabs
     song = UltimateGuitarSong()
     for link in urls:
         print("===================================")
-        print("===================================")
-        print("===================================")
         song.extract_song_from_url(link)
         print(song.get_string())
 
@@ -104,8 +104,6 @@ This piece of code will display 20 songs matching the query (songs holding the "
 
 Output:
 
-    ===================================
-    ===================================
     ===================================
     Title: AUTREFOIS
     Artist: Pink Martini
@@ -116,10 +114,33 @@ Output:
     [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nChaque jour et chaque nuit[/tab]\r\n
     ...
 
-    
+#### Song processing tools on simple text song
+        from pychord import Chord 
+        from src.song.text_song import TextSongWithLineForChords
+
+        song = """
+                            A           E
+                    Happy Birthday to you
+                          E           A
+                    Happy Birthday to you
+                          A7            D
+                    Happy Birthday dear (name)
+                          A        E    A
+                    Happy Birthday to you
+                """
+        the_song = TextSongWithLineForChords()
+        the_song.digest(song)
+        print(the_song.chords_sequence)
+output: 
+
+    [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
 # Release Notes
-* 12/NOV: 
+* 19/NOV/22
+  * starting API to ultimate-guitar.com
+  * querying UG through google.com to retrieve pattern matching over possibilities found in UG
+  * circle of 5th extended to Natural/Melodic/Harmonic minors
+* 12/NOV/22: 
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
 
 # Additional links

@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from pychord import Chord
 
+from src.displays.console import HarmonyLogger
 from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
 
 
@@ -30,6 +31,7 @@ class Test(TestCase):
         assert compliance_level_max[2] == "Natural Major"
 
     def test_guess_tone_and_mode_happy_birthday_chords(self):
+        HarmonyLogger.outcome_level_of_detail = HarmonyLogger.LOD_NONE
         song = """
                     A           E
             Happy Birthday to you
