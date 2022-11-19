@@ -1,4 +1,4 @@
-from src.output.console import HarmonyLogger
+from src.displays.console import HarmonyLogger
 from src.song.text_song import TextSongWithLineForChords
 
 song = """
