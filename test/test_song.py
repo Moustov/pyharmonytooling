@@ -13,16 +13,16 @@ class TestUltimateGuitarSong(TestCase):
         ugs = self.get_test_data1()
 
         res = ugs.get_tone_and_mode()
-        expected = "wrong value"  # todo wrong value
-        assert res == expected
+        expected = "G"
+        assert res[1] == expected
 
     def test_digest_get_borrowed_chords(self):
         ugs = self.get_test_data1()
         res = ugs.get_borrowed_chords()
-        expected = "wrong value"  # todo wrong value
+        expected = ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'D9', 'Ab7', 'G#', 'G#6', 'G#M7']
         assert res == expected
 
-    def get_test_data1(self) -> str:
+    def get_test_data1(self) -> UltimateGuitarSong:
         ugs = UltimateGuitarSong()
         html = ""
         html_file = "C Cm A progression song.html"

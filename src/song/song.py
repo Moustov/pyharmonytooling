@@ -120,19 +120,25 @@ class UltimateGuitarSong:
         self.digest_html(self.html)
         self.url = url
 
+    def get_recognized_chords(self) -> []:
+        res = []
+        for cs in self.chords_sequence:
+            if type(cs) is Chord:
+                res.append(f" {cs} ")
+        return res
+
     def get_tone_and_mode(self) -> [[]]:
-        song = " \n".join(self.lyrics)
+        song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
         compliance_level_max = self.cof.guess_tone_and_mode(cp)
         return compliance_level_max
 
-    def get_borrowed_chords(self) -> dict:
-        song = ""
-        for cs in self.chords_sequence:
-            if type(cs) is Chord:
-                song += f" {cs} "
+    def get_borrowed_chords(self) -> []:
+        song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
-        tone = self.cof.circle_of_fifths_natural_majors["C"]
+        suspected_key = self.cof.guess_tone_and_mode(cp)[1]
+        tone = self.cof.circle_of_fifths_natural_majors[suspected_key]
         borrowed_chords = self.cof.get_borrowed_chords(tone, cp)
         print("   Borrowed chords:", borrowed_chords.keys())
+        return list(borrowed_chords.keys())
 

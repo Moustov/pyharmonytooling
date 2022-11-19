@@ -292,7 +292,7 @@ class CircleOf5th:
         qualities = ["m", "m7b5", "maj7/#5", "m7", "7", "maj7", "dim7"]
         return self.generate_circle_of_fifths(intervals, qualities)
 
-    def generate_circle_of_fifths(self, intervals, qualities, cycle_sequence):
+    def generate_circle_of_fifths(self, intervals, qualities, cycle_sequence=["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]):
         """
         todo
         generates a circle of fifths from intervals, qualities
@@ -301,7 +301,6 @@ class CircleOf5th:
         :param cycle_sequence:
         :return:
         """
-        cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
         return {}
 
     def guess_tone_from_circle_of_fifths(self, cp: ChordProgression, cof: {}, cof_name: str) -> []:
