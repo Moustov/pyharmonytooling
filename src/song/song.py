@@ -6,6 +6,11 @@ from src.harmony.circle_of_5th import CircleOf5th
 
 
 def turn_html_accents(tab: str) -> str:
+    """
+    change all coded accent character into extended ASCII
+    :param tab:
+    :return:
+    """
     tab = tab.replace("&egrave;", "è")
     tab = tab.replace("&eacute;", "é")
     tab = tab.replace("&Agrave;", "À")
@@ -24,6 +29,11 @@ class UltimateGuitarSong:
         self.cof = CircleOf5th()
 
     def digest_html(self, html):
+        """
+        digest song informations & tabs from a UG html page content
+        :param html: a UG html page content
+        :return:
+        """
         self.html = html
         try:
             self.extract_tabs_with_tab(html)
@@ -37,7 +47,11 @@ class UltimateGuitarSong:
         artist_and_site = self.page_title.split("by")[1]
         self.artist = artist_and_site.split("@")[0].strip()
 
-    def get_string(self) -> str:
+    def __str__(self):
+        """
+        returns a string synthesis of a song
+        :return:
+        """
         res = f"Title: {self.song_title}\n"
         res += f"Artist: {self.artist}\n"
         res += f"URL: {self.url}\n"
@@ -45,6 +59,11 @@ class UltimateGuitarSong:
         return res
 
     def extract_tabs_without_tab(self, html: str):
+        """
+        extracts song data from a UG html page is not formatted with [tab] markups
+        :param html:
+        :return:
+        """
         self.tabs = []
         self.lyrics = []
         self.line_of_chords = []
@@ -69,14 +88,18 @@ class UltimateGuitarSong:
                                     a_chord = Chord(chord_name)
                                     self.chords_sequence.append(a_chord)
                             except Exception as err:
-                                print(chord_name, err)
+                                # print(chord_name, err)
                                 self.chords_sequence.append(chord_name)
             elif line.strip() != '':
                 self.lyrics.append(line)
         pass
-        # self.tabs[len(self.tabs) - 1] = self.tabs[len(self.tabs) - 1].split("&quot;,&quot;revision_id&quot;:")[0]
 
     def extract_tabs_with_tab(self, html: str):
+        """
+        extracts song data from a UG html page is formatted with [tab] markups
+        :param html:
+        :return:
+        """
         self.tabs = []
         self.lyrics = []
         self.line_of_chords = []
@@ -98,6 +121,11 @@ class UltimateGuitarSong:
         self.tabs[len(self.tabs) - 1] = self.tabs[len(self.tabs) - 1].split("&quot;,&quot;revision_id&quot;:")[0]
 
     def extract_page_title(self, html: str) -> str:
+        """
+        return the html page title
+        :param html:
+        :return:
+        """
         part = html.split("<title>")
         title = part[1].split("</title>")[0]
         return title
@@ -120,7 +148,11 @@ class UltimateGuitarSong:
         self.digest_html(self.html)
         self.url = url
 
-    def get_recognized_chords(self) -> []:
+    def get_recognized_chords(self) -> [Chord]:
+        """
+        return a list of valid Chords
+        :return:
+        """
         res = []
         for cs in self.chords_sequence:
             if type(cs) is Chord:
@@ -128,17 +160,24 @@ class UltimateGuitarSong:
         return res
 
     def get_tone_and_mode(self) -> [[]]:
+        """
+        return the max tone compliance from this song
+        :return: [probability, note, circle name, scale]
+        """
         song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
         compliance_level_max = self.cof.guess_tone_and_mode(cp)
         return compliance_level_max
 
-    def get_borrowed_chords(self) -> []:
+    def get_borrowed_chords(self) -> [str]:
+        """
+        returns the list of borrowed chords from the max tone compliance perspecive
+        :return:
+        """
         song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
-        suspected_key = self.cof.guess_tone_and_mode(cp)[1]
-        tone = self.cof.circle_of_fifths_natural_majors[suspected_key]
-        borrowed_chords = self.cof.get_borrowed_chords(tone, cp)
+        suspected_key = self.cof.guess_tone_and_mode(cp)
+        borrowed_chords = self.cof.get_borrowed_chords(suspected_key[3], cp)
         print("   Borrowed chords:", borrowed_chords.keys())
         return list(borrowed_chords.keys())
 

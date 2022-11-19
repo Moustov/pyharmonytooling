@@ -10,4 +10,4 @@ for link in urls:
     print("===================================")
     print("===================================")
     song.extract_song_from_url(link)
-    print(song.get_string())
+    print(song)

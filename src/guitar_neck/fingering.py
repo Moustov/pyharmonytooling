@@ -338,6 +338,7 @@ class Fingering:
     def add_fingering_combinations(self, fingering: dict, positions: dict, fret_start: int) -> [[int]]:
         """
         returns a list of chord arrays from the notes in tab (or muted string)
+        :param fingering:
         :param fret_start:
         :param positions: ex {'E': ['X', 0, 3],
                         'A': ['X', 3],

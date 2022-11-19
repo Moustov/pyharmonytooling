@@ -13,13 +13,13 @@ class TestUltimateGuitarSong(TestCase):
         ugs = self.get_test_data1()
 
         res = ugs.get_tone_and_mode()
-        expected = "G"
-        assert res[1] == expected
+        assert res[1] == "F"
+        assert res[2] == "Melodic Minor"
 
     def test_digest_get_borrowed_chords(self):
         ugs = self.get_test_data1()
         res = ugs.get_borrowed_chords()
-        expected = ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'D9', 'Ab7', 'G#', 'G#6', 'G#M7']
+        expected = ['Db', 'A', 'A7', 'Em', 'Cm', 'Am', 'Bm', 'D9', 'G#', 'G#6', 'G#M7']
         assert res == expected
 
     def get_test_data1(self) -> UltimateGuitarSong:

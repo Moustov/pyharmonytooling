@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from pychord import Chord
 
-from src.harmony.circle_of_5th import CircleOf5th
+from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
 
 
 class Test(TestCase):
@@ -13,7 +13,10 @@ class Test(TestCase):
         cof = CircleOf5th()
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
-        assert(compliance_level_max == [1.0, 'C'])
+        assert compliance_level_max[0] == 1.0
+        assert compliance_level_max[1] == 'C'
+        assert compliance_level_max[2] == "Natural Major"
+
 
     def test_guess_tone_and_mode_Bb(self):
         song = """
@@ -22,7 +25,9 @@ class Test(TestCase):
         cof = CircleOf5th()
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
-        assert(compliance_level_max == [1.0, 'Bb'])
+        assert compliance_level_max[0] == 1.0
+        assert compliance_level_max[1] == 'Bb'
+        assert compliance_level_max[2] == "Natural Major"
 
     def test_guess_tone_and_mode_happy_birthday_chords(self):
         song = """
@@ -39,12 +44,16 @@ class Test(TestCase):
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
         print(compliance_level_max)
-        assert(compliance_level_max == [1.0, 'A'])
+        assert compliance_level_max[0] == 1.0
+        assert compliance_level_max[1] == 'A'
+        assert compliance_level_max[2] == "Natural Major"
+
 
     def test_get_chord_possible_qualities(self):
-        cof = CircleOf5th()
-        for tone in cof.circle_of_fifths_natural_majors:
-            for chord_tone in cof.circle_of_fifths_natural_majors[tone]:
+        cof = CircleOf5thNaturalMajor()
+        tones = cof.generate_circle_of_fifths()
+        for tone in tones:
+            for chord_tone in tones[tone]:
                 possible_chord_qualities = cof.get_chord_names_possible_qualities(chord_tone)
                 c = Chord(tone+"m")
                 tc = Chord(chord_tone)
@@ -57,10 +66,10 @@ class Test(TestCase):
         song = """
                 C Dm Em F G Am Bdim
                 """
-        cof = CircleOf5th()
+        cof = CircleOf5thNaturalMajor()
         cp = cof.digest_song(song)
 
-        tone = cof.circle_of_fifths_natural_majors["C"]
+        tone = cof.generate_circle_of_fifths()["C"]
         borrowed_chords = cof.get_borrowed_chords(tone, cp)
         print("   Borrowed chords:", borrowed_chords.keys())
         assert (len(borrowed_chords) == 0)
@@ -69,9 +78,9 @@ class Test(TestCase):
         song = """
                 C Dm Em F G Am Bdim Cm
                 """
-        cof = CircleOf5th()
+        cof = CircleOf5thNaturalMajor()
         cp = cof.digest_song(song)
-        tone = cof.circle_of_fifths_natural_majors["C"]
+        tone = cof.generate_circle_of_fifths()["C"]
         borrowed_chords = cof.get_borrowed_chords(tone, cp)
         print("   Borrowed chords:", borrowed_chords.keys())
         assert (borrowed_chords == {"Cm": True})
