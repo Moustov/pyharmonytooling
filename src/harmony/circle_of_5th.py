@@ -4,7 +4,7 @@ from src.displays.console import HarmonyLogger
 
 
 class CircleOf5th:
-    chromatic_scale = ["A", "B", "C", "D", "E", "F", "G", "A#", "C#", "D#", "F#", "G#"]
+    chromatic_scale = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     cof_name = "circle name"
     intervals = []
     qualities = []
