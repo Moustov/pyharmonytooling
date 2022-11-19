@@ -1,6 +1,6 @@
 from pychord import ChordProgression, Chord
 
-from src.output.console import LOD_TONE, LOD_CHORD, LOD_NOTE, print_detail, HarmonyLogger
+from src.output.console import HarmonyLogger
 
 
 class CircleOf5th:
