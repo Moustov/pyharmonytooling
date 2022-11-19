@@ -1,8 +1,5 @@
 from unittest import TestCase
 
-from deepdiff import DeepDiff
-from pychord import Chord
-
 from src.guitar_neck.fingering import Fingering
 from src.guitar_neck.neck import Neck
 from src.guitar_neck.neck_exception import NeckException
@@ -42,7 +39,7 @@ class Test(TestCase):
         fng = Fingering()
         f = [0, 7, 5, 5, 5, 8]
         try:
-            res = fng.find_finger_layout(f)
+            res = fng.find_finger_layout_from_barres(f)
             self.assertTrue(True, msg=f"tab {f} has a possible fingering: {res}")
         except NeckException as neck_err:
             self.assertFalse(False, msg=f"issue with tab {str(f)}: {str(neck_err)}")

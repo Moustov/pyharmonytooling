@@ -10,7 +10,6 @@ root = Tk()
 root.geometry('800x600')
 root.title('My Music')
 
-
 # create a menubar
 menubar = Menu(root)
 root.config(menu=menubar)
@@ -66,6 +65,7 @@ menubar.add_cascade(
     underline=0
 )
 
+
 def show_selected_size():
     showinfo(
         title='Result',
@@ -74,8 +74,8 @@ def show_selected_size():
 
 
 selected_size = tk.StringVar()
-sizes = (('C', 'C'),('C#', 'C#'),
-         ('D', 'D'),('D#', 'D#'),
+sizes = (('C', 'C'), ('C#', 'C#'),
+         ('D', 'D'), ('D#', 'D#'),
          ('E', 'E'),
          ('F', 'F'), ('F#', 'F#'),
          ('G', 'G'), ('G#', 'G#'),
@@ -105,12 +105,11 @@ button = ttk.Button(
 
 button.pack(fill='x', padx=5, pady=5)
 
-
 svg_image = tksvg.SvgImage('C:/tmp/my_music/circle.svg')
-#label = tk.Label(image=svg_image)
-#label.pack(fill='x', padx=5, pady=5)
-frame=tk.Frame(root)
-tk_image=svgPhotoImage('C:/tmp/my_music/circle.svg')
+# label = tk.Label(image=svg_image)
+# label.pack(fill='x', padx=5, pady=5)
+frame = tk.Frame(root)
+tk_image = svgPhotoImage('C:/tmp/my_music/circle.svg')
 frame.configure(image=tk_image)
 
 root.mainloop()

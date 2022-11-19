@@ -60,7 +60,7 @@ class Test(TestCase):
                 if c in possible_chord_qualities and tc.quality.quality == "":
                     print(c, "Minor chord cannot be a possible Major chord")
                     self.fail()
-        assert (True)
+        assert True
 
     def test_get_borrowed_chords_C(self):
         song = """

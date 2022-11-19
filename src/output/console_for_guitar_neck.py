@@ -34,15 +34,18 @@ class GuitarNeck:
         string_pos = self.string_name_to_display_position(string)
         if fret == 0:
             vertical_index = string_pos * self.GRID_STRING_LEN
-            self.horizontal_grid = self.horizontal_grid[0:vertical_index+1] + "0" + self.horizontal_grid[vertical_index+2:]
+            self.horizontal_grid = self.horizontal_grid[0:vertical_index+1] + "0" \
+                                   + self.horizontal_grid[vertical_index+2:]
         elif 0 < fret <= self.GRID_FRETS:
             vertical_index = string_pos * self.GRID_STRING_LEN + fret * (self.GRID_WIDTH+1)
-            self.horizontal_grid = self.horizontal_grid[0:vertical_index-1] + finger + self.horizontal_grid[vertical_index:]
+            self.horizontal_grid = self.horizontal_grid[0:vertical_index-1] \
+                                   + finger + self.horizontal_grid[vertical_index:]
         else:
             fret = fret - self.GRID_WIDTH - 1
             self.horizontal_grid = self.remove_nut()
             vertical_index = string_pos * self.GRID_STRING_LEN + fret * (self.GRID_WIDTH+1)
-            self.horizontal_grid = self.horizontal_grid[0:vertical_index-1] + finger + self.horizontal_grid[vertical_index:]
+            self.horizontal_grid = self.horizontal_grid[0:vertical_index-1] \
+                                   + finger + self.horizontal_grid[vertical_index:]
         return self.horizontal_grid
 
     def set_blank_grid(self) -> str:

@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 
 app = QApplication(sys.argv)
 
-svgWidget = QtSvg.QSvgWidget('/circle.svg');
+svgWidget = QtSvg.QSvgWidget('/circle.svg')
 #svgWidget.setGeometry(50,50,759,668)
 svgWidget.show()
 

@@ -2,7 +2,7 @@ from pychord import Chord
 
 from src.guitar_neck.neck_exception import NeckException
 from src.guitar_neck.neck import Neck
-from src.output.console import print_detail, LOD_CHORD
+from src.output.console import HarmonyLogger
 
 
 class Fingering:
@@ -319,13 +319,15 @@ class Fingering:
 
     def remove_muted_strings(self, chord_layout: [int]):
         try:
-            while self.FRET_MUTE in chord_layout: chord_layout.remove(self.FRET_MUTE)
+            while self.FRET_MUTE in chord_layout:
+                chord_layout.remove(self.FRET_MUTE)
         except Exception:
             pass
 
     def remove_open_strings(self, chord_layout: [int]):
         try:
-            while self.FRET_OPEN in chord_layout: chord_layout.remove(self.FRET_OPEN)
+            while self.FRET_OPEN in chord_layout:
+                chord_layout.remove(self.FRET_OPEN)
         except Exception:
             pass
 
@@ -366,12 +368,13 @@ class Fingering:
                                 lower_fret = self.get_lowest_used_fret(chord_array)
                                 higher_fret = max(chord_array)
                                 if lower_fret != -1 \
-                                        and(higher_fret - lower_fret) <= Fingering.FINGERING_WIDTH \
+                                        and (higher_fret - lower_fret) <= Fingering.FINGERING_WIDTH \
                                         and chord_array not in fingering[str(higher_fret)] \
                                         and chord_array != [Fingering.FRET_MUTE, Fingering.FRET_MUTE,
                                                             Fingering.FRET_MUTE, Fingering.FRET_MUTE,
                                                             Fingering.FRET_MUTE, Fingering.FRET_MUTE]:
-                                    # todo: add option to also remove any chord_array when the bass not the bass part of the chord
-                                    print_detail(LOD_CHORD, str(chord_array))
+                                    # todo: add option to also remove any chord_array when the bass
+                                    #  not the bass part of the chord
+                                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, str(chord_array))
                                     fingering[str(max(chord_array))].append(chord_array)
         pass

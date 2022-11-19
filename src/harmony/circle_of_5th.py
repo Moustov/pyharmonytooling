@@ -1,6 +1,6 @@
 from pychord import ChordProgression, Chord
 
-from src.output.console import LOD_TONE, LOD_CHORD, LOD_NOTE, print_detail
+from src.output.console import LOD_TONE, LOD_CHORD, LOD_NOTE, print_detail, HarmonyLogger
 
 
 class CircleOf5th:
@@ -9,6 +9,7 @@ class CircleOf5th:
     intervals = []
     qualities = []
     cof_scales = None
+    cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
     # circle_of_fifths_natural_majors = {
     #     "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
     #     "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
@@ -85,7 +86,7 @@ class CircleOf5th:
         for note in self.chromatic_scale:
             possible_chords_from_note += self.get_chord_names_possible_qualities(note)
             possible_chords_from_note += self.get_chord_names_possible_qualities(note + "m")
-        print_detail(LOD_TONE, f"Number of existing chords: {len(possible_chords_from_note)}")
+        HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(possible_chords_from_note)}")
         return possible_chords_from_note
 
     def find_substitutes(self, chord: Chord) -> [Chord]:
@@ -99,8 +100,8 @@ class CircleOf5th:
         for pc in possible_chords:
             if pc != chord and pc.components() == chord.components():
                 similar_chords.append(pc)
-                print_detail(LOD_CHORD, f"{pc} == {chord}")
-                print_detail(LOD_NOTE, f"{pc.components()} vs {chord.components()}")
+                HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{pc} == {chord}")
+                HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE, f"{pc.components()} vs {chord.components()}")
         return similar_chords
 
     def find_similar_chords(self) -> []:
@@ -114,8 +115,8 @@ class CircleOf5th:
             for chord2 in possible_chords_from_note:
                 if chord1 != chord2 and chord1.components() == chord2.components():
                     similar_chords.append([chord1, chord2])
-                    print_detail(LOD_CHORD, f"{chord1} == {chord2}")
-                    print_detail(LOD_NOTE, f"{chord1.components()} vs {chord2.components()}")
+                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
+                    HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE, f"{chord1.components()} vs {chord2.components()}")
         return similar_chords
 
     def get_compliance_chord_presence(self, tone: [str], cp: ChordProgression) -> float:
@@ -135,14 +136,14 @@ class CircleOf5th:
 
         # check each chord in the tone and see if colored versions of the chord is used in chord_song_list
         for chord_tone in tone:
-            print_detail(LOD_CHORD, f"  Check {chord_tone}")
+            HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"  Check {chord_tone}")
             tone_compliance[chord_tone] = False
             possible_chord_qualities = self.get_chord_names_possible_qualities(chord_tone)
             for chord_song in chord_song_list:
                 if chord_song in possible_chord_qualities:
                     tone_compliance[chord_tone] = True
                     compliant_chords.append(chord_song)
-                    print_detail(LOD_CHORD, f"    {chord_song} found in song")
+                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"    {chord_song} found in song")
 
         # set compliance level
         compliance_level = 0
@@ -304,9 +305,7 @@ class CircleOf5th:
         qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
         return self.generate_circle_of_fifths(intervals, qualities)
 
-    def generate_circle_of_fifths(self, intervals, qualities, cycle_sequence=["C", "G", "D", "E",
-                                                                              "A", "B", "F#", "Db",
-                                                                              "Ab", "Eb", "Bb", "F"]) -> dict:
+    def generate_circle_of_fifths(self, intervals, qualities) -> dict:
         """
         generates a circle of fifths from intervals, qualities
         :param intervals:
@@ -316,7 +315,7 @@ class CircleOf5th:
         """
         intervals.append(0)
         res = {}
-        for seq in cycle_sequence:
+        for seq in self.cycle_sequence:
             res[seq] = []
             current_note = seq
             for interval, quality in zip(intervals, qualities):
@@ -334,9 +333,9 @@ class CircleOf5th:
         compliances = {}
         compliance_level = 0
         for tone in self.cof_scales:
-            print_detail(LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
+            HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
             compliance_level = self.get_compliance_chord_presence(self.cof_scales[tone], cp)
-            print_detail(LOD_TONE, f"{tone}, {compliance_level * 100}%")
+            HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"{tone}, {compliance_level * 100}%")
             compliances[tone] = compliance_level
             if compliance_level > compliance_level_max[0]:
                 compliance_level_max = [compliance_level, tone, self.cof_name, self.get_scale(tone)]
