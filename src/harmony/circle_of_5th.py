@@ -5,9 +5,10 @@ from src.output.console import LOD_TONE, LOD_CHORD, LOD_NOTE, print_detail
 
 class CircleOf5th:
     chromatic_scale = ["A", "B", "C", "D", "E", "F", "G", "A#", "C#", "D#", "F#", "G#"]
-    name = "circle name"
+    cof_name = "circle name"
     intervals = []
     qualities = []
+    cof_scales = None
     # circle_of_fifths_natural_majors = {
     #     "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
     #     "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
@@ -323,24 +324,22 @@ class CircleOf5th:
                 current_note = self.get_next_note(current_note, interval)
         return res
 
-    def guess_tone_from_circle_of_fifths(self, cp: ChordProgression, cof: {}, cof_name: str) -> []:
+    def guess_tone_from_circle_of_fifths(self, cp: ChordProgression) -> []:
         """
 
-        :param cof_name:
         :param cp:
-        :param cof:
         :return: [probability, note, circle name, scale]
         """
         compliance_level_max = [0, "?", "?",[]]
         compliances = {}
         compliance_level = 0
-        for tone in cof:
-            print_detail(LOD_TONE, f"Check tone {str(tone)} in {cof_name}")
-            compliance_level = self.get_compliance_chord_presence(cof[tone], cp)
+        for tone in self.cof_scales:
+            print_detail(LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
+            compliance_level = self.get_compliance_chord_presence(self.cof_scales[tone], cp)
             print_detail(LOD_TONE, f"{tone}, {compliance_level * 100}%")
             compliances[tone] = compliance_level
             if compliance_level > compliance_level_max[0]:
-                compliance_level_max = [compliance_level, tone, cof_name, self.get_scale(tone)]
+                compliance_level_max = [compliance_level, tone, self.cof_name, self.get_scale(tone)]
         return compliance_level_max
 
     def guess_tone_and_mode(self, cp: ChordProgression) -> []:
@@ -351,22 +350,19 @@ class CircleOf5th:
         """
         best_tone = [0, "-", "?", []]
         cof_nat_maj = CircleOf5thNaturalMajor()
-        guess = cof_nat_maj.guess_tone_from_circle_of_fifths(cp, cof_nat_maj.generate_circle_of_fifths(), cof_nat_maj.name)
+        guess = cof_nat_maj.guess_tone_from_circle_of_fifths(cp)
         if guess[0] > best_tone[0]:
             best_tone = guess
-
         cof_mel_minor = CircleOf5thMelodicMinor()
-        guess = cof_mel_minor.guess_tone_from_circle_of_fifths(cp, cof_mel_minor.generate_circle_of_fifths(), cof_mel_minor.name)
+        guess = cof_mel_minor.guess_tone_from_circle_of_fifths(cp)
         if guess[0] > best_tone[0]:
             best_tone = guess
-
         cof_nat_min = CircleOf5thNaturalMinor()
-        guess = cof_nat_min.guess_tone_from_circle_of_fifths(cp, cof_nat_min.generate_circle_of_fifths(), cof_nat_min.name)
+        guess = cof_nat_min.guess_tone_from_circle_of_fifths(cp)
         if guess[0] > best_tone[0]:
             best_tone = guess
-
         cof_harm_minor = CircleOf5thHarmonicMinor()
-        guess = cof_harm_minor.guess_tone_from_circle_of_fifths(cp, cof_harm_minor.generate_circle_of_fifths(), cof_harm_minor.name)
+        guess = cof_harm_minor.guess_tone_from_circle_of_fifths(cp)
         if guess[0] > best_tone[0]:
             best_tone = guess
         return best_tone
@@ -398,9 +394,12 @@ class CircleOf5th:
 
 
 class CircleOf5thNaturalMajor(CircleOf5th):
-    name = "Natural Major"
+    cof_name = "Natural Major"
     intervals = [2, 2, 1, 2, 2, 2]
     qualities = ["", "m", "m", "", "", "m", "dim"]
+
+    def __init__(self):
+        self.cof_scales = self.generate_circle_of_fifths()
 
     def generate_circle_of_fifths(self) -> {}:
         """
@@ -412,9 +411,12 @@ class CircleOf5thNaturalMajor(CircleOf5th):
 
 
 class CircleOf5thNaturalMinor(CircleOf5th):
-    name = "Natural Minor"
+    cof_name = "Natural Minor"
     intervals = [2, 1, 2, 2, 1, 2]
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+
+    def __init__(self):
+        self.cof_scales = self.generate_circle_of_fifths()
 
     def generate_circle_of_fifths(self) -> {}:
         """
@@ -426,9 +428,12 @@ class CircleOf5thNaturalMinor(CircleOf5th):
 
 
 class CircleOf5thMelodicMinor(CircleOf5th):
-    name = "Melodic Minor"
+    cof_name = "Melodic Minor"
     intervals = [2, 1, 2, 2, 2, 2]
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+
+    def __init__(self):
+        self.cof_scales = self.generate_circle_of_fifths()
 
     def generate_circle_of_fifths(self) -> {}:
         """
@@ -440,9 +445,12 @@ class CircleOf5thMelodicMinor(CircleOf5th):
 
 
 class CircleOf5thHarmonicMinor(CircleOf5th):
-    name = "Harmonic Minor"
+    cof_name = "Harmonic Minor"
     intervals = [2, 1, 2, 2, 1, 3]
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+
+    def __init__(self):
+        self.cof_scales = self.generate_circle_of_fifths()
 
     def generate_circle_of_fifths(self) -> {}:
         """
