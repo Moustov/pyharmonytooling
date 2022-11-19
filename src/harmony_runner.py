@@ -1,6 +1,5 @@
-from src.harmony.circle_of_5th import digest_song, guess_tone_and_mode, \
-    circle_of_fifths_natural_majors, get_borrowed_chords
 from src.output.console import LOD_NONE
+from src.song.text_song import TextSongWithLineForChords
 
 song = """
   Dm                                C         Dm
@@ -115,11 +114,10 @@ Un morceau d'Emmental
 
          """
 outcome_level_of_detail = LOD_NONE
-cp = digest_song(song)
-compliance_level_max = guess_tone_and_mode(cp)
+the_song = TextSongWithLineForChords()
+compliance_level_max = the_song.guess_tone_and_mode()
 print("Compliance:", compliance_level_max)
-tone = circle_of_fifths_natural_majors[compliance_level_max[1]]
-borrowed_chords = get_borrowed_chords(tone, cp)
+borrowed_chords = the_song.get_borrowed_chords()
 print("Borrowed chords:", borrowed_chords.keys())
 #
 # tone = circle_of_fifths_natural_majors[compliance_level_max[1]]

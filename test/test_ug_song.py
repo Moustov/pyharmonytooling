@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.song.song import UltimateGuitarSong
+from src.song.ultimate_guitar_song import UltimateGuitarSong
 
 
 class TestUltimateGuitarSong(TestCase):
@@ -11,7 +11,6 @@ class TestUltimateGuitarSong(TestCase):
 
     def test_digest_get_tone_and_mode(self):
         ugs = self.get_test_data1()
-
         res = ugs.get_tone_and_mode()
         assert res[1] == "F"
         assert res[2] == "Melodic Minor"
@@ -23,10 +22,14 @@ class TestUltimateGuitarSong(TestCase):
         assert res == expected
 
     def get_test_data1(self) -> UltimateGuitarSong:
+        """
+        data initializer with a UG not based on [tab] tags
+        :return:
+        """
         ugs = UltimateGuitarSong()
         html = ""
         html_file = "C Cm A progression song.html"
         with open(html_file, 'r') as f:
             html = f.read()
-        ugs.digest_html(html)
+        ugs.digest(html)
         return ugs

@@ -1,4 +1,4 @@
-from src.song.song import UltimateGuitarSong
+from src.song.ultimate_guitar_song import UltimateGuitarSong
 from src.song.ultimate_guitar_search import UltimateGuitarSearch
 
 ug_engine = UltimateGuitarSearch()
