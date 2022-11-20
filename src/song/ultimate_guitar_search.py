@@ -50,8 +50,10 @@ class UltimateGuitarSearch:
             more_songs = len(self.html_parts) > 1
             for part in self.html_parts[1:]:
                 link = self.__extract_link(part)
-                match_found = self.check_matches_exactly(query, link)
-                if match_found:
+                match_found = False
+                if matches_exactly:
+                    match_found = self.check_matches_exactly(query, link)
+                if match_found or not matches_exactly:
                     print(f"Song found at {link}")
                     res.append(link)
                     link_qty += 1
