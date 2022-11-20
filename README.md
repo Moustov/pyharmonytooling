@@ -114,6 +114,92 @@ Output:
     [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nChaque jour et chaque nuit[/tab]\r\n
     ...
 
+#### Song search from a cadence
+Searching for songs in the 12 tones from a cadence
+
+        from src.harmony.circle_of_5th import CircleOf5thNaturalMajor
+        from src.song.ultimate_guitar_search import UltimateGuitarSearch
+        
+        ugs = UltimateGuitarSearch()
+        cof_maj = CircleOf5thNaturalMajor()
+        songs = ugs.search_songs_from_cadence("ii7-V7-Imaj7", cof_maj, 5)
+        print(songs)
+output:
+        {'Bm7 E7 Amaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/1726600', 
+                'https://tabs.ultimate-guitar.com/tab/henri-salvador/jardin-dhiver-chords-2202243', 
+                'https://tabs.ultimate-guitar.com/tab/2330957', 
+                'https://tabs.ultimate-guitar.com/tab/slimane/a-fleur-de-toi-chords-1873948', 
+                'https://tabs.ultimate-guitar.com/tab/1707559'],
+        'Cm7 F7 A#maj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/louis-armstrong/a-kiss-to-build-a-dream-on-chords-923726', 
+                'https://tabs.ultimate-guitar.com/tab/amy-winehouse/mr-magic-chords-1828391', 
+                'https://tabs.ultimate-guitar.com/tab/amy-winehouse/mr-magic-chords-1828391', 
+                'https://tabs.ultimate-guitar.com/tab/stevie-wonder/lately-chords-173491', 
+                'https://tabs.ultimate-guitar.com/tab/louis-armstrong/a-kiss-to-build-a-dream-on-chords-923726'], 
+        'C#m7 F#7 Bmaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/jvke/this-is-what-falling-in-love-feels-like-chords-3871874', 
+                'https://tabs.ultimate-guitar.com/tab/jvke/this-is-what-falling-in-love-feels-like-chords-3871874', 
+                'https://tabs.ultimate-guitar.com/tab/jvke/this-is-what-falling-in-love-feels-like-chords-3871874', 
+                'https://tabs.ultimate-guitar.com/tab/jvke/this-is-what-falling-in-love-feels-like-chords-3871874', 
+                'https://tabs.ultimate-guitar.com/tab/jvke/this-is-what-falling-in-love-feels-like-chords-3871874'], 
+        'Dm7 G7 Cmaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/frank-sinatra/fly-me-to-the-moon-chords-1193296', 
+                'https://tabs.ultimate-guitar.com/tab/frank-sinatra/fly-me-to-the-moon-chords-1193296', 
+                'https://tabs.ultimate-guitar.com/tab/grover-washington-jr-/just-the-two-of-us-chords-1095786', 
+                'https://tabs.ultimate-guitar.com/tab/michel-fugain/une-belle-histoire-chords-391387', 
+                'https://tabs.ultimate-guitar.com/tab/michel-fugain/une-belle-histoire-chords-391387'], 
+        'D#m7 G#7 C#maj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/941025', 
+                'https://tabs.ultimate-guitar.com/tab/941025', 
+                'https://tabs.ultimate-guitar.com/tab/941025', 
+                'https://tabs.ultimate-guitar.com/tab/941025', 
+                'https://tabs.ultimate-guitar.com/tab/941025'], 
+        'Em7 A7 Dmaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/eric-clapton/autumn-leaves-chords-2502690', 
+                https://tabs.ultimate-guitar.com/tab/eric-clapton/autumn-leaves-chords-2502690', 
+                'https://tabs.ultimate-guitar.com/tab/eric-clapton/autumn-leaves-chords-2502690', 
+                https://tabs.ultimate-guitar.com/tab/eric-clapton/autumn-leaves-chords-2502690', 
+                'https://tabs.ultimate-guitar.com/tab/frank-sinatra/the-way-you-look-tonight-ukulele-1485850'], 
+        'Fm7 A#7 D#maj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/michael-jackson/i-just-cant-stop-loving-you-chords-967366', 
+                'https://tabs.ultimate-guitar.com/tab/michael-jackson/i-just-cant-stop-loving-you-chords-967366', 
+                'https://tabs.ultimate-guitar.com/tab/michael-jackson/i-just-cant-stop-loving-you-chords-967366', 
+                'https://tabs.ultimate-guitar.com/tab/michael-jackson/i-just-cant-stop-loving-you-chords-967366', 
+                'https://tabs.ultimate-guitar.com/tab/frank-sinatra/the-way-you-look-tonight-chords-1771608'], 
+        F#m7 B7 Emaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/3709742', 
+                'https://tabs.ultimate-guitar.com/tab/misc-soundtrack/la-la-land-audition-the-fools-who-dream-chords-1909336', 
+                'https://tabs.ultimate-guitar.com/tab/julie-london/cry-me-a-river-chords-1499105', 
+                'https://tabs.ultimate-guitar.com/tab/h-e-r-/wrong-places-chords-3119678', 
+                'https://tabs.ultimate-guitar.com/tab/h-e-r-/wrong-places-chords-3119678'], 
+        'Gm7 C7 Fmaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/yves-montand/les-feuilles-mortes-chords-2576898', 
+                'https://tabs.ultimate-guitar.com/tab/glen-campbell/by-the-time-i-get-to-phoenix-chords-2129751', 
+                'https://tabs.ultimate-guitar.com/tab/yves-montand/les-feuilles-mortes-chords-2576898', 
+                'https://tabs.ultimate-guitar.com/tab/glen-campbell/by-the-time-i-get-to-phoenix-chords-2129751', 
+                'https://tabs.ultimate-guitar.com/tab/glen-campbell/by-the-time-i-get-to-phoenix-chords-2129751'], 
+        'G#m7 C#7 F#maj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/misc-soundtrack/la-la-land-audition-the-fools-who-dream-chords-1909336', 
+                'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219', 
+                'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219', 
+                'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219', 
+                'https://tabs.ultimate-guitar.com/tab/yves-montand/les-feuilles-mortes-chords-2576898'], 
+        'Am7 D7 Gmaj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/billy-joel/just-the-way-you-are-chords-1404186', 
+                'https://tabs.ultimate-guitar.com/tab/laufey/falling-behind-chords-4307414', 
+                'https://tabs.ultimate-guitar.com/tab/billy-joel/just-the-way-you-are-chords-1404186', 
+                'https://tabs.ultimate-guitar.com/tab/billy-joel/just-the-way-you-are-chords-1404186', 
+                'https://tabs.ultimate-guitar.com/tab/john-mayer/new-light-chords-3180788'], 
+        'A#m7 D#7 G#maj7 ': 
+                ['https://tabs.ultimate-guitar.com/tab/george-benson/give-me-the-night-chords-61898', 
+                'https://tabs.ultimate-guitar.com/tab/george-benson/give-me-the-night-chords-61898', 
+                'https://tabs.ultimate-guitar.com/tab/george-benson/give-me-the-night-chords-61898', 
+                'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219', 
+                'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219']
+                }
+
+
 #### Song processing tools on simple text song
         from pychord import Chord 
         from src.song.text_song import TextSongWithLineForChords
