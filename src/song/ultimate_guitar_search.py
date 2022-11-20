@@ -1,7 +1,8 @@
-from google.modules.utils import _get_search_url as google_search, get_html
-from pychord import Chord
+from random import randint
+from time import time
 
-from src.displays.console import HarmonyLogger
+from google.modules.utils import _get_search_url as google_search, get_html
+
 from src.harmony.circle_of_5th import CircleOf5th
 from src.harmony.degree import Degree
 from src.song.ultimate_guitar_song import UltimateGuitarSong
@@ -43,6 +44,8 @@ class UltimateGuitarSearch:
             url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
             # html = str(self.get_html_content(url))
             html = str(get_html(url))
+            if html:
+                raise Exception("No more query is accepted for a while - try again later...")
             self.html_parts = html.split("=https://tabs.ultimate-guitar.com/tab/")
             more_songs = len(self.html_parts) > 1
             for part in self.html_parts[1:]:
@@ -57,6 +60,7 @@ class UltimateGuitarSearch:
                 else:
                     numbers_of_negative_checks += 1
             page += 1
+            time.sleep(randint(180,240)) # wait a bit to avoid being blocked by google: https://github.com/abenassi/Google-Search-API/issues/91
         if numbers_of_negative_checks >= self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS:
             print(f"{len(res)} found - No other song found with {self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS} attempts...")
         return res
