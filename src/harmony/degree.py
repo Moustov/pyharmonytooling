@@ -1,4 +1,5 @@
 from src.harmony.circle_of_5th import CircleOf5th
+from src.harmony.note import Note
 
 
 class Degree:
@@ -70,5 +71,5 @@ class Degree:
         nb_half_tones = 0
         for i in range(0, degree - 1):
             nb_half_tones += mode.intervals[i]
-        index = (CircleOf5th.chromatic_scale.index(root_note) + nb_half_tones) % len(CircleOf5th.chromatic_scale)
-        return CircleOf5th.chromatic_scale[index]
+        index = (Note.chromatic_scale.index(root_note) + nb_half_tones) % len(Note.chromatic_scale)
+        return Note.chromatic_scale[index]

@@ -116,7 +116,7 @@ class UltimateGuitarSong(Song):
             loc = s[0].split()
             for c in loc[1:]:
                 if "[ch]" in c and "[/ch]" in c:
-                    chord_name = c[4:-5]    #filtering [ch] & [/ch]
+                    chord_name = c[4:-5]    # filtering [ch] & [/ch]
                     a_chord = Chord(chord_name)
                     self.chords_sequence.append(a_chord)
             self.lyrics.append(s[1])

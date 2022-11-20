@@ -235,3 +235,4 @@ output:
 # Additional links
 * https://codepen.io/2kool2/pen/bmVxpZ
 * https://github.com/victorfontes/python-ultimate-guitar
+* 🇫🇷 https://www.youtube.com/@gradusadparnassumfr

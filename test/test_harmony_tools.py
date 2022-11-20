@@ -18,7 +18,6 @@ class Test(TestCase):
         assert compliance_level_max[1] == 'C'
         assert compliance_level_max[2] == "Natural Major"
 
-
     def test_guess_tone_and_mode_Bb(self):
         song = """
         Bb, Cm, Dm, E, F, Gm, Adim
@@ -50,14 +49,13 @@ class Test(TestCase):
         assert compliance_level_max[1] == 'A'
         assert compliance_level_max[2] == "Natural Major"
 
-
     def test_get_chord_possible_qualities(self):
         cof = CircleOf5thNaturalMajor()
         tones = cof.generate_circle_of_fifths()
         for tone in tones:
             for chord_tone in tones[tone]:
                 possible_chord_qualities = cof.get_chord_names_possible_qualities(chord_tone)
-                c = Chord(tone+"m")
+                c = Chord(tone + "m")
                 tc = Chord(chord_tone)
                 if c in possible_chord_qualities and tc.quality.quality == "":
                     print(c, "Minor chord cannot be a possible Major chord")

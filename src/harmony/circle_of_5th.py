@@ -1,10 +1,10 @@
 from pychord import ChordProgression, Chord
 
 from src.displays.console import HarmonyLogger
+from src.harmony.note import Note
 
 
 class CircleOf5th:
-    chromatic_scale = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     cof_name = "circle name"
     intervals = []
     qualities = []
@@ -83,10 +83,11 @@ class CircleOf5th:
         :return:
         """
         possible_chords_from_note = []
-        for note in self.chromatic_scale:
+        for note in Note.chromatic_scale:
             possible_chords_from_note += self.get_chord_names_possible_qualities(note)
             possible_chords_from_note += self.get_chord_names_possible_qualities(note + "m")
-        HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(possible_chords_from_note)}")
+        HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE,
+                                   f"Number of existing chords: {len(possible_chords_from_note)}")
         return possible_chords_from_note
 
     @staticmethod
@@ -125,7 +126,8 @@ class CircleOf5th:
                 if chord1 != chord2 and chord1.components() == chord2.components():
                     similar_chords.append([chord1, chord2])
                     HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
-                    HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE, f"{chord1.components()} vs {chord2.components()}")
+                    HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE,
+                                               f"{chord1.components()} vs {chord2.components()}")
         return similar_chords
 
     def get_compliance_chord_presence(self, tone: [str], cp: ChordProgression) -> float:
@@ -208,6 +210,7 @@ class CircleOf5th:
         :param chord:
         :return:
         """
+        base_chord = None
         try:
             base_chord = Chord(chord)
         except:
@@ -251,7 +254,7 @@ class CircleOf5th:
                 pass
         enriched_with_quality_with_bass = enriched_with_quality.copy()
         for c in enriched_with_quality:
-            for cs in self.chromatic_scale:
+            for cs in Note.chromatic_scale:
                 try:
                     a = (str(c) + "/" + cs)
                     valid_chord = Chord(a)
@@ -314,20 +317,18 @@ class CircleOf5th:
         qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
         return self.generate_circle_of_fifths(intervals, qualities)
 
-    def generate_circle_of_fifths(self, intervals, qualities) -> dict:
+    def generate_circle_of_fifths(self) -> dict:
         """
         generates a circle of fifths from intervals, qualities
-        :param intervals:
-        :param qualities:
-        :param cycle_sequence:
         :return:
         """
+        intervals = self.intervals.copy()
         intervals.append(0)
         res = {}
         for seq in self.cycle_sequence:
             res[seq] = []
             current_note = seq
-            for interval, quality in zip(intervals, qualities):
+            for interval, quality in zip(intervals, self.qualities):
                 res[seq].append(f"{current_note}{quality}")
                 current_note = self.get_next_note(current_note, interval)
         return res
@@ -338,7 +339,7 @@ class CircleOf5th:
         :param cp:
         :return: [probability, note, circle name, scale]
         """
-        compliance_level_max = [0, "?", "?",[]]
+        compliance_level_max = [0, "?", "?", []]
         compliances = {}
         compliance_level = 0
         for tone in self.cof_scales:
@@ -409,15 +410,6 @@ class CircleOf5thNaturalMajor(CircleOf5th):
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
 
-    def generate_circle_of_fifths(self) -> {}:
-        """
-        generates the circle_of_fifths_natural_majors
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        return super().generate_circle_of_fifths(self.intervals, self.qualities)
-
-
 class CircleOf5thNaturalMinor(CircleOf5th):
     cof_name = "Natural Minor"
     intervals = [2, 1, 2, 2, 1, 2]
@@ -425,14 +417,6 @@ class CircleOf5thNaturalMinor(CircleOf5th):
 
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
-
-    def generate_circle_of_fifths(self) -> {}:
-        """
-        generates the circle_of_fifths_natural_minors
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        return super().generate_circle_of_fifths(self.intervals, self.qualities)
 
 
 class CircleOf5thMelodicMinor(CircleOf5th):
@@ -443,15 +427,6 @@ class CircleOf5thMelodicMinor(CircleOf5th):
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
 
-    def generate_circle_of_fifths(self) -> {}:
-        """
-        generates the circle_of_fifths_melodic minor
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        return super().generate_circle_of_fifths(self.intervals, self.qualities)
-
-
 class CircleOf5thHarmonicMinor(CircleOf5th):
     cof_name = "Harmonic Minor"
     intervals = [2, 1, 2, 2, 1, 3]
@@ -459,12 +434,4 @@ class CircleOf5thHarmonicMinor(CircleOf5th):
 
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
-
-    def generate_circle_of_fifths(self) -> {}:
-        """
-        generates the circle_of_fifths_melodic minor
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        return super().generate_circle_of_fifths(self.intervals, self.qualities)
 

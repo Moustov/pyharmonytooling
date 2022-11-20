@@ -27,7 +27,6 @@ class TestUltimateGuitarSong(TestCase):
         :return:
         """
         ugs = UltimateGuitarSong()
-        html = ""
         html_file = "C Cm A progression song.html"
         with open(html_file, 'r') as f:
             html = f.read()
