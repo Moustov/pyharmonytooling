@@ -223,7 +223,7 @@ output:
 
 # Release Notes
 * 20/NOV/22
-  * accurate song search
+  * accurate song search (param added)
   * find songs that match a cadence in degrees
 * 19/NOV/22
   * starting API to ultimate-guitar.com
