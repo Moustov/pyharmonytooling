@@ -1,10 +1,15 @@
 from google.modules.utils import _get_search_url as google_search, get_html
+from pychord import Chord
 
+from src.displays.console import HarmonyLogger
 from src.harmony.circle_of_5th import CircleOf5th
 from src.harmony.degree import Degree
+from src.song.ultimate_guitar_song import UltimateGuitarSong
 
 
 class UltimateGuitarSearch:
+    NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 100
+
     def __init__(self):
         self.html_parts = []
 
@@ -17,11 +22,12 @@ class UltimateGuitarSearch:
         res = part.split("&amp")
         return "https://tabs.ultimate-guitar.com/tab/" + res[0]
 
-    def search(self, query: str, limit: int) -> [str]:
+    def search(self, query: str, limit: int, matches_exactly=False) -> [str]:
         """
         search from UG any string, not only the author / title
         WARNING: too many searches will result in a blocking HTTP ERROR 429
         https://stackoverflow.com/questions/22786068/how-to-avoid-http-error-429-too-many-requests-python
+        :param matches_exactly: check on UG if the query matches some part of the songs found
         :param query:
         :param limit:
         :return:
@@ -31,23 +37,35 @@ class UltimateGuitarSearch:
         link_qty = 0
         page = 0
         more_songs = True
-        while link_qty < limit and more_songs:
+        numbers_of_negative_checks = 0
+        while link_qty < limit and more_songs \
+                and numbers_of_negative_checks < self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS:
             url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
             # html = str(self.get_html_content(url))
             html = str(get_html(url))
             self.html_parts = html.split("=https://tabs.ultimate-guitar.com/tab/")
             more_songs = len(self.html_parts) > 1
             for part in self.html_parts[1:]:
-                res.append(self.__extract_link(part))
-                link_qty += 1
-                if link_qty >= limit:
-                    break
+                link = self.__extract_link(part)
+                match_found = self.check_matches_exactly(query, link)
+                if match_found:
+                    print(f"Song found at {link}")
+                    res.append(link)
+                    link_qty += 1
+                    if link_qty >= limit:
+                        break
+                else:
+                    numbers_of_negative_checks += 1
             page += 1
+        if numbers_of_negative_checks >= self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS:
+            print(f"{len(res)} found - No other song found with {self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS} attempts...")
         return res
 
-    def search_songs_from_cadence(self, cadence: str, mode: CircleOf5th, limit_per_tone: int) -> dict:
+    def search_songs_from_cadence(self, cadence: str, mode: CircleOf5th, limit_per_tone: int,
+                                  matches_exactly: bool = False) -> dict:
         """
         return a list of songs that match the cadence
+        :param matches_exactly:
         :param limit_per_tone:
         :param mode: major/minor...
         :param cadence: eg. "ii7–V7–Imaj"
@@ -61,8 +79,20 @@ class UltimateGuitarSearch:
                 chord = Degree.get_chord_from_degree(degree, root_note, mode)
                 search_string += chord + " "
             print(search_string)
-            songs[search_string] = self.search(search_string, limit_per_tone)
+            songs[search_string] = self.search(search_string, limit_per_tone, matches_exactly)
         return songs
+
+    def check_matches_exactly(self, query: str, link: str) -> bool:
+        ugs = UltimateGuitarSong()
+        ugs.extract_song_from_url(link)
+        cs = ""
+        for chord in ugs.chords_sequence:
+            cs += f"{chord} "
+        cs.replace("[tab]", "")
+        res = query[0:len(query)-len(" site:ultimate-guitar.com")] in cs
+        return res
+
+
 
 
 

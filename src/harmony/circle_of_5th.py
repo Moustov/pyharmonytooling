@@ -89,6 +89,15 @@ class CircleOf5th:
         HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(possible_chords_from_note)}")
         return possible_chords_from_note
 
+    @staticmethod
+    def guess_tone_and_mode_from_cadence(cadence: str):
+        """
+        return the most compatible circle of 5th with the cadence
+        :param cadence: eg. "ii7-V7-Imaj7" would return a CircleOf5thNaturalMajor()
+        :return:
+        """
+        return CircleOf5thNaturalMajor()
+
     def find_substitutes(self, chord: Chord) -> [Chord]:
         """
         return the list of equivalent chords from a chord

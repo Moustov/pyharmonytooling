@@ -222,6 +222,9 @@ output:
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
 # Release Notes
+* 20/NOV/22
+  * accurate song search
+  * find songs that match a cadence in degrees
 * 19/NOV/22
   * starting API to ultimate-guitar.com
   * querying UG through google.com to retrieve pattern matching over possibilities found in UG
