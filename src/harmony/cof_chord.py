@@ -102,3 +102,21 @@ class CofChord(Chord):
         HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE,
                                    f"Number of existing chords: {len(possible_chords_from_note)}")
         return possible_chords_from_note
+
+    @staticmethod
+    def find_similar_chords() -> []:
+        """
+        find similar chords among all possible chords
+        /! a lot of combinations are generated
+        :return:
+        """
+        similar_chords = []
+        possible_chords_from_note = CofChord.all_existing_chords()
+        for chord1 in possible_chords_from_note:
+            for chord2 in possible_chords_from_note:
+                if chord1 != chord2 and chord1.components() == chord2.components():
+                    similar_chords.append([chord1, chord2])
+                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
+                    HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE,
+                                               f"{chord1.components()} vs {chord2.components()}")
+        return similar_chords

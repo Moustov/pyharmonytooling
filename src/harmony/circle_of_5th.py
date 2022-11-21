@@ -43,24 +43,6 @@ class CircleOf5th:
         """
         return CircleOf5thNaturalMajor()
 
-    @staticmethod
-    def find_similar_chords() -> []:
-        """
-        find similar chords among all possible chords
-        /! a lot of combinations are generated
-        :return:
-        """
-        similar_chords = []
-        possible_chords_from_note = CircleOf5th.all_existing_chords()
-        for chord1 in possible_chords_from_note:
-            for chord2 in possible_chords_from_note:
-                if chord1 != chord2 and chord1.components() == chord2.components():
-                    similar_chords.append([chord1, chord2])
-                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
-                    HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE,
-                                               f"{chord1.components()} vs {chord2.components()}")
-        return similar_chords
-
     def get_compliance_chord_presence(self, tone: [str], cp: ChordProgression) -> float:
         """
         the distance is binary : if the chord is present => the chord will fully count
