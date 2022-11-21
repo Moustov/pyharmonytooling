@@ -1,11 +1,10 @@
 import os.path
-import time
 import datetime
 from datetime import date
 from datetime import datetime
 import platform
 from random import randint
-from time import time
+from time import time, sleep
 
 from google.modules.utils import _get_search_url as google_search, get_html
 
@@ -16,7 +15,8 @@ from src.song.ultimate_guitar_song import UltimateGuitarSong
 
 
 class UltimateGuitarSearch:
-    GOOGLE_SEARCH_MAX_WAIT = 6  # 6'
+    GOOGLE_SEARCH_SECURE_WAIT = 6   # minutes
+    GOOGLE_SEARCH_WAIT_AFTER_REJECTION = 5 # minutes
     NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 100
     NB_GOOGLE_SEARCHES_LOG_FILE_NAME = ".google_searches_qty.log"
 
@@ -62,11 +62,12 @@ class UltimateGuitarSearch:
                 if matches_exactly:
                     match_found = self.check_matches_exactly(query, link)
                 if match_found or not matches_exactly:
-                    print(f"Song found at {link}")
-                    res.append(link)
-                    link_qty += 1
-                    if link_qty >= limit:
-                        break
+                    if link not in res:
+                        print(f"Song found at {link}")
+                        res.append(link)
+                        link_qty += 1
+                        if link_qty >= limit:
+                            break
                 else:
                     numbers_of_negative_checks += 1
             page += 1
@@ -88,7 +89,7 @@ class UltimateGuitarSearch:
         """
         songs = {}
         degrees = cadence.split("-")
-        for root_note in Note.chromatic_scale:
+        for root_note in Note.CHROMATIC_SCALE:
             search_string = ""
             for degree in degrees:
                 chord = Degree.get_chord_from_degree(degree, root_note, mode)
@@ -110,17 +111,22 @@ class UltimateGuitarSearch:
     def get_google_search_page(self, query, page) -> str:
         """
         try to fetch the html page from a google search url
+        A wait will be triggered after MAX_QUERIES queries
+        NOTE: does not seem to be efficient because the GOOGLE_SEARCH_MAX_WAIT should be several hours
+                => could be interesting for massive batches when time does not matter
         :param url:
         :return:
         """
         nb_searches = self.add_new_google_search()
         # wait a bit to avoid being blocked by google
         # see https://github.com/abenassi/Google-Search-API/issues/91
-        if nb_searches > 100:
-            min_wait = 5
-            max_wait = UltimateGuitarSearch.GOOGLE_SEARCH_MAX_WAIT
+        MAX_QUERIES = 40
+        if nb_searches > MAX_QUERIES:
+            min_wait = UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION \
+                       - (UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION * 0.1)
+            max_wait = UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION
             print(f"Too many queries - let's try to wait for {min_wait} to {max_wait} minutes")
-            time.sleep(randint(min_wait*60, max_wait*60))
+            sleep(float(randint(min_wait*60, max_wait*60)))
             self.reset_google_searches()
         url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
         return str(get_html(url))
@@ -134,7 +140,7 @@ class UltimateGuitarSearch:
             google_searches_log_file_creation_date = self.get_creation_date_google_searches_log_file()
             today = datetime.combine(date.today(), datetime.now().time())
             delta = today - google_searches_log_file_creation_date
-            if delta.seconds > UltimateGuitarSearch.GOOGLE_SEARCH_MAX_WAIT * 60:
+            if delta.seconds > UltimateGuitarSearch.GOOGLE_SEARCH_SECURE_WAIT * 60:
                 self.reset_google_searches()
                 nb_google_searches = 0
             else:
@@ -155,7 +161,7 @@ class UltimateGuitarSearch:
         See http://stackoverflow.com/a/39501288/1709587 for explanation.
         """
         if platform.system() == 'Windows':
-            time_stamp = os.path.getctime(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+            time_stamp = os.path.getmtime(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
             the_date = datetime.fromtimestamp(time_stamp)
             return the_date
         else:
@@ -176,6 +182,12 @@ class UltimateGuitarSearch:
         :return:
         """
         os.remove(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+        log_exists = os.path.exists(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+        # #must wait for the file to be removed
+        # while log_exists:
+        #     time.sleep(1)
+        #     log_exists = os.path.exists(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+
         with open(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w") as nb_google_searches_log_file:
             nb_google_searches_log_file.write("1")
 

@@ -4,6 +4,7 @@ from pychord import Chord
 
 from src.displays.console import HarmonyLogger
 from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
+from src.harmony.cof_chord import CofChord
 
 
 class Test(TestCase):
@@ -54,7 +55,7 @@ class Test(TestCase):
         tones = cof.generate_circle_of_fifths()
         for tone in tones:
             for chord_tone in tones[tone]:
-                possible_chord_qualities = cof.get_chord_names_possible_qualities(chord_tone)
+                possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
                 c = Chord(tone + "m")
                 tc = Chord(chord_tone)
                 if c in possible_chord_qualities and tc.quality.quality == "":

@@ -1,6 +1,7 @@
 from pychord import ChordProgression, Chord
 
 from src.displays.console import HarmonyLogger
+from src.harmony.cof_chord import CofChord
 from src.harmony.note import Note
 
 
@@ -10,51 +11,6 @@ class CircleOf5th:
     qualities = []
     cof_scales = None
     cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
-
-    # circle_of_fifths_natural_majors = {
-    #     "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
-    #     "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
-    #     "D": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
-    #     "A": ["A", "Bm", "C#m", "D", "E", "Fm", "G#dim"],
-    #     "E": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
-    #     "B": ["B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"],
-    #     "F#": ["F#", "G#m", "Abm", "Bb", "C#", "D#m", "Fdim"],
-    #     "Db": ["Db", "Ebm", "F#m", "G#", "Ab", "Bbm", "C#dim"],
-    #     "Ab": ["Ab", "Bbm", "Cm", "Db", "Eb", "Fm", "Gdim"],
-    #     "Eb": ["Eb", "Fm", "Gm", "Ab", "Bb", "Cm", "Ddim"],
-    #     "Bb": ["Bb", "Cm", "Dm", "Eb", "F", "Gm", "Adim"],
-    #     "F": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"]
-    # }
-    # circle_of_fifths_church_modes = circle_of_fifths_natural_majors
-    # circle_of_fifths_major_modes = circle_of_fifths_natural_majors
-    # circle_of_fifths_harmonic_minors = {  # todo
-    #     "C": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "G": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "D": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "A": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "E": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "B": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "F#": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "Db": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "Ab": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "Eb": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "Bb": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    #     "F": ["Cm", "Dm7b5", "Ebmaj7-#5", "Fm7", "G7", "Abmaj7", "Bdim7"],
-    # }
-    # circle_of_fifths_melodic_minors = {  # todo
-    #     "C": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "G": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "D": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "E": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "A": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "B": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "F#": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "Dd": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "Ab": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "Eb": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "Bb": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    #     "F": ["Cm", "Dm7", "EbM7#5", "F7", "G7", "Abm7b5", "Bm7b5"],
-    # }
 
     def get_compliance_note_presence(self, tone: [str], cp: ChordProgression) -> float:
         """
@@ -78,15 +34,16 @@ class CircleOf5th:
         """
         return 0.0
 
-    def all_existing_chords(self) -> [Chord]:
+    @staticmethod
+    def all_existing_chords() -> [Chord]:
         """
         return the list of all possible chords
         :return:
         """
         possible_chords_from_note = []
-        for note in Note.chromatic_scale:
-            possible_chords_from_note += self.get_chord_names_possible_qualities(note)
-            possible_chords_from_note += self.get_chord_names_possible_qualities(note + "m")
+        for note in Note.CHROMATIC_SCALE:
+            possible_chords_from_note += CofChord.get_chord_names_possible_qualities(note)
+            possible_chords_from_note += CofChord.get_chord_names_possible_qualities(note + "m")
         HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE,
                                    f"Number of existing chords: {len(possible_chords_from_note)}")
         return possible_chords_from_note
@@ -107,7 +64,7 @@ class CircleOf5th:
         :return:
         """
         similar_chords = []
-        possible_chords = self.all_existing_chords()
+        possible_chords = CircleOf5th.all_existing_chords()
         for pc in possible_chords:
             if pc != chord and pc.components() == chord.components():
                 similar_chords.append(pc)
@@ -115,13 +72,15 @@ class CircleOf5th:
                 HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE, f"{pc.components()} vs {chord.components()}")
         return similar_chords
 
-    def find_similar_chords(self) -> []:
+    @staticmethod
+    def find_similar_chords() -> []:
         """
         find similar chords among all possible chords
+        /! a lot of combinations are generated
         :return:
         """
         similar_chords = []
-        possible_chords_from_note = self.all_existing_chords()
+        possible_chords_from_note = CircleOf5th.all_existing_chords()
         for chord1 in possible_chords_from_note:
             for chord2 in possible_chords_from_note:
                 if chord1 != chord2 and chord1.components() == chord2.components():
@@ -150,7 +109,7 @@ class CircleOf5th:
         for chord_tone in tone:
             HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"  Check {chord_tone}")
             tone_compliance[chord_tone] = False
-            possible_chord_qualities = self.get_chord_names_possible_qualities(chord_tone)
+            possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
             for chord_song in chord_song_list:
                 if chord_song in possible_chord_qualities:
                     tone_compliance[chord_tone] = True
@@ -186,7 +145,7 @@ class CircleOf5th:
         borrowed_chords = {}
         colors = []
         for chord_tone in tone:
-            possible_chord_qualities = self.get_chord_names_possible_qualities(chord_tone)
+            possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
             for chord_tone_color in possible_chord_qualities:
                 colors.append(chord_tone_color)
 
@@ -202,69 +161,6 @@ class CircleOf5th:
                         borrowed_chords[str(chord_song)] = True
         return borrowed_chords
 
-    def get_chord_names_possible_qualities(self, chord: str) -> [Chord]:
-        """
-        returns the list of Chord with possible qualities a chord may have
-        see
-            https://www.oolimo.com/guitarchords/find
-            https://www.musicnotes.com/now/tips/a-complete-guide-to-chord-symbols-in-music/
-        :param chord:
-        :return:
-        """
-        base_chord = None
-        try:
-            base_chord = Chord(chord)
-        except:
-            pass
-        chord_qualities = []
-        if base_chord.quality.quality == "m":
-            chord_qualities = ["m", "5", "add9", "aug", "dim7",
-                               "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
-                               "madd9", "m6", "m6/9", "m7", "m7/9", "m7/11",
-                               "m7/13", "m7/b13", "m/maj7",
-                               "m7b5",
-                               "m7/11/b5", "dim/b13"
-                               ]
-        elif base_chord.quality.quality == "dim":
-            chord_qualities = ["dim", "dim7", "dim/b13"]
-        elif base_chord.quality.quality == "":
-            chord_qualities = ["", "5", "add9", "aug",
-                               "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
-                               "maj7", "maj7/9", "maj7/#11",
-                               "M7+5", "maj7/13", "maj7/9/13", "7", "7/b9", "7/9",
-                               "7/#9", "7/#11", "7/b5", "7/#5", "7/b13", "7/13",
-                               "7/9/13", "7/b9/b13", "7/13/b9", "6", "6/9"
-                               ]
-        else:
-            chord_qualities = ["", "m", "5", "add9", "aug", "dim7",
-                               "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
-                               "madd9", "m6", "m6/9", "m7", "m7/9", "m7/11",
-                               "m7/13", "m7/b13", "m/maj7", "maj7", "maj7/9", "maj7/#11",
-                               "M7+5", "maj7/13", "maj7/9/13", "7", "7/b9", "7/9",
-                               "7/#9", "7/#11", "7/b5", "7/#5", "7/b13", "7/13",
-                               "7/9/13", "7/b9/b13", "7/13/b9", "6", "6/9", "m7b5",
-                               "m7/11/b5", "dim7/b13"
-                               ]
-        enriched_with_quality = []
-        for c in chord_qualities:
-            try:
-                valid_chord = Chord(base_chord.root + c)
-                enriched_with_quality.append(valid_chord)
-            except ValueError as err:
-                # print("Chord", chord+c, "is invalid", err)
-                pass
-        enriched_with_quality_with_bass = enriched_with_quality.copy()
-        for c in enriched_with_quality:
-            for cs in Note.chromatic_scale:
-                try:
-                    a = (str(c) + "/" + cs)
-                    valid_chord = Chord(a)
-                    enriched_with_quality_with_bass.append(valid_chord)
-                except ValueError as err:
-                    # print("Chord", a, "is invalid", err)
-                    pass
-        # print("All possible chords:", len(enriched_with_quality_with_bass))
-        return enriched_with_quality_with_bass
 
     def digest_song(self, song: str) -> ChordProgression:
         """

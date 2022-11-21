@@ -71,5 +71,5 @@ class Degree:
         nb_half_tones = 0
         for i in range(0, degree - 1):
             nb_half_tones += mode.intervals[i]
-        index = (Note.chromatic_scale.index(root_note) + nb_half_tones) % len(Note.chromatic_scale)
-        return Note.chromatic_scale[index]
+        index = (Note.CHROMATIC_SCALE.index(root_note) + nb_half_tones) % len(Note.CHROMATIC_SCALE)
+        return Note.CHROMATIC_SCALE[index]
