@@ -1,9 +1,9 @@
-from src.displays.console import HarmonyLogger
+from src.displays.console import _HarmonyLogger
 from src.song.text_song import TextSongWithLineForChords
 
 song = """
 Am Em Am Em G Gmaj7 Em         """
-HarmonyLogger.outcome_level_of_detail = HarmonyLogger.LOD_NONE
+_HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
 the_song = TextSongWithLineForChords()
 the_song.digest(song)
 compliance_level_max = the_song.get_tone_and_mode()

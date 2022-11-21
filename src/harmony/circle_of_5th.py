@@ -1,6 +1,6 @@
 from pychord import ChordProgression, Chord
 
-from src.displays.console import HarmonyLogger
+from src.displays.console import _HarmonyLogger
 from src.harmony.cof_chord import CofChord
 from src.harmony.note import Note
 
@@ -14,8 +14,7 @@ class CircleOf5th:
 
     def get_compliance_note_presence(self, tone: [str], cp: ChordProgression) -> float:
         """
-        todo
-        distance with notes
+        todo distance with notes
         if the note is present => the chord will fully count
         :param tone:
         :param cp:
@@ -25,8 +24,7 @@ class CircleOf5th:
 
     def get_compliance_chord_frequency(self, tone: [str], cp: ChordProgression) -> float:
         """
-        todo
-        distance with tone is based on the amount of chord presence:
+        todo distance with tone is based on the amount of chord presence:
         if the chord is present => the chord will count regarding its use in the cp
         :param tone:
         :param cp:
@@ -60,14 +58,15 @@ class CircleOf5th:
 
         # check each chord in the tone and see if colored versions of the chord is used in chord_song_list
         for chord_tone in tone:
-            HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"  Check {chord_tone}")
+            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"  Check {chord_tone}")
             tone_compliance[chord_tone] = False
             possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
             for chord_song in chord_song_list:
                 if chord_song in possible_chord_qualities:
+                    # todo handle tempered equivalence with Note.__eq__()
                     tone_compliance[chord_tone] = True
                     compliant_chords.append(chord_song)
-                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"    {chord_song} found in song")
+                    _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"    {chord_song} found in song")
 
         # set compliance level
         compliance_level = 0
@@ -163,9 +162,9 @@ class CircleOf5th:
         compliances = {}
         compliance_level = 0
         for tone in self.cof_scales:
-            HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
+            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
             compliance_level = self.get_compliance_chord_presence(self.cof_scales[tone], cp)
-            HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE, f"{tone}, {compliance_level * 100}%")
+            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"{tone}, {compliance_level * 100}%")
             compliances[tone] = compliance_level
             if compliance_level > compliance_level_max[0]:
                 compliance_level_max = [compliance_level, tone, self.cof_name, self.get_scale(tone)]

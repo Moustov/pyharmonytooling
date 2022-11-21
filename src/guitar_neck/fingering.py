@@ -2,7 +2,7 @@ from pychord import Chord
 
 from src.guitar_neck.neck_exception import NeckException
 from src.guitar_neck.neck import Neck
-from src.displays.console import HarmonyLogger
+from src.displays.console import _HarmonyLogger
 
 
 class Fingering:
@@ -375,6 +375,6 @@ class Fingering:
                                                             Fingering.FRET_MUTE, Fingering.FRET_MUTE]:
                                     # todo: add option to also remove any chord_array when the bass
                                     #  not the bass part of the chord
-                                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, str(chord_array))
+                                    _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, str(chord_array))
                                     fingering[str(max(chord_array))].append(chord_array)
         pass

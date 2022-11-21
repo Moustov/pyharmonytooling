@@ -1,6 +1,6 @@
 from pychord import Chord
 
-from src.displays.console import HarmonyLogger
+from src.displays.console import _HarmonyLogger
 from src.harmony.note import Note
 
 
@@ -85,8 +85,8 @@ class CofChord(Chord):
         for pc in possible_chords:
             if pc != chord and pc.components() == chord.components():
                 similar_chords.append(pc)
-                HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{pc} == {chord}")
-                HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE, f"{pc.components()} vs {chord.components()}")
+                _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"{pc} == {chord}")
+                _HarmonyLogger.print_detail(_HarmonyLogger.LOD_NOTE, f"{pc.components()} vs {chord.components()}")
         return similar_chords
 
     @staticmethod
@@ -99,7 +99,7 @@ class CofChord(Chord):
         for note in Note.CHROMATIC_SCALE:
             possible_chords_from_note += CofChord.get_chord_names_possible_qualities(note)
             possible_chords_from_note += CofChord.get_chord_names_possible_qualities(note + "m")
-        HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE,
+        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE,
                                    f"Number of existing chords: {len(possible_chords_from_note)}")
         return possible_chords_from_note
 
@@ -116,7 +116,7 @@ class CofChord(Chord):
             for chord2 in possible_chords_from_note:
                 if chord1 != chord2 and chord1.components() == chord2.components():
                     similar_chords.append([chord1, chord2])
-                    HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
-                    HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE,
+                    _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
+                    _HarmonyLogger.print_detail(_HarmonyLogger.LOD_NOTE,
                                                f"{chord1.components()} vs {chord2.components()}")
         return similar_chords
