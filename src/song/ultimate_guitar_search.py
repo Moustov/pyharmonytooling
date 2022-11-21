@@ -1,3 +1,9 @@
+import os.path
+import time
+import datetime
+from datetime import date
+from datetime import datetime
+import platform
 from random import randint
 from time import time
 
@@ -10,8 +16,9 @@ from src.song.ultimate_guitar_song import UltimateGuitarSong
 
 
 class UltimateGuitarSearch:
+    GOOGLE_SEARCH_MAX_WAIT = 6  # 6'
     NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 100
-    NB_GOOGLE_SEARCHES_LOG_FILE_NAME = "nb_google_searches.log"
+    NB_GOOGLE_SEARCHES_LOG_FILE_NAME = ".google_searches_qty.log"
 
     def __init__(self):
         self.html_parts = []
@@ -111,7 +118,7 @@ class UltimateGuitarSearch:
         # see https://github.com/abenassi/Google-Search-API/issues/91
         if nb_searches > 100:
             min_wait = 5
-            max_wait = 6
+            max_wait = UltimateGuitarSearch.GOOGLE_SEARCH_MAX_WAIT
             print(f"Too many queries - let's try to wait for {min_wait} to {max_wait} minutes")
             time.sleep(randint(min_wait*60, max_wait*60))
             self.reset_google_searches()
@@ -124,21 +131,52 @@ class UltimateGuitarSearch:
         :return:
         """
         try:
-            with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "r") as nb_google_searches_log_file:
-                nb_google_searches = int(nb_google_searches_log_file.read())
-        except:
+            google_searches_log_file_creation_date = self.get_creation_date_google_searches_log_file()
+            today = datetime.combine(date.today(), datetime.now().time())
+            delta = today - google_searches_log_file_creation_date
+            if delta.seconds > UltimateGuitarSearch.GOOGLE_SEARCH_MAX_WAIT * 60:
+                self.reset_google_searches()
+                nb_google_searches = 0
+            else:
+                with open(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "r") as nb_google_searches_log_file:
+                    nb_google_searches = int(nb_google_searches_log_file.read())
+        except Exception as err:
+            print(err)
             nb_google_searches = 0
         nb_google_searches += 1
-        with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w+") as nb_google_searches_log_file:
+        with open(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w") as nb_google_searches_log_file:
             nb_google_searches_log_file.write(str(nb_google_searches))
         return nb_google_searches
+
+    def get_creation_date_google_searches_log_file(self) -> datetime:
+        """
+        Try to get the date that a file was created, falling back to when it was
+        last modified if that isn't possible.
+        See http://stackoverflow.com/a/39501288/1709587 for explanation.
+        """
+        if platform.system() == 'Windows':
+            time_stamp = os.path.getctime(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+            the_date = datetime.fromtimestamp(time_stamp)
+            return the_date
+        else:
+            stat = os.stat(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+            try:
+                the_date = datetime.fromtimestamp(stat.st_birthtime)
+                return the_date
+            except AttributeError:
+                # We're probably on Linux. No easy way to get creation dates here,
+                # so we'll settle for when its content was last modified.
+                the_date = datetime.fromtimestamp(stat.st_mtime)
+                return the_date
+        return None # should not happen
 
     def reset_google_searches(self):
         """
         resets the amount of google searches
         :return:
         """
-        with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w+") as nb_google_searches_log_file:
+        os.remove(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME)
+        with open(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w") as nb_google_searches_log_file:
             nb_google_searches_log_file.write("1")
 
     def set_google_max_searches_status_reached(self):
@@ -146,5 +184,5 @@ class UltimateGuitarSearch:
         resets the amount of google searches
         :return:
         """
-        with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w+") as nb_google_searches_log_file:
+        with open(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w") as nb_google_searches_log_file:
             nb_google_searches_log_file.write("1000")
