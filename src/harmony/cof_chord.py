@@ -120,3 +120,11 @@ class CofChord(Chord):
                     _HarmonyLogger.print_detail(_HarmonyLogger.LOD_NOTE,
                                                f"{chord1.components()} vs {chord2.components()}")
         return similar_chords
+
+    def guess_chord_name(self, chord_notes: [Note]) -> Chord:
+        """
+        todo return <Chord("C")> from [<Note("C">), <Note("G">), <Note("E">)]
+        :param chord_notes:
+        :return:
+        """
+        return self
