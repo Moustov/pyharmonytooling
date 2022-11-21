@@ -10,6 +10,7 @@ class CircleOf5th:
     qualities = []
     cof_scales = None
     cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
+
     # circle_of_fifths_natural_majors = {
     #     "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
     #     "G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
@@ -287,36 +288,6 @@ class CircleOf5th:
         cp = ChordProgression(possible_chords)
         return cp
 
-    def generate_circle_of_fifths_natural_majors(self) -> {}:
-        """
-        generates the circle_of_fifths_natural_majors
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        intervals = [2, 2, 1, 2, 2, 2]
-        qualities = ["", "m", "m", "", "", "m", "dim"]
-        return self.generate_circle_of_fifths(intervals, qualities)
-
-    def generate_circle_of_fifths_harmonic_minors(self) -> {}:
-        """
-        generates the circle_of_fifths_natural_majors
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        intervals = [2, 1, 2, 2, 1, 3]
-        qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
-        return self.generate_circle_of_fifths(intervals, qualities)
-
-    def generate_circle_of_fifths_natural_minors(self) -> {}:
-        """
-        generates the circle_of_fifths_natural_majors
-        https://music.utk.edu/theorycomp/courses/murphy/documents/Major+MinorScales.pdf
-        :return:
-        """
-        intervals = [2, 1, 2, 2, 1, 2]
-        qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
-        return self.generate_circle_of_fifths(intervals, qualities)
-
     def generate_circle_of_fifths(self) -> dict:
         """
         generates a circle of fifths from intervals, qualities
@@ -410,6 +381,7 @@ class CircleOf5thNaturalMajor(CircleOf5th):
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
 
+
 class CircleOf5thNaturalMinor(CircleOf5th):
     cof_name = "Natural Minor"
     intervals = [2, 1, 2, 2, 1, 2]
@@ -427,6 +399,7 @@ class CircleOf5thMelodicMinor(CircleOf5th):
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
 
+
 class CircleOf5thHarmonicMinor(CircleOf5th):
     cof_name = "Harmonic Minor"
     intervals = [2, 1, 2, 2, 1, 3]
@@ -434,4 +407,3 @@ class CircleOf5thHarmonicMinor(CircleOf5th):
 
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
-

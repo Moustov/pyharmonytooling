@@ -11,8 +11,8 @@ class TestNote(TestCase):
         assert Note("C#") != Note("D")
         assert Note("Cb") != Note("D")
         # tempered equivalences
+        assert Note("A#") == "Bb"
         assert Note("C#") == Note("Db")
         assert Note("C#") == "Db"
         # limits
-        assert Note("A#") == "Gb"   # fails
-        assert Note("G#") == "Ab"   # fails
+        assert Note("G#") == "Ab"

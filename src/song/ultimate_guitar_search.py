@@ -11,6 +11,7 @@ from src.song.ultimate_guitar_song import UltimateGuitarSong
 
 class UltimateGuitarSearch:
     NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 100
+    NB_GOOGLE_SEARCHES_LOG_FILE_NAME = "nb_google_searches.log"
 
     def __init__(self):
         self.html_parts = []
@@ -24,12 +25,11 @@ class UltimateGuitarSearch:
         res = part.split("&amp")
         return "https://tabs.ultimate-guitar.com/tab/" + res[0]
 
-    def search(self, query: str, limit: int, matches_exactly=False, try_avoiding_blocked_searches=True) -> [str]:
+    def search(self, query: str, limit: int, matches_exactly=False) -> [str]:
         """
         search from UG any string, not only the author / title
         WARNING: too many searches will result in a blocking HTTP ERROR 429
         https://stackoverflow.com/questions/22786068/how-to-avoid-http-error-429-too-many-requests-python
-        :param try_avoiding_blocked_searches: wait a bit to avoid being blocked by google
         :param matches_exactly: check on UG if the query matches some part of the songs found
         :param query:
         :param limit:
@@ -43,10 +43,9 @@ class UltimateGuitarSearch:
         numbers_of_negative_checks = 0
         while link_qty < limit and more_songs \
                 and numbers_of_negative_checks < self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS:
-            url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
-            # html = str(self.get_html_content(url))
-            html = str(get_html(url))
-            if html:
+            html = self.get_google_search_page(query, page)
+            if not html:
+                self.set_google_max_searches_status_reached()
                 raise Exception("No more query is accepted for a while - try again later...")
             self.html_parts = html.split("=https://tabs.ultimate-guitar.com/tab/")
             more_songs = len(self.html_parts) > 1
@@ -64,10 +63,6 @@ class UltimateGuitarSearch:
                 else:
                     numbers_of_negative_checks += 1
             page += 1
-            if try_avoiding_blocked_searches:
-                # wait a bit to avoid being blocked by google
-                # see https://github.com/abenassi/Google-Search-API/issues/91
-                time.sleep(randint(180, 240))
         if numbers_of_negative_checks >= self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS:
             print(f"{len(res)} found - No other song found with "
                   f"{self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS} attempts...")
@@ -92,8 +87,7 @@ class UltimateGuitarSearch:
                 chord = Degree.get_chord_from_degree(degree, root_note, mode)
                 search_string += chord + " "
             print(search_string)
-            songs[search_string] = self.search(search_string, limit_per_tone, matches_exactly,
-                                               try_avoiding_blocked_searches)
+            songs[search_string] = self.search(search_string, limit_per_tone, matches_exactly)
         return songs
 
     def check_matches_exactly(self, query: str, link: str) -> bool:
@@ -105,3 +99,52 @@ class UltimateGuitarSearch:
         cs.replace("[tab]", "")
         res = query[0:len(query) - len(" site:ultimate-guitar.com")] in cs
         return res
+
+    def get_google_search_page(self, query, page) -> str:
+        """
+        try to fetch the html page from a google search url
+        :param url:
+        :return:
+        """
+        nb_searches = self.add_new_google_search()
+        # wait a bit to avoid being blocked by google
+        # see https://github.com/abenassi/Google-Search-API/issues/91
+        if nb_searches > 100:
+            min_wait = 5
+            max_wait = 6
+            print(f"Too many queries - let's try to wait for {min_wait} to {max_wait} minutes")
+            time.sleep(randint(min_wait*60, max_wait*60))
+            self.reset_google_searches()
+        url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
+        return str(get_html(url))
+
+    def add_new_google_search(self) -> int:
+        """
+        store the amount of google searches done
+        :return:
+        """
+        try:
+            with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "r") as nb_google_searches_log_file:
+                nb_google_searches = int(nb_google_searches_log_file.read())
+        except:
+            nb_google_searches = 0
+        nb_google_searches += 1
+        with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w+") as nb_google_searches_log_file:
+            nb_google_searches_log_file.write(str(nb_google_searches))
+        return nb_google_searches
+
+    def reset_google_searches(self):
+        """
+        resets the amount of google searches
+        :return:
+        """
+        with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w+") as nb_google_searches_log_file:
+            nb_google_searches_log_file.write("1")
+
+    def set_google_max_searches_status_reached(self):
+        """
+        resets the amount of google searches
+        :return:
+        """
+        with open(self.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w+") as nb_google_searches_log_file:
+            nb_google_searches_log_file.write("1000")

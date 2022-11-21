@@ -29,7 +29,7 @@ class Note:
                 index_other = Note.tempered_chromatic_scale.index(other)
             same = (index_name == index_other + 1) \
                     or (index_other == index_name + 1) \
-                    or (index_other == len(Note.tempered_chromatic_scale) and index_name == 0) \
-                    or (index_other == 0 and index_name == len(Note.tempered_chromatic_scale))
+                    or (index_other == len(Note.tempered_chromatic_scale) - 1 and index_name == 0) \
+                    or (index_other == 0 and index_name == len(Note.tempered_chromatic_scale) -1)
 
             return same

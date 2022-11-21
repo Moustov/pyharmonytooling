@@ -3,13 +3,12 @@ from unittest import TestCase
 from deepdiff import DeepDiff
 from pychord import Chord
 
-from src.harmony.circle_of_5th import CircleOf5th
+from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMinor, CircleOf5thNaturalMajor
 
 
 class TestCircleOf5th(TestCase):
     def test_generate_circle_of_fifths(self):
-        c = CircleOf5th()
-        cof = c.generate_circle_of_fifths_natural_majors()
+        c = CircleOf5thNaturalMajor()
         expected = {
             "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
             "G": ["G", "Am", "Bm", "C", "D", "Em", "Gbdim"],
@@ -24,7 +23,7 @@ class TestCircleOf5th(TestCase):
             "Bb": ["Bb", "Cm", "Dm", "Eb", "F", "Gm", "Adim"],
             "F": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"]
         }
-        diff = DeepDiff(cof, expected, ignore_order=True)
+        diff = DeepDiff(c.cof_scales, expected, ignore_order=True)
         assert diff == {}
 
     def test_find_substitutes(self):
