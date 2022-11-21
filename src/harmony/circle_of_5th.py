@@ -35,20 +35,6 @@ class CircleOf5th:
         return 0.0
 
     @staticmethod
-    def all_existing_chords() -> [Chord]:
-        """
-        return the list of all possible chords
-        :return:
-        """
-        possible_chords_from_note = []
-        for note in Note.CHROMATIC_SCALE:
-            possible_chords_from_note += CofChord.get_chord_names_possible_qualities(note)
-            possible_chords_from_note += CofChord.get_chord_names_possible_qualities(note + "m")
-        HarmonyLogger.print_detail(HarmonyLogger.LOD_TONE,
-                                   f"Number of existing chords: {len(possible_chords_from_note)}")
-        return possible_chords_from_note
-
-    @staticmethod
     def guess_tone_and_mode_from_cadence(cadence: str):
         """
         return the most compatible circle of 5th with the cadence
@@ -56,21 +42,6 @@ class CircleOf5th:
         :return:
         """
         return CircleOf5thNaturalMajor()
-
-    def find_substitutes(self, chord: Chord) -> [Chord]:
-        """
-        return the list of equivalent chords from a chord
-        :param chord:
-        :return:
-        """
-        similar_chords = []
-        possible_chords = CircleOf5th.all_existing_chords()
-        for pc in possible_chords:
-            if pc != chord and pc.components() == chord.components():
-                similar_chords.append(pc)
-                HarmonyLogger.print_detail(HarmonyLogger.LOD_CHORD, f"{pc} == {chord}")
-                HarmonyLogger.print_detail(HarmonyLogger.LOD_NOTE, f"{pc.components()} vs {chord.components()}")
-        return similar_chords
 
     @staticmethod
     def find_similar_chords() -> []:
