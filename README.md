@@ -125,6 +125,7 @@ Searching for songs in the 12 tones from a cadence
         songs = ugs.search_songs_from_cadence("ii7-V7-Imaj7", cof_maj, 5)
         print(songs)
 output:
+
         {'Bm7 E7 Amaj7 ': 
                 ['https://tabs.ultimate-guitar.com/tab/1726600', 
                 'https://tabs.ultimate-guitar.com/tab/henri-salvador/jardin-dhiver-chords-2202243', 
@@ -201,6 +202,7 @@ output:
 
 
 #### Song processing tools on simple text song
+
         from pychord import Chord 
         from src.song.text_song import TextSongWithLineForChords
 
