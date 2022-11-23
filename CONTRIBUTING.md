@@ -8,6 +8,9 @@ Run at least the unit tests under before committing
 * test/2_file_system_based_tests
 
 ## Unit Tests
+Comply at much as possible with PEP8
+
+# Unit Tests
 - Create as much UT as possible :)
 - When a bug is found, cover it with a UT
 - Add the UT is the appropriate test category
