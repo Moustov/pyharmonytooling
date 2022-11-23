@@ -1,5 +1,10 @@
+PyHarmonyTooling
+==============
 
+<div align="center">
 <img src="circle_of_5th.png" width="300" alt="Circle of 5th">
+</div>
+
 
 ## OVERVIEW ##
 Series of tools to handle harmony in music
@@ -74,8 +79,7 @@ ouput:
     substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
 
 #### Guess chord from notes
-To guess a chord from notes, there is a feature [`CofChord.guess_chord_name()`](src/harmony/cof_chord.py).
-It is possible 
+To guess a chord from notes, there is a feature that enables: 
 - to have a list of possible chords that include all the provided notes
 - to limit this list to chord with exactly the same notes (`is_strictly_compliant=True`)
 - to provide the simplest possible chord (`simplest_chord_only=True`)
@@ -268,7 +272,7 @@ output:
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
 # Release Notes
-* 23/NOV/22
+* 23/NOV/22 - tag 
   * find chords from notes
   * start parsing tabs
 * 20/NOV/22
@@ -283,8 +287,8 @@ output:
 
 # Additional links
 * PyChord project: https://github.com/yuma-m/pychord
-* https://codepen.io/2kool2/pen/bmVxpZ
-* https://github.com/victorfontes/python-ultimate-guitar
+* Nice GUI on the Cof major: https://codepen.io/2kool2/pen/bmVxpZ
+* An API to UG: https://github.com/victorfontes/python-ultimate-guitar
 * 🇫🇷 https://www.youtube.com/@gradusadparnassumfr
 * Circle of Fifths: 
   * https://websemantics.uk/tools/circle-of-fifths-chord-wheel/

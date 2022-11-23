@@ -27,7 +27,7 @@ class TestUltimateGuitarSong(TestCase):
         :return:
         """
         ugs = UltimateGuitarSong()
-        html_file = "no_tab_tags-progression_song.html"
+        html_file = r".\no_tab_tags-progression_song.html"
         with open(html_file, 'r') as f:
             html = f.read()
         ugs.digest(html)

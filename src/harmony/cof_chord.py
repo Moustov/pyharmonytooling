@@ -160,6 +160,7 @@ class CofChord(Chord):
         """
         return the list of all possible chords
         the list includes sharp/flat equivalents
+        todo : provide a cache for this
         :return:
         """
         possible_chords = []
@@ -211,8 +212,9 @@ class CofChord(Chord):
                     compatible_chords.append(c)
                 elif not is_strictly_compliant:
                     compatible_chords.append(c)
-
-        if simplest_chord_only:
+        if simplest_chord_only and len(chord_notes) == 1:
+            return [Chord(str(chord_notes[0]))]
+        elif simplest_chord_only:
             # loooong dummy name to ensure finding the shortest chord name
             simplest_chord_name = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
             simplest_chord = None
