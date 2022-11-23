@@ -11,7 +11,7 @@ Series of tools to handle harmony in music
   * https://en.wikipedia.org/wiki/Circle_of_fifths
 
 ## Features ##
-> :warning: **Warning** :warning:
+> **Warning**
 >
 > All possible chord names are defined by the PyChord library
 > See [here](https://github.com/yuma-m/pychord/blob/main/pychord/constants/qualities.py)
