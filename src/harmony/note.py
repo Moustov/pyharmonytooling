@@ -17,12 +17,20 @@ class Note:
         if name == "E#":
             self.name = "F"
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return f"<Note: {self.name}>"
+
     def __eq__(self, other) -> bool:
         """
         returns True if same well tempered note (eg: A# == Bb is True
         :param other:
         :return:
         """
+        if not isinstance(other, Note) and not isinstance(other, str):
+            raise TypeError(f"Cannot compare Note object with {type(other)} object")
         if type(other) == str and self.name == other:
             return True
         elif type(other) == Note and self.name == other.name:
@@ -37,6 +45,8 @@ class Note:
         :param note:
         :return:
         """
+        if not isinstance(other, Note) and not isinstance(other, str):
+            raise TypeError(f"Cannot compare Note object with {type(other)} object")
         tempered_scale = list(Note.TEMPERED_CHROMATIC_SCALE.keys())
         index_name = tempered_scale.index(self.name)
         if type(other) == Note:
