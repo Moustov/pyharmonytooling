@@ -45,12 +45,14 @@ class GuitarTab():
         for fingering_sequence in range(0, MAX_SEQUENCE):
             chord_layout = []
             chord_notes = []
-            for string_name in strings:
+            chord = None
+            for string_name in fingerings.keys():
                 fret = fingerings[string_name][fingering_sequence]
                 chord_layout.append(fret)
-                chord_notes.append(Note(Neck.find_note_from_position(string_name, fret)))
-            chord = CofChord()
-            chord.guess_chord_name(chord_notes)
-            print(chord)
-            res.append(chord)
+                if fret != -1:
+                    chord_notes.append(Note(Neck.find_note_from_position(string_name, fret)))
+            if len(chord_notes) > 0:
+                chord = CofChord.guess_chord_name(chord_notes)
+                print(chord)
+                res.append(chord)
         return res

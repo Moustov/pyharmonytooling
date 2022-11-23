@@ -11,7 +11,8 @@ class Neck:
     def __init__(self):
         pass
 
-    def find_note_from_position(self, string: str, fret: int) -> str:
+    @staticmethod
+    def find_note_from_position(string: str, fret: int) -> str:
         """
         https://www.musicnotes.com/now/tips/how-to-read-guitar-tabs/
         # todo involve self.TUNING to alter the note
@@ -35,7 +36,7 @@ class Neck:
         """
         res = []
         for fret in range(0, self.FRET_QUANTITY + 2):  # +1 for the nut / +1 to reach the last fret => +2
-            if self.find_note_from_position(string, fret).upper() == note.upper():
+            if Neck.find_note_from_position(string, fret).upper() == note.upper():
                 res.append([string, fret])
         return res
 

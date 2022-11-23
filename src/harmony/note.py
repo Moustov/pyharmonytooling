@@ -1,5 +1,6 @@
 class Note:
-    CHROMATIC_SCALE = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
+    CHROMATIC_SCALE_SHARP_BASED = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
+    CHROMATIC_SCALE_FLAT_BASED = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
     TEMPERED_CHROMATIC_SCALE = {"Ab": 1, "A": 1, "A#": 0, "Bb": 1, "B": 0,
                                 "Cb": 1, "C": 1, "C#": 0, "Db": 1, "D": 1, "D#": 0,
                                 "Eb": 1, "E": 0, "Fb": 1, "F": 1, "F#": 0,
@@ -65,3 +66,19 @@ class Note:
             return nb_half_tones % 12
         else:
             return nb_half_tones % -12
+
+    @staticmethod
+    def equivalents(note) -> []:
+        """
+        if the note is flat => the sharp will also be part of the returned list
+        ex  equivalents("Ab") => ["Ab", "G#"]
+            equivalents("A") => ["A"]
+        :param note:
+        :return:
+        """
+        if "b" in note:
+            return [note, Note.CHROMATIC_SCALE_SHARP_BASED[Note.CHROMATIC_SCALE_FLAT_BASED.index(note)]]
+        elif "#" in note:
+            return [note, Note.CHROMATIC_SCALE_FLAT_BASED[Note.CHROMATIC_SCALE_SHARP_BASED.index(note)]]
+        else:
+            return [note]

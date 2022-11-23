@@ -8,7 +8,57 @@ from src.harmony.note import Note
 
 class CofChord(Chord):
     def __init__(self, chord_name: str):
-        super().Chord(chord_name)
+        super().__init__(chord_name)
+
+    @staticmethod
+    def is_same_chord_from_components(a, b):
+        """
+        returns True if all components are the same
+        :param a:
+        :param b:
+        :return:
+        """
+        if not isinstance(a, Chord) or not isinstance(b, Chord):
+            raise TypeError(f"Cannot compare non CofChord objects")
+        c1 = sorted(a.components())
+        c2 = sorted(b.components())
+        if len(c1) != len (c2):
+            return False
+        return CofChord.is_chord_included_from_components(a, b)
+
+    @staticmethod
+    def is_chord_included_from_components(a, b):
+        """
+        return True is the components from a are included in b
+        :param a:
+        :param b:
+        :return:
+        """
+        if not isinstance(a, Chord) or not isinstance(b, Chord):
+            raise TypeError(f"Cannot compare non CofChord objects")
+        c1 = sorted(a.components())
+        return CofChord.are_components_included_in_chord(c1, b)
+
+    @staticmethod
+    def are_components_included_in_chord(components: [Note], chord):
+        """
+        return True is the components from a are included in b
+        :param chord: a Chord()
+        :param components:
+        :return:
+        """
+        if not isinstance(chord, Chord):
+            raise TypeError(f"Cannot compare non CofChord objects")
+        c2 = sorted(chord.components())
+        for e1 in components:
+            found = False
+            for e2 in c2:
+                if e1 == Note(e2):
+                    found = True
+                    break
+            if not found:
+                return False
+        return True
 
     @staticmethod
     def get_chord_names_possible_qualities(chord: str) -> [Chord]:
@@ -64,7 +114,7 @@ class CofChord(Chord):
                 pass
         enriched_with_quality_with_bass = enriched_with_quality.copy()
         for c in enriched_with_quality:
-            for cs in Note.CHROMATIC_SCALE:
+            for cs in Note.CHROMATIC_SCALE_SHARP_BASED:
                 if cs != base_chord.root:
                     try:
                         a = (str(c) + "/" + cs)
@@ -86,7 +136,7 @@ class CofChord(Chord):
         similar_chords = []
         possible_chords = CofChord.all_existing_chords()
         for pc in possible_chords:
-            if pc != chord and pc.components() == chord.components():
+            if CofChord.is_same_chord_from_components(chord, pc):
                 similar_chords.append(pc)
                 _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"{pc} == {chord}")
                 _HarmonyLogger.print_detail(_HarmonyLogger.LOD_NOTE, f"{pc.components()} vs {chord.components()}")
@@ -109,21 +159,28 @@ class CofChord(Chord):
     def all_existing_chords() -> [Chord]:
         """
         return the list of all possible chords
+        the list includes sharp/flat equivalents
         :return:
         """
         possible_chords = []
-        for note in Note.CHROMATIC_SCALE:
-            possible_chords += CofChord.get_chord_names_possible_qualities(note)
-            possible_chords += CofChord.get_chord_names_possible_qualities(note + "m")
-        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE,
-                                    f"Number of existing chords: {len(possible_chords)}")
-        return possible_chords
+        for note in Note.CHROMATIC_SCALE_SHARP_BASED:
+            for eqv_note in Note.equivalents(note):
+                possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note)
+                possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note + "m")
+        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(possible_chords)}")
+        res = []
+        checked_chords = []
+        for c in possible_chords:
+            if str(c) not in checked_chords:
+                res.append(c)
+                checked_chords.append(str(c))
+        return res
 
     @staticmethod
     def find_similar_chords() -> []:
         """
         find similar chords among all possible chords
-        /! a lot of combinations are generated
+        WARNING a lot of combinations are generated
         :return:
         """
         similar_chords = []
@@ -147,19 +204,14 @@ class CofChord(Chord):
         :return:
         """
         compatible_chords = []
-        for root_note in chord_notes:
-            possible_chords = CofChord.all_existing_chords_from_note(root_note)
-            for p in possible_chords:
-                notes = p.components()
-                compatibility = 0
-                for n in notes:
-                    if n in chord_notes:
-                        compatibility += 1
-                if p not in compatible_chords and compatibility == len(chord_notes):
-                    if not is_strictly_compliant:
-                        compatible_chords.append(p)
-                    elif is_strictly_compliant and compatibility == len(notes):
-                        compatible_chords.append(p)
+        possible_chords = CofChord.all_existing_chords()
+        for c in possible_chords:
+            if CofChord.are_components_included_in_chord(chord_notes, c):
+                if is_strictly_compliant and len(chord_notes) == len(c.components()):
+                    compatible_chords.append(c)
+                elif not is_strictly_compliant:
+                    compatible_chords.append(c)
+
         if simplest_chord_only:
             # loooong dummy name to ensure finding the shortest chord name
             simplest_chord_name = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"

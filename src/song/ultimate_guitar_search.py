@@ -89,7 +89,7 @@ class UltimateGuitarSearch:
         """
         songs = {}
         degrees = cadence.split("-")
-        for root_note in Note.CHROMATIC_SCALE:
+        for root_note in Note.CHROMATIC_SCALE_SHARP_BASED:
             search_string = ""
             for degree in degrees:
                 chord = Degree.get_chord_from_degree(degree, root_note, mode)

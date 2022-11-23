@@ -11,6 +11,11 @@ Series of tools to handle harmony in music
   * https://en.wikipedia.org/wiki/Circle_of_fifths
 
 ## Features ##
+> :warning: **Warning** :warning:
+>
+> All possible chord names are defined by the PyChord library
+> See [here](https://github.com/yuma-m/pychord/blob/main/pychord/constants/qualities.py)
+
 ### Features on Harmony
 #### Guess the tone & mode of a song"
     from src.displays.console import HarmonyLogger
@@ -104,6 +109,27 @@ output:
 output:
 
     [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
+
+#### Find chords from tabs
+    from pychord import Chord
+    from src.guitar_tab.guitar_tab import GuitarTab
+    from src.harmony.cof_chord import CofChord
+
+    tab = """
+          e|--11-----11-----10-----11---|
+          B|--11-----12-----11-----11---|
+          G|--11-----13-----10-----11---|
+          D|----------------------------|
+          A|----------------------------|
+          E|----------------------------|
+    """
+    res = GuitarTab.digest_tab(tab)
+    expected = [Chord("D#m"), Chord("G#m"), Chord("Bb"), Chord("D#m")]
+    for (c_res, c_expected) in zip(res, expected):
+        if CofChord(str(c_res[0])) != CofChord(str(c_expected)):
+            assert False
+    assert True
+
 
 ### Song Processing
 #### Song search & processing tools on Ultimate Guitar through Google.com
@@ -247,6 +273,7 @@ output:
 # Release Notes
 * 23/NOV/22
   * find chords from notes
+  * start parsing tabs
 * 20/NOV/22
   * accurate song search (param added)
   * find songs that match a cadence in degrees

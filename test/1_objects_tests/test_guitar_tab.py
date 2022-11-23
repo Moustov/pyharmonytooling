@@ -1,8 +1,8 @@
 from unittest import TestCase
 
 from pychord import Chord
-
 from src.guitar_tab.guitar_tab import GuitarTab
+from src.harmony.cof_chord import CofChord
 
 
 class TestGuitarTab(TestCase):
@@ -15,7 +15,10 @@ class TestGuitarTab(TestCase):
         A|-------------------------------------------------------------------------|
         E|-------------------------------------------------------------------------|
         """
-        expected =  [Chord("Gb6"), Chord("G#m"), Chord("Bb"), Chord("Gb6")]
+        expected = [Chord("D#m"), Chord("G#m"), Chord("Bb"), Chord("D#m")]
         res = GuitarTab.digest_tab(tab)
-        assert res == expected
+        for (c_res, c_expected) in zip(res, expected):
+            if CofChord(str(c_res[0])) != CofChord(str(c_expected)):
+                assert False
+        assert True
 
