@@ -1,14 +1,8 @@
 
-<img src="circle_of_5th.png" width="200" alt="Circle of 5th">
+<img src="circle_of_5th.png" width="300" alt="Circle of 5th">
 
 ## OVERVIEW ##
 Series of tools to handle harmony in music
-
-## Links ##
-* PyChord project: https://github.com/yuma-m/pychord
-* Circle of Fifths: 
-  * https://websemantics.uk/tools/circle-of-fifths-chord-wheel/
-  * https://en.wikipedia.org/wiki/Circle_of_fifths
 
 ## Features ##
 > **Warning**
@@ -43,13 +37,14 @@ ouput:
 
 #### Guess borrowed chords in a song from a tone point of view
     song = """
-                C Dm Em F G Am Bdim Cm
-                """
+          C Dm Em F G Am Bdim Cm
+          """
     cof = CircleOf5thNaturalMajor()
     cp = cof.digest_song(song)
     tone = cof.generate_circle_of_fifths()["C"]
     borrowed_chords = cof.get_borrowed_chords(tone, cp)
     print("   Borrowed chords:", borrowed_chords.keys())
+
 ouput:
 
     Borrowed chords: dict_keys(['Cm'])
@@ -62,6 +57,7 @@ ouput:
     chord = "G6"
     substitutes = cof.find_substitutes(Chord(chord))
     print("substitutes from :", chord, substitutes)
+
 ouput:
 
     Number of existing chords: 5772
@@ -78,12 +74,13 @@ ouput:
     substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
 
 #### Guess chord from notes
-To guess a chord from notes, there is a feature [CofChord](src/harmony/cof_chord.py).guess_chord_name().
+To guess a chord from notes, there is a feature [`CofChord.guess_chord_name()`](src/harmony/cof_chord.py).
 It is possible 
 - to have a list of possible chords that include all the provided notes
 - to limit this list to chord with exactly the same notes (`is_strictly_compliant=True`)
 - to provide the simplest possible chord (`simplest_chord_only=True`)
 
+Code sample:
 
     from pychord import Chord
     from src.harmony.cof_chord import CofChord
@@ -285,6 +282,10 @@ output:
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
 
 # Additional links
+* PyChord project: https://github.com/yuma-m/pychord
 * https://codepen.io/2kool2/pen/bmVxpZ
 * https://github.com/victorfontes/python-ultimate-guitar
 * 🇫🇷 https://www.youtube.com/@gradusadparnassumfr
+* Circle of Fifths: 
+  * https://websemantics.uk/tools/circle-of-fifths-chord-wheel/
+  * https://en.wikipedia.org/wiki/Circle_of_fifths
