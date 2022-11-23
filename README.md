@@ -72,6 +72,27 @@ ouput:
     ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
     substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
 
+#### Guess chord from notes
+To guess a chord from notes, there is a feature [CofChord](src/harmony/cof_chord.py).guess_chord_name().
+It is possible 
+- to have a list of possible chords that include all the provided notes
+- to limit this list to chord with exactly the same notes (`is_strictly_compliant=True`)
+- to provide the simplest possible chord (`simplest_chord_only=True`)
+
+
+    from pychord import Chord
+    from src.harmony.cof_chord import CofChord
+    from src.harmony.note import Note
+
+    expected = [Chord("Cmaj7")]
+    notes = [Note("C"), Note("E"), Note("G"), Note("B")]
+    res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=True)
+    print(res == expected)
+
+output:
+
+    True
+
 ### Guitar tools
 #### Find chord fingering on a guitar
     from src.guitar_neck.fingering import Fingering
@@ -224,6 +245,8 @@ output:
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
 # Release Notes
+* 23/NOV/22
+  * find chords from notes
 * 20/NOV/22
   * accurate song search (param added)
   * find songs that match a cadence in degrees
