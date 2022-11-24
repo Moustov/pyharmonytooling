@@ -279,6 +279,7 @@ output:
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
 
 # Additional links
+* Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
 * PyChord project: https://github.com/yuma-m/pychord
 * Nice GUI on the Cof major: https://codepen.io/2kool2/pen/bmVxpZ
 * An API to UG: https://github.com/victorfontes/python-ultimate-guitar
