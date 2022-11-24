@@ -3,7 +3,7 @@ from unittest import TestCase
 from deepdiff import DeepDiff
 from pychord import Chord
 
-from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMinor, CircleOf5thNaturalMajor
+from src.harmony.circle_of_5th import CircleOf5thNaturalMajor
 from src.harmony.cof_chord import CofChord
 
 
@@ -37,11 +37,12 @@ class TestCircleOf5th(TestCase):
                     Chord("Em7/13/B"), Chord("Em7/13/D"), Chord("Em7/13/G"),
                     Chord("G6"), Chord("G6/9"), Chord("G/E"),
                     Chord("G6/B"), Chord("G6/D"), Chord("G6/E"), Chord("G6/9/B"), Chord("G6/9/D"), Chord("G6/9/E")]
-        assert substitutes == expected
+        assert CofChord.same_array_of_chords(substitutes, expected)
 
     def test_find_substitutes_c(self):
         chord = "C"
         substitutes = CofChord.find_substitutes(Chord(chord))
         expected = [Chord("C"), Chord("C/E"), Chord("C/G"), Chord("C5/E")]
         print("substitutes from :", chord, substitutes)
-        assert substitutes == expected
+        assert CofChord.same_array_of_chords(substitutes, expected)
+

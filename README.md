@@ -272,6 +272,9 @@ output:
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
 # Release Notes
+* 24/NOV/22
+  * weird notes (eg. Cb)
+  * possible chords cached for optimization
 * 23/NOV/22 - tag 
   * find chords from notes
   * start parsing tabs

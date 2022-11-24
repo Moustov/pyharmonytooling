@@ -7,6 +7,37 @@ from src.harmony.note import Note
 
 
 class GuitarTab():
+    """
+    handling guitar tabs
+
+    todo: handle
+             /  slide up
+             \  slide down
+             h  hammer-on
+             p  pull-off
+             ~  vibrato
+             +  harmonic
+             x  Mute note
+
+    todo handle guitar tuning
+        E|---|
+        B|---|
+        G|---|
+        D|---|
+        A|---|
+        D|---|
+
+    todo handle bars & repeats
+        F||-----6-4-|-----7-6-|-----7-6|-----7-6||
+        C||---2-----|---4-----|---6----|---6----||
+        G||-0-------|-0-------|-0------|-0------||
+        D||---------|---------|--------|--------||
+        A||---------|---------|--------|--------||
+        E||---------|---------|--------|--------||
+
+    todo handle multiple tabs: the fretboard is repeated over to continue the song
+    """
+
     def __init__(self):
         pass
 
@@ -25,27 +56,37 @@ class GuitarTab():
         :return: the keys would be the nb of chars from '|' (bar delimiter)
         """
         res = {}
-        MAX_SEQUENCE = 20
         fingerings = {}
-        strings = tab.strip().split('\n')   # todo define Neck.TUNING from strings
+        strings = tab.split('\n')   # todo define Neck.TUNING from strings
+        tab_size = 0
+        if strings:
+            for s in strings:
+                if tab_size < len(s):
+                    tab_size = len(s)
         for string in strings:
-            parts = string.split("-")
+            if string.strip() == "":
+                continue
+            parts = string.strip().split("-")
+            print("-", string)
             string_name = parts[0].strip()
             string_name = string_name[0]
             part_position = 0
-            fingerings[string_name] = [Fingering.FRET_MUTE] * MAX_SEQUENCE
+            fingerings[string_name] = [Fingering.FRET_MUTE] * tab_size
             pos_on_string = 1
             fret = 0
             for part in parts[1:]:
                 if "-" not in part and part != "" and part != "|":   # todo use "|" to delimit bars
                     fret = int(part)    # todo handle hammering, pull off, etc.
                     fingerings[string_name][part_position] = [int(fret), pos_on_string]
+                    pos_on_string += len(str(fret)) + 1
+                else:
+                    pos_on_string += 1
                 part_position += 1
-                pos_on_string += len(str(fret))
+
 
         print(fingerings)
         # todo imagine different clusters to guess chords
-        for fingering_sequence in range(0, part_position):
+        for fingering_sequence in range(0, tab_size):
             chord_layout = []
             chord_notes = []
             chord = None

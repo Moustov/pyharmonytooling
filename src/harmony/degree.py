@@ -60,7 +60,7 @@ class Degree:
             return note + degree[1:]
 
     @staticmethod
-    def get_note_degree(root_note: str, degree: int, mode: CircleOf5th):
+    def get_note_degree(root_note: str, degree: int, mode: CircleOf5th) -> int:
         """
 
         :param mode: the CircleOf5th will provide intervals

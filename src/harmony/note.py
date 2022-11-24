@@ -1,6 +1,7 @@
 class Note:
     CHROMATIC_SCALE_SHARP_BASED = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     CHROMATIC_SCALE_FLAT_BASED = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
+    CHROMATIC_SCALE_WEIRD_NOTES = ["Bdd", "Bb", "Cb", "B#", "Db", "Ebb", "Eb", "Fb", "E#", "Gb", "Abb", "Ab"]
     TEMPERED_CHROMATIC_SCALE = {"Ab": 1, "A": 1, "A#": 0, "Bb": 1, "B": 0,
                                 "Cb": 1, "C": 1, "C#": 0, "Db": 1, "D": 1, "D#": 0,
                                 "Eb": 1, "E": 0, "Fb": 1, "F": 1, "F#": 0,
@@ -23,6 +24,9 @@ class Note:
 
     def __repr__(self):
         return f"<Note: {self.name}>"
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def __eq__(self, other) -> bool:
         """
@@ -48,24 +52,35 @@ class Note:
         """
         if not isinstance(other, Note) and not isinstance(other, str):
             raise TypeError(f"Cannot compare Note object with {type(other)} object")
-        tempered_scale = list(Note.TEMPERED_CHROMATIC_SCALE.keys())
-        index_name = tempered_scale.index(self.name)
-        if type(other) == Note:
-            index_other = tempered_scale.index(other.name)
-        elif type(other) == str:
-            index_other = tempered_scale.index(other)
-        nb_half_tones = 0
-        if index_other < index_name:
-            for n in tempered_scale[index_other: index_name]:
-                nb_half_tones += Note.TEMPERED_CHROMATIC_SCALE[n]
-            nb_half_tones -= 12
+        s_self = str(self)
+        index_self = Note.get_index(s_self)
+        s_other = str(other)
+        index_other = Note.get_index(s_other)
+        return index_other - index_self
+
+    @staticmethod
+    def get_index(note_name):
+        """
+        returns the internal position of the note_name
+        :param note_name:
+        :return:
+        """
+        if not isinstance(note_name, Note) and not isinstance(note_name, str):
+            raise TypeError(f"Cannot compare Note object with {type(note_name)} object")
+        index_note = -1
+        if "#" in note_name:
+            try:
+                index_note = Note.CHROMATIC_SCALE_SHARP_BASED.index(note_name)
+            except:
+                index_note = Note.CHROMATIC_SCALE_WEIRD_NOTES.index(note_name)
         else:
-            for n in tempered_scale[index_name:index_other]:
-                nb_half_tones += Note.TEMPERED_CHROMATIC_SCALE[n]
-        if nb_half_tones >= 0:
-            return nb_half_tones % 12
-        else:
-            return nb_half_tones % -12
+            try:
+                index_note = Note.CHROMATIC_SCALE_FLAT_BASED.index(note_name)
+            except:
+                index_note = Note.CHROMATIC_SCALE_WEIRD_NOTES.index(note_name)
+        if index_note == -1:
+            raise ValueError(f"{note_name} is not a known note...")
+        return index_note
 
     @staticmethod
     def equivalents(note) -> []:

@@ -7,6 +7,8 @@ from src.harmony.note import Note
 
 
 class CofChord(Chord):
+    possible_chords = []
+
     def __init__(self, chord_name: str):
         super().__init__(chord_name)
 
@@ -40,20 +42,20 @@ class CofChord(Chord):
         return CofChord.are_components_included_in_chord(c1, b)
 
     @staticmethod
-    def are_components_included_in_chord(components: [Note], chord):
+    def are_components_included_in_chord(expected_notes: [Note], chord):
         """
         return True is the components from a are included in b
         :param chord: a Chord()
-        :param components:
+        :param expected_notes:
         :return:
         """
         if not isinstance(chord, Chord):
             raise TypeError(f"Cannot compare non CofChord objects")
-        c2 = sorted(chord.components())
-        for e1 in components:
+        proposed_chord_components = chord.components()
+        for exp_note in expected_notes:
             found = False
-            for e2 in c2:
-                if e1 == Note(e2):
+            for proposed_note in proposed_chord_components:
+                if exp_note == Note(proposed_note):
                     found = True
                     break
             if not found:
@@ -160,28 +162,31 @@ class CofChord(Chord):
         """
         return the list of all possible chords
         the list includes sharp/flat equivalents
-        todo : provide a cache for this
         :return:
         """
-        possible_chords = []
+        if CofChord.possible_chords:
+            return CofChord.possible_chords
+
         for note in Note.CHROMATIC_SCALE_SHARP_BASED:
+            # let's handle notes like Ab/G#
             for eqv_note in Note.equivalents(note):
-                possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note)
-                possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note + "m")
-        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(possible_chords)}")
+                CofChord.possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note)
+                CofChord.possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note + "m")
+        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(CofChord.possible_chords)}")
         res = []
         checked_chords = []
-        for c in possible_chords:
+        for c in CofChord.possible_chords:
             if str(c) not in checked_chords:
                 res.append(c)
                 checked_chords.append(str(c))
+        CofChord.possible_chords = res
         return res
 
     @staticmethod
     def find_similar_chords() -> []:
         """
         find similar chords among all possible chords
-        WARNING a lot of combinations are generated
+        **WARNING** a lot of combinations are generated
         :return:
         """
         similar_chords = []
@@ -198,29 +203,96 @@ class CofChord(Chord):
     @staticmethod
     def guess_chord_name(chord_notes: [Note], is_strictly_compliant: bool = True, simplest_chord_only: bool = True) -> [Chord]:
         """
-        todo return <Chord("C")> from [<Note("C">), <Note("G">), <Note("E">)]
+        return <Chord("C")> from [<Note("C">), <Note("G">), <Note("E">)]
+        **WARNING** : simplest_chord_only => is_strictly_compliant
         :param simplest_chord_only: "simple" means shortest chord name (with no bass if possible)
         :param is_strictly_compliant: try not to
         :param chord_notes:
         :return:
         """
+        exaecos = []  # chords with same best complexity
         compatible_chords = []
         possible_chords = CofChord.all_existing_chords()
         for c in possible_chords:
             if CofChord.are_components_included_in_chord(chord_notes, c):
-                if is_strictly_compliant and len(chord_notes) == len(c.components()):
-                    compatible_chords.append(c)
-                elif not is_strictly_compliant:
+                if is_strictly_compliant:
+                    if len(chord_notes) == len(c.components()):
+                        compatible_chords.append(c)
+                else:
                     compatible_chords.append(c)
         if simplest_chord_only and len(chord_notes) == 1:
             return [Chord(str(chord_notes[0]))]
         elif simplest_chord_only:
+            res = []
             # loooong dummy name to ensure finding the shortest chord name
-            simplest_chord_name = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            simplest_chord_name = "A#7sus4/13/C#"   # the longest known/valid chord name (see PyChord)
             simplest_chord = None
             for c in compatible_chords:
-                if len(str(c)) < len(str(simplest_chord_name)):
-                    simplest_chord_name = c
+                diff = CofChord.compare_simplicity(c, simplest_chord_name)
+                if diff == -1:
+                    simplest_chord_name = str(c)
                     simplest_chord = c
-            compatible_chords = [simplest_chord]
-        return compatible_chords
+                    exaecos = [c]
+                elif diff == 0:
+                    exaecos.append(c)
+        return exaecos
+
+    @staticmethod
+    def compare_simplicity(chord: Chord, simplest_chord_name: str) -> bool:
+        """
+        return True if chord (name) is simpler than the provided simplest_chord_name
+        todo : add other criteria that would provide simpler chords such as CoF compliance or b/# to improve readability
+        Note: CoF compliance could be handled at Song level
+        Note: on a guitar, the less fingers, the better
+        Note: on a guitar, the closest, the better
+        :param simplest_chord_name: criterion #1 because it improves readability
+        :param chord:
+        :return: -1 : chord is simpler / 0: same / 1 simplest_chord_name is simpler
+        """
+        if len(chord.components()) < len(Chord(simplest_chord_name).components()):
+            # the less note, the less strings, the simplier
+            return -1
+        if len(str(chord)) < len(simplest_chord_name):
+            # the shorter the name, the more readable, the simplier
+            return -1
+        elif len(str(chord)) == len(simplest_chord_name) and (len(chord.components()) == len(simplest_chord_name)):
+            # same name length + same amount of notes
+            return 0
+        elif len(str(chord)) > len(simplest_chord_name):
+            # the longer the name, the more complex
+            return 1
+        return 0
+
+    @staticmethod
+    def is_chord_in_array(chord: Chord, array: [Chord]) -> bool:
+        """
+        True if the chord can be found in the array
+        :param chord:
+        :param array:
+        :return:
+        """
+        found = False
+        for c in array:
+            if str(chord) == str(c):
+                found = True
+                break
+        return found
+
+    @staticmethod
+    def same_array_of_chords(chords_1: [Chord], chords_2: [Chord]):
+        """
+        True if the 2 arrays of chords contains the same Chords
+        :param chords_2:
+        :return:
+        """
+        expectation_met = True
+        for r in chords_1:
+            c_found = False
+            for e in chords_2:
+                if str(r) == str(e):
+                    c_found = True
+                    break
+            if not c_found:
+                return False
+            expectation_met = expectation_met and c_found
+        return expectation_met

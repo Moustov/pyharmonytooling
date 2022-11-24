@@ -9,25 +9,32 @@ class TestCofChord(TestCase):
         expected = CofChord.find_substitutes(Chord("C"))
         notes = [Note("C"), Note("G"), Note("E")]
         res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=False)
-        assert res == expected
+        assert CofChord.same_array_of_chords(res, expected)
 
     def test_guess_chord_name_Cm(self):
         expected = [Chord("C5/D#"), Chord("Cm"), Chord("Cm/D#"), Chord("Cm/G")]
         notes = [Note("C"), Note("Eb"), Note("G")]
         res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=False)
-        assert res == expected
+        assert CofChord.same_array_of_chords(res, expected)
 
     def test_guess_chord_name_Cm_only(self):
         expected = [Chord("Cm")]
         notes = [Note("C"), Note("Eb"), Note("G")]
         res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=True)
-        assert res == expected
+        assert CofChord.same_array_of_chords(res, expected)
+
+    def test_guess_chord_name_Gb6_only(self):
+        expected = Chord("Gb6")
+        notes = [Note("Bb"), Note("Eb"), Note("Gb")]
+        res = CofChord.guess_chord_name(notes, is_strictly_compliant=False, simplest_chord_only=True)
+        assert CofChord.is_chord_in_array(expected, res)
 
     def test_guess_chord_name_Cmaj7_only(self):
-        expected = [Chord("Cmaj7")]
+        expected = Chord("CM7")
         notes = [Note("C"), Note("E"), Note("G"), Note("B")]
         res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=True)
-        assert res == expected
+        status = CofChord.is_chord_in_array(expected, res)
+        assert status
 
     def test_cofchord_equals_conb_emc(self):
         conb = CofChord("C/B")
