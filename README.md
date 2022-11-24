@@ -9,6 +9,9 @@ PyHarmonyTooling
 ## OVERVIEW ##
 Series of tools to handle harmony in music
 
+## Install ##
+pip install 
+
 ## Features ##
 > **Warning**
 >

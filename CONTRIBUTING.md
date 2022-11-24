@@ -29,3 +29,9 @@ You are encouraged to contribute...
 # Building a package
     
     python.exe setup.py bdist_wheel
+
+Then apply https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/
+
+To deploy the package on Pypi.org
+
+    .\venv\Scripts\python.exe -m twine upload --repository testpypi .\dist\
