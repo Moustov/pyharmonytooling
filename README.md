@@ -10,7 +10,8 @@ PyHarmonyTooling
 Series of tools to handle harmony in music
 
 ## Install ##
-pip install 
+
+    pip install pyHarmonyTooling 
 
 ## Features ##
 > **Warning**
@@ -263,7 +264,7 @@ output:
 * 24/NOV/22
   * weird notes (eg. Cb)
   * possible chords cached for optimization
-  * package v.0.1.1
+  * package v.0.1.2
 * 23/NOV/22 - tag 
   * find chords from notes
   * start parsing tabs
