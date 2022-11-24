@@ -2,9 +2,9 @@ from unittest import TestCase
 
 from pychord import Chord
 
-from src.displays.console import _HarmonyLogger
-from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
-from src.harmony.cof_chord import CofChord
+from pyharmonytools.displays.console import _HarmonyLogger
+from pyharmonytools.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
+from pyharmonytools.harmony.cof_chord import CofChord
 
 
 class Test(TestCase):

@@ -1,7 +1,7 @@
 from unittest import TestCase
 from pychord import Chord
-from src.harmony.cof_chord import CofChord
-from src.harmony.note import Note
+from pyharmonytools.harmony.cof_chord import CofChord
+from pyharmonytools.harmony.note import Note
 
 
 class TestCofChord(TestCase):

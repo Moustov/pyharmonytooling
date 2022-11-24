@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.displays.console_for_guitar_neck import GuitarNeck
+from pyharmonytools.displays.console_for_guitar_neck import GuitarNeck
 
 
 class Test(TestCase):

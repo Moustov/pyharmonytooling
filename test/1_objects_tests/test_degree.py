@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from src.harmony.circle_of_5th import CircleOf5thNaturalMajor, CircleOf5thNaturalMinor
-from src.harmony.degree import Degree
+from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor, CircleOf5thNaturalMinor
+from pyharmonytools.harmony.degree import Degree
 
 
 class TestDegree(TestCase):

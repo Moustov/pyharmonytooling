@@ -1,5 +1,5 @@
-from src.harmony.circle_of_5th import CircleOf5th
-from src.harmony.note import Note
+from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+from pyharmonytools.harmony.note import Note
 
 
 class Degree:

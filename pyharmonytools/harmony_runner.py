@@ -1,5 +1,5 @@
-from src.displays.console import _HarmonyLogger
-from src.song.text_song import TextSongWithLineForChords
+from pyharmonytools.displays.console import _HarmonyLogger
+from pyharmonytools.song.text_song import TextSongWithLineForChords
 
 song = """
 Am Em Am Em G Gmaj7 Em         """

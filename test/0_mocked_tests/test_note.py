@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.harmony.note import Note
+from pyharmonytools.harmony.note import Note
 
 
 class TestNote(TestCase):

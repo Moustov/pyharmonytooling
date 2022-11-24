@@ -1,8 +1,8 @@
 from pychord import ChordProgression, Chord
 
-from src.displays.console import _HarmonyLogger
-from src.harmony.cof_chord import CofChord
-from src.harmony.note import Note
+from pyharmonytools.displays.console import _HarmonyLogger
+from pyharmonytools.harmony.cof_chord import CofChord
+from pyharmonytools.harmony.note import Note
 
 
 class CircleOf5th:

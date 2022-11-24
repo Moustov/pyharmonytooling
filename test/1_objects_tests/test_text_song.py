@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from pychord import Chord
 
-from src.song.text_song import TextSongWithLineForChords
+from pyharmonytools.song.text_song import TextSongWithLineForChords
 
 
 class TestTextSong(TestCase):

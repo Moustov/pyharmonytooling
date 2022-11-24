@@ -1,8 +1,8 @@
 from pychord import Chord
 
-from src.guitar_neck.neck_exception import NeckException
-from src.guitar_neck.neck import Neck
-from src.displays.console import _HarmonyLogger
+from pyharmonytools.guitar_neck.neck_exception import NeckException
+from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.displays.console import _HarmonyLogger
 
 
 class Fingering:

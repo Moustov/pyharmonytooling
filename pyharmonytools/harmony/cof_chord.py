@@ -2,8 +2,8 @@ from array import array
 
 from pychord import Chord
 
-from src.displays.console import _HarmonyLogger
-from src.harmony.note import Note
+from pyharmonytools.displays.console import _HarmonyLogger
+from pyharmonytools.harmony.note import Note
 
 
 class CofChord(Chord):

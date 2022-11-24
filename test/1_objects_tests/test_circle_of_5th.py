@@ -3,8 +3,8 @@ from unittest import TestCase
 from deepdiff import DeepDiff
 from pychord import Chord
 
-from src.harmony.circle_of_5th import CircleOf5thNaturalMajor
-from src.harmony.cof_chord import CofChord
+from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
+from pyharmonytools.harmony.cof_chord import CofChord
 
 
 class TestCircleOf5th(TestCase):

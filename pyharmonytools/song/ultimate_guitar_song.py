@@ -2,8 +2,8 @@ import urllib
 
 from pychord import Chord
 
-from src.harmony.circle_of_5th import CircleOf5th
-from src.song.song import Song
+from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+from pyharmonytools.song.song import Song
 
 
 def turn_html_accents(tab: str) -> str:

@@ -1,9 +1,9 @@
 from pychord import Chord
 
-from src.guitar_neck.fingering import Fingering
-from src.guitar_neck.neck import Neck
-from src.harmony.cof_chord import CofChord
-from src.harmony.note import Note
+from pyharmonytools.guitar_neck.fingering import Fingering
+from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.harmony.cof_chord import CofChord
+from pyharmonytools.harmony.note import Note
 
 
 class GuitarTab():

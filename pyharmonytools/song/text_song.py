@@ -1,6 +1,6 @@
 from pychord import Chord
 
-from src.song.song import Song
+from pyharmonytools.song.song import Song
 
 
 class TextSongWithLineForChords(Song):

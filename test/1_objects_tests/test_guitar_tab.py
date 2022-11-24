@@ -1,8 +1,8 @@
 from unittest import TestCase
 
 from pychord import Chord
-from src.guitar_tab.guitar_tab import GuitarTab
-from src.harmony.cof_chord import CofChord
+from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
+from pyharmonytools.harmony.cof_chord import CofChord
 
 
 class TestGuitarTab(TestCase):

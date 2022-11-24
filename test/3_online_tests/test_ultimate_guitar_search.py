@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.song.ultimate_guitar_search import UltimateGuitarSearch
+from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 
 class TestUltimateGuitarSearch(TestCase):

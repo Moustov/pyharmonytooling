@@ -1,5 +1,5 @@
-from src.song.ultimate_guitar_song import UltimateGuitarSong
-from src.song.ultimate_guitar_search import UltimateGuitarSearch
+from pyharmonytools.song.ultimate_guitar_song import UltimateGuitarSong
+from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 ug_engine = UltimateGuitarSearch()
 query = "C Cm G"

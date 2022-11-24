@@ -17,30 +17,16 @@ Series of tools to handle harmony in music
 
 ### Features on Harmony
 #### Guess the tone & mode of a song"
-    from src.displays.console import HarmonyLogger
-    from src.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
-
-    HarmonyLogger.outcome_level_of_detail = HarmonyLogger.LOD_NONE
-    song = """
-                  A           E
-            Happy Birthday to you
-                  E           A
-            Happy Birthday to you
-                  A7            D
-            Happy Birthday dear (name)
-                  A        E    A
-            Happy Birthday to you
-            """
-    cof = CircleOf5th()
-    cp = cof.digest_song(song)
-    compliance_level_max = cof.guess_tone_and_mode(cp)
-    print(compliance_level_max)
-
-ouput:
-
-    [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
-
-#### Guess borrowed chords in a song from a tone point of view
+    from pyharmonytools.displays.console import _HarmonyLogger
+    from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+    
+    _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
+    
+    ouput:
+    
+        [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
+    
+    #### Guess borrowed chords in a song from a tone point of view
     song = """
           C Dm Em F G Am Bdim Cm
           """
@@ -56,7 +42,7 @@ ouput:
 
 #### Find substitutes from a chord
     from pychord import Chord 
-    from src.harmony.circle_of_5th import CircleOf5th
+    from pyharmonytools.harmony.circle_of_5th import CircleOf5th
 
     cof = CircleOf5th()
     chord = "G6"
@@ -87,8 +73,8 @@ To guess a chord from notes, there is a feature that enables:
 Code sample:
 
     from pychord import Chord
-    from src.harmony.cof_chord import CofChord
-    from src.harmony.note import Note
+    from pyharmonytools.harmony.cof_chord import CofChord
+    from pyharmonytools.harmony.note import Note
 
     expected = [Chord("Cmaj7")]
     notes = [Note("C"), Note("E"), Note("G"), Note("B")]
@@ -101,9 +87,8 @@ output:
 
 ### Guitar tools
 #### Find chord fingering on a guitar
-    from src.guitar_neck.fingering import Fingering
+    from pyharmonytools.guitar_neck.fingering import Fingering
 
-    outcome_level_of_detail = LOD_ALL
     fng = Fingering()
     f = fng.get_fingering_from_chord(Chord("C"))
     print(f)
@@ -113,8 +98,8 @@ output:
 
 #### Find chords from tabs
     from pychord import Chord
-    from src.guitar_tab.guitar_tab import GuitarTab
-    from src.harmony.cof_chord import CofChord
+    from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
+    from srpyharmonytoolsc.harmony.cof_chord import CofChord
 
     tab = """
           e|--11-----11-----10-----11---|
@@ -136,8 +121,8 @@ output:
 #### Song search & processing tools on Ultimate Guitar through Google.com
 You may search and handle song lyrics & tabs
 
-    from src.song.song import UltimateGuitarSong
-    from src.song.ultimate_guitar_search import UltimateGuitarSearch
+    from pyharmonytools.song.song import UltimateGuitarSong
+    from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
     
     ug_engine = UltimateGuitarSearch()
     query = "D Dm A"
@@ -165,8 +150,8 @@ Output:
 #### Song search from a cadence
 Searching for songs in the 12 tones from a cadence
 
-        from src.harmony.circle_of_5th import CircleOf5thNaturalMajor
-        from src.song.ultimate_guitar_search import UltimateGuitarSearch
+        from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
+        from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
         
         ugs = UltimateGuitarSearch()
         cof_maj = CircleOf5thNaturalMajor()
@@ -252,7 +237,7 @@ output:
 #### Song processing tools on simple text song
 
         from pychord import Chord 
-        from src.song.text_song import TextSongWithLineForChords
+        from pyharmonytools.song.text_song import TextSongWithLineForChords
 
         song = """
                             A           E
@@ -275,6 +260,7 @@ output:
 * 24/NOV/22
   * weird notes (eg. Cb)
   * possible chords cached for optimization
+  * package v.0.1.1
 * 23/NOV/22 - tag 
   * find chords from notes
   * start parsing tabs

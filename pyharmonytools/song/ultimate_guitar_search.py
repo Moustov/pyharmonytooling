@@ -8,10 +8,10 @@ from time import time, sleep
 
 from google.modules.utils import _get_search_url as google_search, get_html
 
-from src.harmony.circle_of_5th import CircleOf5th
-from src.harmony.degree import Degree
-from src.harmony.note import Note
-from src.song.ultimate_guitar_song import UltimateGuitarSong
+from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+from pyharmonytools.harmony.degree import Degree
+from pyharmonytools.harmony.note import Note
+from pyharmonytools.song.ultimate_guitar_song import UltimateGuitarSong
 
 
 class UltimateGuitarSearch:

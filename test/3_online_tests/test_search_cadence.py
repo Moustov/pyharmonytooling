@@ -1,8 +1,8 @@
 from datetime import datetime, date
 from unittest import TestCase
 
-from src.harmony.circle_of_5th import CircleOf5thNaturalMajor
-from src.song.ultimate_guitar_search import UltimateGuitarSearch
+from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
+from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 class TestNote(TestCase):
     def test_google_query_robustness_at_least_one(self):

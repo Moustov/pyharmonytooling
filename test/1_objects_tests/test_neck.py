@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from src.guitar_neck.fingering import Fingering
-from src.guitar_neck.neck import Neck
-from src.guitar_neck.neck_exception import NeckException
+from pyharmonytools.guitar_neck.fingering import Fingering
+from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.guitar_neck.neck_exception import NeckException
 
 
 class Test(TestCase):

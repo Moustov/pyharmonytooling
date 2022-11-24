@@ -25,3 +25,7 @@ The code embeds "_todo_" tags to improve features.
 Tickets in Github are also an option - this is still in building mode
 
 You are encouraged to contribute...
+
+# Building a package
+    
+    python.exe setup.py bdist_wheel
