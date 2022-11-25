@@ -44,7 +44,7 @@ class GuitarTab():
     @staticmethod
     def digest_tab_simplest_chords_in_a_bar(tab: str) -> {}:
         """
-        provide the simplest chord at each char position in the bar
+        provide the simplest chord at the tab fret position in the bar
         e|--11-----11-----10-----11-----|
         B|--11-----12-----11-----11-----|
         G|--11-----13-----10-----11-----|

@@ -4,7 +4,8 @@ from unittest import TestCase
 from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
-class TestNote(TestCase):
+
+class TestRobustness(TestCase):
     def test_google_query_robustness_at_least_one(self):
         print(r"/!\ this unit test lasts 2hrs to reach the positive assert")
         ugs = UltimateGuitarSearch()

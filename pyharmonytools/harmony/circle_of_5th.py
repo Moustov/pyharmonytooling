@@ -36,6 +36,7 @@ class CircleOf5th:
     def guess_tone_and_mode_from_cadence(cadence: str):
         """
         return the most compatible circle of 5th with the cadence
+        see https://en.wikipedia.org/wiki/Cadence
         :param cadence: eg. "ii7-V7-Imaj7" would return a CircleOf5thNaturalMajor()
         :return:
         """

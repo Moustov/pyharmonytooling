@@ -5,3 +5,7 @@
 /test/3_online_tests/.google_searches_qty.log
 /test/.google_searches_qty.log
 /graphics.odp
+/build/
+/dist/
+/pyHarmonyTooling.egg-info/
+/pyharmonytools/pyHarmonyTooling.egg-info/
