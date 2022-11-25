@@ -83,7 +83,6 @@ class GuitarTab():
                     pos_on_string += 1
                 part_position += 1
 
-
         print(fingerings)
         # todo imagine different clusters to guess chords
         for fingering_sequence in range(0, tab_size):

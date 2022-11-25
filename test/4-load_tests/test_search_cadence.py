@@ -23,17 +23,7 @@ class TestRobustness(TestCase):
             songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True, try_avoiding_blocked_searches=True)
             print(songs)
 
-            are_all_search_empty = True
-            is_there_one_song_found = False
-            search_query_failed_qty = 0
-            for k in songs.keys():
-                if len(songs[k]) == 0:
-                    search_query_failed_qty += 1
-                    are_all_search_empty = False
-                else:
-                    is_there_one_song_found = True
-
-            assert is_there_one_song_found
+            assert UltimateGuitarSearch.found_matches(songs, all_song=False)
             batch_situation = datetime.combine(date.today(), datetime.now().time())
             delta = batch_situation - batch_start
 
@@ -56,18 +46,7 @@ class TestRobustness(TestCase):
             print("=================")
             songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True, try_avoiding_blocked_searches=True)
             print(songs)
-
-            are_all_search_empty = True
-            is_there_one_song_found = False
-            search_query_failed_qty = 0
-            for k in songs.keys():
-                if len(songs[k]) == 0:
-                    search_query_failed_qty += 1
-                    are_all_search_empty = False
-                else:
-                    is_there_one_song_found = True
-
-            assert are_all_search_empty
+            assert UltimateGuitarSearch.found_matches(songs, all_song=True)
             batch_situation = datetime.combine(date.today(), datetime.now().time())
             delta = batch_situation - batch_start
 

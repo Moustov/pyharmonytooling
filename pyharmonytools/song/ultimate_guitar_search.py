@@ -16,8 +16,8 @@ from pyharmonytools.song.ultimate_guitar_song import UltimateGuitarSong
 
 class UltimateGuitarSearch:
     GOOGLE_SEARCH_SECURE_WAIT = 6   # minutes
-    GOOGLE_SEARCH_WAIT_AFTER_REJECTION = 5 # minutes
-    NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 100
+    GOOGLE_SEARCH_WAIT_AFTER_REJECTION = 5  # minutes
+    NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 75
     NB_GOOGLE_SEARCHES_LOG_FILE_NAME = ".google_searches_qty.log"
 
     def __init__(self):
@@ -198,3 +198,27 @@ class UltimateGuitarSearch:
         """
         with open(UltimateGuitarSearch.NB_GOOGLE_SEARCHES_LOG_FILE_NAME, "w") as nb_google_searches_log_file:
             nb_google_searches_log_file.write("1000")
+
+    @staticmethod
+    def found_matches(self, songs: dict, all_song) -> bool:
+        """
+        returns all/one 1 criterion status on songs found by UltimateGuitarSearch.search_songs_from_cadence()
+        :param songs:
+        :param all_song:    if True => True if all search are found at all keys
+                            if false => True returned if we have at least 1 song at least in 1 key
+        :return:
+        """
+        are_all_search_empty = True
+        is_there_one_song_found = False
+        search_query_failed_qty = 0
+        for k in songs.keys():
+            if len(songs[k]) == 0:
+                search_query_failed_qty += 1
+                are_all_search_empty = False
+            else:
+                is_there_one_song_found = True
+
+        if all_song:
+            return are_all_search_empty
+        else:
+            return is_there_one_song_found

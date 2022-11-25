@@ -17,10 +17,11 @@ class TestGuitarTab(TestCase):
         """
         expected = {"2": Chord("Gb6"), "9": Chord("B6"), "16": Chord("Bb"), "23": Chord("Gb6")}
         res = GuitarTab.digest_tab_simplest_chords_in_a_bar(tab)
+        found = False
         for (chord_res, chord_expected) in zip(res.keys(), expected.keys()):
             if CofChord.is_chord_included_from_components(expected[chord_expected], res[chord_res]):
-                assert False
-        assert True
+                found = True
+        assert found
 
     def test_digest_tab_d(self):
         tab = """
@@ -33,7 +34,8 @@ class TestGuitarTab(TestCase):
         """
         expected = {"2": Chord("Gb6")}
         res = GuitarTab.digest_tab_simplest_chords_in_a_bar(tab)
-        assert res == expected
+        assert len(res.keys()) == len(expected.keys())
+        assert res["2"] == expected["2"]
 
     def test_digest_tab_eb(self):
         tab = """

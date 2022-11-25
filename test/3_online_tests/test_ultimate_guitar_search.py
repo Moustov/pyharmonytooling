@@ -22,18 +22,8 @@ class TestUltimateGuitarSearch(TestCase):
         songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,
                                               try_avoiding_blocked_searches=True)
         print(songs)
+        assert UltimateGuitarSearch.found_matches(songs, all_song=False)
 
-        are_all_search_empty = True
-        is_there_one_song_found = False
-        search_query_failed_qty = 0
-        for k in songs.keys():
-            if len(songs[k]) == 0:
-                search_query_failed_qty += 1
-                are_all_search_empty = False
-            else:
-                is_there_one_song_found = True
-
-        assert is_there_one_song_found
 
     def test_search_cadence_vm_ivm6_v(self):
         ugs = UltimateGuitarSearch()
@@ -45,18 +35,7 @@ class TestUltimateGuitarSearch(TestCase):
         songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,
                                               try_avoiding_blocked_searches=True)
         print(songs)
-
-        are_all_search_empty = True
-        is_there_one_song_found = False
-        search_query_failed_qty = 0
-        for k in songs.keys():
-            if len(songs[k]) == 0:
-                search_query_failed_qty += 1
-                are_all_search_empty = False
-            else:
-                is_there_one_song_found = True
-
-        assert is_there_one_song_found
+        assert UltimateGuitarSearch.found_matches(songs, all_song=False)
 
     def test_search_cadence_iv_ivm_i(self):
         ugs = UltimateGuitarSearch()
@@ -68,15 +47,4 @@ class TestUltimateGuitarSearch(TestCase):
         songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,
                                               try_avoiding_blocked_searches=True)
         print(songs)
-
-        are_all_search_empty = True
-        is_there_one_song_found = False
-        search_query_failed_qty = 0
-        for k in songs.keys():
-            if len(songs[k]) == 0:
-                search_query_failed_qty += 1
-                are_all_search_empty = False
-            else:
-                is_there_one_song_found = True
-
-        assert is_there_one_song_found
+        assert UltimateGuitarSearch.found_matches(songs, all_song=False)

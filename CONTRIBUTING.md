@@ -34,4 +34,4 @@ Then apply https://www.freecodecamp.org/news/how-to-create-and-upload-your-first
 
 To deploy the package on Pypi.org
 
-    .\venv\Scripts\python.exe -m twine upload --repository testpypi .\dist\
+    .\venv\Scripts\python.exe -m twine upload .\dist\pyHarmonyTooling<version>.whl

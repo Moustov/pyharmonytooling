@@ -1,5 +1,5 @@
 PyHarmonyTooling
-==============
+================
 
 <div align="center">
 <img src="circle_of_5th.png" width="300" alt="Circle of 5th">
