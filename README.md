@@ -265,7 +265,7 @@ see [here](unit_test_report.md)
 
 # Release Notes
 * 26/NOV/22
-  * unit test report (see [here](unit_test_report.md))
+  * unit test report (see [here](unit_test_report.md)) + [CONTRIBUTING.md](CONTRIBUTING.md)
 * 25/NOV/22
   * start reading guitar tabs when chords are vertical or played in arpeggio
 * 24/NOV/22
