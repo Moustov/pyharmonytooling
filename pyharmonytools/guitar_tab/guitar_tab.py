@@ -89,7 +89,10 @@ class GuitarTab():
                     chord_notes.append(n)
             possible_chords = CofChord.guess_chord_name(chord_notes, is_strictly_compliant=True,
                                                         simplest_chord_only=True)
-            res[k] = possible_chords[0]
+            try:
+                res[k] = possible_chords[0]
+            except IndexError:
+                res[k] = None
         return res
 
     @staticmethod

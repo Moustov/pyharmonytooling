@@ -2,7 +2,7 @@
 UNIT TEST REPORT
 ================
         
- generation: 2022-11-26 21:18:34.085513
+ generation: 2022-11-26 22:06:40.014499
 
 
 -------
@@ -263,15 +263,38 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
-* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L254)]: test_digest_tab_bach(line 254): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L42)]: test_digest_tab_d(line 42): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L43)]: test_digest_tab_d(line 43): 
+* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L271)]: test_digest_tab_bach(line 271): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L29)]: test_digest_tab_dgbd(line 29): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L56)]: test_digest_tab_eb(line 56): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L260)]: test_get_notes_from_chord_layout(line 260): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L73)]: test_digest_tab_eb(line 73): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L42)]: test_digest_tab_gb6(line 42): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L43)]: test_digest_tab_gb6(line 43): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L57)]: test_digest_tab_gb6_d(line 57): 
+* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L60)]: test_digest_tab_gb6_d(line 60): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L277)]: test_get_notes_from_chord_layout(line 277): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L79)]: test_get_borrowed_chords_C(line 79): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L90)]: test_get_borrowed_chords_Cm(line 90): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L67)]: test_get_chord_possible_qualities(line 67): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L32)]: test_guess_tone_and_mode_Bb(line 32): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L33)]: test_guess_tone_and_mode_Bb(line 33): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L34)]: test_guess_tone_and_mode_Bb(line 34): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L21)]: test_guess_tone_and_mode_C(line 21): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L22)]: test_guess_tone_and_mode_C(line 22): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L23)]: test_guess_tone_and_mode_C(line 23): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L52)]: test_guess_tone_and_mode_happy_birthday_chords(line 52): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L53)]: test_guess_tone_and_mode_happy_birthday_chords(line 53): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L54)]: test_guess_tone_and_mode_happy_birthday_chords(line 54): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L46)]: test_find_finger_layout2(line 46): tab [0, 7, 5, 5, 5, 8] has a possible fingering: {'E': ['0', '-', '-', '-', '-', '-', '-', '-', '-'], 'A': ['-', '-', '-', '-', '-', '-', '-', '3', '-'], 'D': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'G': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'B': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'e': ['-', '-', '-', '-', '-', '-', '-', '-', '4']}
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L29)]: test_find_note_from_position_string_D(line 29): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L34)]: test_find_note_from_position_string_D(line 34): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L17)]: test_find_note_from_position_string_E(line 17): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L22)]: test_find_note_from_position_string_E(line 22): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L39)]: test_find_positions_from_note(line 39): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L44)]: test_compliance(line 44): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L45)]: test_compliance(line 45): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L46)]: test_compliance(line 46): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L50)]: test_compliance(line 50): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L26)]: test_digest(line 26): 
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L27)]: test_digest_get_borrowed_chords(line 27): 
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L20)]: test_digest_get_tone_and_mode(line 20): 
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L21)]: test_digest_get_tone_and_mode(line 21): 
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L15)]: test_digest_html(line 15): 

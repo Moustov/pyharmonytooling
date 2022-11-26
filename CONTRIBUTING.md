@@ -25,7 +25,7 @@ Run at least the unit tests under before committing
 > and the test class initializes `self.ut_report``:
 > 
 >      ut_report = UnitTestReport()
-This will include the *assert* in the [test report](unit_test_report.md)
+This will include the *assert* in the [test report](unit_test_report.md) with a link to the failing assert in the code
 
 ## Code Quality
 Comply at much as possible with PEP8

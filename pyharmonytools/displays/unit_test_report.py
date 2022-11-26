@@ -9,6 +9,8 @@ import os
 
 class UnitTestReport(TestCase):
     test_report_started = False
+    green = 0
+    red = 1
 
     def __init__(self):
         """
@@ -32,7 +34,7 @@ class UnitTestReport(TestCase):
             path_parts = calling_file.split("\\")
             try:
                 test_pos = path_parts.index("test")
-                project_path = "/".join(path_parts[:test_pos])
+                project_path = "\\".join(path_parts[:test_pos])
                 break
             except ValueError:
                 pass
@@ -44,8 +46,10 @@ class UnitTestReport(TestCase):
             msg = ""
         if expr:
             message = f"* :green_circle:"
+            UnitTestReport.green += 1
         else:
             message = f"* :red_circle: {msg}"
+            UnitTestReport.red += 1
         for item in inspect.stack():
             calling_file = item.filename
             calling_function = item.function
@@ -74,3 +78,10 @@ UNIT TEST REPORT
         report_header += f"\n generation: {today}\n\n\n-------\n"
         with open(self.unit_test_report_file, 'w') as f:
             f.writelines(report_header)
+
+    def add_synthesis(self):
+        report = ""
+        with open(self.unit_test_report_file, 'r') as f:
+            report_lines = f.readlines()
+        report_lines[6] = f":red_circle:{UnitTestReport.red} / :green_circle:{UnitTestReport.green}"
+

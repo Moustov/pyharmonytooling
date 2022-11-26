@@ -28,7 +28,7 @@ class TestGuitarTab(TestCase):
                 found = True
         self.ut_report.assertTrue(found)
 
-    def test_digest_tab_d(self):
+    def test_digest_tab_gb6(self):
         tab = """
         e|--11---------------|
         B|------11-----------|
@@ -41,6 +41,23 @@ class TestGuitarTab(TestCase):
         res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
         self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
         self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"],  expected["2"]))
+
+    def test_digest_tab_gb6_d(self):
+        tab = """
+        e|--11------------2---|
+        B|------11--------3---|
+        G|-----------11---2---|
+        D|--------------------|
+        A|--------------------|
+        E|--------------------|
+        """
+        expected = {"2": Chord("Gb6")}
+        try:
+            res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
+            self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
+            self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"],  expected["2"]))
+        except:
+            self.ut_report.assertTrue(False)
 
     def test_digest_tab_eb(self):
         tab = """
