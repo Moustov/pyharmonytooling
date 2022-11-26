@@ -1,12 +1,16 @@
 from unittest import TestCase
 
 from pychord import Chord
+
+from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
 from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.harmony.note import Note
 
 
 class TestGuitarTab(TestCase):
+    ut_report = UnitTestReport()
+
     def test_digest_tab_dgbd(self):
         tab = """
         e|--11-----11-----10-----11----|

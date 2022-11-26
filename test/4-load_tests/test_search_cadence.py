@@ -1,11 +1,14 @@
 from datetime import datetime, date
 from unittest import TestCase
 
+from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 
 class TestRobustness(TestCase):
+    ut_report = UnitTestReport()
+
     def test_google_query_robustness_at_least_one(self):
         print(r"/!\ this unit test lasts 2hrs to reach the positive assert")
         ugs = UltimateGuitarSearch()
@@ -23,11 +26,11 @@ class TestRobustness(TestCase):
             songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True, try_avoiding_blocked_searches=True)
             print(songs)
 
-            assert UltimateGuitarSearch.found_matches(songs, all_song=False)
+            self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs, all_song=False))
             batch_situation = datetime.combine(date.today(), datetime.now().time())
             delta = batch_situation - batch_start
 
-        assert True
+        self.ut_report.assertTrue(True)
 
 
     def test_google_query_robustness_all(self):
@@ -46,8 +49,8 @@ class TestRobustness(TestCase):
             print("=================")
             songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True, try_avoiding_blocked_searches=True)
             print(songs)
-            assert UltimateGuitarSearch.found_matches(songs, all_song=True)
+            self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs, all_song=True))
             batch_situation = datetime.combine(date.today(), datetime.now().time())
             delta = batch_situation - batch_start
 
-        assert True
+        self.ut_report.assertTrue(True)

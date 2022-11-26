@@ -15,14 +15,28 @@ class UnitTestReport(TestCase):
 
         :rtype: object
         """
-        file_path = os.path.realpath(__file__)
-        project_path = os.path.dirname(os.path.abspath(file_path))
+        # file_path = os.path.realpath(__file__)
+        # project_path = os.path.dirname(os.path.abspath(file_path))
+        project_path = self.get_project_path()
         print(project_path)
         self.unit_test_report_file = rf"{project_path}\unit_test_report.md"
         if not UnitTestReport.test_report_started:
             UnitTestReport.test_report_started = True
             self.reset_unit_test_report_log()
         super().__init__()
+
+    def get_project_path(self) -> str:
+        project_path = ""
+        for item in inspect.stack():
+            calling_file = item.filename
+            path_parts = calling_file.split("\\")
+            try:
+                test_pos = path_parts.index("test")
+                project_path = "/".join(path_parts[:test_pos])
+                break
+            except ValueError:
+                pass
+        return project_path
 
     def assertTrue(self, expr: Any, msg: Any = ...) -> None:
         message = ""
@@ -41,7 +55,7 @@ class UnitTestReport(TestCase):
             try:
                 test_pos = path_parts.index("test")
                 project_path = "/".join(path_parts[test_pos+1:])
-                unit_test_path = f"{project_path}: {calling_function} (line {calling_line})"
+                unit_test_path = f"{project_path}: {calling_function}(line {calling_line})"
                 break
             except ValueError:
                 pass

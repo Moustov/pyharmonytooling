@@ -3,11 +3,14 @@ from unittest import TestCase
 from pychord import Chord
 
 from pyharmonytools.displays.console import _HarmonyLogger
+from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
 from pyharmonytools.harmony.cof_chord import CofChord
 
 
 class Test(TestCase):
+    ut_report = UnitTestReport()
+
     def test_guess_tone_and_mode_C(self):
         song = """
         C Dm Em F G Am Bdim
@@ -15,9 +18,9 @@ class Test(TestCase):
         cof = CircleOf5th()
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
-        assert compliance_level_max[0] == 1.0
-        assert compliance_level_max[1] == 'C'
-        assert compliance_level_max[2] == "Natural Major"
+        self.ut_report.assertTrue(compliance_level_max[0] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max[1] == 'C')
+        self.ut_report.assertTrue(compliance_level_max[2] == "Natural Major")
 
     def test_guess_tone_and_mode_Bb(self):
         song = """
@@ -26,9 +29,9 @@ class Test(TestCase):
         cof = CircleOf5th()
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
-        assert compliance_level_max[0] == 1.0
-        assert compliance_level_max[1] == 'Bb'
-        assert compliance_level_max[2] == "Natural Major"
+        self.ut_report.assertTrue(compliance_level_max[0] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max[1] == 'Bb')
+        self.ut_report.assertTrue(compliance_level_max[2] == "Natural Major")
 
     def test_guess_tone_and_mode_happy_birthday_chords(self):
         _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
@@ -46,9 +49,9 @@ class Test(TestCase):
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
         print(compliance_level_max)
-        assert compliance_level_max[0] == 1.0
-        assert compliance_level_max[1] == 'A'
-        assert compliance_level_max[2] == "Natural Major"
+        self.ut_report.assertTrue(compliance_level_max[0] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max[1] == 'A')
+        self.ut_report.assertTrue(compliance_level_max[2] == "Natural Major")
 
     def test_get_chord_possible_qualities(self):
         cof = CircleOf5thNaturalMajor()
@@ -61,7 +64,7 @@ class Test(TestCase):
                 if c in possible_chord_qualities and tc.quality.quality == "":
                     print(c, "Minor chord cannot be a possible Major chord")
                     self.fail()
-        assert True
+        self.ut_report.assertTrue(True)
 
     def test_get_borrowed_chords_C(self):
         song = """
@@ -73,7 +76,7 @@ class Test(TestCase):
         tone = cof.generate_circle_of_fifths()["C"]
         borrowed_chords = cof.get_borrowed_chords(tone, cp)
         print("   Borrowed chords:", borrowed_chords.keys())
-        assert (len(borrowed_chords) == 0)
+        self.ut_report.assertTrue(len(borrowed_chords) == 0)
 
     def test_get_borrowed_chords_Cm(self):
         song = """
@@ -84,4 +87,4 @@ class Test(TestCase):
         tone = cof.generate_circle_of_fifths()["C"]
         borrowed_chords = cof.get_borrowed_chords(tone, cp)
         print("   Borrowed chords:", borrowed_chords.keys())
-        assert (borrowed_chords == {"Cm": True})
+        self.ut_report.assertTrue(borrowed_chords == {"Cm": True})
