@@ -261,6 +261,8 @@ output:
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
 # Release Notes
+* 25/NOV/22
+* start reading guitar tabs when chords are vertical or played in arpeggio
 * 24/NOV/22
   * weird notes (eg. Cb)
   * possible chords cached for optimization
@@ -279,11 +281,14 @@ output:
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
 
 # Additional links
-* Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
-* PyChord project: https://github.com/yuma-m/pychord
-* Nice GUI on the Cof major: https://codepen.io/2kool2/pen/bmVxpZ
-* An API to UG: https://github.com/victorfontes/python-ultimate-guitar
-* 🇫🇷 https://www.youtube.com/@gradusadparnassumfr
+* Theory of music 🇫🇷: https://www.youtube.com/@gradusadparnassumfr
 * Circle of Fifths: 
   * https://websemantics.uk/tools/circle-of-fifths-chord-wheel/
   * https://en.wikipedia.org/wiki/Circle_of_fifths
+  * Nice GUI on the Cof major: https://codepen.io/2kool2/pen/bmVxpZ
+* Guitar tools:
+  * https://www.oolimo.com/guitarchords/analyze
+* Python:
+  * Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
+  * PyChord project: https://github.com/yuma-m/pychord
+  * An API to UG: https://github.com/victorfontes/python-ultimate-guitar

@@ -22,6 +22,12 @@ class Cadence:
         "HALF CADENCE": "ii–V",    # https://www.schoolofcomposition.com/cadences-in-music/
         "DECEPTIVE CADENCE": "V-ii",  # https://www.schoolofcomposition.com/cadences-in-music/
         "DECEPTIVE CADENCE 2": "V–vi",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "DECEPTIVE CADENCE 3": "V7–vi",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "DECEPTIVE CADENCE 4": "Vsus–vi7",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "DECEPTIVE CADENCE 5": "V7–VI",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "DECEPTIVE CADENCE 6": "V–IV/3rd",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "SUSPENS RISING": "i°-i#°-ii°",
+        "MELANCOLIC JOY": "I-IM7-I7",
         # "*":"any chord" /  "]":"a phrase ending on"
         "HALF CADENCE": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
     }

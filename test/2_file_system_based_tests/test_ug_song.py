@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from unittest import TestCase
 
 from pyharmonytools.song.ultimate_guitar_song import UltimateGuitarSong
@@ -27,7 +29,10 @@ class TestUltimateGuitarSong(TestCase):
         :return:
         """
         ugs = UltimateGuitarSong()
-        html_file = r".\no_tab_tags-progression_song.html"
+        # let's get the test file regardless from where the UT in run
+        file_path = os.path.realpath(__file__)
+        dir_path = os.path.dirname(os.path.abspath(file_path))
+        html_file = rf"{dir_path}\no_tab_tags-progression_song.html"
         with open(html_file, 'r') as f:
             html = f.read()
         ugs.digest(html)

@@ -88,7 +88,6 @@ class TestNote(TestCase):
             assert Note.get_index(n) == index
             index += 1
 
-
     def test_get_all_interval(self):
         # todo add Note.CHROMATIC_SCALE_WEIRD_NOTES
         for n1, n2 in zip(Note.CHROMATIC_SCALE_SHARP_BASED, Note.CHROMATIC_SCALE_FLAT_BASED):

@@ -3,6 +3,7 @@ from unittest import TestCase
 from pychord import Chord
 from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
 from pyharmonytools.harmony.cof_chord import CofChord
+from pyharmonytools.harmony.note import Note
 
 
 class TestGuitarTab(TestCase):
@@ -16,7 +17,7 @@ class TestGuitarTab(TestCase):
         E|-----------------------------|
         """
         expected = {"2": Chord("Gb6"), "9": Chord("B6"), "16": Chord("Bb"), "23": Chord("Gb6")}
-        res = GuitarTab.digest_tab_simplest_chords_in_a_bar(tab)
+        res = GuitarTab.digest_tab_simplest_vertical_chords_in_a_bar(tab)
         found = False
         for (chord_res, chord_expected) in zip(res.keys(), expected.keys()):
             if CofChord.is_chord_included_from_components(expected[chord_expected], res[chord_res]):
@@ -33,9 +34,9 @@ class TestGuitarTab(TestCase):
         E|-------------------|
         """
         expected = {"2": Chord("Gb6")}
-        res = GuitarTab.digest_tab_simplest_chords_in_a_bar(tab)
+        res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
         assert len(res.keys()) == len(expected.keys())
-        assert res["2"] == expected["2"]
+        assert CofChord.are_chord_equals(res["2"],  expected["2"])
 
     def test_digest_tab_eb(self):
         tab = """
@@ -47,7 +48,7 @@ class TestGuitarTab(TestCase):
         E|-------|
         """
         expected = {"2": Chord("Eb")}
-        res = GuitarTab.digest_tab_simplest_chords_in_a_bar(tab)
+        res = GuitarTab.digest_tab_simplest_vertical_chords_in_a_bar(tab)
         assert res == expected
 
     def test_digest_tab_bach(self):
@@ -247,3 +248,10 @@ class TestGuitarTab(TestCase):
             E|---------------------------------|-3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-|        
         """
         assert False
+
+    def test_get_notes_from_chord_layout(self):
+        chord_layout = [-1, -1, -1, 11, 11, 11]
+        res = GuitarTab.get_notes_from_chord_layout(chord_layout)
+        expected = [None, None, None, Note("Gb"), Note("Bb"), Note("Eb")]
+        assert res == expected
+

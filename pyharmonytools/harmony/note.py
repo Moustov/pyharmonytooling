@@ -97,3 +97,4 @@ class Note:
             return [note, Note.CHROMATIC_SCALE_FLAT_BASED[Note.CHROMATIC_SCALE_SHARP_BASED.index(note)]]
         else:
             return [note]
+
