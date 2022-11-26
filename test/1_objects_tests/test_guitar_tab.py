@@ -11,6 +11,12 @@ from pyharmonytools.harmony.note import Note
 class TestGuitarTab(TestCase):
     ut_report = UnitTestReport()
 
+    def test_get_notes_from_chord_layout(self):
+        chord_layout = [-1, -1, -1, 11, 11, 11]
+        res = GuitarTab.get_notes_from_chord_layout(chord_layout)
+        expected = [None, None, None, Note("Gb"), Note("Bb"), Note("Eb")]
+        self.ut_report.assertTrue(res == expected)
+
     def test_digest_tab_dgbd(self):
         tab = """
         e|--11-----11-----10-----11----|
@@ -269,10 +275,4 @@ class TestGuitarTab(TestCase):
             E|---------------------------------|-3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-|        
         """
         self.ut_report.assertTrue(False)
-
-    def test_get_notes_from_chord_layout(self):
-        chord_layout = [-1, -1, -1, 11, 11, 11]
-        res = GuitarTab.get_notes_from_chord_layout(chord_layout)
-        expected = [None, None, None, Note("Gb"), Note("Bb"), Note("Eb")]
-        self.ut_report.assertTrue(res == expected)
 

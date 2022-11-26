@@ -9,16 +9,13 @@ import os
 
 class UnitTestReport(TestCase):
     test_report_started = False
+    project_path = ""
     green = 0
     red = 1
 
     def __init__(self):
         """
-
-        :rtype: object
         """
-        # file_path = os.path.realpath(__file__)
-        # project_path = os.path.dirname(os.path.abspath(file_path))
         project_path = self.get_project_path()
         print(project_path)
         self.unit_test_report_file = rf"{project_path}\unit_test_report.md"
@@ -28,6 +25,13 @@ class UnitTestReport(TestCase):
         super().__init__()
 
     def get_project_path(self) -> str:
+        """
+        get the project path from stack
+        => must be used only while running test cases under the folder "test"
+        :return:
+        """
+        if UnitTestReport.project_path != "":
+            return self.project_path
         project_path = ""
         for item in inspect.stack():
             calling_file = item.filename
@@ -38,10 +42,18 @@ class UnitTestReport(TestCase):
                 break
             except ValueError:
                 pass
+        self.project_path = project_path
         return project_path
 
     def assertTrue(self, expr: Any, msg: Any = ...) -> None:
+        """
+        intercept asserts to update the test report
+        :param expr:
+        :param msg:
+        :return:
+        """
         message = ""
+        unit_test_path = ""
         if msg == Ellipsis:
             msg = ""
         if expr:
@@ -65,12 +77,15 @@ class UnitTestReport(TestCase):
                 pass
         print(unit_test_path)
         message += unit_test_path
-        with open(self.unit_test_report_file, 'a') as f:
-            f.writelines(message + "\n")
+        self.update_report(message)
         super().assertTrue(expr, message)
 
     def reset_unit_test_report_log(self):
-        report_header ="""
+        """
+        initialize the test report
+        :return:
+        """
+        report_header = """
 UNIT TEST REPORT
 ================
         """
@@ -79,9 +94,21 @@ UNIT TEST REPORT
         with open(self.unit_test_report_file, 'w') as f:
             f.writelines(report_header)
 
-    def add_synthesis(self):
-        report = ""
+    def update_report(self, msg: str):
+        """
+        update the report with the message at the end
+        :param msg:
+        :return:
+        """
+        report_lines = []
+        # https://mkyong.com/python/python-difference-between-r-w-and-a-in-open/#read-and-write-a-file-with-r
         with open(self.unit_test_report_file, 'r') as f:
-            report_lines = f.readlines()
-        report_lines[6] = f":red_circle:{UnitTestReport.red} / :green_circle:{UnitTestReport.green}"
+            report = f.read()
+            report_lines = report.split("\n")
+            report_lines[5] = f":red_circle:{UnitTestReport.red}"
+            report_lines[6] = f":green_circle:{UnitTestReport.green}"
+            report_lines.append(msg)
+        report = "\n".join(report_lines)
+        with open(self.unit_test_report_file, 'w') as f:
+            f.writelines(report)
 

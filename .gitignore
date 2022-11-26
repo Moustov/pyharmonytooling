@@ -9,3 +9,4 @@
 /dist/
 /pyHarmonyTooling.egg-info/
 /pyharmonytools/pyHarmonyTooling.egg-info/
+/.pytest_cache/

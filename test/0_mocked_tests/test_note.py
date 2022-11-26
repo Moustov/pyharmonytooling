@@ -1,4 +1,3 @@
-import inspect
 from unittest import TestCase
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
@@ -97,7 +96,7 @@ class TestNote(TestCase):
             print(n1, " - ", n2)
             d = Note(n1).get_interval_in_half_tones(Note(n2))
             print(" = ", d)
-            assert d == 0
+            self.ut_report.assertTrue(d == 0)
         i_n1 = 0
         for n1 in Note.CHROMATIC_SCALE_SHARP_BASED:
             i_n2 = 0
@@ -107,7 +106,7 @@ class TestNote(TestCase):
                     d = Note(n1).get_interval_in_half_tones(Note(n2))
                     expected = (i_n2 - i_n1)
                     # print(expected, " = ", d)
-                    assert d == expected
+                    self.ut_report.assertTrue(d == expected)
                 i_n2 += 1
             i_n1 += 1
 

@@ -33,8 +33,7 @@ class TestUltimateGuitarSong(TestCase):
         """
         ugs = UltimateGuitarSong()
         # let's get the test file regardless from where the UT in run
-        file_path = os.path.realpath(__file__)
-        dir_path = os.path.dirname(os.path.abspath(file_path))
+        dir_path = self.ut_report.get_project_path()
         html_file = rf"{dir_path}\no_tab_tags-progression_song.html"
         with open(html_file, 'r') as f:
             html = f.read()

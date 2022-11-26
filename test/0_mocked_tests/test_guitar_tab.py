@@ -1,7 +1,4 @@
-import inspect
 from unittest import TestCase
-
-from _ctypes_test import func
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
