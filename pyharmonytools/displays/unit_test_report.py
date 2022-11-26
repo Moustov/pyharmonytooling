@@ -55,7 +55,7 @@ class UnitTestReport(TestCase):
             try:
                 test_pos = path_parts.index("test")
                 project_path = "/".join(path_parts[test_pos+1:])
-                unit_test_path = f"[{project_path}](test/{project_path})]: {calling_function}(line {calling_line}): {msg}"
+                unit_test_path = f"[[{project_path}](test/{project_path}#L{calling_line})]: {calling_function}(line {calling_line}): {msg}"
                 break
             except ValueError:
                 pass
