@@ -2,11 +2,14 @@ from unittest import TestCase
 
 from deepdiff import DeepDiff
 
+from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.guitar_neck.fingering import Fingering
 from pyharmonytools.guitar_neck.neck import Neck
 
 
 class TestFingering(TestCase):
+    ut_report = UnitTestReport()
+
     def test_get_array_from_tab(self):
         f = Fingering()
         tab = {
@@ -19,7 +22,7 @@ class TestFingering(TestCase):
         }
         res = f.get_array_from_tab(tab)
         expected = [0, 0, 0, 0, 0, 0]
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
         tab = {
             "e": ["-", "-", "2", "-"],
@@ -31,7 +34,7 @@ class TestFingering(TestCase):
         }
         res = f.get_array_from_tab(tab)
         expected = [2, 0, 0, 0, 0, 2]
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
         tab = {
             "e": ["-", "-", "2", "-"],
@@ -43,7 +46,7 @@ class TestFingering(TestCase):
         }
         res = f.get_array_from_tab(tab)
         expected = [2, 0, 0, 0, -1, 2]
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
         tab = {
             "e": ["-", "-", "2", "-"],
@@ -55,7 +58,7 @@ class TestFingering(TestCase):
         }
         res = f.get_array_from_tab(tab)
         expected = [2, 0, 0, 0, 3, 2]
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
     def test_get_array_from_tab2(self):
         f = Fingering()
@@ -67,7 +70,7 @@ class TestFingering(TestCase):
                'e': ['-', '-', '-', '2']}
         res = f.get_array_from_tab(tab)
         expected = [3, 2, 0, 0, 0, 3]
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
     def test_get_tab_from_array(self):
         f = Fingering()
@@ -82,7 +85,7 @@ class TestFingering(TestCase):
             "E": ["X", "-", "-", "-"]
         }
         diff = DeepDiff(res, expected_tab, ignore_order=True)
-        self.assertEqual(diff, {})
+        self.ut_report.assertTrue(diff == {})
 
     def test_is_string_index_between_before_fret_G(self):
         f = Fingering()
@@ -97,7 +100,7 @@ class TestFingering(TestCase):
         string = 'A'
         fret = chord_array[Neck.TUNING.index(string)]
         res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
-        assert not res
+        self.ut_report.assertTrue(not res)
 
     def test_is_string_index_between_before_fret_C(self):
         f = Fingering()
@@ -112,7 +115,7 @@ class TestFingering(TestCase):
         string = 'A'
         fret = 3
         res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
-        assert (not res)
+        self.ut_report.assertTrue(not res)
 
     def test_is_string_index_between_before_fret_partial_D(self):
         f = Fingering()
@@ -127,7 +130,7 @@ class TestFingering(TestCase):
         for string in Neck.TUNING:
             fret = chord_array[Neck.TUNING.index(string)]
             res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
-            assert (not res)
+            self.ut_report.assertTrue(not res)
 
     def test_is_string_index_between_before_fret_D(self):
         f = Fingering()
@@ -142,7 +145,7 @@ class TestFingering(TestCase):
         for string in Neck.TUNING:
             fret = chord_array[Neck.TUNING.index(string)]
             res = f.is_string_fingered_before_fret(barres, chord_array, fret, string)
-            assert (not res)
+            self.ut_report.assertTrue(not res)
 
     def test_get_max_finger(self):
         tab = {'E': ['-', '-', '3', '-'],
@@ -152,7 +155,7 @@ class TestFingering(TestCase):
                'B': ['0', '-', '-', '-'],
                'e': ['-', '-', '2', '-']}
         res = Fingering.get_max_finger(tab)
-        assert res == 3
+        self.ut_report.assertTrue(res == 3)
 
         tab = {'E': ['-', '-', '2', '-'],
                'A': ['-', '1', '-', '-'],
@@ -161,7 +164,7 @@ class TestFingering(TestCase):
                'B': ['0', '-', '-', '-'],
                'e': ['-', '-', '?', '-']}
         res = Fingering.get_max_finger(tab)
-        assert res == 2
+        self.ut_report.assertTrue(res == 2)
 
     def test_find_barres_F(self):
         f = Fingering()
@@ -169,7 +172,7 @@ class TestFingering(TestCase):
         res = f.find_possible_barres(chord_layout)
         expected = {"1": [0, 4, 5], "2": [3], "3": [1, 2]}
         diff = DeepDiff(res, expected, ignore_order=True)
-        self.assertEqual(diff, {})
+        self.ut_report.assertTrue(diff == {})
 
     def test_find_barres_G(self):
         f = Fingering()
@@ -177,7 +180,7 @@ class TestFingering(TestCase):
         res = f.find_possible_barres(chord_layout)
         expected = {"3": [0, 4, 5], "4": [3], "5": [1, 2]}
         diff = DeepDiff(res, expected, ignore_order=True)
-        self.assertEqual(diff, {})
+        self.ut_report.assertTrue(diff == {})
 
     def test_find_barres_C(self):
         f = Fingering()
@@ -185,7 +188,7 @@ class TestFingering(TestCase):
         res = f.find_possible_barres(chord_layout)
         expected = {"3": [0, 1], "2": [2], "1": [4]}
         diff = DeepDiff(res, expected, ignore_order=True)
-        self.assertEqual(diff, {})
+        self.ut_report.assertTrue(diff == {})
 
     def test_find_barres_D(self):
         f = Fingering()
@@ -193,4 +196,4 @@ class TestFingering(TestCase):
         res = f.find_possible_barres(chord_layout)
         expected = {"2": [4], "1": [3, 5]}
         diff = DeepDiff(res, expected, ignore_order=True)
-        self.assertEqual(diff, {})
+        self.ut_report.assertTrue(diff == {})

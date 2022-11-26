@@ -3,11 +3,14 @@ from unittest import TestCase
 from deepdiff import DeepDiff
 from pychord import Chord
 
+from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
 from pyharmonytools.harmony.cof_chord import CofChord
 
 
 class TestCircleOf5th(TestCase):
+    ut_report = UnitTestReport()
+
     def test_generate_circle_of_fifths(self):
         c = CircleOf5thNaturalMajor()
         expected = {
@@ -25,7 +28,7 @@ class TestCircleOf5th(TestCase):
             "F": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"]
         }
         diff = DeepDiff(c.cof_scales, expected, ignore_order=True)
-        assert diff == {}
+        self.ut_report.assertTrue(diff == {})
 
     def test_find_substitutes_g6(self):
         chord = "G6"
@@ -37,12 +40,12 @@ class TestCircleOf5th(TestCase):
                     Chord("Em7/13/B"), Chord("Em7/13/D"), Chord("Em7/13/G"),
                     Chord("G6"), Chord("G6/9"), Chord("G/E"),
                     Chord("G6/B"), Chord("G6/D"), Chord("G6/E"), Chord("G6/9/B"), Chord("G6/9/D"), Chord("G6/9/E")]
-        assert CofChord.same_array_of_chords(substitutes, expected)
+        self.ut_report.assertTrue(CofChord.same_array_of_chords(substitutes, expected))
 
     def test_find_substitutes_c(self):
         chord = "C"
         substitutes = CofChord.find_substitutes(Chord(chord))
         expected = [Chord("C"), Chord("C/E"), Chord("C/G"), Chord("C5/E")]
         print("substitutes from :", chord, substitutes)
-        assert CofChord.same_array_of_chords(substitutes, expected)
+        self.ut_report.assertTrue(CofChord.same_array_of_chords(substitutes, expected))
 

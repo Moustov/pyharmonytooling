@@ -2,7 +2,6 @@ from pychord import ChordProgression, Chord
 
 from pyharmonytools.displays.console import _HarmonyLogger
 from pyharmonytools.harmony.cof_chord import CofChord
-from pyharmonytools.harmony.note import Note
 
 
 class CircleOf5th:
@@ -224,7 +223,7 @@ class CircleOf5th:
 
 class CircleOf5thNaturalMajor(CircleOf5th):
     cof_name = "Natural Major"
-    intervals = [2, 2, 1, 2, 2, 2]
+    intervals = [2, 2, 1, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
     qualities = ["", "m", "m", "", "", "m", "dim"]
 
     def __init__(self):
@@ -233,7 +232,7 @@ class CircleOf5thNaturalMajor(CircleOf5th):
 
 class CircleOf5thNaturalMinor(CircleOf5th):
     cof_name = "Natural Minor"
-    intervals = [2, 1, 2, 2, 1, 2]
+    intervals = [2, 1, 2, 2, 1, 2]  # https://muted.io/scale-formulas-intervals/
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
 
     def __init__(self):
@@ -242,7 +241,7 @@ class CircleOf5thNaturalMinor(CircleOf5th):
 
 class CircleOf5thMelodicMinor(CircleOf5th):
     cof_name = "Melodic Minor"
-    intervals = [2, 1, 2, 2, 2, 2]
+    intervals = [2, 1, 2, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
 
     def __init__(self):
@@ -251,7 +250,7 @@ class CircleOf5thMelodicMinor(CircleOf5th):
 
 class CircleOf5thHarmonicMinor(CircleOf5th):
     cof_name = "Harmonic Minor"
-    intervals = [2, 1, 2, 2, 1, 3]
+    intervals = [2, 1, 2, 2, 1, 3]  # https://muted.io/scale-formulas-intervals/
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
 
     def __init__(self):

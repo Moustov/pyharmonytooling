@@ -281,7 +281,12 @@ output:
   * bugs when finding chord fingering on a guitar on vertical fingering such a barres
 
 # Additional links
-* Theory of music 🇫🇷: https://www.youtube.com/@gradusadparnassumfr
+* Theory of music:
+  * Lectures in 🇫🇷: https://www.youtube.com/@gradusadparnassumfr
+    * Cours d'harmonie (chapitre I): https://www.youtube.com/watch?v=kYbmplpgls8&list=PLyIR6Ix26WY9lELxy0dpDOpjfmYLTGsHA
+    * Cours d'harmonie (chapitre II): https://www.youtube.com/watch?v=aoe-5-JCadA&list=PLyIR6Ix26WY9ww90jZ7z9OnE1RxbUWr4x
+  * Guide to Chord Symbols: https://www.musicnotes.com/now/tips/a-complete-guide-to-chord-symbols-in-music/
+  * few tools: https://muted.io/
 * Circle of Fifths: 
   * https://websemantics.uk/tools/circle-of-fifths-chord-wheel/
   * https://en.wikipedia.org/wiki/Circle_of_fifths
@@ -289,6 +294,7 @@ output:
 * Guitar tools:
   * https://www.oolimo.com/guitarchords/analyze
 * Python:
+  * Python in music: https://wiki.python.org/moin/PythonInMusic 
   * Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
   * PyChord project: https://github.com/yuma-m/pychord
   * An API to UG: https://github.com/victorfontes/python-ultimate-guitar

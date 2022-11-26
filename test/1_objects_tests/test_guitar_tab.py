@@ -22,7 +22,7 @@ class TestGuitarTab(TestCase):
         for (chord_res, chord_expected) in zip(res.keys(), expected.keys()):
             if CofChord.is_chord_included_from_components(expected[chord_expected], res[chord_res]):
                 found = True
-        assert found
+        self.ut_report.assertTrue(found)
 
     def test_digest_tab_d(self):
         tab = """
@@ -35,8 +35,8 @@ class TestGuitarTab(TestCase):
         """
         expected = {"2": Chord("Gb6")}
         res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
-        assert len(res.keys()) == len(expected.keys())
-        assert CofChord.are_chord_equals(res["2"],  expected["2"])
+        self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
+        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"],  expected["2"]))
 
     def test_digest_tab_eb(self):
         tab = """
@@ -49,7 +49,7 @@ class TestGuitarTab(TestCase):
         """
         expected = {"2": Chord("Eb")}
         res = GuitarTab.digest_tab_simplest_vertical_chords_in_a_bar(tab)
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
     def test_digest_tab_bach(self):
         # see https://tabs.ultimate-guitar.com/tab/johann-sebastian-bach/cello-suite-no-1-prelude-tabs-799617
@@ -247,11 +247,11 @@ class TestGuitarTab(TestCase):
             A|---------------------------------|---------------------------------|
             E|---------------------------------|-3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-|        
         """
-        assert False
+        self.ut_report.assertTrue(False)
 
     def test_get_notes_from_chord_layout(self):
         chord_layout = [-1, -1, -1, 11, 11, 11]
         res = GuitarTab.get_notes_from_chord_layout(chord_layout)
         expected = [None, None, None, Note("Gb"), Note("Bb"), Note("Eb")]
-        assert res == expected
+        self.ut_report.assertTrue(res == expected)
 
