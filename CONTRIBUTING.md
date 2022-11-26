@@ -15,6 +15,17 @@ Run at least the unit tests under before committing
   * _**test/1_objects_tests**_: UT that would rely on objects in memory (no persistent data)
   * _**test/2_file_system_based_tests**_: UT that would rely on data stored on the file system
   * _**test/3_online_tests**_: UT that would rely on online servers (eg. google.com, ultimate-guitar.com)
+  * _**test/4_load_tests**_: UT that would require a *long time* to have some feedback on load/robustness/...
+
+> NOTE:
+>
+> Ensure the assert is done this way:
+>
+>      self.ut_report.assertTrue(res == expected)
+> and the test class initializes `self.ut_report``:
+> 
+>      ut_report = UnitTestReport()
+This will include the *assert* in the [test report](unit_test_report.md)
 
 ## Code Quality
 Comply at much as possible with PEP8
