@@ -43,7 +43,7 @@ class UnitTestReport(TestCase):
         if msg == Ellipsis:
             msg = ""
         if expr:
-            message = f"* :green_circle: {msg}"
+            message = f"* :green_circle:"
         else:
             message = f"* :red_circle: {msg}"
         for item in inspect.stack():
@@ -55,7 +55,7 @@ class UnitTestReport(TestCase):
             try:
                 test_pos = path_parts.index("test")
                 project_path = "/".join(path_parts[test_pos+1:])
-                unit_test_path = f"[{project_path}](/test/{project_path}]: {calling_function}(line {calling_line})"
+                unit_test_path = f"[{project_path}](test/{project_path})]: {calling_function}(line {calling_line}): {msg}"
                 break
             except ValueError:
                 pass
