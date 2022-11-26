@@ -6,21 +6,21 @@ PyHarmonyTooling
 </div>
 
 
-## OVERVIEW ##
+# OVERVIEW
 Series of tools to handle harmony in music
 
-## Install ##
+# Install
 
     pip install pyHarmonyTooling 
 
-## Features ##
+# Features
 > **Warning**
 >
 > All possible chord names are defined by the PyChord library
 > See [here](https://github.com/yuma-m/pychord/blob/main/pychord/constants/qualities.py)
 
-### Features on Harmony
-#### Guess the tone & mode of a song"
+## Features on Harmony
+### Guess the tone & mode of a song"
     from pyharmonytools.displays.console import _HarmonyLogger
     from pyharmonytools.harmony.circle_of_5th import CircleOf5th
     
@@ -44,7 +44,7 @@ ouput:
 
     Borrowed chords: dict_keys(['Cm'])
 
-#### Find substitutes from a chord
+### Find substitutes from a chord
     from pychord import Chord 
     from pyharmonytools.harmony.circle_of_5th import CircleOf5th
 
@@ -68,7 +68,7 @@ ouput:
     ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
     substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
 
-#### Guess chord from notes
+### Guess chord from notes
 To guess a chord from notes, there is a feature that enables: 
 - to have a list of possible chords that include all the provided notes
 - to limit this list to chord with exactly the same notes (`is_strictly_compliant=True`)
@@ -89,8 +89,8 @@ output:
 
     True
 
-### Guitar tools
-#### Find chord fingering on a guitar
+## Guitar tools
+### Find chord fingering on a guitar
     from pyharmonytools.guitar_neck.fingering import Fingering
 
     fng = Fingering()
@@ -100,7 +100,7 @@ output:
 
     [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
 
-#### Find chords from tabs
+### Find chords from tabs
     from pychord import Chord
     from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
     from srpyharmonytoolsc.harmony.cof_chord import CofChord
@@ -121,8 +121,8 @@ output:
     assert True
 
 
-### Song Processing
-#### Song search & processing tools on Ultimate Guitar through Google.com
+## Song Processing
+### Song search & processing tools on Ultimate Guitar through Google.com
 You may search and handle song lyrics & tabs
 
     from pyharmonytools.song.song import UltimateGuitarSong
@@ -151,7 +151,7 @@ Output:
     [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nChaque jour et chaque nuit[/tab]\r\n
     ...
 
-#### Song search from a cadence
+### Song search from a cadence
 Searching for songs in the 12 tones from a cadence
 
         from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
@@ -238,7 +238,7 @@ output:
                 }
 
 
-#### Song processing tools on simple text song
+### Song processing tools on simple text song
 
         from pychord import Chord 
         from pyharmonytools.song.text_song import TextSongWithLineForChords
@@ -260,9 +260,14 @@ output:
 
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
 
+# Test report
+see [here](unit_test_report.md)
+
 # Release Notes
+* 26/NOV/22
+  * unit test report (see [here](unit_test_report.md))
 * 25/NOV/22
-* start reading guitar tabs when chords are vertical or played in arpeggio
+  * start reading guitar tabs when chords are vertical or played in arpeggio
 * 24/NOV/22
   * weird notes (eg. Cb)
   * possible chords cached for optimization
