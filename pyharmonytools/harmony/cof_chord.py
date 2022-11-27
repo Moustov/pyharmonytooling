@@ -299,6 +299,8 @@ class CofChord(Chord):
 
     @staticmethod
     def are_chord_equals(chord1: Chord, chord2:Chord) -> bool:
+        if not chord1 or not chord2 and chord1 != chord2:
+            return False
         c1 = sorted(chord1.components())
         cmp = CofChord.are_components_included_in_chord(c1, chord2)
         return cmp

@@ -4,6 +4,7 @@ from pychord import Chord
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
+from pyharmonytools.guitar_tab.string_and_cell import StringAndCell
 from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.harmony.note import Note
 
@@ -46,7 +47,7 @@ class TestGuitarTab(TestCase):
         expected = {"2": Chord("Gb6")}
         res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
         self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
-        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"],  expected["2"]))
+        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"], expected["2"]))
 
     def test_digest_tab_gb6_d(self):
         tab = """
@@ -57,13 +58,10 @@ class TestGuitarTab(TestCase):
         A|--------------------|
         E|--------------------|
         """
-        expected = {"2": Chord("Gb6")}
-        try:
-            res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
-            self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
-            self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"],  expected["2"]))
-        except:
-            self.ut_report.assertTrue(False)
+        expected = {"2": Chord("Gb6"), "16": Chord("D")}
+        res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
+        self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
+        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"], expected["2"]))
 
     def test_digest_tab_eb(self):
         tab = """
@@ -276,3 +274,31 @@ class TestGuitarTab(TestCase):
         """
         self.ut_report.assertTrue(False)
 
+    def test_get_first_caret_position_across_strings(self):
+        tab = """
+        e|--11------------2---|
+        B|------11--------3---|
+        G|-----------11---2---|
+        D|--------------------|
+        A|--------------------|
+        E|--------------------|
+        """
+        expected = StringAndCell('G', caret=2, fret=11)
+        fingerings = GuitarTab.get_fingerings_from_tab(tab)
+        res = GuitarTab.get_first_caret_position_across_strings(fingerings)
+        self.ut_report.assertTrue(res.caret == expected.caret)
+
+    def test_get_next_caret_position_across_strings_next(self):
+        tab = """
+        e|--11------------2---|
+        B|------11--------3---|
+        G|-----------11---2---|
+        D|--------------------|
+        A|--------------------|
+        E|--------------------|
+        """
+        expected = StringAndCell('e', caret=16, fret=2)
+        expected.caret = 16
+        fingerings = GuitarTab.get_fingerings_from_tab(tab)
+        res = GuitarTab.get_next_caret_position_across_strings(fingerings, 13)
+        self.ut_report.assertTrue(res.caret == expected.caret)

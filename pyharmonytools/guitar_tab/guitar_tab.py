@@ -71,11 +71,13 @@ class GuitarTab():
             string_number = string_names.index(current_string_and_cell.string_name)
             chord_layout[string_number] = current_string_and_cell.fret  # warning: chord_layout[0] <==> 'e'
             clusters[str(previous_string_and_cell.caret)] = chord_layout
-            next_string_and_cell = GuitarTab.get_next_caret_position_across_strings(fingerings,
-                                                                                    start_from=current_string_and_cell.caret)
-            if next_string_and_cell and next_string_and_cell.caret > max_sac.caret \
+            next_string_and_cell = GuitarTab.get_next_caret_position_across_strings(fingerings, start_from=current_string_and_cell.caret)
+            if next_string_and_cell and next_string_and_cell.caret >= max_sac.caret \
                     and next_string_and_cell.string_name == max_sac.string_name:
                 previous_string_and_cell = current_string_and_cell
+                chord_layout = [-1] * len(Neck.TUNING)
+                max_sac = GuitarTab.get_next_caret_position_across_strings(fingerings,
+                                                                           start_from=current_string_and_cell.caret)
             current_string_and_cell = next_string_and_cell
 
         print(clusters)

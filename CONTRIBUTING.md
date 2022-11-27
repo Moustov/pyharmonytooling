@@ -27,6 +27,16 @@ Run at least the unit tests under before committing
 >      ut_report = UnitTestReport()
 This will include the *assert* in the [test report](unit_test_report.md) with a link to the failing assert in the code
 
+To prevent UT exits from exception, you must frame your test code with try/exception:
+
+        try:
+            res = GuitarTab.digest_tab_simplest_splitted_chords_in_a_bar(tab)
+            self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
+            self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"],  expected["2"]))
+        except:
+            self.ut_report.assertTrue(False)
+
+
 ## Code Quality
 Comply at much as possible with PEP8
 IDE such as Pycharm provide a code inspection to perform a [5S](https://www.agilitest.com/cards/5s-on-code)
