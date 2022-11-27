@@ -2,8 +2,8 @@
 UNIT TEST REPORT
 ================
         
- generation: 2022-11-27 00:44:35.438770
-:red_circle:3
+ generation: 2022-11-27 09:04:43.095936
+:red_circle:2
 :green_circle:435
 -------
 
@@ -439,8 +439,8 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L46)]: test_compliance(line 46): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L50)]: test_compliance(line 50): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L26)]: test_digest(line 26): 
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L27)]: test_digest_get_borrowed_chords(line 27): 
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L20)]: test_digest_get_tone_and_mode(line 20): 
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L21)]: test_digest_get_tone_and_mode(line 21): 
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L15)]: test_digest_html(line 15): 
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L26)]: test_digest_get_borrowed_chords(line 26): ['Db', 'A', 'A7', 'Em', 'Cm', 'Am', 'Bm', 'D9', 'G#', 'G#6', 'G#M7'] found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L19)]: test_digest_get_tone_and_mode(line 19): F found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L20)]: test_digest_get_tone_and_mode(line 20): Melodic Minor found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L14)]: test_digest_html(line 14): Édith Piaf found
 * :green_circle:[[3_online_tests/test_ultimate_guitar_search.py](test/3_online_tests/test_ultimate_guitar_search.py#L16)]: test_search(line 16): 

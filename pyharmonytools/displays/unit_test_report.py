@@ -1,17 +1,14 @@
 import inspect
-import sys
-import this
 from datetime import datetime, date
 from typing import Any
 from unittest import TestCase
-import os
 
 
 class UnitTestReport(TestCase):
     test_report_started = False
     project_path = ""
     green = 0
-    red = 1
+    red = 0
 
     def __init__(self):
         """
