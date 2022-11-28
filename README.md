@@ -101,9 +101,10 @@ output:
     [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
 
 ### Find chords from tabs
+    from deepdiff import DeepDiff
     from pychord import Chord
     from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
-    from srpyharmonytoolsc.harmony.cof_chord import CofChord
+    from pyharmonytools.harmony.cof_chord import CofChord
 
     tab = """
           e|--11-----11-----10-----11---|
@@ -113,12 +114,10 @@ output:
           A|----------------------------|
           E|----------------------------|
     """
-    res = GuitarTab.digest_tab(tab)
-    expected = [Chord("D#m"), Chord("G#m"), Chord("Bb"), Chord("D#m")]
-    for (c_res, c_expected) in zip(res, expected):
-        if CofChord(str(c_res[0])) != CofChord(str(c_expected)):
-            assert False
-    assert True
+    res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
+    expected = {"2": Chord("D#m"), "9": Chord("G#m"), "16": Chord("Bb"), "23": Chord("D#m")}
+    diff = DeepDiff(res, expected, ignore_order=True)
+    assert (diff == {})
 
 
 ## Song Processing

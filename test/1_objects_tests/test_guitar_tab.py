@@ -18,6 +18,20 @@ class TestGuitarTab(TestCase):
         expected = [None, None, None, Note("Gb"), Note("Bb"), Note("Eb")]
         self.ut_report.assertTrue(res == expected)
 
+    def test_digest_tab_readme(self):
+        tab = """
+              e|--11-----11-----10-----11---|
+              B|--11-----12-----11-----11---|
+              G|--11-----13-----10-----11---|
+              D|----------------------------|
+              A|----------------------------|
+              E|----------------------------|
+        """
+        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
+        expected = {"2": Chord("D#m"), "9": Chord("G#m"), "16": Chord("Bb"), "23": Chord("D#m")}
+        diff = DeepDiff(res, expected, ignore_order=True)
+        self.ut_report.assertTrue(diff == {})
+
     def test_digest_tab_dgbd(self):
         tab = """
         e|--11-----11-----10-----11----|
