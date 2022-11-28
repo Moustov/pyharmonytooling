@@ -6,8 +6,8 @@ from pyharmonytools.displays.console import _HarmonyLogger
 
 
 class Fingering:
-    FINGERING_WIDTH = 3
-    FINGERING_AVAILABLE_FINGERS = 4
+    FINGERING_WIDTH = 3 # nb of frets wide max
+    FINGERING_AVAILABLE_FINGERS = 4     # nb of fingers to imply
     FRET_UNDEFINED = -100
     FRET_MUTE = -1
     FRET_OPEN = 0

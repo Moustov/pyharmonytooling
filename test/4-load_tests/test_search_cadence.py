@@ -26,7 +26,7 @@ class TestRobustness(TestCase):
             songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True, try_avoiding_blocked_searches=True)
             print(songs)
 
-            self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs, all_song=False))
+            self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs=songs, all_song=False))
             batch_situation = datetime.combine(date.today(), datetime.now().time())
             delta = batch_situation - batch_start
 
@@ -49,7 +49,7 @@ class TestRobustness(TestCase):
             print("=================")
             songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True, try_avoiding_blocked_searches=True)
             print(songs)
-            self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs, all_song=True))
+            self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs=songs, all_song=True))
             batch_situation = datetime.combine(date.today(), datetime.now().time())
             delta = batch_situation - batch_start
 

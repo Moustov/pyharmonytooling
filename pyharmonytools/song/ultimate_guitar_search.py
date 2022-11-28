@@ -1,10 +1,10 @@
-import os.path
 import datetime
+import os.path
+import platform
 from datetime import date
 from datetime import datetime
-import platform
 from random import randint
-from time import time, sleep
+from time import sleep
 
 from google.modules.utils import _get_search_url as google_search, get_html
 
@@ -114,7 +114,9 @@ class UltimateGuitarSearch:
         A wait will be triggered after MAX_QUERIES queries
         NOTE: does not seem to be efficient because the GOOGLE_SEARCH_MAX_WAIT should be several hours
                 => could be interesting for massive batches when time does not matter
-        :param url:
+
+        :param query:
+        :param page:
         :return:
         """
         nb_searches = self.add_new_google_search()
@@ -126,7 +128,7 @@ class UltimateGuitarSearch:
                        - (UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION * 0.1)
             max_wait = UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION
             print(f"Too many queries - let's try to wait for {min_wait} to {max_wait} minutes")
-            sleep(float(randint(min_wait*60, max_wait*60)))
+            sleep(randint(min_wait*60, max_wait*60))
             self.reset_google_searches()
         url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
         return str(get_html(url))
@@ -174,7 +176,6 @@ class UltimateGuitarSearch:
                 # so we'll settle for when its content was last modified.
                 the_date = datetime.fromtimestamp(stat.st_mtime)
                 return the_date
-        return None # should not happen
 
     def reset_google_searches(self):
         """

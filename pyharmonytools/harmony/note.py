@@ -46,8 +46,7 @@ class Note:
     def get_interval_in_half_tones(self, other) -> int:
         """
         return the number of half tones between self & other
-        :type note: Note
-        :param note:
+        :param other:
         :return:
         """
         if not isinstance(other, Note) and not isinstance(other, str):

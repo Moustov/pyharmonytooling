@@ -17,25 +17,25 @@ class Degree:
         """
         if degree.startswith("iii"):
             note = Degree.get_note_degree(root_note, 3, mode)
-            return note + "m" + degree[3:]
+            return f"{note}m{degree[3:]}"
         if degree.startswith("ii"):
             note = Degree.get_note_degree(root_note, 2, mode)
-            return note + "m" + degree[2:]
+            return f"{note}m{degree[2:]}"
         if degree.startswith("iv"):
             note = Degree.get_note_degree(root_note, 4, mode)
-            return note + "m" + degree[2:]
+            return f"{note}m{degree[2:]}"
         if degree.startswith("i"):
             note = Degree.get_note_degree(root_note, 1, mode)
-            return note + "m" + degree[1:]
+            return f"{note}m{degree[1:]}"
         if degree.startswith("vii"):
             note = Degree.get_note_degree(root_note, 7, mode)
-            return note + "m" + degree[3:]
+            return f"{note}m{degree[3:]}"
         if degree.startswith("vi"):
             note = Degree.get_note_degree(root_note, 6, mode)
-            return note + "m" + degree[2:]
+            return f"{note}m{degree[2:]}"
         if degree.startswith("v"):
             note = Degree.get_note_degree(root_note, 5, mode)
-            return note + "m" + degree[1:]
+            return f"{note}m{degree[1:]}"
 
         if degree.startswith("III"):
             note = Degree.get_note_degree(root_note, 3, mode)

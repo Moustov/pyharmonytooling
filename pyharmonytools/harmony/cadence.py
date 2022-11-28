@@ -29,7 +29,7 @@ class Cadence:
         "SUSPENS RISING": "i°-i#°-ii°",
         "MELANCOLIC JOY": "I-IM7-I7",
         # "*":"any chord" /  "]":"a phrase ending on"
-        "HALF CADENCE": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "HALF CADENCE_GENERIC": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
     }
 
     def __init__(self):
@@ -45,7 +45,7 @@ class Cadence:
         :return:
         """
         ugs = UltimateGuitarSearch
-        songs = ugs.search_songs_from_cadence(cadence, cof,
+        songs = ugs.search_songs_from_cadence(cadence, mode=cof,
                                               limit_per_tone=max_songs,
                                               matches_exactly=True,
                                               try_avoiding_blocked_searches=True)

@@ -1,5 +1,3 @@
-from array import array
-
 from pychord import Chord
 
 from pyharmonytools.displays.console import _HarmonyLogger
@@ -238,7 +236,7 @@ class CofChord(Chord):
         return exaecos
 
     @staticmethod
-    def compare_simplicity(chord: Chord, simplest_chord_name: str) -> bool:
+    def compare_simplicity(chord: Chord, simplest_chord_name: str) -> int:
         """
         return True if chord (name) is simpler than the provided simplest_chord_name
         todo : add other criteria that would provide simpler chords such as CoF compliance or b/# to improve readability
