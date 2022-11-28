@@ -264,7 +264,7 @@ see [here](unit_test_report.md)
 
 # Release Notes
 * 28/NOV/22
-  * chords can be guess from a tab
+  * chords can be guessed from a tab
   * package v0.1.4
 * 26/NOV/22
   * unit test report (see [here](unit_test_report.md)) + [CONTRIBUTING.md](CONTRIBUTING.md)
