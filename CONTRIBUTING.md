@@ -49,7 +49,7 @@ You are encouraged to contribute...
 
 # Building a package
     
-    python.exe setup.py bdist_wheel
+    .\venv\Scripts\python.exe setup.py bdist_wheel
 
 Then apply https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/
 
