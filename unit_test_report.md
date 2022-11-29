@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2022-11-28 18:13:29.597461
-:red_circle:2
-:green_circle:438
+ generation: 2022-11-29 10:10:04.091249
+:red_circle:4
+:green_circle:432
 -------
 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L33)]: test_all_equals(line 33): 
@@ -362,6 +362,8 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L28)]: test_guess_chord_name_Cm_only(line 28): 
 * :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L41)]: test_guess_chord_name_Cmaj7_only(line 41): 
 * :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L34)]: test_guess_chord_name_Gb6_only(line 34): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L72)]: test_is_chord_included_from_components(line 72): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L73)]: test_is_chord_included_from_components(line 73): 
 * :green_circle:[[1_objects_tests/test_console_for_guitar_neck.py](test/1_objects_tests/test_console_for_guitar_neck.py#L45)]: test_set_multiple_fingers(line 45): 
 * :green_circle:[[1_objects_tests/test_console_for_guitar_neck.py](test/1_objects_tests/test_console_for_guitar_neck.py#L20)]: test_set_single_finger_E(line 20): 
 * :green_circle:[[1_objects_tests/test_console_for_guitar_neck.py](test/1_objects_tests/test_console_for_guitar_neck.py#L32)]: test_set_single_finger_e(line 32): 
@@ -405,20 +407,15 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L307)]: test_digest_bach_bar_1(line 307): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L50)]: test_digest_tab_dgbd(line 50): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L91)]: test_digest_tab_eb(line 91): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L63)]: test_digest_tab_gb6(line 63): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L64)]: test_digest_tab_gb6(line 64): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L77)]: test_digest_tab_gb6_d(line 77): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L78)]: test_digest_tab_gb6_d(line 78): 
-* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L33)]: test_digest_tab_readme(line 33): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L320)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6(line 320): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L321)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6(line 321): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L334)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 334): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L335)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 335): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L336)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 336): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L19)]: test_get_notes_from_chord_layout(line 19): 
+* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L345)]: test_digest_bach_bar_1(line 345): 
+* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L377)]: test_digest_bach_bar_1_2(line 377): 
+* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L66)]: test_digest_tab_dgbd(line 66): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L109)]: test_digest_tab_eb(line 109): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L80)]: test_digest_tab_gb6(line 80): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L95)]: test_digest_tab_gb6_d(line 95): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L360)]: test_digest_tab_simplest_progressive_chords_in_a_bar_ebm(line 360): 
+* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L392)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 392): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L50)]: test_get_notes_from_chord_layout(line 50): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L79)]: test_get_borrowed_chords_C(line 79): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L90)]: test_get_borrowed_chords_Cm(line 90): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L67)]: test_get_chord_possible_qualities(line 67): 
@@ -446,4 +443,3 @@ UNIT TEST REPORT
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L19)]: test_digest_get_tone_and_mode(line 19): F found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L20)]: test_digest_get_tone_and_mode(line 20): Melodic Minor found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L14)]: test_digest_html(line 14): Édith Piaf found
-* :red_circle: [[3_online_tests/test_ultimate_guitar_search.py](test/3_online_tests/test_ultimate_guitar_search.py#L16)]: test_search(line 16): 

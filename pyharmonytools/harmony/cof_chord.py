@@ -27,7 +27,7 @@ class CofChord(Chord):
         return CofChord.is_chord_included_from_components(a, b)
 
     @staticmethod
-    def is_chord_included_from_components(a, b):
+    def is_chord_included_from_components(a: Chord, b: Chord):
         """
         return True is the components from a are included in b
         :param a:
@@ -40,7 +40,7 @@ class CofChord(Chord):
         return CofChord.are_components_included_in_chord(c1, b)
 
     @staticmethod
-    def are_components_included_in_chord(expected_notes: [Note], chord):
+    def are_components_included_in_chord(expected_notes: [Note], chord: Chord):
         """
         return True is the components from a are included in b
         :param chord: a Chord()
@@ -202,6 +202,7 @@ class CofChord(Chord):
     def guess_chord_name(chord_notes: [Note], is_strictly_compliant: bool = True, simplest_chord_only: bool = True) -> [Chord]:
         """
         return <Chord("C")> from [<Note("C">), <Note("G">), <Note("E">)]
+        NOTE: the chord name is influenced with the bass
         **WARNING** : simplest_chord_only => is_strictly_compliant
         :param simplest_chord_only: "simple" means shortest chord name (with no bass if possible)
         :param is_strictly_compliant: try not to
@@ -297,8 +298,10 @@ class CofChord(Chord):
 
     @staticmethod
     def are_chord_equals(chord1: Chord, chord2:Chord) -> bool:
-        if not chord1 or not chord2 and chord1 != chord2:
+        if not chord1 or not chord2:
             return False
         c1 = sorted(chord1.components())
-        cmp = CofChord.are_components_included_in_chord(c1, chord2)
-        return cmp
+        cmp1 = CofChord.are_components_included_in_chord(c1, chord2)
+        c2 = sorted(chord1.components())
+        cmp2 = CofChord.are_components_included_in_chord(c2, chord1)
+        return cmp1 and cmp2

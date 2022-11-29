@@ -9,30 +9,48 @@ from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.harmony.note import Note
 
 
+def are_same_digested_tabs(res: dict, expected: dict):
+    """
+    ensure carets & chords match are the same
+    => compares both tab decorations (eg. { "2": xxx, "17": xxxx, ...})
+        and ensure each chords match (at component level)
+    :param res:
+    :param expected:
+    :return:
+    """
+    for chord_res in res.keys():
+        if chord_res not in expected.keys():
+            return False
+        if not CofChord.are_chord_equals(expected[chord_res], res[chord_res]):
+            return False
+    for chord_expected in expected.keys():
+        if chord_expected not in res.keys():
+            return False
+        if not CofChord.are_chord_equals(expected[chord_expected], res[chord_expected]):
+            return False
+    return True
+
+
+def transform_expected_chords(expected_chords: object) -> object:
+    """
+    todo
+    :param expected_chords:
+    :return:
+    """
+    return None
+
+
 class TestGuitarTab(TestCase):
     ut_report = UnitTestReport()
 
     def test_get_notes_from_chord_layout(self):
         chord_layout = [-1, -1, -1, 11, 11, 11]
-        res = GuitarTab.get_notes_from_chord_layout(chord_layout)
+        res = GuitarTab._get_notes_from_chord_layout(chord_layout)
         expected = [None, None, None, Note("Gb"), Note("Bb"), Note("Eb")]
         self.ut_report.assertTrue(res == expected)
 
-    def test_digest_tab_readme(self):
-        tab = """
-              e|--11-----11-----10-----11---|
-              B|--11-----12-----11-----11---|
-              G|--11-----13-----10-----11---|
-              D|----------------------------|
-              A|----------------------------|
-              E|----------------------------|
-        """
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        expected = {"2": Chord("D#m"), "9": Chord("G#m"), "16": Chord("Bb"), "23": Chord("D#m")}
-        diff = DeepDiff(res, expected, ignore_order=True)
-        self.ut_report.assertTrue(diff == {})
-
     def test_digest_tab_dgbd(self):
+        """ test_digest_tab_readme"""
         tab = """
         e|--11-----11-----10-----11----|
         B|--11-----12-----11-----11----|
@@ -41,13 +59,11 @@ class TestGuitarTab(TestCase):
         A|-----------------------------|
         E|-----------------------------|
         """
+        # checked with https://www.oolimo.com/guitarchords/analyze
         expected = {"2": Chord("Gb6"), "9": Chord("B6"), "16": Chord("Bb"), "23": Chord("Gb6")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        found = False
-        for (chord_res, chord_expected) in zip(res.keys(), expected.keys()):
-            if CofChord.is_chord_included_from_components(expected[chord_expected], res[chord_res]):
-                found = True
-        self.ut_report.assertTrue(found)
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
 
     def test_digest_tab_gb6(self):
         tab = """
@@ -58,10 +74,10 @@ class TestGuitarTab(TestCase):
         A|-------------------|
         E|-------------------|
         """
-        expected = {"2": Chord("Gb6")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
-        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"], expected["2"]))
+        expected = {"2": Chord("Bbsus/Gb")}
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(expected, res))
 
     def test_digest_tab_gb6_d(self):
         tab = """
@@ -72,10 +88,11 @@ class TestGuitarTab(TestCase):
         A|--------------------|
         E|--------------------|
         """
-        expected = {"2": Chord("Gb6"), "16": Chord("D")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
-        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"], expected["2"]))
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {"2": Chord("Ebm"), "16": Chord("D")}
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
 
     def test_digest_tab_eb(self):
         tab = """
@@ -87,12 +104,15 @@ class TestGuitarTab(TestCase):
         E|-------|
         """
         expected = {"2": Chord("Eb")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        self.ut_report.assertTrue(res == expected)
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
 
     def test_digest_tab_full_bach(self):
+        # todo work on expected chord + digesting full tab
+        #  (multiple bars & lines with tab signs such as hammering/pull off/...)
         # see https://tabs.ultimate-guitar.com/tab/johann-sebastian-bach/cello-suite-no-1-prelude-tabs-799617
-        tab = """
+        tab_full = """
             Cello Suite No. 1 - Prelude
             Johann Sebastian Bach
             4/4
@@ -191,7 +211,7 @@ class TestGuitarTab(TestCase):
              
                |       |       |       |         |       |       |       |
             e|---------------------------------|---------------------------------|
-            B|---------------------------------|-----------2-3~~~~---------------|
+            B|---------------------------------|-----------2-3-------------------|
             G|---------------------------------|---------2---------------------0-|
             D|-----0-2-4-0-2-4-----0-2-4-0-2-4-|-----0-4-----------------0-2-4---|
             A|-3-0-------------3-0-------------|-3-0---------------0-2-3---------|
@@ -229,7 +249,7 @@ class TestGuitarTab(TestCase):
             e|---------------------------------|---------------------------------|
             B|-----1-0-----------1-0-----------|---0-----------------------------|
             G|---------2-0-----------2-0-------|-----2-0-----------2-0-----------|
-            D|-0~~~--------4-2-0---------4-2-0-|---------4-2-0---------4-2-0-----|
+            D|-0-----------4-2-0---------4-2-0-|---------4-2-0---------4-2-0-----|
             A|---------------------------------|-3-------------3-2-----------3-2-|
             E|---------------------------------|---------------------------------|
              
@@ -279,17 +299,35 @@ class TestGuitarTab(TestCase):
              
              
                |       |       |       |         |       |       |       |
-            e|-2-------2---2---2-------2---2---|-3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-|
-            B|---1---1---1---1---1---1---1---1-|-0~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-|
+            e|-2-------2---2---2-------2---2---|-3-------------------------------|
+            B|---1---1---1---1---1---1---1---1-|-0-------------------------------|
             G|---------------------------------|---------------------------------|
             D|-----0---------------0-----------|---------------------------------|
             A|---------------------------------|---------------------------------|
-            E|---------------------------------|-3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-|        
+            E|---------------------------------|-3-------------------------------|        
         """
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        # a lot of things are not yet implemented to make this run
-        # we need first to split the bars
-        self.ut_report.assertTrue(False)
+        # not yet reliable
+        expected_chords = """
+        C     C     Dm  Dm7 G7  G7  C   C
+        C7    C7    D7  D7  G   G   C   C
+        Am    Am    D7  D7  G   G   Gdim  Edim
+        Dm    Dm    Ddim  Fdim  C   C   F   F
+        Dm    Dm7   G7  G7  C   C   C7  Fmaj7
+        Fmaj7 Fmaj7 F#dim F#dim C#dim Fdim  G7  G7
+        C     C     G7  G7  G7  G7  Cm  C
+        C     C     G   G   G7  G7  C7  C7
+        C     F     C   C   C   C
+        """
+        chords = expected_chords.split()
+        chords_list = []
+        for c in chords:
+            transposed_chord = Chord(c)
+            transposed_chord.transpose(7)
+            chords_list.append(transposed_chord)
+        expected = transform_expected_chords(expected_chords)
+        gt = GuitarTab(tab_full)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
 
     def test_digest_bach_bar_1(self):
         tab = """
@@ -300,13 +338,13 @@ class TestGuitarTab(TestCase):
   A|---------------------------------|
   E|-3---------------3---------------|
   """
-        expected = {'1': Chord("G"), '7': Chord("D5/B"), '13': Chord("G"), '17': Chord("G5"),
-                    '21': Chord("G"), '29': Chord("G")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        diff = DeepDiff(res, expected, ignore_order=True)
-        self.ut_report.assertTrue(diff == {})
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'1': Chord("Gadd9")}
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
 
-    def test_digest_tab_simplest_progressive_chords_in_a_bar_gb6(self):
+    def test_digest_tab_simplest_progressive_chords_in_a_bar_ebm(self):
         tab = """
         e|--11---------------|
         B|------11-----------|
@@ -315,10 +353,28 @@ class TestGuitarTab(TestCase):
         A|-------------------|
         E|-------------------|
         """
-        expected = {"2": Chord("Gb6")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
-        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"], expected["2"]))
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {"2": Chord("Ebm")}
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
+
+    def test_digest_bach_bar_1_2(self):
+        tab = """
+            e|-------------------------------------------------------------------|
+            B|-----0---0---0-------0---0---0---------1-0-1---1-------1-0-1---1---|
+            G|-------2---------------2-------------------------------------------|
+            D|---0-------0---0---0-------0---0-----2-------2---2---2-------2---2-|
+            A|-------------------------------------------------------------------|
+            E|-3---------------3-----------------3---------------3---------------|
+"""
+        #      1                                 35    4143            5759
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'1': Chord('Gadd9'), '35': Chord('C/G'), '41': Chord('B'),
+                    '43': Chord('C/G'), '57': Chord('B'), '59': Chord('C/E')}
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
 
     def test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(self):
         tab = """
@@ -329,8 +385,8 @@ class TestGuitarTab(TestCase):
         A|--------------------|
         E|--------------------|
         """
+        # checked with https://www.oolimo.com/guitarchords/analyze
         expected = {"2": Chord("Gb6"), "16": Chord("D")}
-        res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
-        self.ut_report.assertTrue(len(res.keys()) == len(expected.keys()))
-        self.ut_report.assertTrue(CofChord.are_chord_equals(res["2"], expected["2"]))
-        self.ut_report.assertTrue(CofChord.are_chord_equals(res["16"], expected["16"]))
+        gt = GuitarTab(tab)
+        res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
+        self.ut_report.assertTrue(are_same_digested_tabs(res, expected))

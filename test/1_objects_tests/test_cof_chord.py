@@ -63,3 +63,11 @@ class TestCofChord(TestCase):
         c = CofChord("C")
         d = CofChord("D")
         self.ut_report.assertTrue(not CofChord.is_same_chord_from_components(c, d))
+
+    def test_is_chord_included_from_components(self):
+        # Ebm : Eb, Gb, Bb
+        ebm = Chord("Ebm")
+        # Gb6 : Gb, Bb, Db, Eb
+        gb6 = Chord("Gb6")
+        self.ut_report.assertTrue(CofChord.is_chord_included_from_components(ebm, gb6))
+        self.ut_report.assertTrue(not CofChord.is_chord_included_from_components(gb6, ebm))
