@@ -337,8 +337,8 @@ class GuitarTab():
                 is_next_tab_still_in_chord_notes = is_next_tab_still_in_chord_notes \
                                                    and len(newList) == len(chord_notes)
                 finger_qty += len(newList) - len(chord_notes)
-            else:
-                raise ValueError(f"Bad type of note found in {note_fret_caret.note_or_chord}")
+        else:
+            raise ValueError(f"Bad type of note found in {note_fret_caret.note_or_chord}")
         if finger_qty == 0 and not note_found:
             finger_qty = 1
         return finger_qty
