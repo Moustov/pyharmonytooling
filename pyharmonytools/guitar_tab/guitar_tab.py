@@ -130,7 +130,8 @@ class GuitarTab():
 
     def _get_fingerings_from_tab(self) -> dict:
         """
-        translates the tab into fingerings
+        translates the tab into fingerings.
+        result will be returned & set in self.tab_dict
         :param tab: must be a simple bar tab - eg.
                 e|--11---|
                 B|-------|
@@ -258,14 +259,14 @@ class GuitarTab():
 
     @staticmethod
     def _add_notes_or_chord(chord_notes: [], note_fret_caret: NoteFretCaret) -> []:
-        if type(note_fret_caret.current_notes) == Note: # todo use polymorphism !
-            chord_notes.append(note_fret_caret.current_notes)
-        elif type(note_fret_caret.current_notes) == Chord:
-            components = note_fret_caret.current_notes.components()
+        if type(note_fret_caret.note_or_chord) == Note:  # todo use polymorphism !
+            chord_notes.append(note_fret_caret.note_or_chord)
+        elif type(note_fret_caret.note_or_chord) == Chord:
+            components = note_fret_caret.note_or_chord.components()
             for c in components:
                 chord_notes.append(c)
         else:
-            raise ValueError(f"Bad type of note found in {note_fret_caret.current_notes}")
+            raise ValueError(f"Bad type of note found in {note_fret_caret.note_or_chord}")
         # remove dupes
         res = []
         for c in chord_notes:
@@ -284,23 +285,29 @@ class GuitarTab():
         :param finger_qty:
         :return:
         """
-        is_fingering_not_too_wide = note_fret_caret.fret - first_fret < Fingering.FINGERING_WIDTH
-        is_there_enough_fingers = finger_qty < Fingering.FINGERING_AVAILABLE_FINGERS
-
         # is the next note still in the same chord_notes ?
-        is_next_tab_still_in_chord_notes = False
-        is_next_tab_not_in_chord_notes = True
+        is_next_tab_still_in_chord_notes = True
         for n in chord_notes:
-            if type(note_fret_caret.current_notes) == Note: # todo use polymorphism !
-                is_next_tab_still_in_chord_notes = n == note_fret_caret.current_notes
-            elif type(note_fret_caret.current_notes) == Chord:
+            if type(note_fret_caret.note_or_chord) == Note:     # todo use polymorphism !
+                is_next_tab_still_in_chord_notes = n == note_fret_caret.note_or_chord
+                finger_qty += 1
+            elif type(note_fret_caret.note_or_chord) == Chord:
                 # if all the notes of the chord are not in the chord_notes
-                is_next_tab_not_in_chord_notes = n not in note_fret_caret.current_notes.components()
-                if not is_next_tab_not_in_chord_notes:
-                    break
+                notes_in_chord = note_fret_caret.note_or_chord.components()
+                for c in notes_in_chord:
+                    is_next_tab_still_in_chord_notes = is_next_tab_still_in_chord_notes \
+                                                     and (Note(n) == Note(c))
+                    if not is_next_tab_still_in_chord_notes:
+                        break
+                finger_qty += len(notes_in_chord)
             else:
-                raise ValueError(f"Bad type of note found in {note_fret_caret.current_notes}")
-            if is_next_tab_still_in_chord_notes or not is_next_tab_not_in_chord_notes:
+                raise ValueError(f"Bad type of note found in {note_fret_caret.note_or_chord}")
+            if not is_next_tab_still_in_chord_notes:
                 break
-        return is_there_enough_fingers and is_fingering_not_too_wide or is_next_tab_still_in_chord_notes
+        if is_next_tab_still_in_chord_notes:
+            return True
+        else:
+            is_fingering_not_too_wide = note_fret_caret.fret - first_fret < Fingering.FINGERING_WIDTH
+            is_there_enough_fingers = finger_qty < Fingering.FINGERING_AVAILABLE_FINGERS
+            return is_there_enough_fingers and is_fingering_not_too_wide
 

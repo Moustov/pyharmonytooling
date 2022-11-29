@@ -59,8 +59,9 @@ class TestGuitarTab(TestCase):
         A|-----------------------------|
         E|-----------------------------|
         """
+        #  2       9      16     23
         # checked with https://www.oolimo.com/guitarchords/analyze
-        expected = {"2": Chord("Gb6"), "9": Chord("B6"), "16": Chord("Bb"), "23": Chord("Gb6")}
+        expected = {"2": Chord("Ebm"), "9": Chord("G#m"), "16": Chord("Bb"), "23": Chord("Ebm")}
         gt = GuitarTab(tab)
         res = gt.digest_tab_simplest_progressive_chords_in_a_bar()
         self.ut_report.assertTrue(are_same_digested_tabs(res, expected))
