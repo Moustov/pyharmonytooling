@@ -1,7 +1,10 @@
+from copy import copy
+
 from pychord import Chord
 
 from pyharmonytools.guitar_neck.fingering import Fingering
 from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.guitar_tab.chord_and_fingering import ChordAndFingering
 from pyharmonytools.guitar_tab.note_fret_caret import NoteFretCaret
 from pyharmonytools.guitar_tab.string_and_cell import StringAndCell
 from pyharmonytools.harmony.cof_chord import CofChord
@@ -58,7 +61,7 @@ class GuitarTab():
         """
         string_name = list(self.tab_dict.keys())[string_number]
         for cell in self.tab_dict[string_name]:
-            if type(cell) != int:   # todo use polymorphism !
+            if type(cell) != int:  # todo use polymorphism !
                 if caret_position_start <= cell[1] <= caret_position_end:
                     return cell
         return None
@@ -91,11 +94,14 @@ class GuitarTab():
         if note_fret_caret:
             first_fret = note_fret_caret.fret
             first_caret = note_fret_caret.current_caret
-            finger_qty += note_fret_caret.fingers_involved_qty
+            finger_qty = 0
             current_caret = note_fret_caret.current_caret
         while note_fret_caret:
+            caf = None
             if GuitarTab.is_note_fret_caret_in_same_chord(chord_notes, note_fret_caret, first_fret, finger_qty):
-                chord_notes = GuitarTab._add_notes_or_chord(chord_notes, note_fret_caret)
+                caf = GuitarTab._add_notes_or_chord(chord_notes, note_fret_caret)
+                chord_notes = caf.chord_notes
+                finger_qty += caf.fingers
             else:
                 possible_chord = CofChord.guess_chord_name(chord_notes, is_strictly_compliant=True,
                                                            simplest_chord_only=True)
@@ -105,17 +111,15 @@ class GuitarTab():
                     possible_chord = CofChord.guess_chord_name(chord_notes, is_strictly_compliant=False,
                                                                simplest_chord_only=True)
                     res[str(first_caret)] = possible_chord[0]
-                chord_notes = GuitarTab._add_notes_or_chord([], note_fret_caret)
-                # chord_notes = [note_fret_caret.current_notes]
-                finger_qty = 0
+                caf = GuitarTab._add_notes_or_chord([], note_fret_caret)
+                chord_notes = caf.chord_notes
                 first_fret = note_fret_caret.fret
-                finger_qty += note_fret_caret.fingers_involved_qty
+                finger_qty = caf.fingers
                 current_caret = note_fret_caret.current_caret
                 first_caret = note_fret_caret.current_caret
             note_fret_caret = self._get_next_caret_position_across_strings_note_or_chord(current_caret)
             if note_fret_caret:
                 first_fret = note_fret_caret.fret
-                finger_qty += note_fret_caret.fingers_involved_qty
                 current_caret = note_fret_caret.current_caret
             else:
                 possible_chord = CofChord.guess_chord_name(chord_notes, is_strictly_compliant=True,
@@ -209,7 +213,6 @@ class GuitarTab():
         res = None
         current_pos = 0
         current_caret = -1
-        notes = []
         chord_layout = [-1] * len(Neck.TUNING)
         fret = -1
         strings = list(self.tab_dict.keys())
@@ -217,10 +220,11 @@ class GuitarTab():
         # a tab timeline is browsed following what is available on the 1st string
         reference_string_name = strings[0]
         for cell in self.tab_dict[reference_string_name]:
+            notes = []
             # then we look vertically at a fret
             for string_name_vertical in self.tab_dict.keys():
                 cell_vertical = self.tab_dict[string_name_vertical][current_pos]
-                if type(cell_vertical) != int: # todo use polymorphism !
+                if type(cell_vertical) != int:  # todo use polymorphism !
                     if cell_vertical[GuitarTab.CARET] > caret_start:
                         note = Neck.find_note_from_position(string_name_vertical, cell_vertical[GuitarTab.FRET])
                         notes.append(note)
@@ -258,20 +262,26 @@ class GuitarTab():
         return res
 
     @staticmethod
-    def _add_notes_or_chord(chord_notes: [], note_fret_caret: NoteFretCaret) -> []:
+    def _add_notes_or_chord(chord_notes: [], note_fret_caret: NoteFretCaret) -> ChordAndFingering:
+        added_fingers = GuitarTab._extra_required_fingers_qty(chord_notes, note_fret_caret)
         if type(note_fret_caret.note_or_chord) == Note:  # todo use polymorphism !
-            chord_notes.append(note_fret_caret.note_or_chord)
+            if str(note_fret_caret.note_or_chord) not in chord_notes:
+                chord_notes.append(str(note_fret_caret.note_or_chord))
         elif type(note_fret_caret.note_or_chord) == Chord:
             components = note_fret_caret.note_or_chord.components()
-            for c in components:
-                chord_notes.append(c)
+            for note in components:
+                if note not in chord_notes:
+                    chord_notes.append(note)
         else:
             raise ValueError(f"Bad type of note found in {note_fret_caret.note_or_chord}")
         # remove dupes
-        res = []
-        for c in chord_notes:
-            if c not in res:
-                res.append(c)
+        res = ChordAndFingering()
+        res.fingers = added_fingers
+        res.chord_notes = []
+        for note in chord_notes:
+            note_name = str(note)
+            if note_name not in res.chord_notes:
+                res.chord_notes.append(note_name)
         return res
 
     @staticmethod
@@ -285,29 +295,50 @@ class GuitarTab():
         :param finger_qty:
         :return:
         """
+        extra_fingers = GuitarTab._extra_required_fingers_qty(chord_notes, note_fret_caret)
+        is_fingering_not_too_wide = note_fret_caret.fret - first_fret <= Fingering.FINGERING_WIDTH
+        is_there_enough_fingers = extra_fingers + finger_qty <= Fingering.FINGERING_AVAILABLE_FINGERS
+        return is_there_enough_fingers and is_fingering_not_too_wide
+
+    @staticmethod
+    def _extra_required_fingers_qty(chord_notes: [], note_fret_caret: NoteFretCaret) -> int:
+        """
+        return the extra amount of required fingers with note_fret_caret from chord_notes
+        :param chord_notes:
+        :param note_fret_caret:
+        :return:    the qty of extra required fingers
+        """
         # is the next note still in the same chord_notes ?
         is_next_tab_still_in_chord_notes = True
-        for n in chord_notes:
-            if type(note_fret_caret.note_or_chord) == Note:     # todo use polymorphism !
-                is_next_tab_still_in_chord_notes = n == note_fret_caret.note_or_chord
-                finger_qty += 1
-            elif type(note_fret_caret.note_or_chord) == Chord:
+        finger_qty = 0
+        note_found = False
+        if type(note_fret_caret.note_or_chord) == Note:  # todo use polymorphism !
+            for n in chord_notes:
+                note_found = Note(n) == note_fret_caret.note_or_chord
+                if note_found:
+                    break
+            if not note_found:
+                finger_qty = 1
+        elif type(note_fret_caret.note_or_chord) == Chord:
+            for n in chord_notes:
                 # if all the notes of the chord are not in the chord_notes
                 notes_in_chord = note_fret_caret.note_or_chord.components()
+                is_next_tab_still_in_chord_notes = True
                 for c in notes_in_chord:
                     is_next_tab_still_in_chord_notes = is_next_tab_still_in_chord_notes \
-                                                     and (Note(n) == Note(c))
-                    if not is_next_tab_still_in_chord_notes:
-                        break
-                finger_qty += len(notes_in_chord)
+                                                       and (Note(n) == Note(c))
+                    if Note(n) != Note(c):
+                        finger_qty += 1
+        elif type(note_fret_caret.note_or_chord) == type([]):
+            for n in chord_notes:
+                set1 = set(chord_notes)
+                set2 = set(note_fret_caret.note_or_chord)
+                newList = list(set1.union(set2))
+                is_next_tab_still_in_chord_notes = is_next_tab_still_in_chord_notes \
+                                                   and len(newList) == len(chord_notes)
+                finger_qty += len(newList) - len(chord_notes)
             else:
                 raise ValueError(f"Bad type of note found in {note_fret_caret.note_or_chord}")
-            if not is_next_tab_still_in_chord_notes:
-                break
-        if is_next_tab_still_in_chord_notes:
-            return True
-        else:
-            is_fingering_not_too_wide = note_fret_caret.fret - first_fret < Fingering.FINGERING_WIDTH
-            is_there_enough_fingers = finger_qty < Fingering.FINGERING_AVAILABLE_FINGERS
-            return is_there_enough_fingers and is_fingering_not_too_wide
-
+        if finger_qty == 0 and not note_found:
+            finger_qty = 1
+        return finger_qty
