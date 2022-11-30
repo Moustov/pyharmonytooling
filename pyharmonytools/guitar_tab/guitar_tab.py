@@ -119,7 +119,7 @@ class GuitarTab():
                 first_caret = note_fret_caret.current_caret
             note_fret_caret = self._get_next_caret_position_across_strings_note_or_chord(current_caret)
             if note_fret_caret:
-                first_fret = note_fret_caret.fret
+                # first_fret = note_fret_caret.fret
                 current_caret = note_fret_caret.current_caret
             else:
                 possible_chord = CofChord.guess_chord_name(chord_notes, is_strictly_compliant=True,
@@ -147,7 +147,7 @@ class GuitarTab():
                 'e': [-1, [11, 2], -1, ...],
                 'B': [-1, [11, 2], -1, ...],
                 ...}
-                        -1: finger
+                        -1: no finger
                         [11, 2]: 11th fret found at caret 2 from the '|'
         """
         self.tab_dict = {}
@@ -155,24 +155,28 @@ class GuitarTab():
         tab_size = 0
         if strings:
             for s in strings:
-                if tab_size < len(s):
-                    tab_size = len(s)
+                bars = s.split("|")
+                timeline = ""
+                for b in bars[1:]:
+                    timeline += b
+                if tab_size < len(timeline):
+                    tab_size = len(timeline)
         for string in strings:
             if string.strip() == "":
                 continue
-            parts = string.strip().split("-")
+            parts = string.strip()
             print("-", string)
             string_name = parts[0].strip()
             string_name = string_name[0]
             part_position = 0
             self.tab_dict[string_name] = [Fingering.FRET_MUTE] * tab_size
-            pos_on_string = 1
+            pos_on_string = 0
             fret = 0
-            for part in parts[1:]:
-                if "-" not in part and part != "" and part != "|":  # todo use "|" to delimit bars
+            for part in parts[2:]:
+                if part != "-" and part != "|":  # todo use "|" to delimit bars
                     fret = int(part)  # todo handle hammering, pull off, etc.
                     self.tab_dict[string_name][part_position] = [int(fret), pos_on_string]
-                    pos_on_string += len(str(fret)) + 1
+                    pos_on_string += len(str(fret))
                 else:
                     pos_on_string += 1
                 part_position += 1
@@ -226,13 +230,13 @@ class GuitarTab():
                 cell_vertical = self.tab_dict[string_name_vertical][current_pos]
                 if type(cell_vertical) != int:  # todo use polymorphism !
                     if cell_vertical[GuitarTab.CARET] > caret_start:
+                        current_caret = cell_vertical[GuitarTab.CARET]
                         note = Neck.find_note_from_position(string_name_vertical, cell_vertical[GuitarTab.FRET])
                         notes.append(note)
                         fret = cell_vertical[GuitarTab.FRET]
-                        current_caret = cell_vertical[GuitarTab.CARET]
                         chord_layout[Neck.TUNING.index(string_name_vertical)] = fret
                         string = string_name_vertical
-            if notes:
+            if len(notes) >= 1:
                 break
             current_pos += 1
         note_or_chord = None

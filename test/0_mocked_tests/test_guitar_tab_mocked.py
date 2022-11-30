@@ -1,11 +1,21 @@
 from unittest import TestCase
 
+from deepdiff import DeepDiff
 from pychord import Chord
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
 from pyharmonytools.guitar_tab.note_fret_caret import NoteFretCaret
 from pyharmonytools.harmony.note import Note
+
+
+def is_tab_equals(res: dict, expected: dict):
+    for (res_s, expected_s) in zip(res.keys(), expected.keys()):
+        if res_s != expected_s:
+            return False
+        if res[res_s] != expected[expected_s]:
+            return False
+    return True
 
 
 class TestGuitarTab(TestCase):
@@ -51,3 +61,138 @@ class TestGuitarTab(TestCase):
         chord_notes = ["Eb", "Bb", "Gb"]
         res = GuitarTab.is_note_fret_caret_in_same_chord(chord_notes, nfc, first_fret, finger_qty)
         self.ut_report.assertTrue(not res)
+
+    def test__get_fingerings_from_tab1(self):
+        tab = """
+            e|-------|
+            B|-----0-|
+            G|-------|
+            D|---0---|
+            A|-------|
+            E|-3-----|
+        """
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'e': [-1, -1, -1, -1, -1, -1, -1],
+                    'B': [-1, -1, -1, -1, -1, [0, 5], -1],
+                    'G': [-1, -1, -1, -1, -1, -1, -1],
+                    'D': [-1, -1, -1, [0, 3], -1, -1, -1],
+                    'A': [-1, -1, -1, -1, -1, -1, -1],
+                    'E': [-1, [3, 1], -1, -1, -1, -1, -1]}
+        gt = GuitarTab(tab)
+        res = gt.tab_dict
+        diff = is_tab_equals(res, expected)
+        self.ut_report.assertTrue(diff)
+
+    def test__get_fingerings_from_tab2(self):
+        tab = """
+          e|---------------------|
+          B|-----0---0---0-------|
+          G|-------2-------------|
+          D|---0-------0---0---0-|
+          A|---------------------|
+          E|-3---------------3---|
+        """
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'e': [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                    'B': [-1, -1, -1, -1, -1, [0, 5], -1, -1, -1, [0, 9], -1, -1, -1, [0, 13], -1, -1, -1, -1, -1, -1,
+                          -1],
+                    'G': [-1, -1, -1, -1, -1, -1, -1, [2, 7], -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                    'D': [-1, -1, -1, [0, 3], -1, -1, -1, -1, -1, -1, -1, [0, 11], -1, -1, -1, [0, 15], -1, -1, -1,
+                          [0, 19], -1],
+                    'A': [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                    'E': [-1, [3, 1], -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, [3, 17], -1, -1, -1]}
+        gt = GuitarTab(tab)
+        res = gt.tab_dict
+        diff = is_tab_equals(res, expected)
+        self.ut_report.assertTrue(diff)
+
+    def test__get_fingerings_from_tab3(self):
+        tab = """
+          e|---------------------------------|
+          B|-----0---0---0-------0---0---0---|
+          G|-------2---------------2---------|
+          D|---0-------0---0---0-------0---0-|
+          A|---------------------------------|
+          E|-3---------------3---------------|
+        """
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {
+            'e': [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                  -1, -1, -1, -1, -1, -1, -1, -1],
+            'B': [-1, -1, -1, -1, -1, [0, 5], -1, -1, -1, [0, 9], -1, -1, -1, [0, 13], -1, -1, -1, -1, -1, -1, -1,
+                  [0, 21], -1, -1, -1, [0, 25], -1, -1, -1, [0, 29], -1, -1, -1],
+            'G': [-1, -1, -1, -1, -1, -1, -1, [2, 7], -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                  [2, 23], -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            'D': [-1, -1, -1, [0, 3], -1, -1, -1, -1, -1, -1, -1, [0, 11], -1, -1, -1, [0, 15], -1, -1, -1, [0, 19], -1,
+                  -1, -1, -1, -1, -1, -1, [0, 27], -1, -1, -1, [0, 31], -1],
+            'A': [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                  -1, -1, -1, -1, -1, -1, -1, -1],
+            'E': [-1, [3, 1], -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, [3, 17], -1, -1, -1, -1, -1,
+                  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]}
+        gt = GuitarTab(tab)
+        res = gt.tab_dict
+        diff = is_tab_equals(res, expected)
+        self.ut_report.assertTrue(diff)
+
+    def test__get_fingerings_from_tab4(self):
+        tab = """
+            e|-------|
+            B|-----0-|
+            G|-------|
+            D|---0---|
+            A|-------|
+            E|-3---0-|
+        """
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'e': [-1, -1, -1, -1, -1, -1, -1],
+                    'B': [-1, -1, -1, -1, -1, [0, 5], -1],
+                    'G': [-1, -1, -1, -1, -1, -1, -1],
+                    'D': [-1, -1, -1, [0, 3], -1, -1, -1],
+                    'A': [-1, -1, -1, -1, -1, -1, -1],
+                    'E': [-1, [3, 1], -1, -1, -1, [0, 5], -1]}
+        gt = GuitarTab(tab)
+        res = gt.tab_dict
+        diff = is_tab_equals(res, expected)
+        self.ut_report.assertTrue(diff)
+
+    def test__get_fingerings_from_tab5(self):
+        tab = """
+            e|0------|
+            B|-----0-|
+            G|-------|
+            D|---0---|
+            A|-------|
+            E|-3---0-|
+        """
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'e': [[0, 0], -1, -1, -1, -1, -1, -1],
+                    'B': [-1, -1, -1, -1, -1, [0, 5], -1],
+                    'G': [-1, -1, -1, -1, -1, -1, -1],
+                    'D': [-1, -1, -1, [0, 3], -1, -1, -1],
+                    'A': [-1, -1, -1, -1, -1, -1, -1],
+                    'E': [-1, [3, 1], -1, -1, -1, [0, 5], -1]}
+        gt = GuitarTab(tab)
+        res = gt.tab_dict
+        diff = is_tab_equals(res, expected)
+        self.ut_report.assertTrue(diff)
+
+    def test__get_fingerings_from_tab6(self):
+        tab = """
+            e|0------|
+            B|-----0-|
+            G|-------|
+            D|---0---|
+            A|-------|
+            E|-3----0|
+        """
+        # checked with https://www.oolimo.com/guitarchords/analyze
+        expected = {'e': [[0, 0], -1, -1, -1, -1, -1, -1],
+                    'B': [-1, -1, -1, -1, -1, [0, 5], -1],
+                    'G': [-1, -1, -1, -1, -1, -1, -1],
+                    'D': [-1, -1, -1, [0, 3], -1, -1, -1],
+                    'A': [-1, -1, -1, -1, -1, -1, -1],
+                    'E': [-1, [3, 1], -1, -1, -1, -1, [0, 6]]}
+        gt = GuitarTab(tab)
+        res = gt.tab_dict
+        diff = is_tab_equals(res, expected)
+        self.ut_report.assertTrue(diff)

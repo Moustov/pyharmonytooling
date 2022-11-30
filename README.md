@@ -43,6 +43,7 @@ Series of tools to handle harmony in music
 ouput:
 
     Borrowed chords: dict_keys(['Cm'])
+See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
 
 ### Find substitutes from a chord
     from pychord import Chord 
@@ -68,6 +69,8 @@ ouput:
     ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
     substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
 
+See [related unit tests](test/1_objects_tests/test_circle_of_5th.py)
+
 ### Guess chord from notes
 To guess a chord from notes, there is a feature that enables: 
 - to have a list of possible chords that include all the provided notes
@@ -88,6 +91,8 @@ Code sample:
 output:
 
     True
+
+See [related unit tests](test/1_objects_tests/test_cof_chord.py)
 
 ## Guitar tools
 ### Find chord fingering on a guitar
@@ -119,6 +124,7 @@ output:
     diff = DeepDiff(res, expected, ignore_order=True)
     assert (diff == {})
 
+See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
 ## Song Processing
 ### Song search & processing tools on Ultimate Guitar through Google.com
@@ -149,6 +155,8 @@ Output:
     [tab][ch]A[/ch]                                     [ch]D[/ch]\r\nJ'ai ecris des mots doux а toutes les filles de France[/tab]\r\n
     [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nChaque jour et chaque nuit[/tab]\r\n
     ...
+
+See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
 
 ### Song search from a cadence
 Searching for songs in the 12 tones from a cadence
@@ -236,6 +244,7 @@ output:
                 'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219']
                 }
 
+See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
 
 ### Song processing tools on simple text song
 
@@ -258,6 +267,8 @@ output:
 output: 
 
     [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
+
+See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
 # Test report
 see [here](unit_test_report.md)
