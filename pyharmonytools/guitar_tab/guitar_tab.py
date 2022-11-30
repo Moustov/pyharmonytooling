@@ -76,7 +76,9 @@ class GuitarTab():
         A|------------------------------|
         E|------------------------------|
         would return {"2": Chord("D#m"), "8": Chord("G#m"), "15": Chord("Bb"), "22": Chord("D#m")}
-        Note: the resulted chords can be post-processed
+        Note 1:
+                - if a note is immediately replaced by another on the same string => not part of the tabbed chord
+        Note 2: the resulted chords can be post-processed
                 - to use appropriate notation (eg Bb instead of A#) and renversed chord names
                 - improve chord names from context
                 - to guess some rythm and introduce visual rythmic signs (1/4th or 1/8th with a "+")
