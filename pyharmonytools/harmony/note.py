@@ -76,7 +76,10 @@ class Note:
             try:
                 index_note = Note.CHROMATIC_SCALE_FLAT_BASED.index(note_name)
             except:
-                index_note = Note.CHROMATIC_SCALE_WEIRD_NOTES.index(note_name)
+                try:
+                    index_note = Note.CHROMATIC_SCALE_WEIRD_NOTES.index(note_name)
+                except:
+                    pass
         if index_note == -1:
             raise ValueError(f"{note_name} is not a known note...")
         return index_note

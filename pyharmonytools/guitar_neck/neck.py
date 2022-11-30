@@ -21,7 +21,7 @@ class Neck:
         :return:
         """
         if fret == 0:
-            return string
+            return string.upper()
         else:
             res = Chord(string.upper())
             res.transpose(fret)

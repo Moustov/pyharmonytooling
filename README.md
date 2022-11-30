@@ -124,6 +124,13 @@ output:
     diff = DeepDiff(res, expected, ignore_order=True)
     assert (diff == {})
 
+If the tab if well formatted 
+(only tabbed strings with names and | as bars separators), 
+a whole song can be processes.
+Among the unit tests, a chord guessing
+of Johann Sebastian Bach's Prelude for Cello, Suite No. 1 (BWV1007)
+can be found.
+
 See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
 ## Song Processing
@@ -274,6 +281,8 @@ See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 see [here](unit_test_report.md)
 
 # Release Notes
+* 30/NOV/22
+  * a tab on multiple bars can be processed
 * 28/NOV/22
   * chords can be guessed from a tab
   * package v0.1.4

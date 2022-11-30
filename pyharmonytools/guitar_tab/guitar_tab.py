@@ -1,7 +1,4 @@
-from copy import copy
-
 from pychord import Chord
-
 from pyharmonytools.guitar_neck.fingering import Fingering
 from pyharmonytools.guitar_neck.neck import Neck
 from pyharmonytools.guitar_tab.chord_and_fingering import ChordAndFingering
@@ -11,7 +8,7 @@ from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.harmony.note import Note
 
 
-class GuitarTab():
+class GuitarTab:
     """
     handling guitar tabs
 
@@ -47,26 +44,32 @@ class GuitarTab():
 
     def __init__(self, tab: str):
         self.tab_ascii = tab
-        self.tab_dict = self._get_fingerings_from_tab()
+        self.tab_dict = []
+        self.bars = self._split_tab_in_bars(tab)
+        bar_id = 0
+        for b in self.bars:
+            self.tab_dict.append({})
+            self._get_fingerings_from_tab_bar(b, bar_id)
+            bar_id += 1
 
-    def _get_fret_from_fingering(self, string_number: int, caret_position_start: int,
+    def _get_fret_from_fingering(self, bar_id: int, string_number: int, caret_position_start: int,
                                  caret_position_end: int) -> []:
         """
         return the used fret found on the string_number between caret_position_start and caret_position_end
-        :param tab_dict:
+        :param bar_id: a bar
         :param string_number:
         :param caret_position_start:
         :param caret_position_end:
         :return: [caret pos, fret number]
         """
-        string_name = list(self.tab_dict.keys())[string_number]
-        for cell in self.tab_dict[string_name]:
+        string_name = list(self.tab_dict[bar_id].keys())[string_number]
+        for cell in self.tab_dict[bar_id][string_name]:
             if type(cell) != int:  # todo use polymorphism !
                 if caret_position_start <= cell[1] <= caret_position_end:
                     return cell
         return None
 
-    def digest_tab_simplest_progressive_chords_in_a_bar(self) -> {}:
+    def digest_tab_simplest_progressive_chords_in_a_bar(self, bar_id: int) -> {}:
         """
         provide the simplest chord at the tab fret position in the bar
         e|--11-----11-----10-----11-----|
@@ -83,7 +86,6 @@ class GuitarTab():
                 - improve chord names from context
                 - to guess some rythm and introduce visual rythmic signs (1/4th or 1/8th with a "+")
                 - display the decorated tab
-        :param tab:
         :return: the keys would be the nb of chars from '|' (bar delimiter)
         """
         res = {}
@@ -92,7 +94,7 @@ class GuitarTab():
         current_caret = -1
         first_caret = -1
         first_fret = -1
-        note_fret_caret = self._get_next_caret_position_across_strings_note_or_chord(current_caret)
+        note_fret_caret = self._get_next_caret_position_across_strings_note_or_chord(current_caret, bar_id)
         if note_fret_caret:
             first_fret = note_fret_caret.fret
             first_caret = note_fret_caret.current_caret
@@ -119,7 +121,7 @@ class GuitarTab():
                 finger_qty = caf.fingers
                 current_caret = note_fret_caret.current_caret
                 first_caret = note_fret_caret.current_caret
-            note_fret_caret = self._get_next_caret_position_across_strings_note_or_chord(current_caret)
+            note_fret_caret = self._get_next_caret_position_across_strings_note_or_chord(current_caret, bar_id)
             if note_fret_caret:
                 # first_fret = note_fret_caret.fret
                 current_caret = note_fret_caret.current_caret
@@ -134,7 +136,7 @@ class GuitarTab():
                     res[str(first_caret)] = possible_chord[0]
         return res
 
-    def _get_fingerings_from_tab(self) -> dict:
+    def _get_fingerings_from_tab_bar(self, tab_bar_ascii: str, bar_number: int) -> dict:
         """
         translates the tab into fingerings.
         result will be returned & set in self.tab_dict
@@ -152,8 +154,8 @@ class GuitarTab():
                         -1: no finger
                         [11, 2]: 11th fret found at caret 2 from the '|' (bar start)
         """
-        self.tab_dict = {}
-        strings = self.tab_ascii.split('\n')  # todo define Neck.TUNING from strings
+        self.tab_dict[bar_number] = {}
+        strings = tab_bar_ascii.split('\n')  # todo define Neck.TUNING from strings
         tab_size = 0
         if strings:
             for s in strings:
@@ -171,7 +173,7 @@ class GuitarTab():
             string_name = parts[0].strip()
             string_name = string_name[0]
             part_position = 2
-            self.tab_dict[string_name] = [Fingering.FRET_MUTE] * tab_size
+            self.tab_dict[bar_number][string_name] = [Fingering.FRET_MUTE] * tab_size
             pos_on_string = 0
             fret = 0
             while part_position < len(parts):
@@ -181,12 +183,13 @@ class GuitarTab():
                     pos_on_string += 1
                     part_position += 1
                 if fret_s:
-                    fret = int (fret_s)
-                    self.tab_dict[string_name][pos_on_string - len(fret_s)] = [fret, pos_on_string - len(fret_s)]
+                    fret = int(fret_s)
+                    self.tab_dict[bar_number][string_name][pos_on_string - len(fret_s)] = [fret,
+                                                                                           pos_on_string - len(fret_s)]
                 else:
                     pos_on_string += 1
                     part_position += 1
-        return self.tab_dict
+        return self.tab_dict[bar_number]
 
     @staticmethod
     def _get_notes_from_chord_layout(chord_layout: []) -> [Note]:
@@ -214,26 +217,28 @@ class GuitarTab():
         res = is_there_a_next_sac and is_next_sac_in_a_next_cluster
         return res
 
-    def _get_next_caret_position_across_strings_note_or_chord(self, caret_start: int) -> NoteFretCaret:
+    def _get_next_caret_position_across_strings_note_or_chord(self, caret_start: int, bar_id: int) -> NoteFretCaret:
         """
         browse vertically the neck from the nut to find the first used fret caret_start wise
+        :param bar_id:
         :param caret_start:
         :return:
         """
         res = None
+        notes = None
         current_pos = 0
         current_caret = -1
         chord_layout = [-1] * len(Neck.TUNING)
         fret = -1
-        strings = list(self.tab_dict.keys())
+        strings = list(self.tab_dict[bar_id].keys())
         string = "X"
         # a tab timeline is browsed following what is available on the 1st string
         reference_string_name = strings[0]
-        for cell in self.tab_dict[reference_string_name]:
+        for cell in self.tab_dict[bar_id][reference_string_name]:
             notes = []
             # then we look vertically at a fret
-            for string_name_vertical in self.tab_dict.keys():
-                cell_vertical = self.tab_dict[string_name_vertical][current_pos]
+            for string_name_vertical in self.tab_dict[bar_id].keys():
+                cell_vertical = self.tab_dict[bar_id][string_name_vertical][current_pos]
                 if type(cell_vertical) != int:  # todo use polymorphism !
                     if cell_vertical[GuitarTab.CARET] > caret_start:
                         current_caret = cell_vertical[GuitarTab.CARET]
@@ -352,3 +357,64 @@ class GuitarTab():
         if finger_qty == 0 and not note_found:
             finger_qty = 1
         return finger_qty
+
+    def _split_tab_in_bars(self, tab: str) -> [str]:
+        """
+            e|-3----|-3----|
+            B|------|------|
+            G|------|------|
+            D|------|------|
+            A|------|------|
+            E|------|------|
+
+            e|-2----|-3----|
+            B|------|------|
+            G|------|------|
+            D|------|------|
+            A|------|------|
+            E|------|------|
+
+        returns 4 bars tabs
+        :param tab:
+        :return:
+        """
+        lines = tab.split("\n")
+        bar_id = -1
+        bars = []
+        bars.append("")
+        for li in lines:
+            if li.strip() == "":
+                bar_id += 1
+                bars.append("")
+            else:
+                bars[bar_id] += li.strip() + "\n"
+        res = []
+        bar_id = 0
+        for b in bars:
+            if b != "":
+                lines = b.split("\n")
+                for li in lines:
+                    string_bar = li.strip().split("|")
+                    for b in string_bar[1:]:
+                        if len(b) > 2:  # heuristic: if bigger than 4 char => it's a string content
+                            res.append("")
+        bar_id = 0
+        for b in bars:
+            if b != "":
+                lines = b.split("\n")
+                added_bars = 0
+                for li in lines:
+                    string_bar = li.strip().split("|")
+                    bar_in_string = 0
+                    for b in string_bar[1:]:
+                        if len(b) > 2:  # heuristic: if bigger than 4 char => it's a string content
+                            res[bar_id + bar_in_string] += f"{string_bar[0]}|{b}|\n"
+                            bar_in_string += 1
+                            added_bars = bar_in_string
+                bar_id += added_bars + 1
+        self.bars = []
+        for b in res:
+            if b.strip() != "":
+                self.bars.append(b)
+        return self.bars
+

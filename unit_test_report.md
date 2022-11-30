@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2022-11-30 17:39:42.477820
-:red_circle:1
-:green_circle:447
+ generation: 2022-11-30 21:01:58.135952
+:red_circle:0
+:green_circle:451
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L84)]: test__get_fingerings_from_tab1(line 84): 
@@ -418,14 +418,17 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L346)]: test_digest_bach_bar_1(line 346): 
-* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L377)]: test_digest_bach_bar_1_2(line 377): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L309)]: test_digest_bach_bar_1(line 309): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L341)]: test_digest_bach_bar_1_2(line 341): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L357)]: test_digest_bach_bar_1_2_with_bar(line 357): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L360)]: test_digest_bach_bar_1_2_with_bar(line 360): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L67)]: test_digest_tab_dgbd(line 67): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L110)]: test_digest_tab_eb(line 110): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L294)]: test_digest_tab_full_bach(line 294): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L81)]: test_digest_tab_gb6(line 81): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L96)]: test_digest_tab_gb6_d(line 96): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L361)]: test_digest_tab_simplest_progressive_chords_in_a_bar_ebm(line 361): 
-* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L392)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 392): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L324)]: test_digest_tab_simplest_progressive_chords_in_a_bar_ebm(line 324): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L376)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 376): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L50)]: test_get_notes_from_chord_layout(line 50): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L79)]: test_get_borrowed_chords_C(line 79): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L90)]: test_get_borrowed_chords_Cm(line 90): 
