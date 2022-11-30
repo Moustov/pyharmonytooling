@@ -128,7 +128,7 @@ If the tab if well formatted
 (only tabbed strings with names and | as bars separators), 
 a whole song can be processes.
 Among the unit tests, a chord guessing
-of Johann Sebastian Bach's Prelude for Cello, Suite No. 1 (BWV1007)
+of [Johann Sebastian Bach's Prelude for Cello, Suite No. 1 (BWV1007)](https://github.com/Moustov/pyharmonytooling/blob/master/test/1_objects_tests/test_guitar_tab.py#L112)
 can be found.
 
 See [related unit tests](test/1_objects_tests/test_guitar_tab.py)

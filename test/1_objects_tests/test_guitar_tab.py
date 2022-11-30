@@ -277,21 +277,17 @@ class TestGuitarTab(TestCase):
         C     C     G   G   G7  G7  C7  C7
         C     F     C   C   C   C
         """
-        chords = expected_chords.split()
-        chords_list = []
-        for c in chords:
-            transposed_chord = Chord(c)
-            transposed_chord.transpose(7)
-            chords_list.append(transposed_chord)
-        expected = transform_expected_chords(expected_chords)
         gt = GuitarTab(tab_full)
+        chords = []
         for b in range(0, len(gt.tab_dict)):
             res = gt.digest_tab_simplest_progressive_chords_in_a_bar(b)
             print("----------------")
             print("Bar #", b, ":")
             print(res)
             print(gt.bars[b])
-        self.ut_report.assertTrue(len(gt.tab_dict) == 42)
+            chords.append(res)
+        # the chord transcription will be too hard to test => simple check on processed bars qty
+        self.ut_report.assertTrue(len(chords) == 42)
 
     def test_digest_bach_bar_1(self):
         tab = """
