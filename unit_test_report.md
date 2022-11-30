@@ -2,15 +2,22 @@
 UNIT TEST REPORT
 ================
         
- generation: 2022-11-29 23:41:38.806559
-:red_circle:3
-:green_circle:438
+ generation: 2022-11-30 16:48:09.413608
+:red_circle:2
+:green_circle:446
 -------
 
-* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L23)]: test_is_note_fret_caret_in_same_chord_1(line 23): 
-* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L33)]: test_is_note_fret_caret_in_same_chord_2(line 33): 
-* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L43)]: test_is_note_fret_caret_in_same_chord_3(line 43): 
-* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L53)]: test_is_note_fret_caret_in_same_chord_4(line 53): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L84)]: test__get_fingerings_from_tab1(line 84): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L107)]: test__get_fingerings_from_tab2(line 107): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L135)]: test__get_fingerings_from_tab3(line 135): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L156)]: test__get_fingerings_from_tab4(line 156): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L177)]: test__get_fingerings_from_tab5(line 177): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L198)]: test__get_fingerings_from_tab6(line 198): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L219)]: test__get_fingerings_from_tab7(line 219): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L33)]: test_is_note_fret_caret_in_same_chord_1(line 33): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L43)]: test_is_note_fret_caret_in_same_chord_2(line 43): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L53)]: test_is_note_fret_caret_in_same_chord_3(line 53): 
+* :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L63)]: test_is_note_fret_caret_in_same_chord_4(line 63): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L33)]: test_all_equals(line 33): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L33)]: test_all_equals(line 33): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L33)]: test_all_equals(line 33): 
@@ -411,7 +418,7 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
 * :green_circle:[[1_objects_tests/test_fingering.py](test/1_objects_tests/test_fingering.py#L133)]: test_is_string_index_between_before_fret_partial_D(line 133): 
-* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L346)]: test_digest_bach_bar_1(line 346): 
+* :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L346)]: test_digest_bach_bar_1(line 346): 
 * :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L378)]: test_digest_bach_bar_1_2(line 378): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L67)]: test_digest_tab_dgbd(line 67): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L110)]: test_digest_tab_eb(line 110): 

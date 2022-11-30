@@ -145,10 +145,10 @@ class GuitarTab():
                 E|-------|
         :return: fingerings = {
                 'e': [-1, [11, 2], -1, ...],
-                'B': [-1, [11, 2], -1, ...],
+                'B': [-1, -1 , -1, ...],
                 ...}
                         -1: no finger
-                        [11, 2]: 11th fret found at caret 2 from the '|'
+                        [11, 2]: 11th fret found at caret 2 from the '|' (bar start)
         """
         self.tab_dict = {}
         strings = self.tab_ascii.split('\n')  # todo define Neck.TUNING from strings
@@ -168,18 +168,22 @@ class GuitarTab():
             print("-", string)
             string_name = parts[0].strip()
             string_name = string_name[0]
-            part_position = 0
+            part_position = 2
             self.tab_dict[string_name] = [Fingering.FRET_MUTE] * tab_size
             pos_on_string = 0
             fret = 0
-            for part in parts[2:]:
-                if part != "-" and part != "|":  # todo use "|" to delimit bars
-                    fret = int(part)  # todo handle hammering, pull off, etc.
-                    self.tab_dict[string_name][part_position] = [int(fret), pos_on_string]
-                    pos_on_string += len(str(fret))
+            while part_position < len(parts):
+                fret_s = ""
+                while parts[part_position] != "-" and parts[part_position] != "|":  # todo use "|" to delimit bars
+                    fret_s += parts[part_position]  # todo handle hammering, pull off, etc.
+                    pos_on_string += 1
+                    part_position += 1
+                if fret_s:
+                    fret = int (fret_s)
+                    self.tab_dict[string_name][pos_on_string - len(fret_s)] = [fret, pos_on_string - len(fret_s)]
                 else:
                     pos_on_string += 1
-                part_position += 1
+                    part_position += 1
         return self.tab_dict
 
     @staticmethod
