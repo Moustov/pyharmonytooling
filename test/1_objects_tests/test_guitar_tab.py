@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from pychord import Chord
 
-from pyharmonytools.displays.guitar_tab.console_for_guitar_tab import ConsoleForGuitarTab
+from pyharmonytools.displays.console_for_guitar_tab import ConsoleForGuitarTab
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
 from pyharmonytools.harmony.note import Note
