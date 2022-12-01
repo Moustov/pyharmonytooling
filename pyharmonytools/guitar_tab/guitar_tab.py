@@ -44,13 +44,29 @@ class GuitarTab:
 
     def __init__(self, tab: str):
         self.tab_ascii = tab
-        self.tab_dict = []
-        self.bars = self._split_tab_in_bars(tab)
+        self._bars_tab_dict = []
+        self.bars_ascii = self._split_tab_in_bars(tab)
         bar_id = 0
-        for b in self.bars:
-            self.tab_dict.append({})
+        for b in self.bars_ascii:
+            self._bars_tab_dict.append({})
             self._get_fingerings_from_tab_bar(b, bar_id)
             bar_id += 1
+
+    def get_nb_chars_in_bar(self, bar: int) -> int:
+        """
+        return the nb of chars in the bar
+        :param bar:
+        :return:
+        """
+        bar_lines = self.bars_ascii[bar].split("\n")
+        return len(bar_lines[0])
+
+    def get_number_of_bars(self) -> int:
+        """
+        return the number of digested bars
+        :return:
+        """
+        return len(self.bars_ascii)
 
     def _get_fret_from_fingering(self, bar_id: int, string_number: int, caret_position_start: int,
                                  caret_position_end: int) -> []:
@@ -62,14 +78,14 @@ class GuitarTab:
         :param caret_position_end:
         :return: [caret pos, fret number]
         """
-        string_name = list(self.tab_dict[bar_id].keys())[string_number]
-        for cell in self.tab_dict[bar_id][string_name]:
+        string_name = list(self._bars_tab_dict[bar_id].keys())[string_number]
+        for cell in self._bars_tab_dict[bar_id][string_name]:
             if type(cell) != int:  # todo use polymorphism !
                 if caret_position_start <= cell[1] <= caret_position_end:
                     return cell
         return None
 
-    def digest_tab_simplest_progressive_chords_in_a_bar(self, bar_id: int) -> {}:
+    def get_simplest_progressive_chords_in_a_bar(self, bar_id: int) -> {}:
         """
         provide the simplest chord at the tab fret position in the bar
         e|--11-----11-----10-----11-----|
@@ -158,7 +174,7 @@ class GuitarTab:
                         -1: no finger
                         [11, 2]: 11th fret found at caret 2 from the '|' (bar start)
         """
-        self.tab_dict[bar_number] = {}
+        self._bars_tab_dict[bar_number] = {}
         strings = tab_bar_ascii.split('\n')  # todo define Neck.TUNING from strings
         tab_size = 0
         if strings:
@@ -177,23 +193,24 @@ class GuitarTab:
             string_name = parts[0].strip()
             string_name = string_name[0]
             part_position = 2
-            self.tab_dict[bar_number][string_name] = [Fingering.FRET_MUTE] * tab_size
+            self._bars_tab_dict[bar_number][string_name] = [Fingering.FRET_MUTE] * tab_size
             pos_on_string = 0
             fret = 0
             while part_position < len(parts):
                 fret_s = ""
                 while parts[part_position] != "-" and parts[part_position] != "|":  # todo use "|" to delimit bars
-                    fret_s += parts[part_position]  # todo handle hammering, pull off, etc.
+                    if ord(parts[part_position]) in range(ord('0'), ord('9')):  # todo handle hammering, pull off, etc.
+                        fret_s += parts[part_position]
                     pos_on_string += 1
                     part_position += 1
                 if fret_s:
                     fret = int(fret_s)
-                    self.tab_dict[bar_number][string_name][pos_on_string - len(fret_s)] = [fret,
-                                                                                           pos_on_string - len(fret_s)]
+                    self._bars_tab_dict[bar_number][string_name][pos_on_string - len(fret_s)] = [fret,
+                                                                                                 pos_on_string - len(fret_s)]
                 else:
                     pos_on_string += 1
                     part_position += 1
-        return self.tab_dict[bar_number]
+        return self._bars_tab_dict[bar_number]
 
     @staticmethod
     def _get_notes_from_chord_layout(chord_layout: []) -> [Note]:
@@ -234,15 +251,15 @@ class GuitarTab:
         current_caret = -1
         chord_layout = [-1] * len(Neck.TUNING)
         fret = -1
-        strings = list(self.tab_dict[bar_id].keys())
+        strings = list(self._bars_tab_dict[bar_id].keys())
         string = "X"
         # a tab timeline is browsed following what is available on the 1st string
         reference_string_name = strings[0]
-        for cell in self.tab_dict[bar_id][reference_string_name]:
+        for cell in self._bars_tab_dict[bar_id][reference_string_name]:
             notes = []
             # then we look vertically at a fret
-            for string_name_vertical in self.tab_dict[bar_id].keys():
-                cell_vertical = self.tab_dict[bar_id][string_name_vertical][current_pos]
+            for string_name_vertical in self._bars_tab_dict[bar_id].keys():
+                cell_vertical = self._bars_tab_dict[bar_id][string_name_vertical][current_pos]
                 if type(cell_vertical) != int:  # todo use polymorphism !
                     if cell_vertical[GuitarTab.CARET] > caret_start:
                         current_caret = cell_vertical[GuitarTab.CARET]
@@ -416,9 +433,31 @@ class GuitarTab:
                             bar_in_string += 1
                             added_bars = bar_in_string
                 bar_id += added_bars + 1
-        self.bars = []
+        self.bars_ascii = []
         for b in res:
             if b.strip() != "":
-                self.bars.append(b)
-        return self.bars
+                self.bars_ascii.append(b)
+        return self.bars_ascii
+
+    @staticmethod
+    def are_same_digested_tabs(res: dict, expected: dict):
+        """
+        ensure carets & chords match are the same
+        => compares both tab decorations (eg. { "2": xxx, "17": xxxx, ...})
+            and ensure each chords match (at component level)
+        :param res:
+        :param expected:
+        :return:
+        """
+        for chord_res in res.keys():
+            if chord_res not in expected.keys():
+                return False
+            if not CofChord.are_chord_equals(expected[chord_res], res[chord_res]):
+                return False
+        for chord_expected in expected.keys():
+            if chord_expected not in res.keys():
+                return False
+            if not CofChord.are_chord_equals(expected[chord_expected], res[chord_expected]):
+                return False
+        return True
 

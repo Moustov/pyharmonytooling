@@ -79,7 +79,7 @@ class TestGuitarTab(TestCase):
                     'A': [-1, -1, -1, -1, -1, -1, -1],
                     'E': [-1, [3, 1], -1, -1, -1, -1, -1]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -102,7 +102,7 @@ class TestGuitarTab(TestCase):
                     'A': [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
                     'E': [-1, [3, 1], -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, [3, 17], -1, -1, -1]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -130,7 +130,7 @@ class TestGuitarTab(TestCase):
             'E': [-1, [3, 1], -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, [3, 17], -1, -1, -1, -1, -1,
                   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -151,7 +151,7 @@ class TestGuitarTab(TestCase):
                     'A': [-1, -1, -1, -1, -1, -1, -1],
                     'E': [-1, [3, 1], -1, -1, -1, [0, 5], -1]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -172,7 +172,7 @@ class TestGuitarTab(TestCase):
                     'A': [-1, -1, -1, -1, -1, -1, -1],
                     'E': [-1, [3, 1], -1, -1, -1, [0, 5], -1]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -193,7 +193,7 @@ class TestGuitarTab(TestCase):
                     'A': [-1, -1, -1, -1, -1, -1, -1],
                     'E': [-1, [3, 1], -1, -1, -1, -1, [0, 6]]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -214,7 +214,7 @@ class TestGuitarTab(TestCase):
                     'A': [-1, -1, -1, -1, -1, -1, -1, -1],
                     'E': [-1, [3, 1], -1, -1, -1, -1, -1, -1]}
         gt = GuitarTab(tab)
-        res = gt.tab_dict[0]
+        res = gt._bars_tab_dict[0]
         diff = is_tab_equals(res, expected)
         self.ut_report.assertTrue(diff)
 
@@ -237,4 +237,4 @@ class TestGuitarTab(TestCase):
             E|------|------|
 """
         gt = GuitarTab(tab)
-        assert len(gt.bars) == 4
+        assert len(gt.bars_ascii) == 4

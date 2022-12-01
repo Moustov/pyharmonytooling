@@ -119,7 +119,8 @@ output:
           A|----------------------------|
           E|----------------------------|
     """
-    res = GuitarTab.digest_tab_simplest_progressive_chords_in_a_bar(tab)
+    gt = GuitarTab(tab)
+    res = gt.get_simplest_progressive_chords_in_a_bar(0)
     expected = {"2": Chord("D#m"), "9": Chord("G#m"), "16": Chord("Bb"), "23": Chord("D#m")}
     diff = DeepDiff(res, expected, ignore_order=True)
     assert (diff == {})
