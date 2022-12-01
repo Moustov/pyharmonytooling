@@ -79,8 +79,12 @@ class GuitarTab:
         A|------------------------------|
         E|------------------------------|
         would return {"2": Chord("D#m"), "8": Chord("G#m"), "15": Chord("Bb"), "22": Chord("D#m")}
-        Note 1:
-                - if a note is immediately replaced by another on the same string => not part of the tabbed chord
+        Note 1: the involved method is based on building chords
+                    as long as the fret range is acceptable (Fingering.FINGERING_WIDTH)
+                    and you have enough fingers or a tab
+                    therefore, sometimes the chord guessing is not inaccurate
+                    since musical phrases are not taken into account
+                    see unit tests test_digest_bach_bar_1_2 and test_digest_bach_bar_1_2_with_bar
         Note 2: the resulted chords can be post-processed
                 - to use appropriate notation (eg Bb instead of A#) and renversed chord names
                 - improve chord names from context

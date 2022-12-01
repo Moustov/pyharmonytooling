@@ -5,7 +5,7 @@ from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 
 class Cadence:
-    REMARQUABLE_CADENCES = {
+    REMARQUABLE_CADENCES_NATURAL_MAJOR = {
         "AUTHENTIC CADENCE": "V–I", # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "PLAGAL CADENCE": "IV–I", # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "ANATOLE": "ii7-V7-Imaj7",  # https://en.wikipedia.org/wiki/Ii%E2%80%93V%E2%80%93I_progression
@@ -26,10 +26,14 @@ class Cadence:
         "DECEPTIVE CADENCE 4": "Vsus–vi7",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 5": "V7–VI",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 6": "V–IV/3rd",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
-        "SUSPENS RISING": "i°-i#°-ii°",
-        "MELANCOLIC JOY": "I-IM7-I7",
+        "MELANCOLIC JOY": "I-IM7-I7",   # eg. Jamie Cullum's "It's Christmas" https://tabs.ultimate-guitar.com/tab/jamie-cullum/its-christmas-chords-4335365
+        "FREEDOM": "V-IV-I",   # eg. https://tabs.ultimate-guitar.com/tab/george-michael/freedom-90-chords-8344
+        "S. WONDER's 251": "IImaj7-V9sus4-Imaj7",   # https://www.youtube.com/shorts/J8IV_umUdUo
         # "*":"any chord" /  "]":"a phrase ending on"
         "HALF CADENCE_GENERIC": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+    }
+    REMARQUABLE_CADENCES_MELODIC_MINOR = {
+        "SUSPENS RISING": "i°-i#°-ii°",  # eg. https://tabs.ultimate-guitar.com/tab/the-specials/ghost-town-chords-2572791
     }
 
     def __init__(self):
