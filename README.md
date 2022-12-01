@@ -164,11 +164,11 @@ See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
     
     _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
     
-    ouput:
-    
-        [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
-    
-    #### Guess borrowed chords in a song from a tone point of view
+ouput: 
+
+    [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
+
+### Guess borrowed chords in a song from a tone point of view
     song = """
           C Dm Em F G Am Bdim Cm
           """
