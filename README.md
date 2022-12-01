@@ -283,6 +283,7 @@ see [here](unit_test_report.md)
 # Release Notes
 * 30/NOV/22
   * a tab on multiple bars can be processed
+  * package v0.2.1
 * 28/NOV/22
   * chords can be guessed from a tab
   * package v0.1.4
