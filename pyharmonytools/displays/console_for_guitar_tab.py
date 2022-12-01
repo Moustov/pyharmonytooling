@@ -11,8 +11,8 @@ class ConsoleForGuitarTab:
         for b in range(0, gt.get_number_of_bars()):
             localized_chords = gt.get_simplest_progressive_chords_in_a_bar(b)
             print("----------------")
-            print("Bar #", b, ":")
-            print(localized_chords)
+            print(f"Bar #{b}:")
+            # print(localized_chords)
             chords_line = [" " * gt.get_nb_chars_in_bar(b), " " * gt.get_nb_chars_in_bar(b)]
             chord_number = 0
             previous_end_of_chord_position = 0
@@ -28,6 +28,7 @@ class ConsoleForGuitarTab:
                                     + chords_line[line][len(before_new_chord):]
                 previous_end_of_chord_position = len(before_new_chord)
                 chord_number += 1
-            print(chords_line[1])
+            if (chords_line[1].strip()):
+                print(chords_line[1])
             print(chords_line[0])
             print(gt.bars_ascii[b])

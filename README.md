@@ -20,31 +20,6 @@ Series of tools to handle harmony in music
 > See [here](https://github.com/yuma-m/pychord/blob/main/pychord/constants/qualities.py)
 
 ## Features on Harmony
-### Guess the tone & mode of a song"
-    from pyharmonytools.displays.console import _HarmonyLogger
-    from pyharmonytools.harmony.circle_of_5th import CircleOf5th
-    
-    _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
-    
-    ouput:
-    
-        [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
-    
-    #### Guess borrowed chords in a song from a tone point of view
-    song = """
-          C Dm Em F G Am Bdim Cm
-          """
-    cof = CircleOf5thNaturalMajor()
-    cp = cof.digest_song(song)
-    tone = cof.generate_circle_of_fifths()["C"]
-    borrowed_chords = cof.get_borrowed_chords(tone, cp)
-    print("   Borrowed chords:", borrowed_chords.keys())
-
-ouput:
-
-    Borrowed chords: dict_keys(['Cm'])
-See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
-
 ### Find substitutes from a chord
     from pychord import Chord 
     from pyharmonytools.harmony.circle_of_5th import CircleOf5th
@@ -106,10 +81,26 @@ output:
     [[0, 3, 2, 0, 1, 0], [0, 3, 2, 0, 1, 3], [3, 3, 2, 0, 1, 0], ... ]
 
 ### Find chords from tabs
-    from deepdiff import DeepDiff
-    from pychord import Chord
+This tool is done to guess involved chords from a guitar tab.
+It is supposed to handle tab guitar techniques such as
+* `h`:   Hammer-on
+* `p`:   Pull-off
+* `^`: Bend
+* `/`:   Slide up
+* `\`:   Slide down
+* `~`:   Vibrato
+
+The involved method is based on building chords
+as long as the fret range is acceptable (Fingering.FINGERING_WIDTH)
+and you have enough fingers or a tab
+therefore, sometimes the chord guessing is not accurate
+since musical phrases are not taken into account.
+
+This wizard is then merely a guide you should check with both hears and fingers! :wink:
+
+
+    from pyharmonytools.displays.console_for_guitar_tab import ConsoleForGuitarTab
     from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
-    from pyharmonytools.harmony.cof_chord import CofChord
 
     tab = """
           e|--11-----11-----10-----11---|
@@ -119,11 +110,19 @@ output:
           A|----------------------------|
           E|----------------------------|
     """
-    gt = GuitarTab(tab)
-    res = gt.get_simplest_progressive_chords_in_a_bar(0)
-    expected = {"2": Chord("D#m"), "9": Chord("G#m"), "16": Chord("Bb"), "23": Chord("D#m")}
-    diff = DeepDiff(res, expected, ignore_order=True)
-    assert (diff == {})
+    gt = GuitarTab(tab_full)
+    ConsoleForGuitarTab.display(gt)
+Output
+
+    ----------------
+    Bar #0:
+        D#m    G#m    A#     D#m    
+    e|--11-----11-----10-----11----|
+    B|--11-----12-----11-----11----|
+    G|--11-----13-----10-----11----|
+    D|-----------------------------|
+    A|-----------------------------|
+    E|-----------------------------|
 
 If the tab if well formatted 
 (only tabbed strings with names and | as bars separators), 
@@ -135,6 +134,57 @@ can be found.
 See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
 ## Song Processing
+### Song processing tools on simple text song
+
+        from pychord import Chord 
+        from pyharmonytools.song.text_song import TextSongWithLineForChords
+
+        song = """
+                            A           E
+                    Happy Birthday to you
+                          E           A
+                    Happy Birthday to you
+                          A7            D
+                    Happy Birthday dear (name)
+                          A        E    A
+                    Happy Birthday to you
+                """
+        the_song = TextSongWithLineForChords()
+        the_song.digest(song)
+        print(the_song.chords_sequence)
+output: 
+
+    [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
+
+See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
+
+### Guess the tone & mode of a song"
+    from pyharmonytools.displays.console import _HarmonyLogger
+    from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+    
+    _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
+    
+    ouput:
+    
+        [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
+    
+    #### Guess borrowed chords in a song from a tone point of view
+    song = """
+          C Dm Em F G Am Bdim Cm
+          """
+    cof = CircleOf5thNaturalMajor()
+    cp = cof.digest_song(song)
+    tone = cof.generate_circle_of_fifths()["C"]
+    borrowed_chords = cof.get_borrowed_chords(tone, cp)
+    print("   Borrowed chords:", borrowed_chords.keys())
+
+ouput:
+
+    Borrowed chords: dict_keys(['Cm'])
+See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
+
+
+## Song Querying
 ### Song search & processing tools on Ultimate Guitar through Google.com
 You may search and handle song lyrics & tabs
 
@@ -254,34 +304,14 @@ output:
 
 See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
 
-### Song processing tools on simple text song
-
-        from pychord import Chord 
-        from pyharmonytools.song.text_song import TextSongWithLineForChords
-
-        song = """
-                            A           E
-                    Happy Birthday to you
-                          E           A
-                    Happy Birthday to you
-                          A7            D
-                    Happy Birthday dear (name)
-                          A        E    A
-                    Happy Birthday to you
-                """
-        the_song = TextSongWithLineForChords()
-        the_song.digest(song)
-        print(the_song.chords_sequence)
-output: 
-
-    [<Chord: A>, <Chord: E>, <Chord: E>, <Chord: A>, <Chord: A7>, <Chord: D>, <Chord: A>, <Chord: E>, <Chord: A>]
-
-See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
 # Test report
 see [here](unit_test_report.md)
 
 # Release Notes
+* 01/DEC/22
+  * displaying tabs with chords
+  * handling guitar gimmicks in tabs
 * 30/NOV/22
   * a tab on multiple bars can be processed
   * package v0.2.1
