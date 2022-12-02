@@ -64,6 +64,11 @@ class CofChord(Chord):
     def get_chord_names_possible_qualities(chord: str) -> [Chord]:
         """
         returns the list of Chord with possible qualities a chord may have
+
+        NOTE: let's try to extract possible qualities from
+                https://github.com/yuma-m/pychord/blob/main/pychord/constants/qualities.py
+                or QualityManager (https://github.com/yuma-m/pychord/blob/main/pychord/quality.py)
+                considering minor qualities from the presence of "3" in the chord notes
         see
             https://www.oolimo.com/guitarchords/find
             https://www.musicnotes.com/now/tips/a-complete-guide-to-chord-symbols-in-music/
@@ -202,10 +207,26 @@ class CofChord(Chord):
     def guess_chord_name(chord_notes: [Note], is_strictly_compliant: bool = True, simplest_chord_only: bool = True) -> [Chord]:
         """
         return <Chord("C")> from [<Note("C">), <Note("G">), <Note("E">)]
-        NOTE: the chord name is influenced with the bass
-        **WARNING** : simplest_chord_only => is_strictly_compliant
+
+        * NOTE: the chord name is influenced with the bass
+        * **WARNING** : simplest_chord_only => is_strictly_compliant
+        * todo BUG: simplest_chord_only does not seem to work properly:
+
+                notes = [Note("B"), Note("E"), Note("D"), Note("A")]
+                res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=False)
+                print(res)
+                --> []
+            while
+                notes = [Note("B"), Note("E"), Note("D"), Note("A")]
+                res = CofChord.guess_chord_name(notes, is_strictly_compliant=True, simplest_chord_only=True)
+                print(res)
+                --> [<Chord: E7sus4>]
+
+        * NOTE: could be optimized from https://github.com/yuma-m/pychord/blob/59e3bf52d39c3355c6b5709f6adf6d44b7eaec6a/pychord/analyzer.py#L8
+            However, this method does not fully work properly : https://github.com/yuma-m/pychord/issues/73
         :param simplest_chord_only: "simple" means shortest chord name (with no bass if possible)
-        :param is_strictly_compliant: try not to
+        :param is_strictly_compliant:   True: finds only chords with the same notes
+                                        False: chords that includes required notes
         :param chord_notes:
         :return:
         """

@@ -352,6 +352,7 @@ see [here](unit_test_report.md)
   * Nice GUI on the Cof major: https://codepen.io/2kool2/pen/bmVxpZ
 * Guitar tools:
   * https://www.oolimo.com/guitarchords/analyze
+  * Notes from chords + fingering: https://chord-c.com/guitar-chord/B/minor-eleventh/
 * Python:
   * Python in music: https://wiki.python.org/moin/PythonInMusic 
   * Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
