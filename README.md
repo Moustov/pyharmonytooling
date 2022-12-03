@@ -21,28 +21,17 @@ Series of tools to handle harmony in music
 
 ## Features on Harmony
 ### Find substitutes from a chord
-    from pychord import Chord 
-    from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+    
+    from pyharmonytools.harmony.cof_chord import CofChord
 
-    cof = CircleOf5th()
     chord = "G6"
-    substitutes = cof.find_substitutes(Chord(chord))
+    substitutes = CofChord.find_substitutes(Chord(chord))
     print("substitutes from :", chord, substitutes)
 
-ouput:
+ouput _(detailed log skipped)_:
 
-    Number of existing chords: 5772
-    Em7/9 == G6
-    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
-    Em7/13 == G6
-    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
-    Em7/9/G == G6
-    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
-    Em7/13/G == G6
-    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
-    G6/9/G == G6
-    ['G', 'B', 'D', 'E'] vs ['G', 'B', 'D', 'E']
-    substitutes from : G6 [<Chord: Em7/9>, <Chord: Em7/13>, <Chord: Em7/9/G>, <Chord: Em7/13/G>, <Chord: G6/9/G>]
+    substitutes from : G6 [<Chord: Em7>, <Chord: Em7/9>, <Chord: Em7/11>, <Chord: Em7/13>, <Chord: Em/D>, <Chord: Em7/B>, <Chord: Em7/D>, <Chord: Em7/G>, <Chord: Em7/9/B>, <Chord: Em7/9/D>, <Chord: Em7/9/G>, <Chord: Em7/11/B>, <Chord: Em7/11/D>, <Chord: Em7/11/G>, <Chord: Em7/13/B>, <Chord: Em7/13/D>, <Chord: Em7/13/G>, <Chord: G6>, <Chord: G6/9>, <Chord: G/E>, <Chord: G6/B>, <Chord: G6/D>, <Chord: G6/E>, <Chord: G6/9/B>, <Chord: G6/9/D>, <Chord: G6/9/E>]
+ 
 
 See [related unit tests](test/1_objects_tests/test_circle_of_5th.py)
 
@@ -353,6 +342,7 @@ see [here](unit_test_report.md)
 * Guitar tools:
   * https://www.oolimo.com/guitarchords/analyze
   * Notes from chords + fingering: https://chord-c.com/guitar-chord/B/minor-eleventh/
+  * Interactive circle of fifths for guitarists: https://guitardashboard.com/
 * Python:
   * Python in music: https://wiki.python.org/moin/PythonInMusic 
   * Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
