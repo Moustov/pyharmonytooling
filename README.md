@@ -203,7 +203,7 @@ Output:
     [tab][ch]Dm[/ch]                    [ch]A[/ch]\r\nChaque jour et chaque nuit[/tab]\r\n
     ...
 
-See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
+See [related unit tests](E2E_tests/3_online_tests/test_ultimate_guitar_search.py)
 
 ### Song search from a cadence
 Searching for songs in the 12 tones from a cadence
@@ -291,7 +291,7 @@ output:
                 'https://tabs.ultimate-guitar.com/tab/tyler-the-creator/boredom-chords-2785219']
                 }
 
-See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
+See [related unit tests](E2E_tests/3_online_tests/test_ultimate_guitar_search.py)
 
 ## Next Features
 _(in no specific order)_
