@@ -6,16 +6,19 @@ from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 
-class TestUltimateGuitarSearch(TestCase):
+class _TestUltimateGuitarSearch(TestCase):
+    """
+    rename class with TestUltimateGuitarSearch to enable unit test running
+    """
     ut_report = UnitTestReport()
 
-    def test_search(self):
+    def _test_search(self):
         ug_searcher = UltimateGuitarSearch()
         songs = ug_searcher.search('Bm7 E7', 3, matches_exactly=True)
         print(songs)
         self.ut_report.assertTrue(len(songs) > 0)   # this assert cannot be 100% repeatable because it depends on google
 
-    def test_search_cadence_iim7_v7_imaj7(self):
+    def _test_search_cadence_iim7_v7_imaj7(self):
         ugs = UltimateGuitarSearch()
         cadence = Cadence.REMARQUABLE_CADENCES["ANATOLE"]
 
@@ -27,8 +30,7 @@ class TestUltimateGuitarSearch(TestCase):
         print(songs)
         self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs=songs, all_song=False))
 
-
-    def test_search_cadence_vm_ivm6_v(self):
+    def _test_search_cadence_vm_ivm6_v(self):
         ugs = UltimateGuitarSearch()
         cadence = Cadence.REMARQUABLE_CADENCES["PHRYGIAN_HALF_CADENCE"]
 
@@ -40,7 +42,7 @@ class TestUltimateGuitarSearch(TestCase):
         print(songs)
         self.ut_report.assertTrue(UltimateGuitarSearch.found_matches(songs=songs, all_song=False))
 
-    def test_search_cadence_iv_ivm_i(self):
+    def _test_search_cadence_iv_ivm_i(self):
         ugs = UltimateGuitarSearch()
         cadence = Cadence.REMARQUABLE_CADENCES["MINOR_PLAGAL_CADENCE"]
 

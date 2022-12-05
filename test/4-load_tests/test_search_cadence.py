@@ -6,10 +6,13 @@ from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 
-class TestRobustness(TestCase):
+class _TestRobustness(TestCase):
+    """
+    rename class with TestRobustness to enable unit test running
+    """
     ut_report = UnitTestReport()
 
-    def test_google_query_robustness_at_least_one(self):
+    def _test_google_query_robustness_at_least_one(self):
         print(r"/!\ this unit test lasts 2hrs to reach the positive assert")
         ugs = UltimateGuitarSearch()
         cadence = "ii7-V7-Imaj7"
@@ -33,7 +36,7 @@ class TestRobustness(TestCase):
         self.ut_report.assertTrue(True)
 
 
-    def test_google_query_robustness_all(self):
+    def _test_google_query_robustness_all(self):
         print(r"/!\ this unit test lasts 2hrs to reach the positive assert")
         ugs = UltimateGuitarSearch()
         cadence = "ii7-V7-Imaj7"
