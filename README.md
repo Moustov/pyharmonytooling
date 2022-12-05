@@ -293,6 +293,16 @@ output:
 
 See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
 
+## Next Features
+_(in no specific order)_
+* transpose song chords
+* display degrees song chords
+* take guitar tuning into account when handling guitar tabs
+* display degrees in guitar tabs
+* transpose guitar tabs
+* update tabs with guitar tuning
+* guess rhythm from guitar tab
+* use rhythm in guitar tab to guess phrases and improve chord guessing
 
 # Test report
 see [here](unit_test_report.md)
