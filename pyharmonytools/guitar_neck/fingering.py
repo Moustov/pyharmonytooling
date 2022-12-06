@@ -121,7 +121,7 @@ class Fingering:
         return is_string_fingered and is_finger_before
 
     def find_possible_barres(self, chord_layout: [int]) -> {}:
-        """
+        r"""
         eg. chord_layout = [1, 3, 3, 2, 1, 1]
         => {"1": [0, 1, 2, 3, 4, 5], "2": [3], "3": [1,2]}
         * keys are the fret numbers
@@ -150,7 +150,7 @@ class Fingering:
         #             barres_found[s_fret].append((f))
         return barres_found
 
-    def find_finger_layout_from_barres(self, chord_layout: [int]) -> [chr]:
+    def find_finger_layout_from_barres(self, chord_layout: [int]) -> []:
         """
         finds an appropriate finger layout from a chord
         :param chord_layout:
