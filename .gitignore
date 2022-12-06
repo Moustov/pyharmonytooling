@@ -1,8 +1,8 @@
 /.idea/
 /venv/
 /pyharmonytools/.google_searches_qty.log
-/E2E_tests/3_online_tests/nb_google_searches.log
-/E2E_tests/3_online_tests/.google_searches_qty.log
+/test/3_online_tests/nb_google_searches.log
+/test/3_online_tests/.google_searches_qty.log
 /test/.google_searches_qty.log
 /graphics.odp
 /build/

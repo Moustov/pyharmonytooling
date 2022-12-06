@@ -35,7 +35,6 @@ class _TestRobustness(TestCase):
 
         self.ut_report.assertTrue(True)
 
-
     def _test_google_query_robustness_all(self):
         print(r"/!\ this unit test lasts 2hrs to reach the positive assert")
         ugs = UltimateGuitarSearch()
