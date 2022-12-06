@@ -1,4 +1,3 @@
-from pychord import Chord
 
 
 class ChordAndFingering:

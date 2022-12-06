@@ -160,7 +160,8 @@ class GuitarTab:
         """
         translates the tab into fingerings.
         result will be returned & set in self.tab_dict
-        :param tab: must be a simple bar tab - eg.
+        :param bar_number: the bar ID
+        :param tab_bar_ascii: must be a simple bar tab - eg.
                 e|--11---|
                 B|-------|
                 G|-------|

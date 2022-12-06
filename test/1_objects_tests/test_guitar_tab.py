@@ -347,7 +347,7 @@ class TestGuitarTab(TestCase):
         res = gt.get_simplest_progressive_chords_in_a_bar(0)
         self.ut_report.assertTrue(GuitarTab.are_same_digested_tabs(res, expected))
 
-    def _test_digest_tab_simplest_progressive_chords_with_notations_1_3(self):
+    def test_digest_tab_simplest_progressive_chords_with_notations_1_3(self):
         # https://tabs.ultimate-guitar.com/tab/eagles/hotel-california-tabs-94065
         tab = r"""
             e|-------------------------------|------------------------|------------------------------------|
@@ -375,7 +375,7 @@ class TestGuitarTab(TestCase):
         expected = {"2": Chord("A")}
         self.ut_report.assertTrue(GuitarTab.are_same_digested_tabs(res, expected))
 
-    def _test_digest_tab_simplest_progressive_chords_with_notations(self):
+    def test_digest_tab_simplest_progressive_chords_with_notations(self):
         # https://tabs.ultimate-guitar.com/tab/eagles/hotel-california-tabs-94065
         tab = """
   Bm               ~~        1/4  F#7                      A       1/2           1/2

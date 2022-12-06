@@ -83,7 +83,7 @@ class Cadence:
         :return:
         """
         ugs = UltimateGuitarSearch
-        songs = ugs.search_songs_from_cadence(cadence, mode=cof,
+        songs = ugs.search_songs_from_cadence(cadence=cadence, mode=cof,
                                               limit_per_tone=max_songs,
                                               matches_exactly=True,
                                               try_avoiding_blocked_searches=True)

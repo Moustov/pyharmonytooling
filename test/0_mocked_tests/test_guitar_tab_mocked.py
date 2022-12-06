@@ -1,6 +1,5 @@
 from unittest import TestCase
 
-from deepdiff import DeepDiff
 from pychord import Chord
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport

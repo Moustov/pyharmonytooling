@@ -302,6 +302,7 @@ class CofChord(Chord):
     def same_array_of_chords(chords_1: [Chord], chords_2: [Chord]):
         """
         True if the 2 arrays of chords contains the same Chords
+        :param chords_1:
         :param chords_2:
         :return:
         """

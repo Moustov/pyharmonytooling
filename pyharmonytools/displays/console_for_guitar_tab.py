@@ -24,8 +24,7 @@ class ConsoleForGuitarTab:
                 else:
                     line = 0
                 before_new_chord = chords_line[line][:current_caret_found + 2] + chord
-                chords_line[line] = before_new_chord \
-                                    + chords_line[line][len(before_new_chord):]
+                chords_line[line] = before_new_chord + chords_line[line][len(before_new_chord):]
                 previous_end_of_chord_position = len(before_new_chord)
                 chord_number += 1
             if (chords_line[1].strip()):

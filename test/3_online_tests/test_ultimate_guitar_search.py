@@ -14,13 +14,13 @@ class _TestUltimateGuitarSearch(TestCase):
 
     def _test_search(self):
         ug_searcher = UltimateGuitarSearch()
-        songs = ug_searcher.search('Bm7 E7', 3, matches_exactly=True)
+        songs = ug_searcher.search('Bm7 E7', 3, artist=None, matches_exactly=True)
         print(songs)
         self.ut_report.assertTrue(len(songs) > 0)   # this assert cannot be 100% repeatable because it depends on google
 
     def _test_search_cadence_iim7_v7_imaj7(self):
         ugs = UltimateGuitarSearch()
-        cadence = Cadence.REMARQUABLE_CADENCES["ANATOLE"]
+        cadence = Cadence.REMARQUABLE_CADENCES_NATURAL_MAJOR["ANATOLE"]
 
         cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
         MAX_SONG_PER_SEARCH = 5
@@ -32,7 +32,7 @@ class _TestUltimateGuitarSearch(TestCase):
 
     def _test_search_cadence_vm_ivm6_v(self):
         ugs = UltimateGuitarSearch()
-        cadence = Cadence.REMARQUABLE_CADENCES["PHRYGIAN_HALF_CADENCE"]
+        cadence = Cadence.REMARQUABLE_CADENCES_HYBRID["PHRYGIAN_HALF_CADENCE"]
 
         cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
         MAX_SONG_PER_SEARCH = 5
@@ -44,7 +44,7 @@ class _TestUltimateGuitarSearch(TestCase):
 
     def _test_search_cadence_iv_ivm_i(self):
         ugs = UltimateGuitarSearch()
-        cadence = Cadence.REMARQUABLE_CADENCES["MINOR_PLAGAL_CADENCE"]
+        cadence = Cadence.REMARQUABLE_CADENCES_HYBRID["MINOR_PLAGAL_CADENCE"]
 
         cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
         MAX_SONG_PER_SEARCH = 5

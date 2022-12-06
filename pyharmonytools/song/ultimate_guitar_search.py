@@ -80,9 +80,11 @@ class UltimateGuitarSearch:
         return res
 
     def search_songs_from_cadence(self, cadence: str, mode: CircleOf5th, limit_per_tone: int,
-                                  matches_exactly: bool = False, try_avoiding_blocked_searches=True) -> dict:
+                                  artist: str = None, matches_exactly: bool = False,
+                                  try_avoiding_blocked_searches: bool = True) -> dict:
         """
         return a list of songs that match the cadence
+        :param artist: search limited to the artist
         :param try_avoiding_blocked_searches:
         :param matches_exactly:
         :param limit_per_tone:
@@ -98,7 +100,8 @@ class UltimateGuitarSearch:
                 chord = Degree.get_chord_from_degree(degree, root_note, mode)
                 search_string += chord + " "
             print(search_string)
-            songs[search_string] = self.search(search_string, limit_per_tone, matches_exactly)
+            songs[search_string] = self.search(search_string, limit_per_tone, artist=artist,
+                                               matches_exactly=matches_exactly)
         return songs
 
     def check_matches_exactly(self, query: str, link: str) -> bool:
@@ -131,7 +134,7 @@ class UltimateGuitarSearch:
                        - (UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION * 0.1)
             max_wait = UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION
             print(f"Too many queries - let's try to wait for {min_wait} to {max_wait} minutes")
-            sleep(randint(min_wait*60, max_wait*60))
+            sleep(randint(int(min_wait*60), int(max_wait*60)))
             self.reset_google_searches()
         url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
         return str(get_html(url))
@@ -204,7 +207,7 @@ class UltimateGuitarSearch:
             nb_google_searches_log_file.write("1000")
 
     @staticmethod
-    def found_matches(self, songs: dict, all_song) -> bool:
+    def found_matches(songs: dict, all_song) -> bool:
         """
         returns all/one 1 criterion status on songs found by UltimateGuitarSearch.search_songs_from_cadence()
         :param songs:
