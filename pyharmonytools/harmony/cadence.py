@@ -9,10 +9,7 @@ class Cadence:
         "AUTHENTIC CADENCE": "V–I", # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "PLAGAL CADENCE": "IV–I", # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "ANATOLE": "ii7-V7-Imaj7",  # https://en.wikipedia.org/wiki/Ii%E2%80%93V%E2%80%93I_progression
-        "PHRYGIAN_HALF_CADENCE": "v–iv6–V",   # https://en.wikipedia.org/wiki/Cadence#Phrygian_half_cadence
-        "MINOR_PLAGAL_CADENCE": "IV-iv-I",  # Minor Plagal Cadence found in "My Way" https://en.wikipedia.org/wiki/Cadence#Minor_plagal_cadence
         "VIIb_V7_I": "bVII–V7-I", # https://en.wikipedia.org/wiki/%E2%99%ADVII%E2%80%93V7_cadence
-        "III_VI_II_V": "III–VI–II–V",     # https://en.wikipedia.org/wiki/Ii%E2%80%93V%E2%80%93I_progression
         "I_V_vi_IV": "I–V–vi–IV", # https://en.wikipedia.org/wiki/I%E2%80%93V%E2%80%93vi%E2%80%93IV_progression
         "I_IV_bVII_IV": "I–IV–bVII–IV",   # https://en.wikipedia.org/wiki/I%E2%80%93V%E2%80%93vi%E2%80%93IV_progression#I%E2%80%93V%E2%80%93%E2%99%ADVII%E2%80%93IV
         "PACHELBEL'S CANON": "I–V–vi–iii–IV–I–IV–V",   # https://en.wikipedia.org/wiki/Pachelbel%27s_Canon
@@ -24,7 +21,6 @@ class Cadence:
         "DECEPTIVE CADENCE 2": "V–vi",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 3": "V7–vi",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 4": "Vsus–vi7",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
-        "DECEPTIVE CADENCE 5": "V7–VI",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 6": "V–IV/3rd",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "MELANCOLIC JOY": "I-IM7-I7",   # eg. Jamie Cullum's "It's Christmas" https://tabs.ultimate-guitar.com/tab/jamie-cullum/its-christmas-chords-4335365
         "FREEDOM": "V-IV-I",   # eg. https://tabs.ultimate-guitar.com/tab/george-michael/freedom-90-chords-8344
@@ -33,8 +29,21 @@ class Cadence:
         # "*":"any chord" /  "]":"a phrase ending on"
         "HALF CADENCE_GENERIC": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
     }
-    REMARQUABLE_CADENCES_MELODIC_MINOR = {
+
+    REMARQUABLE_CADENCES_NATURAL_MINOR = {
+        "i-iv-v-i": "i-iv-v-i", # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-ii°-v-i": "i-iidim-v-i",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-bVI-bIII-bVII": "i-bVI-bIII-bVII",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-bVII-bVI-bVII-i": "i-bVII-bVI-bVII-i",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-bVII-bVI-V7": "i-bVII-bVI-V7",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+    }
+
+    REMARQUABLE_CADENCES_HYBRID = {
         "SUSPENS RISING": "i°-i#°-ii°",  # eg. https://tabs.ultimate-guitar.com/tab/the-specials/ghost-town-chords-2572791
+        "PHRYGIAN_HALF_CADENCE": "v–iv6–V",  # https://en.wikipedia.org/wiki/Cadence#Phrygian_half_cadence
+        "MINOR_PLAGAL_CADENCE": "IV-iv-I",   # Minor Plagal Cadence found in "My Way" https://en.wikipedia.org/wiki/Cadence#Minor_plagal_cadence
+        "DECEPTIVE CADENCE 5": "V7–VI",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
+        "III_VI_II_V": "III–VI–II–V",  # https://en.wikipedia.org/wiki/Ii%E2%80%93V%E2%80%93I_progression
     }
 
     def __init__(self):

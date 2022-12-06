@@ -233,6 +233,7 @@ class CircleOf5thNaturalMajor(CircleOf5th):
 class CircleOf5thNaturalMinor(CircleOf5th):
     """
     https://www.youtube.com/watch?v=44t2KJQUh3Y
+    https://www.study-guitar.com/blog/minor-key-chord-progressions/
     """
     cof_name = "Natural Minor"
     intervals = [2, 1, 2, 2, 1, 2]  # https://muted.io/scale-formulas-intervals/
