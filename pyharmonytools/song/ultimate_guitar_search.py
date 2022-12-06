@@ -32,16 +32,19 @@ class UltimateGuitarSearch:
         res = part.split("&amp")
         return "https://tabs.ultimate-guitar.com/tab/" + res[0]
 
-    def search(self, query: str, limit: int, matches_exactly=False) -> [str]:
+    def search(self, query: str, limit: int, artist: str = None, matches_exactly=False) -> [str]:
         """
         search from UG any string, not only the author / title
         **WARNING**: too many searches will result in a blocking HTTP ERROR 429
         https://stackoverflow.com/questions/22786068/how-to-avoid-http-error-429-too-many-requests-python
+        :param artist: constraint search to an artist
         :param matches_exactly: check on UG if the query matches some part of the songs found
         :param query:
         :param limit:
         :return:
         """
+        if artist:
+            query += f" {artist} "
         query += " site:ultimate-guitar.com"
         res = []
         link_qty = 0
