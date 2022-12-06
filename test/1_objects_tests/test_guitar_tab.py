@@ -349,7 +349,7 @@ class TestGuitarTab(TestCase):
 
     def test_digest_tab_simplest_progressive_chords_with_notations_1_3(self):
         # https://tabs.ultimate-guitar.com/tab/eagles/hotel-california-tabs-94065
-        tab = """
+        tab = r"""
             e|-------------------------------|------------------------|------------------------------------|
             B|--(15)--10-12-------------7----|------------------------|------7-------------7---------------|
             G|--------------11s9~~--7h9---7^-|------------------------|--7h9---7^-------7h9---7^-----------|
@@ -361,10 +361,12 @@ class TestGuitarTab(TestCase):
         res = gt.get_simplest_progressive_chords_in_a_bar(0)
         ConsoleForGuitarTab.display(gt)
         # Bm is provided on https://tabs.ultimate-guitar.com/tab/eagles/hotel-california-tabs-94065
+        # Bm notes: B, F# D
+        # played notes: (D), A, B, F# s _E_  , D, E, F#, D
         # but the heard notes are (A), B, D, E, (F#)
-        # so the chord should sound like Bmadd11 or Bm11 or Bm11/F# (ie Bmadd4 in PyChord)
+        # so the chord should sound like E9sus4 or Bm7/E or D6/E
         # see https://www.oolimo.com/guitarchords/analyze
-        expected = {"2": Chord("Bmadd4")}
+        expected = {"2": Chord("D6/E")}
         self.ut_report.assertTrue(GuitarTab.are_same_digested_tabs(res, expected))
         res = gt.get_simplest_progressive_chords_in_a_bar(1)
         expected = {"1": Chord("F#7")}

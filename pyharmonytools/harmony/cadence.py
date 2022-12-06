@@ -29,6 +29,7 @@ class Cadence:
         "MELANCOLIC JOY": "I-IM7-I7",   # eg. Jamie Cullum's "It's Christmas" https://tabs.ultimate-guitar.com/tab/jamie-cullum/its-christmas-chords-4335365
         "FREEDOM": "V-IV-I",   # eg. https://tabs.ultimate-guitar.com/tab/george-michael/freedom-90-chords-8344
         "S. WONDER's 251": "IImaj7-V9sus4-Imaj7",   # https://www.youtube.com/shorts/J8IV_umUdUo
+        "3-6-2-5 TURNAROUND": "III-VI-II-V",    # https://www.youtube.com/watch?v=hWCX9-DnMG0
         # "*":"any chord" /  "]":"a phrase ending on"
         "HALF CADENCE_GENERIC": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
     }

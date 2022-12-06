@@ -231,15 +231,21 @@ class CircleOf5thNaturalMajor(CircleOf5th):
 
 
 class CircleOf5thNaturalMinor(CircleOf5th):
+    """
+    https://www.youtube.com/watch?v=44t2KJQUh3Y
+    """
     cof_name = "Natural Minor"
     intervals = [2, 1, 2, 2, 1, 2]  # https://muted.io/scale-formulas-intervals/
-    qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+    qualities = ["m", "dim", "", "m", "m", "", ""]
 
     def __init__(self):
         self.cof_scales = self.generate_circle_of_fifths()
 
 
 class CircleOf5thMelodicMinor(CircleOf5th):
+    """
+    https://www.youtube.com/watch?v=44t2KJQUh3Y
+    """
     cof_name = "Melodic Minor"
     intervals = [2, 1, 2, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
@@ -249,6 +255,9 @@ class CircleOf5thMelodicMinor(CircleOf5th):
 
 
 class CircleOf5thHarmonicMinor(CircleOf5th):
+    """
+    https://www.youtube.com/watch?v=44t2KJQUh3Y
+    """
     cof_name = "Harmonic Minor"
     intervals = [2, 1, 2, 2, 1, 3]  # https://muted.io/scale-formulas-intervals/
     qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]

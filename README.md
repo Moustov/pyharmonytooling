@@ -295,14 +295,21 @@ See [related unit tests](E2E_tests/3_online_tests/test_ultimate_guitar_search.py
 
 ## Next Features
 _(in no specific order)_
-* transpose song chords
-* display degrees song chords
-* take guitar tuning into account when handling guitar tabs
-* display degrees in guitar tabs
-* transpose guitar tabs
-* update tabs with guitar tuning
-* guess rhythm from guitar tab
-* use rhythm in guitar tab to guess phrases and improve chord guessing
+* Chords stuff
+  * transpose song chords
+  * display degrees song chords
+  * show remarkable cadences in songs
+  * build a database from chord transitions (event log mechanism could be used)
+  * find similar songs from chord sequences
+* Tabs stuff
+  * take guitar tuning into account when handling guitar tabs
+  * display degrees in guitar tabs
+  * transpose guitar tabs
+  * update tabs with guitar tuning
+  * guess rhythm from guitar tab
+  * use rhythm in guitar tab to guess phrases and improve chord guessing
+  * show remarkable cadences in tabs
+  * analyze found chords from tabs to make them more consistent (notably with the CoF or b/#)
 
 # Test report
 see [here](unit_test_report.md)
