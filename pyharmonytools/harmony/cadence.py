@@ -27,8 +27,8 @@ class Cadence:
         "DECEPTIVE CADENCE 3": "V7–vi",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 4": "Vsus–vi7",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "DECEPTIVE CADENCE 6": "V–IV/3rd",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
-        "MELANCOLIC JOY": "I-IM7-I7",
-        # eg. Jamie Cullum's "It's Christmas" https://tabs.ultimate-guitar.com/tab/jamie-cullum/its-christmas-chords-4335365
+        "MELANCOLIC JOY": "I-IM7-I7",  # eg. Jamie Cullum's "It's Christmas" https://tabs.ultimate-guitar.com/tab/jamie-cullum/its-christmas-chords-4335365
+        "CANON": "I-V-vi-iii-IV-I-IV-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
         "FREEDOM": "V-IV-I",  # eg. https://tabs.ultimate-guitar.com/tab/george-michael/freedom-90-chords-8344
         "S. WONDER's 251": "IImaj7-V9sus4-Imaj7",  # https://www.youtube.com/shorts/J8IV_umUdUo
         "3-6-2-5 TURNAROUND": "III-VI-II-V",  # https://www.youtube.com/watch?v=hWCX9-DnMG0
@@ -45,6 +45,10 @@ class Cadence:
         "BELIEVE": "I-V-ii-IV",  # https://www.youtube.com/watch?v=AbW3sES2zCw
         "DOO-WOP CHANGES": "I-vi-IV-V",  # https://www.youtube.com/watch?v=AbW3sES2zCw
         "50s PROGRESSION": "I-vi-IV-V",  # https://www.youtube.com/watch?v=AbW3sES2zCw
+        "I-IV-V-IV": "I-IV-V-IV", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
+        "I-IV-ii-V": "I-IV-ii-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
+        "I-IV-I-V": "I-IV-I-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
+        "I-ii-iii-IV-V": "I-ii-iii-IV-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
         # "*":"any chord" /  "]":"a phrase ending on"
         "HALF CADENCE_GENERIC": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
     }
@@ -72,8 +76,11 @@ class Cadence:
         "DECEPTIVE CADENCE 5": "V7–VI",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "III_VI_II_V": "III–VI–II–V",  # https://en.wikipedia.org/wiki/Ii%E2%80%93V%E2%80%93I_progression
         "EPIC PROGRESSION": "I-bVI-V",  # https://www.youtube.com/watch?v=eVteycbJUsw
+        "I-III-IV-iv": "I-III-IV-iv",  # https://www.musical-u.com/learn/exploring-common-chord-progressions/
+        "i-V-i-iv": "i-V-i-iv", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
         "MINOR CHANGE": "IV-iv-I",  # https://www.youtube.com/watch?v=eVteycbJUsw
         "TRAP CHORDS": "i-VI-i-v",  # https://www.youtube.com/watch?v=eVteycbJUsw
+        "ANDALUSIAN CADENCE": "vi-V-IV-III", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
     }
 
     def __init__(self):
