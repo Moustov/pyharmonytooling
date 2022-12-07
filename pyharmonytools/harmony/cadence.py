@@ -52,9 +52,15 @@ class Cadence:
     REMARQUABLE_CADENCES_NATURAL_MINOR = {
         "i-iv-v-i": "i-iv-v-i",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
         "i-ii°-v-i": "i-iidim-v-i",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
-        "i-bVI-bIII-bVII": "i-bVI-bIII-bVII",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
-        "i-bVII-bVI-bVII-i": "i-bVII-bVI-bVII-i",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
-        "i-bVII-bVI-V7": "i-bVII-bVI-V7",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-VI-III-VII": "i-VI-III-VII",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-VII-VI-VII-i": "i-VII-VI-VII-i",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-VII-VI-V7": "i-VII-VI-V7",  # https://www.study-guitar.com/blog/minor-key-chord-progressions/
+        "i-VI-VII": "i-VI-VII", # https://www.fretjam.com/natural-minor-chord-progressions.html
+        "i-III-VII-VI": "i-III-VII-VI",  # https://www.fretjam.com/natural-minor-chord-progressions.html
+        "i-VII-iv-VI": "i-VII-iv-VI",  # https://www.fretjam.com/natural-minor-chord-progressions.html
+        "i-v-VI-VII": "i-v-VI-VII",  # https://www.fretjam.com/natural-minor-chord-progressions.html
+        "i-v-VII-iv": "i-v-VII-iv",  # https://www.fretjam.com/natural-minor-chord-progressions.html
+        "i-v-iv-VII": "i-v-iv-VII",  # https://www.fretjam.com/natural-minor-chord-progressions.html
     }
 
     REMARQUABLE_CADENCES_HYBRID = {
