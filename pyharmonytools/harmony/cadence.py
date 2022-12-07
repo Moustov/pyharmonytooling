@@ -68,11 +68,9 @@ class Cadence:
     }
 
     REMARQUABLE_CADENCES_HYBRID = {
-        "SUSPENS RISING": "i°-i#°-ii°",
-        # eg. https://tabs.ultimate-guitar.com/tab/the-specials/ghost-town-chords-2572791
+        "SUSPENS RISING": "i°-i#°-ii°",  # eg. https://tabs.ultimate-guitar.com/tab/the-specials/ghost-town-chords-2572791
         "PHRYGIAN_HALF_CADENCE": "v–iv6–V",  # https://en.wikipedia.org/wiki/Cadence#Phrygian_half_cadence
-        "MINOR_PLAGAL_CADENCE": "IV-iv-I",
-        # Minor Plagal Cadence found in "My Way" https://en.wikipedia.org/wiki/Cadence#Minor_plagal_cadence
+        "MINOR_PLAGAL_CADENCE": "IV-iv-I", # Minor Plagal Cadence found in "My Way" https://en.wikipedia.org/wiki/Cadence#Minor_plagal_cadence
         "DECEPTIVE CADENCE 5": "V7–VI",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
         "III_VI_II_V": "III–VI–II–V",  # https://en.wikipedia.org/wiki/Ii%E2%80%93V%E2%80%93I_progression
         "EPIC PROGRESSION": "I-bVI-V",  # https://www.youtube.com/watch?v=eVteycbJUsw
