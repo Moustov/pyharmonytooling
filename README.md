@@ -296,6 +296,9 @@ See [related unit tests](test/3_online_tests/test_ultimate_guitar_search.py)
 ## Next Features
 _(in no specific order)_
 * Chords stuff
+  * chord comping : provide chord fingering from a soprano (or bass) note + chord name - see
+    * https://www.youtube.com/watch?v=nUq6PArEnuY)
+    * https://www.jazzguitarlessons.net/blog/ultimate-guide-jazz-guitar-chords
   * transpose song chords
   * display degrees song chords
   * show remarkable cadences in songs
