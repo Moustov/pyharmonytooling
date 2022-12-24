@@ -49,9 +49,9 @@ class Cadence:
         "I-IV-ii-V": "I-IV-ii-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
         "I-IV-I-V": "I-IV-I-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
         "I-ii-iii-IV-V": "I-ii-iii-IV-V", # https://www.musical-u.com/learn/exploring-common-chord-progressions/
-        "AT LAST":  "I-vi-II-V", # Etta James https://tabs.ultimate-guitar.com/tab/etta-james/at-last-chords-1118407
+        "AT LAST":  "I-vi7-ii7-V7", # Etta James https://tabs.ultimate-guitar.com/tab/etta-james/at-last-chords-1118407
         #"SAMBA DE BENCAO" = "AT LAST"
-        "SAMBA SARAVAH":    "I-ii-V",   # Pierre Barouh https://tabs.ultimate-guitar.com/tab/pierre-barouh/samba-saravah-chords-4454282
+        "SAMBA SARAVAH":    "I6-iim7-V7",   # Pierre Barouh https://tabs.ultimate-guitar.com/tab/pierre-barouh/samba-saravah-chords-4454282
         # "*":"any chord" /  "]":"a phrase ending on"
         "HALF CADENCE_GENERIC": "*-V]",  # https://musictheory.pugetsound.edu/mt21c/cadences.html
     }

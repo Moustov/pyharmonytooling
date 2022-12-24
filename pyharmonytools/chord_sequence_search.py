@@ -13,7 +13,7 @@ ug_engine = UltimateGuitarSearch()
 #     print(song)
 
 ugs = UltimateGuitarSearch()
-cadence = "I-V-vi-IV"
+cadence = "I-vi7-ii7-V7"
 
 cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
 MAX_SONG_PER_SEARCH = 5
