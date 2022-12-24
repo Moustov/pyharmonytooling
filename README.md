@@ -303,7 +303,7 @@ _(in no specific order)_
   * display degrees song chords
   * show remarkable cadences in songs
   * build a database from chord transitions (event log mechanism could be used)
-  * find similar songs from chord sequences
+  * find similar songs from chord sequences (options: sequence is included / only cadence)
 * Tabs stuff
   * take guitar tuning into account when handling guitar tabs
   * display degrees in guitar tabs
