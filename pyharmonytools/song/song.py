@@ -32,10 +32,10 @@ class Song:
                 res.append(f" {cs} ")
         return res
 
-    def get_tone_and_mode(self) -> [[]]:
+    def get_tone_and_mode(self) -> dict:
         """
         return the max tone compliance from this song
-        :return: [probability, note, circle name, scale]
+        :return: {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         """
         song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
@@ -50,7 +50,7 @@ class Song:
         chords_string = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(chords_string)
         suspected_key = self.cof.guess_tone_and_mode(cp)
-        borrowed_chords = self.cof.get_borrowed_chords(suspected_key[3], cp)
+        borrowed_chords = self.cof.get_borrowed_chords(suspected_key['scale'], cp)
         # print("   Borrowed chords:", borrowed_chords.keys())
         return list(borrowed_chords.keys())
 

@@ -104,15 +104,15 @@ class CircleOf5th:
         for chord_song in song_chord_progression:
             found = False
             for chord_tone_color in colors:
-                if chord_tone_color.components() == chord_song.components():
+                if CofChord.is_same_chord_from_components(chord_tone_color, chord_song):
                     found = True
+                    break
             if not found:
                 for chord_tone in tone:
                     c = Chord(chord_tone)
-                    if c.components() != chord_song.components():
+                    if not CofChord.is_same_chord_from_components(c, chord_song):
                         borrowed_chords[str(chord_song)] = True
         return borrowed_chords
-
 
     def digest_song(self, song: str) -> ChordProgression:
         """
@@ -158,7 +158,7 @@ class CircleOf5th:
         :param cp:
         :return: [probability, note, circle name, scale]
         """
-        compliance_level_max = [0, "?", "?", []]
+        compliance_level_max = {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         compliances = {}
         compliance_level = 0
         for tone in self.cof_scales:
@@ -166,32 +166,33 @@ class CircleOf5th:
             compliance_level = self.get_compliance_chord_presence(self.cof_scales[tone], cp)
             _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"{tone}, {compliance_level * 100}%")
             compliances[tone] = compliance_level
-            if compliance_level > compliance_level_max[0]:
-                compliance_level_max = [compliance_level, tone, self.cof_name, self.get_scale(tone)]
+            if compliance_level > compliance_level_max["compliance_level"]:
+                compliance_level_max = {"compliance_level": compliance_level, "tone": tone, "cof_name": self.cof_name,
+                                        "scale": self.get_scale(tone), "harmonic suite": self.cof_scales[tone]}
         return compliance_level_max
 
-    def guess_tone_and_mode(self, cp: ChordProgression) -> []:
+    def guess_tone_and_mode(self, cp: ChordProgression) -> dict:
         """
         return the most probable tone of a ChordProgression across possible circle of 5th
         :param cp:
-        :return: [probability, note, circle name, scale]
+        :return: {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         """
-        best_tone = [0, "-", "?", []]
+        best_tone = {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         cof_nat_maj = CircleOf5thNaturalMajor()
         guess = cof_nat_maj.guess_tone_from_circle_of_fifths(cp)
-        if guess[0] > best_tone[0]:
+        if guess["compliance_level"] > best_tone["compliance_level"]:
             best_tone = guess
         cof_mel_minor = CircleOf5thMelodicMinor()
         guess = cof_mel_minor.guess_tone_from_circle_of_fifths(cp)
-        if guess[0] > best_tone[0]:
+        if guess["compliance_level"] > best_tone["compliance_level"]:
             best_tone = guess
         cof_nat_min = CircleOf5thNaturalMinor()
         guess = cof_nat_min.guess_tone_from_circle_of_fifths(cp)
-        if guess[0] > best_tone[0]:
+        if guess["compliance_level"] > best_tone["compliance_level"]:
             best_tone = guess
         cof_harm_minor = CircleOf5thHarmonicMinor()
         guess = cof_harm_minor.guess_tone_from_circle_of_fifths(cp)
-        if guess[0] > best_tone[0]:
+        if guess["compliance_level"] > best_tone["compliance_level"]:
             best_tone = guess
         return best_tone
 

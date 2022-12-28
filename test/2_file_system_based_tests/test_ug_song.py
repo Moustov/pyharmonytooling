@@ -16,11 +16,13 @@ class TestUltimateGuitarSong(TestCase):
     def test_digest_get_tone_and_mode(self):
         ugs = self.get_test_data1()
         res = ugs.get_tone_and_mode()
-        self.utr.assertTrue(res[1] == "F", f"{res[1]} found")
-        self.utr.assertTrue(res[2] == "Melodic Minor", f"{res[2]} found")
+
+        self.utr.assertTrue(res["tone"] == "F", f"{res['tone']} found")
+        self.utr.assertTrue(res["cof_name"] == "Melodic Minor", f"{res['cof_name']} found")
 
     def test_digest_get_borrowed_chords(self):
         ugs = self.get_test_data1()
+        tone = ugs.get_tone_and_mode()
         res = ugs.get_borrowed_chords()
         expected = ['Db', 'A', 'A7', 'Em', 'Cm', 'Am', 'Bm', 'D9', 'G#', 'G#6', 'G#M7']
         self.utr.assertTrue(res == expected, f"{res} found")

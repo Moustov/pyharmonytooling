@@ -18,9 +18,42 @@ class Test(TestCase):
         cof = CircleOf5th()
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max[0] == 1.0)
-        self.ut_report.assertTrue(compliance_level_max[1] == 'C')
-        self.ut_report.assertTrue(compliance_level_max[2] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["tone"] == 'C')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+
+    def test_guess_tone_and_mode_Db(self):
+        song = """
+        C# D#m E#m F# G# A#m B#dim
+        """
+        cof = CircleOf5th()
+        cp = cof.digest_song(song)
+        compliance_level_max = cof.guess_tone_and_mode(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["tone"] == 'Db')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+
+    def test_guess_tone_and_mode_E(self):
+        song = """
+        E F#m G#m A B C#m D#dim
+        """
+        cof = CircleOf5th()
+        cp = cof.digest_song(song)
+        compliance_level_max = cof.guess_tone_and_mode(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["tone"] == 'E')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+
+    def test_guess_tone_and_mode_F(self):
+        song = """
+        F Gm Am Bb C Dm Edim
+        """
+        cof = CircleOf5th()
+        cp = cof.digest_song(song)
+        compliance_level_max = cof.guess_tone_and_mode(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["tone"] == 'F')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
     def test_guess_tone_and_mode_Bb(self):
         song = """
@@ -29,9 +62,9 @@ class Test(TestCase):
         cof = CircleOf5th()
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max[0] == 1.0)
-        self.ut_report.assertTrue(compliance_level_max[1] == 'Bb')
-        self.ut_report.assertTrue(compliance_level_max[2] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["tone"] == 'Bb')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
     def test_guess_tone_and_mode_happy_birthday_chords(self):
         _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
@@ -49,9 +82,9 @@ class Test(TestCase):
         cp = cof.digest_song(song)
         compliance_level_max = cof.guess_tone_and_mode(cp)
         print(compliance_level_max)
-        self.ut_report.assertTrue(compliance_level_max[0] == 1.0)
-        self.ut_report.assertTrue(compliance_level_max[1] == 'A')
-        self.ut_report.assertTrue(compliance_level_max[2] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["tone"] == 'A')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
     def test_get_chord_possible_qualities(self):
         cof = CircleOf5thNaturalMajor()
@@ -80,11 +113,11 @@ class Test(TestCase):
 
     def test_get_borrowed_chords_Cm(self):
         song = """
-                C Dm Em F G Am Bdim Cm
+                C Dm Em F G Am Bdim Cdim
                 """
         cof = CircleOf5thNaturalMajor()
         cp = cof.digest_song(song)
         tone = cof.generate_circle_of_fifths()["C"]
         borrowed_chords = cof.get_borrowed_chords(tone, cp)
         print("   Borrowed chords:", borrowed_chords.keys())
-        self.ut_report.assertTrue(borrowed_chords == {"Cm": True})
+        self.ut_report.assertTrue(borrowed_chords == {"Cdim": True})

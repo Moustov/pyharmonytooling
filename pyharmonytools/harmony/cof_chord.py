@@ -196,7 +196,7 @@ class CofChord(Chord):
         possible_chords_from_note = CofChord.all_existing_chords()
         for chord1 in possible_chords_from_note:
             for chord2 in possible_chords_from_note:
-                if chord1 != chord2 and chord1.components() == chord2.components():
+                if chord1 != chord2 and CofChord.is_same_chord_from_components(chord1, chord2):
                     similar_chords.append([chord1, chord2])
                     _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"{chord1} == {chord2}")
                     _HarmonyLogger.print_detail(_HarmonyLogger.LOD_NOTE,
