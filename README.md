@@ -368,3 +368,4 @@ see [here](unit_test_report.md)
   * Pypi Home Page: https://pypi.org/project/pyHarmonyTooling/
   * PyChord project: https://github.com/yuma-m/pychord
   * An API to UG: https://github.com/victorfontes/python-ultimate-guitar
+  * A Toolkit for Computer-Aided Musical Analysis and Computational Musicology: https://github.com/cuthbertLab/music21

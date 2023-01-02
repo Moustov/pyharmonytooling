@@ -35,11 +35,13 @@ class Song:
     def get_tone_and_mode(self) -> dict:
         """
         return the max tone compliance from this song
+        see:
+        * https://stackoverflow.com/questions/45399081/determine-the-key-of-a-song-by-its-chords
         :return: {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         """
         song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
-        compliance_level_max = self.cof.guess_tone_and_mode(cp)
+        compliance_level_max = self.cof.digest_possible_tones_and_modes(cp)
         return compliance_level_max
 
     def get_borrowed_chords(self) -> [str]:
@@ -49,7 +51,11 @@ class Song:
         """
         chords_string = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(chords_string)
-        suspected_key = self.cof.guess_tone_and_mode(cp)
+        suspected_key = {}
+        if self.cof.cof_tone_compliances == {}:
+            suspected_key = self.cof.digest_possible_tones_and_modes(cp)
+        else:
+            suspected_key = self.get_most_compliant_tone_and_mode()
         borrowed_chords = self.cof.get_borrowed_chords(suspected_key['scale'], cp)
         # print("   Borrowed chords:", borrowed_chords.keys())
         return list(borrowed_chords.keys())
@@ -62,3 +68,14 @@ class Song:
         """
         raise Exception("You should use a subclass and implement this method inside")
 
+    def get_most_compliant_tone_and_mode(self) -> dict:
+        """
+        returns the most probable tone and mode
+        :return:
+        """
+        best_compliance = {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        for mode in self.cof.cof_tone_compliances.keys():
+            for tone in self.cof.cof_tone_compliances[mode].keys():
+                if self.cof.cof_tone_compliances[mode][tone]["compliance_level"] > best_compliance["compliance_level"]:
+                    best_compliance = self.cof.cof_tone_compliances[mode][tone]
+        return best_compliance

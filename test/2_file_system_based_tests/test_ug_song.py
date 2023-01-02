@@ -23,8 +23,10 @@ class TestUltimateGuitarSong(TestCase):
     def test_digest_get_borrowed_chords(self):
         ugs = self.get_test_data1()
         tone = ugs.get_tone_and_mode()
+        print("Compliances:")
+        print(ugs.cof.cof_tone_compliances)
         res = ugs.get_borrowed_chords()
-        expected = ['Db', 'A', 'A7', 'Em', 'Cm', 'Am', 'Bm', 'D9', 'G#', 'G#6', 'G#M7']
+        expected = ['Bb', 'Bb6', 'BbM7', 'Db', 'Ab', 'Em', 'Ab7', 'G#', 'G#6', 'G#M7']
         self.utr.assertTrue(res == expected, f"{res} found")
 
     def get_test_data1(self) -> UltimateGuitarSong:

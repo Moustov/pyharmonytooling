@@ -2,30 +2,54 @@ from pyharmonytools.displays.console import _HarmonyLogger
 from pyharmonytools.song.text_song import TextSongWithLineForChords
 
 song = """
-D6 Bm7         Em   A7(6)   D6            Bm7      Em      A7(6)    D6
-É melhor ser alegre que ser triste, A alegria é melhor coisa que existe
-   Bm7          Em    A7/6  D6/9 Em6 D6/9 Em6
-É assim como a luz no cora- ção
-D6        Bm7    Em    A7/6 D6          Bm7       Em   A7/6  D6
-Mas pra fazer um samba com beleza, É preciso um bocado de tristeza
-   Bm7       Em   A7/6   D6       Bm7        Em     A7/6  D6 A7 D6 A7
-Preciso um bocado de tristeza, Se não não se faz um samba não
-D6    Bm7       Em     A7/6  D6             Bm7   Em       A7/6 D6
-Fazer samba não é con- tar piada, Quem faz samba assim não é de nada
-Bm7 Em A7/6 D6/9 Em6 D6/9 Em6
-Um bom samba é uma forma de ora- ção
-D6 Bm7 Em A7/6 D6 Bm7 Em A7/6 D6
-Porque o samba é a tristeza que balança, E a tristeza tem sempre uma esperança
-D6 Bm7 Em A7/6 D6 Bm7 Em A7/6 D6 A7 D6 A7
-A tristeza tem sempre uma esperança, De um dia não ser mais triste não
-D6 Bm7 Em A7/6 D6 Bm7 Em A7/6 D6
-Ponha um pouco de amor, uma cadencia, E vai ver que ninguem no mundo vence
-D6 Bm7 Em A7/6 D6/9 Em6 D6/9 Em6
-A beleza que tem um samba, não
-D6 Bm7 Em A7/6 D6 Bm7 Em A7/6 D6
-Porque o samba nasceu lá na Bahia, E se hoje ele é branco na poesia
-D6 Bm7 Em A7/6 D6 Bm7 Em A7/6 D6
-Se hoje é branco na poesia, Ele é negro e demais no cora- ção         """
+       Dm
+Hevenu Sha- lom halerem
+       Gm
+Hevenu Sha- lom halerem
+       A7       Gm
+Hevenu Sha- lom ha- lerem
+       A7        A7        A7           Dm
+Hevenu Sha- lom, Sha- lom, Sha- lom halerem
+ 
+[Verse 1]
+             Dm
+Nous vous a- nnoncons la paix,
+             Gm
+Nous vous a- nnonçons la paix,
+             A7            Dm
+Nous vous a- nnon- çons la paix
+                    A7       A7       A7           Dm
+Nous vous annonçons la paix, la paix, la paix en Jésus
+ 
+[Verse 2]
+             Dm
+Nous vous a- nnoncons la joie,
+             Gm
+Nous vous a- nnonçons la joie,
+             A7            Dm
+Nous vous a- nnon- çons la joie
+                    A7       A7       A7           Dm
+Nous vous annonçons la joie, la joie, la joie en Jésus-Christ
+ 
+[Verse 3]
+             Dm
+Nous vous a- nnoncons l'amour,
+             Gm
+Nous vous a- nnonçons l'amour,
+             A7           Dm
+Nous vous a- nnon- çons l'amour
+                      A7       A7       A7       Dm
+Nous vous annonçons l'amour, l'amour, l'amour en Jésus
+ 
+[Verse 4]
+             Dm
+Nous vous a- nnoncons la paix,
+             Gm
+Nous vous a- nnonçons la joie,
+             A7           Dm
+Nous vous a- nnon- çons l'amour
+                    A7       A7         A7       Dm
+Nous vous annonçons la paix, la joie, l'amour en Jésus        """
 _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE
 the_song = TextSongWithLineForChords()
 the_song.digest(song)

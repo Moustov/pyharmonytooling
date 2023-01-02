@@ -327,3 +327,39 @@ class CofChord(Chord):
         c2 = sorted(chord1.components())
         cmp2 = CofChord.are_components_included_in_chord(c2, chord1)
         return cmp1 and cmp2
+
+    @staticmethod
+    def get_chord_from_harmonic_and_enharmonic(chord_name: str):
+        note_name = ""
+        index_m = 0
+        if "m" in chord_name and "dim" not in chord_name:
+            index_m = chord_name.index("m")
+            note_name = chord_name[0:index_m]
+        elif "#" in chord_name:
+            note_name = chord_name[0:2]
+        elif "b" in chord_name:
+            note_name = chord_name[0:2]
+        elif "bb" in chord_name:
+            note_name = chord_name[0:3]
+        else:
+            note_name = chord_name[0:1]
+        if note_name in Note.CHROMATIC_SCALE_SHARP_BASED:
+            return chord_name
+        if note_name in Note.CHROMATIC_SCALE_FLAT_BASED:
+            return chord_name
+        if note_name in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
+            degree = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES.index(note_name)
+            new_chord_name = Note.CHROMATIC_SCALE_FLAT_BASED[degree]
+            if "m" in chord_name and "dim" not in chord_name:
+                new_chord_name = f"{new_chord_name}{chord_name[index_m:]}"
+            elif "#" in new_chord_name:
+                new_chord_name = f"{new_chord_name}{chord_name[len(note_name):]}"
+            elif "b" in new_chord_name:
+                new_chord_name = f"{new_chord_name}{chord_name[len(note_name):]}"
+            elif "bb" in new_chord_name:
+                new_chord_name = f"{new_chord_name}{chord_name[len(note_name):]}"
+            else:
+                new_chord_name = f"{new_chord_name}{chord_name[len(note_name):]}"
+            return new_chord_name
+        else:
+            return "???"

@@ -85,7 +85,7 @@ class TestNote(TestCase):
             self.ut_report.assertTrue(Note.get_index(n) == index)
             index += 1
         index = 0
-        for n in Note.CHROMATIC_SCALE_WEIRD_NOTES:
+        for n in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
             print(n)
             self.ut_report.assertTrue(Note.get_index(n) == index)
             index += 1

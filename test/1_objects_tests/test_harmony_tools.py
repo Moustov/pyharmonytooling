@@ -17,8 +17,8 @@ class Test(TestCase):
         """
         cof = CircleOf5th()
         cp = cof.digest_song(song)
-        compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        compliance_level_max = cof.digest_possible_tones_and_modes(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'C')
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
@@ -28,8 +28,8 @@ class Test(TestCase):
         """
         cof = CircleOf5th()
         cp = cof.digest_song(song)
-        compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        compliance_level_max = cof.digest_possible_tones_and_modes(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'Db')
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
@@ -39,8 +39,8 @@ class Test(TestCase):
         """
         cof = CircleOf5th()
         cp = cof.digest_song(song)
-        compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        compliance_level_max = cof.digest_possible_tones_and_modes(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'E')
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
@@ -50,19 +50,19 @@ class Test(TestCase):
         """
         cof = CircleOf5th()
         cp = cof.digest_song(song)
-        compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        compliance_level_max = cof.digest_possible_tones_and_modes(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'F')
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
     def test_guess_tone_and_mode_Bb(self):
         song = """
-        Bb, Cm, Dm, E, F, Gm, Adim
+        Bb Cm Dm Eb F Gm Adim
         """
         cof = CircleOf5th()
         cp = cof.digest_song(song)
-        compliance_level_max = cof.guess_tone_and_mode(cp)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        compliance_level_max = cof.digest_possible_tones_and_modes(cp)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'Bb')
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
@@ -80,7 +80,7 @@ class Test(TestCase):
         """
         cof = CircleOf5th()
         cp = cof.digest_song(song)
-        compliance_level_max = cof.guess_tone_and_mode(cp)
+        compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         print(compliance_level_max)
         self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'A')
