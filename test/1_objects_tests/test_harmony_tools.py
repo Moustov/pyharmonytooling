@@ -82,7 +82,7 @@ class Test(TestCase):
         cp = cof.digest_song(song)
         compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         print(compliance_level_max)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 1.0)
+        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'A')
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
 
