@@ -82,7 +82,7 @@ class CofChord(Chord):
             pass
         chord_qualities = []
         if base_chord.quality.quality == "m":
-            chord_qualities = ["m", "5", "add9", "aug", "dim7",
+            chord_qualities = ["m", "add9", "aug", "dim7",
                                "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
                                "madd9", "m6", "m6/9", "m7", "m7/9", "m7/11",
                                "m7/13", "m7/b13", "m/maj7",
@@ -92,7 +92,7 @@ class CofChord(Chord):
         elif base_chord.quality.quality == "dim":
             chord_qualities = ["dim", "dim7", "dim/b13"]
         elif base_chord.quality.quality == "":
-            chord_qualities = ["", "5", "add9", "aug",
+            chord_qualities = ["", "add9", "aug",
                                "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
                                "M7", "M7/9", "M7/#11",
                                "M7+5", "M7/13", "M7/9/13", "7", "7/b9", "7/9",
@@ -100,6 +100,7 @@ class CofChord(Chord):
                                "7/9/13", "7/b9/b13", "7/13/b9", "6", "6/9"
                                ]
         else:
+            # https://fretello.com/news/power-chords/ : power chords are neither Major nor minor
             chord_qualities = ["", "m", "5", "add9", "aug", "dim7",
                                "sus4", "sus2", "7sus4", "7sus4/9", "7sus4/b9", "7sus4/13",
                                "madd9", "m6", "m6/9", "m7", "m7/9", "m7/11",

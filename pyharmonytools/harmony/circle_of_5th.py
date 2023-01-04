@@ -12,7 +12,7 @@ def chord_note_included_in_chord_list(chord_song: Chord, chord_list: [Chord]) ->
     :return:
     """
     for c in chord_list:
-        #if CofChord.is_chord_included_from_components(chord_song, c):
+        # if CofChord.is_chord_included_from_components(chord_song, c):
         if CofChord.is_same_chord_from_components(chord_song, c):
             return True
     return False
@@ -28,6 +28,10 @@ class CircleOf5th:
         self.cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
         self.cof_tone_compliances = {}
         self.cof_tone_compliances[self.cof_name] = {}
+        self.compliance_level = 0
+        self.borrowed_chords_level = 0
+        self.compliant_chords_qty = 0
+        self.borrowed_chords_qty = 0
 
     def get_compliance_note_presence(self, tone: [str], cp: ChordProgression) -> float:
         """
@@ -59,11 +63,12 @@ class CircleOf5th:
         """
         return CircleOf5thNaturalMajor()
 
-    def get_compliance_chord_presence(self, harmonic_suite_chords: [str], cp: ChordProgression) -> float:
+    def get_compliance_chord_presence(self, harmonic_suite_chords: [str], chords: ChordProgression,
+                                      cof_name: str, tonality: str) -> float:
         """
         the distance is binary : if the chord is present => the chord will fully count
         :param harmonic_suite_chords:
-        :param cp:
+        :param chords:
         :return: 0.0 --> 1.0 (100% compliant)
         """
         # init - synthesis of used chords in cp for quicker analysis
@@ -71,45 +76,45 @@ class CircleOf5th:
         compliant_chords = []
         chord_song_list = {}
         chord_list = []
-        for chord_song in cp:
-            if not CofChord.is_chord_in_array(chord_song, chord_list):
-                chord_song_list[str(chord_song)] = 1
-                chord_list.append(chord_song)
+        for cs in chords:
+            if not CofChord.is_chord_in_array(cs, chord_list):
+                chord_song_list[str(cs)] = 1
+                chord_list.append(cs)
             else:
-                chord_song_list[str(chord_song)] += 1
+                chord_song_list[str(cs)] += 1
 
         # check each chord in the tone and see if colored versions of the chord is used in chord_song_list
-        for chord_tone in harmonic_suite_chords:
-            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"  Check {chord_tone}")
-            tone_compliance[chord_tone] = 0
-            possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
-            for chord_song in chord_song_list.keys():
+        self.cof_tone_compliances[cof_name][tonality] = {}
+        self.compliance_level = 0
+        self.borrowed_chords_level = 0
+        self.compliant_chords_qty = 0
+        self.borrowed_chords_qty = 0
+        for chord_song in chord_song_list:
+            chord_tone_found = False
+            for chord_tone in harmonic_suite_chords:
+                possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
                 if chord_note_included_in_chord_list(Chord(chord_song), possible_chord_qualities):
-                    tone_compliance[chord_tone] = chord_song_list[chord_song]
-                    compliant_chords.append(Chord(chord_song))
-                    _HarmonyLogger.print_detail(_HarmonyLogger.LOD_CHORD, f"    {chord_song} found in song")
+                    self.cof_tone_compliances[cof_name][tonality][chord_song] = chord_song_list[chord_song]
+                    self.compliance_level += chord_song_list[chord_song]
+                    self.compliant_chords_qty += 1
+                    chord_tone_found = True
+                    break
+            if not chord_tone_found:
+                self.cof_tone_compliances[cof_name][tonality][chord_song] = -chord_song_list[chord_song]
+                self.borrowed_chords_qty += 1
+                self.borrowed_chords_level += abs(chord_song_list[chord_song])
 
-        # set compliance level
-        compliance_level = 0
-        borrowed_chords_qty = 0
-        if len(compliant_chords) > 0:
-            for chord_song in chord_song_list.keys():
-                if chord_note_included_in_chord_list(Chord(chord_song), compliant_chords):
-                    compliance_level += chord_song_list[chord_song]
-                else:
-                    borrowed_chords_qty += chord_song_list[chord_song]
-
-        if compliance_level == 0 or len(compliant_chords) == 0:
+        if self.compliance_level == 0 or self.compliant_chords_qty == 0:
             # nothing in common
             return 0.0
-        elif len(chord_song_list) > len(tone_compliance) and compliance_level == len(tone_compliance):
-            # all chord tones are used and others are borrowed
+        elif len(self.cof_tone_compliances[cof_name][tonality]) >= len(chord_song_list) == self.compliant_chords_qty:
+            # all song chords are used and belong to the tonality
             return 1.0
-        elif len(chord_song_list) <= len(tone_compliance) and borrowed_chords_qty == 0:
-            # the whole song is in the tone
-            return 100.0
+        # elif len(chord_song_list) <= len(self.cof_tone_compliances[cof_name][tone]) and borrowed_chords_qty == 0:
+        #     # the whole song is in the tone
+        #     return 100.0
         else:
-            return (compliance_level - borrowed_chords_qty) / len(chord_song_list)
+            return (self.compliance_level - self.borrowed_chords_level) / len(chords)
 
     def get_borrowed_chords(self, tone: [str], song_chord_progression: ChordProgression) -> {}:
         """
@@ -156,7 +161,7 @@ class CircleOf5th:
                         chord = CofChord.get_chord_from_harmonic_and_enharmonic(w)
                         c = Chord(chord)
                         possible_chords.append(chord)
-                    except: # todo handle exception differently because it should not happen
+                    except:  # todo handle exception differently because it should not happen
                         pass
         cp = ChordProgression(possible_chords)
         return cp
@@ -191,19 +196,24 @@ class CircleOf5th:
         :param cp:
         :return: [probability, note, circle name, scale]
         """
-        compliance_level_max = {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
-        compliance_level = 0
+        compliance_level_max = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        compliance_rate = 0
         for tone in self.cof_scales:
             _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
-            compliance_level = self.get_compliance_chord_presence(self.cof_scales[tone], cp)
-            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"{tone}, {compliance_level * 100}%")
-            self.cof_tone_compliances[self.cof_name][tone] = {"compliance_level": compliance_level,
+            compliance_rate = self.get_compliance_chord_presence(self.cof_scales[tone], cp, self.cof_name, tone)
+            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"{tone}, {compliance_rate * 100}%")
+            self.cof_tone_compliances[self.cof_name][tone] = {"compliance_rate": compliance_rate,
                                                               "tone": tone, "cof_name": self.cof_name,
                                                               "scale": self.get_scale(tone),
-                                                              "harmonic suite": self.cof_scales[tone]}
-            if compliance_level > compliance_level_max["compliance_level"]:
-                compliance_level_max = {"compliance_level": compliance_level, "tone": tone, "cof_name": self.cof_name,
-                                        "scale": self.get_scale(tone), "harmonic suite": self.cof_scales[tone]}
+                                                              "harmonic suite": self.cof_scales[tone],
+                                                              "chords": self.cof_tone_compliances[self.cof_name][tone],
+                                                              "compliance_level": self.compliance_level,
+                                                              "borrowed_chords_level": self.borrowed_chords_level,
+                                                              "compliant_chords_qty": self.compliant_chords_qty,
+                                                              "borrowed_chords_qty": self.borrowed_chords_qty
+                                                              }
+            if compliance_rate > compliance_level_max["compliance_rate"]:
+                compliance_level_max = self.cof_tone_compliances[self.cof_name][tone]
         return compliance_level_max
 
     def digest_possible_tones_and_modes(self, cp: ChordProgression) -> dict:
@@ -218,6 +228,12 @@ class CircleOf5th:
         cof_nat_maj = CircleOf5thNaturalMajor()
         guess = cof_nat_maj.digest_tone_compliancy_with_circle_of_fifth(cp)
         self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_nat_maj.cof_tone_compliances}
+        if guess["compliance_level"] > best_tone["compliance_level"]:
+            best_tone = guess
+
+        cof_har_major = CircleOf5thHarmonicMajor()
+        guess = cof_har_major.digest_tone_compliancy_with_circle_of_fifth(cp)
+        self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_har_major.cof_tone_compliances}
         if guess["compliance_level"] > best_tone["compliance_level"]:
             best_tone = guess
 
@@ -269,6 +285,7 @@ class CircleOf5th:
 
 
 class CircleOf5thNaturalMajor(CircleOf5th):
+    # aka "Church more
     def __init__(self):
         super().__init__()
         self.cof_name = "Natural Major"
@@ -278,11 +295,22 @@ class CircleOf5thNaturalMajor(CircleOf5th):
         self.cof_tone_compliances[self.cof_name] = {}
 
 
+class CircleOf5thHarmonicMajor(CircleOf5th):
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Harmonic Major"
+        self.intervals = [2, 2, 1, 2, 1, 3]
+        self.qualities = ["maj7", "m7b5", "m7", "mM7", "7", "M7+5", "dim7"]
+        self.cof_scales = self.generate_circle_of_fifths()
+        self.cof_tone_compliances[self.cof_name] = {}
+
+
 class CircleOf5thNaturalMinor(CircleOf5th):
     """
     https://www.youtube.com/watch?v=44t2KJQUh3Y
     https://www.study-guitar.com/blog/minor-key-chord-progressions/
     """
+
     def __init__(self):
         super().__init__()
         self.cof_name = "Natural Minor"
@@ -296,6 +324,7 @@ class CircleOf5thMelodicMinor(CircleOf5th):
     """
     https://www.youtube.com/watch?v=44t2KJQUh3Y
     """
+
     def __init__(self):
         super().__init__()
         self.cof_name = "Melodic Minor"
