@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-05 21:41:45.460376
+ generation: 2023-01-05 22:19:07.484838
 :red_circle:2
-:green_circle:459
+:green_circle:463
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -432,27 +432,31 @@ UNIT TEST REPORT
 * :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L520)]: test_digest_tab_simplest_progressive_chords_with_notations(line 520): 
 * :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L370)]: test_digest_tab_simplest_progressive_chords_with_notations_1_3(line 370): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L27)]: test_get_notes_from_chord_layout(line 27): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L112)]: test_get_borrowed_chords_C(line 112): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L122)]: test_get_borrowed_chords_Cdim(line 122): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L100)]: test_get_chord_possible_qualities(line 100): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L65)]: test_guess_tone_and_mode_Bb(line 65): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L125)]: test_evenou(line 125): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L126)]: test_evenou(line 126): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L127)]: test_evenou(line 127): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L130)]: test_evenou(line 130): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L175)]: test_get_borrowed_chords_C(line 175): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L185)]: test_get_borrowed_chords_Cdim(line 185): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L163)]: test_get_chord_possible_qualities(line 163): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L66)]: test_guess_tone_and_mode_Bb(line 66): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L67)]: test_guess_tone_and_mode_Bb(line 67): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L21)]: test_guess_tone_and_mode_C(line 21): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L68)]: test_guess_tone_and_mode_Bb(line 68): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L22)]: test_guess_tone_and_mode_C(line 22): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L23)]: test_guess_tone_and_mode_C(line 23): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L32)]: test_guess_tone_and_mode_Db(line 32): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L24)]: test_guess_tone_and_mode_C(line 24): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L33)]: test_guess_tone_and_mode_Db(line 33): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L34)]: test_guess_tone_and_mode_Db(line 34): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L43)]: test_guess_tone_and_mode_E(line 43): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L35)]: test_guess_tone_and_mode_Db(line 35): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L44)]: test_guess_tone_and_mode_E(line 44): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L45)]: test_guess_tone_and_mode_E(line 45): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L54)]: test_guess_tone_and_mode_F(line 54): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L46)]: test_guess_tone_and_mode_E(line 46): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L55)]: test_guess_tone_and_mode_F(line 55): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L56)]: test_guess_tone_and_mode_F(line 56): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L85)]: test_guess_tone_and_mode_happy_birthday_chords(line 85): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L86)]: test_guess_tone_and_mode_happy_birthday_chords(line 86): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L87)]: test_guess_tone_and_mode_happy_birthday_chords(line 87): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L57)]: test_guess_tone_and_mode_F(line 57): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L148)]: test_guess_tone_and_mode_happy_birthday_chords(line 148): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L149)]: test_guess_tone_and_mode_happy_birthday_chords(line 149): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L150)]: test_guess_tone_and_mode_happy_birthday_chords(line 150): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L46)]: test_find_finger_layout2(line 46): tab [0, 7, 5, 5, 5, 8] has a possible fingering: {'E': ['0', '-', '-', '-', '-', '-', '-', '-', '-'], 'A': ['-', '-', '-', '-', '-', '-', '-', '3', '-'], 'D': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'G': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'B': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'e': ['-', '-', '-', '-', '-', '-', '-', '-', '4']}
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L29)]: test_find_note_from_position_string_D(line 29): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L34)]: test_find_note_from_position_string_D(line 34): 
