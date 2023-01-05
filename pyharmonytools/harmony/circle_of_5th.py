@@ -2,6 +2,7 @@ from pychord import ChordProgression, Chord
 
 from pyharmonytools.displays.console import _HarmonyLogger
 from pyharmonytools.harmony.cof_chord import CofChord
+from pyharmonytools.harmony.note import Note
 
 
 def chord_note_included_in_chord_list(chord_song: Chord, chord_list: [Chord]) -> bool:
@@ -91,9 +92,10 @@ class CircleOf5th:
         self.borrowed_chords_qty = 0
         for chord_song in chord_song_list:
             chord_tone_found = False
-            for chord_tone in harmonic_suite_chords:
-                possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
-                if chord_note_included_in_chord_list(Chord(chord_song), possible_chord_qualities):
+            for chord_tonality in harmonic_suite_chords:
+                ct = Chord(chord_tonality)
+                cs = Chord(chord_song)
+                if self.is_chord_in_tonality(ct, cs):
                     self.cof_tone_compliances[cof_name][tonality][chord_song] = chord_song_list[chord_song]
                     self.compliance_level += chord_song_list[chord_song]
                     self.compliant_chords_qty += 1
@@ -115,6 +117,46 @@ class CircleOf5th:
         #     return 100.0
         else:
             return (self.compliance_level - self.borrowed_chords_level) / len(chords)
+
+    def is_chord_in_tonality(self, chord_tonality: Chord, chord_song: Chord) -> bool:
+        """
+        useful when trying to see if a chord song is in a tonality
+        :param chord_tonality:
+        :param chord_song:
+        :return:
+        """
+        # handles flat & sharp equivalents
+        eqv = Note(chord_tonality.root).equivalents(chord_song.root)
+        same_root = False
+        for n in eqv:
+            if str(n) == chord_tonality.root:
+                same_root = True
+                break
+
+        if same_root:
+            if chord_tonality.quality.quality == chord_song.quality.quality:
+                return True
+            if chord_tonality.quality.quality.startswith("dim") and chord_song.quality.quality.startswith("dim"):
+                return True
+            elif chord_tonality.quality.quality.startswith("maj") and chord_song.quality.quality.startswith("maj"):
+                return True
+            else:
+                if chord_tonality.quality.quality.startswith("m") and chord_song.quality.quality.startswith("m"):
+                    return True
+                elif not chord_tonality.quality.quality.startswith("m") \
+                        and not chord_song.quality.quality.startswith("m"):
+                    if not chord_tonality.quality.quality.startswith("dim") \
+                        and not chord_song.quality.quality.startswith("dim"):
+                        return True
+                    else:
+                        return False
+                else:
+                    return False
+        else:
+            return False
+        # alternative technical solution:
+        # possible_chord_qualities = CofChord.get_chord_names_possible_qualities(chord_tone)
+        # return chord_note_included_in_chord_list(Chord(chord_song), possible_chord_qualities)
 
     def get_borrowed_chords(self, song_chord_progression: ChordProgression, cof_name: str, tonality: str) -> [str]:
         """
@@ -190,7 +232,7 @@ class CircleOf5th:
         for tone in self.cof_scales:
             _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
             compliance_rate = self.get_compliance_chord_presence(self.cof_scales[tone], cp, self.cof_name, tone)
-            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"{tone}, {compliance_rate * 100}%")
+            _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"   -> {tone}, {compliance_rate * 100}%")
             self.cof_tone_compliances[self.cof_name][tone] = {"compliance_rate": compliance_rate,
                                                               "tone": tone, "cof_name": self.cof_name,
                                                               "scale": self.get_scale(tone),

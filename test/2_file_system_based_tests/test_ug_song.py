@@ -1,6 +1,8 @@
 import os
 from unittest import TestCase
 
+from pychord import ChordProgression
+
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.song.ultimate_guitar_song import UltimateGuitarSong
 
@@ -12,14 +14,6 @@ class TestUltimateGuitarSong(TestCase):
         ugs = self.get_test_data1()
         # transcription went through since this is the last digest() step
         self.utr.assertTrue(ugs.artist == 'Édith Piaf', f"{ugs.artist} found")
-
-    def test_g_natmajor_f_harmajor(self):
-        ugs = self.get_test_data1()
-        cp = ugs.cof.digest_song(" ".join(ugs.chords_sequence))
-        tone = "G"
-        compliance_rate_g = ugs.cof.get_compliance_chord_presence(ugs.cof.cof_scales[tone], cp, self.cof_name, tone)
-        tone = "F"
-        compliance_rate_f = ugs.cof.get_compliance_chord_presence(ugs.cof.cof_scales[tone], cp, self.cof_name, tone)
 
     def test_digest_get_tone_and_mode(self):
         ugs = self.get_test_data1()
@@ -34,7 +28,7 @@ class TestUltimateGuitarSong(TestCase):
         print("Compliances:")
         print(ugs.cof.cof_tone_compliances)
         res = ugs.get_borrowed_chords()
-        expected = ['Bb', 'Bb6', 'BbM7', 'Db', 'Ab', 'Em', 'Ab7', 'G#', 'G#6', 'G#M7']
+        expected = ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7']
         self.utr.assertTrue(res == expected, f"{res} found")
 
     def get_test_data1(self) -> UltimateGuitarSong:

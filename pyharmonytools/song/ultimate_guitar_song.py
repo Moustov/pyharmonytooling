@@ -91,7 +91,7 @@ class UltimateGuitarSong(Song):
                                     a_chord = Chord(chord_name)
                                     self.chords_sequence.append(a_chord)
                             except Exception as err:
-                                # print(chord_name, err)
+                                print(chord_name, err)
                                 self.chords_sequence.append(chord_name)
             elif line.strip() != '':
                 self.lyrics.append(line)

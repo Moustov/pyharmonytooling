@@ -86,7 +86,7 @@ class Note:
         return index_note
 
     @staticmethod
-    def equivalents(note) -> []:
+    def equivalents(note: str) -> []:
         """
         if the note is flat => the sharp will also be part of the returned list
         ex  equivalents("Ab") => ["Ab", "G#"]

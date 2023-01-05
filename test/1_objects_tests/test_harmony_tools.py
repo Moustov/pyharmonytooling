@@ -117,7 +117,6 @@ class Test(TestCase):
                 """
         cof = CircleOf5thNaturalMajor()
         cp = cof.digest_song(song)
-        tone = cof.generate_circle_of_fifths()["C"]
         borrowed_chords = cof.get_borrowed_chords(cp, cof.cof_name, "C")
         print("   Borrowed chords:", borrowed_chords)
         self.ut_report.assertTrue(borrowed_chords == ["Cdim"])
