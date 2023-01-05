@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-05 08:55:57.677335
-:red_circle:4
-:green_circle:456
+ generation: 2023-01-05 21:41:45.460376
+:red_circle:2
+:green_circle:459
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -433,7 +433,7 @@ UNIT TEST REPORT
 * :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L370)]: test_digest_tab_simplest_progressive_chords_with_notations_1_3(line 370): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L27)]: test_get_notes_from_chord_layout(line 27): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L112)]: test_get_borrowed_chords_C(line 112): 
-* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L123)]: test_get_borrowed_chords_Cdim(line 123): 
+* :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L122)]: test_get_borrowed_chords_Cdim(line 122): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L100)]: test_get_chord_possible_qualities(line 100): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L65)]: test_guess_tone_and_mode_Bb(line 65): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L66)]: test_guess_tone_and_mode_Bb(line 66): 
@@ -464,6 +464,7 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L46)]: test_compliance(line 46): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L50)]: test_compliance(line 50): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L26)]: test_digest(line 26): 
-* :red_circle: ['D', 'Ab', 'Bm', 'Ab7', 'G#'] found[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L38)]: test_digest_get_borrowed_chords(line 38): ['D', 'Ab', 'Bm', 'Ab7', 'G#'] found
-* :red_circle: F found[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L28)]: test_digest_get_tone_and_mode(line 28): F found
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L14)]: test_digest_html(line 14): Édith Piaf found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L32)]: test_digest_get_borrowed_chords(line 32): ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7'] found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L22)]: test_digest_get_tone_and_mode(line 22): G found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L23)]: test_digest_get_tone_and_mode(line 23): Natural Major found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L16)]: test_digest_html(line 16): Édith Piaf found
