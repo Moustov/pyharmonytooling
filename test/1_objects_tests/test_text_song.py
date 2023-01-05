@@ -41,7 +41,7 @@ class TestTextSong(TestCase):
         the_song.digest(song)
         compliance_level_max = the_song.get_tone_and_mode()
         print("Compliance:", compliance_level_max)
-        self.ut_report.assertTrue(compliance_level_max["compliance_level"] == 100)
+        self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == "A")
         self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
         print(the_song.chords_sequence)

@@ -37,7 +37,7 @@ class Song:
         return the max tone compliance from this song
         see:
         * https://stackoverflow.com/questions/45399081/determine-the-key-of-a-song-by-its-chords
-        :return: {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        :return: {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         """
         song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
@@ -56,9 +56,8 @@ class Song:
             suspected_key = self.cof.digest_possible_tones_and_modes(cp)
         else:
             suspected_key = self.get_most_compliant_tone_and_mode()
-        borrowed_chords = self.cof.get_borrowed_chords(suspected_key['scale'], cp)
-        # print("   Borrowed chords:", borrowed_chords.keys())
-        return list(borrowed_chords.keys())
+        borrowed_chords = self.cof.get_borrowed_chords(cp, suspected_key["cof_name"], suspected_key["tone"])
+        return borrowed_chords
 
     def digest(self, content: str):
         """
@@ -73,9 +72,9 @@ class Song:
         returns the most probable tone and mode
         :return:
         """
-        best_compliance = {"compliance_level": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        best_compliance = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
         for mode in self.cof.cof_tone_compliances.keys():
             for tone in self.cof.cof_tone_compliances[mode].keys():
-                if self.cof.cof_tone_compliances[mode][tone]["compliance_level"] > best_compliance["compliance_level"]:
+                if self.cof.cof_tone_compliances[mode][tone]["compliance_rate"] > best_compliance["compliance_rate"]:
                     best_compliance = self.cof.cof_tone_compliances[mode][tone]
         return best_compliance

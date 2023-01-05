@@ -13,6 +13,14 @@ class TestUltimateGuitarSong(TestCase):
         # transcription went through since this is the last digest() step
         self.utr.assertTrue(ugs.artist == 'Édith Piaf', f"{ugs.artist} found")
 
+    def test_g_natmajor_f_harmajor(self):
+        ugs = self.get_test_data1()
+        cp = ugs.cof.digest_song(" ".join(ugs.chords_sequence))
+        tone = "G"
+        compliance_rate_g = ugs.cof.get_compliance_chord_presence(ugs.cof.cof_scales[tone], cp, self.cof_name, tone)
+        tone = "F"
+        compliance_rate_f = ugs.cof.get_compliance_chord_presence(ugs.cof.cof_scales[tone], cp, self.cof_name, tone)
+
     def test_digest_get_tone_and_mode(self):
         ugs = self.get_test_data1()
         res = ugs.get_tone_and_mode()
