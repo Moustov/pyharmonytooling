@@ -124,7 +124,7 @@ class Test(TestCase):
         print("Compliance:", compliance_level_max)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'D')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == 'Harmonic Major')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == 'Melodic Minor')
         borrowed_chords = the_song.get_borrowed_chords()
         print("Borrowed chords:", borrowed_chords)
         self.ut_report.assertTrue(borrowed_chords == [])

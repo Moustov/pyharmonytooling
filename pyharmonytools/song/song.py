@@ -11,6 +11,7 @@ class Song:
         self.lyrics = []
         self.line_of_chords = []
         self.chords_sequence = []
+        self.degrees = []
 
     def __str__(self):
         """
@@ -52,7 +53,7 @@ class Song:
         chords_string = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(chords_string)
         suspected_key = {}
-        if self.cof.cof_tone_compliances == {}:
+        if len(self.cof.cof_tone_compliances.keys()) <= 1:
             suspected_key = self.cof.digest_possible_tones_and_modes(cp)
         else:
             suspected_key = self.get_most_compliant_tone_and_mode()
@@ -78,3 +79,48 @@ class Song:
                 if self.cof.cof_tone_compliances[mode][tone]["compliance_rate"] > best_compliance["compliance_rate"]:
                     best_compliance = self.cof.cof_tone_compliances[mode][tone]
         return best_compliance
+
+    def generate_degrees_from_chord_progression(self):
+        """
+        set song degrees from the song suspected key into self.degrees
+        :return:
+        """
+        self.degrees = []
+        chords_string = " ".join(self.get_recognized_chords())
+        cp = self.cof.digest_song(chords_string)
+        suspected_key = {}
+        if len(self.cof.cof_tone_compliances.keys()) <= 1:
+            suspected_key = self.cof.digest_possible_tones_and_modes(cp)
+        else:
+            suspected_key = self.get_most_compliant_tone_and_mode()
+        for cs in self.chords_sequence:
+            deg = self.get_degree(suspected_key, cs)
+            self.degrees.append(deg)
+
+    def get_degree(self, tonality: dict, c: Chord) -> str:
+        """
+        return degree of c within a tonality
+        :param tonality:
+        :param c:
+        :return:
+        """
+        deg = 0
+        for d in tonality["harmonic suite"]:
+            deg += 1
+            d_chord = Chord(d)
+            if d_chord.root == c.root:
+                break
+        if deg == 1:
+            return f"I{c.quality.quality}"
+        if deg == 2:
+            return f"II{c.quality.quality}"
+        if deg == 3:
+            return f"III{c.quality.quality}"
+        if deg == 4:
+            return f"IV{c.quality.quality}"
+        if deg == 5:
+            return f"V{c.quality.quality}"
+        if deg == 6:
+            return f"VI{c.quality.quality}"
+        if deg == 7:
+            return f"VII{c.quality.quality}"

@@ -141,7 +141,10 @@ class CircleOf5th:
             elif chord_tonality.quality.quality.startswith("maj7") and chord_song.quality.quality.startswith("maj7"):
                 return True
             else:
-                if chord_tonality.quality.quality.startswith("m") and chord_song.quality.quality.startswith("m"):
+                if chord_tonality.quality.quality.startswith("m") \
+                        and chord_song.quality.quality.startswith("m") \
+                        and not chord_tonality.quality.quality.startswith("maj7") \
+                        and not chord_song.quality.quality.startswith("maj7"):
                     return True
                 elif not chord_tonality.quality.quality.startswith("m") \
                         and not chord_song.quality.quality.startswith("m"):
