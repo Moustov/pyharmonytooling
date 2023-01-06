@@ -3,10 +3,6 @@ class Note:
     CHROMATIC_SCALE_FLAT_BASED = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
     # https://youtu.be/ZjKyQ7cUlO8?t=730
     CHROMATIC_SCALE_ENHARMONIC_NOTES = ["Bdd", "Bb", "Cb", "B#", "Db", "Ebb", "Eb", "Fb", "E#", "Gb", "Abb", "Ab"]
-    TEMPERED_CHROMATIC_SCALE = {"Ab": 1, "A": 1, "A#": 0, "Bb": 1, "B": 0,
-                                "Cb": 1, "C": 1, "C#": 0, "Db": 1, "D": 1, "D#": 0,
-                                "Eb": 1, "E": 0, "Fb": 1, "F": 1, "F#": 0,
-                                "Gb": 1, "G": 1, "G#": 0}
     # see https://en.wikipedia.org/wiki/Comma_(music) to make it generic as much as possible
     EXTENDED_CHROMATIC_SCALE = ["Abb", "Ab", "A", "A#", "A##", "Bbb", "Bb", "B", "B#", "B##",
                                 "Cbb", "Cb", "C", "C#", "C##", "Dbb", "Db", "D", "D#", "D##",

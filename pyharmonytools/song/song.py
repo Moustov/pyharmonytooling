@@ -1,6 +1,7 @@
 from pychord import Chord
 
 from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+from pyharmonytools.harmony.note import Note
 
 
 class Song:
@@ -105,43 +106,62 @@ class Song:
         :return:
         """
         deg = 0
+        root_found = False
+        interval = 0
         for d in tonality["harmonic suite"]:
             deg += 1
             d_chord = Chord(d)
             if d_chord.root == c.root:
+                root_found = True
                 break
+        if not root_found:
+            deg = 0
+            for d in tonality["harmonic suite"]:
+                deg += 1
+                d_chord = Chord(d)
+                if ord(d_chord.root[0]) == ord(c.root[0]):
+                    root_found = True
+                    interval = Note(d_chord.root).get_interval_in_half_tones(Note(c.root))
+                    break
+
+        sharp = ""
+        if interval != 0:
+            sharp = "#"
+
         if deg == 1:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"i{c.quality.quality[1:]}"
+                return f"i{sharp}{c.quality.quality[1:]}"
             else:
-                return f"I{c.quality.quality}"
-        if deg == 2:
+                return f"I{sharp}{c.quality.quality}"
+        elif deg == 2:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"ii{c.quality.quality[1:]}"
+                return f"ii{sharp}{c.quality.quality[1:]}"
             else:
-                return f"II{c.quality.quality}"
-        if deg == 3:
+                return f"II{sharp}{c.quality.quality}"
+        elif deg == 3:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"iii{c.quality.quality[1:]}"
+                return f"iii{sharp}{c.quality.quality[1:]}"
             else:
-                return f"III{c.quality.quality}"
-        if deg == 4:
+                return f"III{sharp}{c.quality.quality}"
+        elif deg == 4:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"iv{c.quality.quality[1:]}"
+                return f"iv{sharp}{c.quality.quality[1:]}"
             else:
-                return f"IV{c.quality.quality}"
-        if deg == 5:
+                return f"IV{sharp}{c.quality.quality}"
+        elif deg == 5:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"v{c.quality.quality[1:]}"
+                return f"v{sharp}{c.quality.quality[1:]}"
             else:
-                return f"V{c.quality.quality}"
-        if deg == 6:
+                return f"V{sharp}{c.quality.quality}"
+        elif deg == 6:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"vi{c.quality.quality[1:]}"
+                return f"vi{sharp}{c.quality.quality[1:]}"
             else:
-                return f"VI{c.quality.quality}"
-        if deg == 7:
+                return f"VI{sharp}{c.quality.quality}"
+        elif deg == 7:
             if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
-                return f"vii{c.quality.quality[1:]}"
+                return f"vii{sharp}{c.quality.quality[1:]}"
             else:
-                return f"VII{c.quality.quality}"
+                return f"VII{sharp}{c.quality.quality}"
+        else:
+            raise ValueError(f"Degree calculation error with {str(c)} in {str(tonality)}")

@@ -338,7 +338,7 @@ see [here](unit_test_report.md)
 # Release Notes
 * 06/JAN/23
   * displaying degrees song chords 
-  * package v0.3.0
+  * package v0.3.1
 * 01/DEC/22
   * displaying tabs with chords
   * handling guitar gimmicks in tabs
