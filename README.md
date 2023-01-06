@@ -5,6 +5,10 @@ PyHarmonyTooling
 <img src="circle_of_5th.png" width="300" alt="Circle of 5th">
 </div>
 
+Table of Content
+----------------
+[[_TOC_]]
+
 
 # OVERVIEW
 Series of tools to handle harmony in music
@@ -337,7 +341,7 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
-* 06/JAN/23 ?
+* 06/JAN/23
   * displaying degrees song chords 
   * package v0.3.0
 * 01/DEC/22
