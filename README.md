@@ -317,6 +317,8 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 06/JAN/23 ?
+  * displaying degrees song chords 
 * 01/DEC/22
   * displaying tabs with chords
   * handling guitar gimmicks in tabs

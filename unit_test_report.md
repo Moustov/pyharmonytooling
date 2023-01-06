@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-06 08:45:51.142763
-:red_circle:3
-:green_circle:464
+ generation: 2023-01-06 08:56:21.743552
+:red_circle:2
+:green_circle:465
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -467,7 +467,7 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L46)]: test_compliance(line 46): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L47)]: test_compliance(line 47): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L51)]: test_compliance(line 51): 
-* :red_circle: [[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L122)]: test_degrees_evenou(line 122): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L122)]: test_degrees_evenou(line 122): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L67)]: test_degrees_happy_birthday(line 67): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L26)]: test_digest(line 26): 
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L32)]: test_digest_get_borrowed_chords(line 32): ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7'] found

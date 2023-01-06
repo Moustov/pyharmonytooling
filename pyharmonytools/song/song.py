@@ -111,16 +111,37 @@ class Song:
             if d_chord.root == c.root:
                 break
         if deg == 1:
-            return f"I{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"i{c.quality.quality[1:]}"
+            else:
+                return f"I{c.quality.quality}"
         if deg == 2:
-            return f"II{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"ii{c.quality.quality[1:]}"
+            else:
+                return f"II{c.quality.quality}"
         if deg == 3:
-            return f"III{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"iii{c.quality.quality[1:]}"
+            else:
+                return f"III{c.quality.quality}"
         if deg == 4:
-            return f"IV{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"iv{c.quality.quality[1:]}"
+            else:
+                return f"IV{c.quality.quality}"
         if deg == 5:
-            return f"V{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"v{c.quality.quality[1:]}"
+            else:
+                return f"V{c.quality.quality}"
         if deg == 6:
-            return f"VI{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"vi{c.quality.quality[1:]}"
+            else:
+                return f"VI{c.quality.quality}"
         if deg == 7:
-            return f"VII{c.quality.quality}"
+            if c.quality.quality.startswith("m") and not c.quality.quality.startswith("maj7"):
+                return f"vii{c.quality.quality[1:]}"
+            else:
+                return f"VII{c.quality.quality}"

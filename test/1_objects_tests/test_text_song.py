@@ -119,7 +119,7 @@ class TestTextSong(TestCase):
         the_song = TextSongWithLineForChords()
         the_song.digest(song)
         the_song.generate_degrees_from_chord_progression()
-        self.ut_report.assertTrue(the_song.degrees == ['ii', 'iv', 'V7', 'iv', 'V7', 'V7', 'V7', 'ii', 'ii', 'iv',
-                                                       'V7', 'ii', 'V7', 'V7', 'V7', 'ii', 'ii', 'iv', 'V7', 'ii',
-                                                       'V7', 'V7', 'V7', 'ii', 'ii', 'iv', 'V7', 'ii', 'V7', 'V7',
-                                                       'V7', 'ii', 'ii', 'iv', 'V7', 'ii', 'V7', 'V7', 'V7', 'ii'])
+        self.ut_report.assertTrue(the_song.degrees == ['i', 'iv', 'V7', 'iv', 'V7', 'V7', 'V7', 'i', 'i', 'iv', 'V7',
+                                                        'i', 'V7', 'V7', 'V7', 'i', 'i', 'iv', 'V7', 'i', 'V7', 'V7',
+                                                        'V7', 'i', 'i', 'iv', 'V7', 'i', 'V7', 'V7', 'V7', 'i', 'i',
+                                                        'iv', 'V7', 'i', 'V7', 'V7', 'V7', 'i'])
