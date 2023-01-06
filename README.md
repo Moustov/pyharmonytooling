@@ -172,6 +172,26 @@ ouput:
     Borrowed chords: dict_keys(['Cm'])
 See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
 
+### Get degrees on a song from a guessed tonality
+        from pychord import Chord
+        from pyharmonytools.displays.unit_test_report import UnitTestReport
+        from pyharmonytools.song.text_song import TextSongWithLineForChords
+
+        song = """
+                            A           E
+                    Happy Birthday to you
+                          E           A
+                    Happy Birthday to you
+                          A7            D
+                    Happy Birthday dear (name)
+                          A        E    A
+                    Happy Birthday to you
+                """
+        the_song = TextSongWithLineForChords()
+        the_song.digest(song)
+        the_song.generate_degrees_from_chord_progression()
+        assert (the_song.degrees == ['I', 'V', 'V', 'I', 'I7', 'IV', 'I', 'V', 'I'])
+
 
 ## Song Querying
 ### Song search & processing tools on Ultimate Guitar through Google.com
@@ -319,6 +339,7 @@ see [here](unit_test_report.md)
 # Release Notes
 * 06/JAN/23 ?
   * displaying degrees song chords 
+  * package v0.3.0
 * 01/DEC/22
   * displaying tabs with chords
   * handling guitar gimmicks in tabs

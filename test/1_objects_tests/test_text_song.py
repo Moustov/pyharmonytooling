@@ -1,7 +1,5 @@
 from unittest import TestCase
-
 from pychord import Chord
-
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.song.text_song import TextSongWithLineForChords
 
