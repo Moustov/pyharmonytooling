@@ -15,7 +15,7 @@ from pyharmonytools.song.ultimate_guitar_song import UltimateGuitarSong
 
 
 class UltimateGuitarSearch:
-    GOOGLE_SEARCH_SECURE_WAIT = 6   # minutes
+    GOOGLE_SEARCH_SECURE_WAIT = 6  # minutes
     GOOGLE_SEARCH_WAIT_AFTER_REJECTION = 5  # minutes
     NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS = 75
     NB_GOOGLE_SEARCHES_LOG_FILE_NAME = ".google_searches_qty.log"
@@ -134,7 +134,7 @@ class UltimateGuitarSearch:
                        - (UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION * 0.1)
             max_wait = UltimateGuitarSearch.GOOGLE_SEARCH_WAIT_AFTER_REJECTION
             print(f"Too many queries - let's try to wait for {min_wait} to {max_wait} minutes")
-            sleep(randint(int(min_wait*60), int(max_wait*60)))
+            sleep(randint(int(min_wait * 60), int(max_wait * 60)))
             self.reset_google_searches()
         url = google_search(query, page, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False)
         return str(get_html(url))
@@ -229,3 +229,18 @@ class UltimateGuitarSearch:
             return are_all_search_empty
         else:
             return is_there_one_song_found
+
+    def get_song_samples(self, cadence: str, cof: CircleOf5th, max_songs: int) -> dict:
+        """
+        returns songs from a cadence
+        todo the mode should rather be guessed from the cadence
+        :param cadence:
+        :param cof:
+        :param max_songs:
+        :return:
+        """
+        songs = self.search_songs_from_cadence(cadence=cadence, mode=cof,
+                                               limit_per_tone=max_songs,
+                                               matches_exactly=True,
+                                               try_avoiding_blocked_searches=True)
+        return songs

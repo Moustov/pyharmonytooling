@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-06 23:47:03.226612
+ generation: 2023-01-08 00:07:57.802577
 :red_circle:2
-:green_circle:466
+:green_circle:469
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -463,14 +463,17 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L17)]: test_find_note_from_position_string_E(line 17): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L22)]: test_find_note_from_position_string_E(line 22): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L39)]: test_find_positions_from_note(line 39): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L43)]: test_compliance(line 43): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L44)]: test_compliance(line 44): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L45)]: test_compliance(line 45): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L49)]: test_compliance(line 49): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L120)]: test_degrees_evenou(line 120): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L65)]: test_degrees_happy_birthday(line 65): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L182)]: test_degrees_sometimes(line 182): 
-* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L24)]: test_digest(line 24): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L266)]: test_compliance(line 266): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L267)]: test_compliance(line 267): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L268)]: test_compliance(line 268): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L272)]: test_compliance(line 272): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L284)]: test_degrees_evenou(line 284): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L278)]: test_degrees_happy_birthday(line 278): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L293)]: test_degrees_sometimes(line 293): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L257)]: test_digest(line 257): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L314)]: test_remarquable_cadences_happy_birthday(line 314): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L333)]: test_remarquable_cadences_saravah(line 333): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L324)]: test_remarquable_cadences_sometimes(line 324): 
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L32)]: test_digest_get_borrowed_chords(line 32): ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7'] found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L22)]: test_digest_get_tone_and_mode(line 22): G found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L23)]: test_digest_get_tone_and_mode(line 23): Natural Major found

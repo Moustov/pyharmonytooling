@@ -1,11 +1,13 @@
 from pychord import Chord
 
+from pyharmonytools.harmony.cadence import Cadence
 from pyharmonytools.harmony.circle_of_5th import CircleOf5th
 from pyharmonytools.harmony.note import Note
 
 
 class Song:
     def __init__(self):
+        self.remarquable_cadences = {}
         self.artist = ""
         self.song_title = ""
         self.cof = CircleOf5th()
@@ -97,6 +99,25 @@ class Song:
         for cs in self.chords_sequence:
             deg = self.get_degree(suspected_key, cs)
             self.degrees.append(deg)
+
+    def get_remarquable_cadences(self) -> dict:
+        """
+        show remarkable cadences in tabs
+        :return:
+        """
+        if not self.degrees:
+            self.generate_degrees_from_chord_progression()
+
+        self.remarquable_cadences = {}
+        song_degrees = "-".join(self.degrees)
+        for c in Cadence.REMARQUABLE_CADENCES_NATURAL_MAJOR:
+            key = f"REMARQUABLE_CADENCES_NATURAL_MAJOR:{c}"
+            for deg in range(0, len(self.degrees)):
+                if song_degrees[deg:].startswith(Cadence.REMARQUABLE_CADENCES_NATURAL_MAJOR[c]):
+                    if key not in self.remarquable_cadences.keys():
+                        self.remarquable_cadences[key] = []
+                    self.remarquable_cadences[key].append(deg)
+        return self.remarquable_cadences
 
     def get_degree(self, tonality: dict, c: Chord) -> str:
         """

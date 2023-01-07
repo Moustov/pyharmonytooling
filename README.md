@@ -329,7 +329,6 @@ _(in no specific order)_
   * update tabs with guitar tuning
   * guess rhythm from guitar tab
   * use rhythm in guitar tab to guess phrases and improve chord guessing
-  * show remarkable cadences in tabs
   * analyze found chords from tabs to make them more consistent (notably with the CoF or b/#)
 
 # Test report
@@ -337,7 +336,7 @@ see [here](unit_test_report.md)
 
 # Release Notes
 * 06/JAN/23
-  * displaying degrees song chords 
+  * degrees from song chords 
   * package v0.3.1
 * 01/DEC/22
   * displaying tabs with chords
