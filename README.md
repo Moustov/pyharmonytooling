@@ -335,6 +335,8 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 08/JAN/23
+  * spot remarquable cadences in a song
 * 06/JAN/23
   * degrees from song chords 
   * package v0.3.1

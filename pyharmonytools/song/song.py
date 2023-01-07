@@ -117,6 +117,20 @@ class Song:
                     if key not in self.remarquable_cadences.keys():
                         self.remarquable_cadences[key] = []
                     self.remarquable_cadences[key].append(deg)
+        for c in Cadence.REMARQUABLE_CADENCES_NATURAL_MINOR:
+            key = f"REMARQUABLE_CADENCES_NATURAL_MINOR:{c}"
+            for deg in range(0, len(self.degrees)):
+                if song_degrees[deg:].startswith(Cadence.REMARQUABLE_CADENCES_NATURAL_MINOR[c]):
+                    if key not in self.remarquable_cadences.keys():
+                        self.remarquable_cadences[key] = []
+                    self.remarquable_cadences[key].append(deg)
+        for c in Cadence.REMARQUABLE_CADENCES_HYBRID:
+            key = f"REMARQUABLE_CADENCES_HYBRID:{c}"
+            for deg in range(0, len(self.degrees)):
+                if song_degrees[deg:].startswith(Cadence.REMARQUABLE_CADENCES_HYBRID[c]):
+                    if key not in self.remarquable_cadences.keys():
+                        self.remarquable_cadences[key] = []
+                    self.remarquable_cadences[key].append(deg)
         return self.remarquable_cadences
 
     def get_degree(self, tonality: dict, c: Chord) -> str:
