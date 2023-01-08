@@ -196,7 +196,7 @@ class CircleOf5th:
                         c = Chord(chord)
                         possible_chords.append(chord)
                     except:  # todo handle exception differently because it should not happen
-                        pass
+                        print(f"Issue to digest chord {chord} with PyChord")
         cp = ChordProgression(possible_chords)
         return cp
 

@@ -41,6 +41,8 @@ class UltimateGuitarSong(Song):
         self.html = html
         try:
             self.extract_tabs_with_tab(html)
+            if not self.chords_sequence:  # to handle weird formats such as https://tabs.ultimate-guitar.com/tab/trans-siberian-orchestra/christmas-canon-rock-tabs-3465077
+                self.extract_tabs_with_chless_tabs(html)
         except:
             try:
                 self.extract_tabs_without_tab(html)
@@ -111,12 +113,12 @@ class UltimateGuitarSong(Song):
         for tab in tabs_with_extra:
             tab = "[tab]" + tab
             tab = turn_html_accents(tab)
-            s = tab.split(r"\\r\\n")
+            s = tab.split(r"\r\n")
             self.line_of_chords.append(s[0])
             loc = s[0].split()
             for c in loc[1:]:
                 if "[ch]" in c and "[/ch]" in c:
-                    chord_name = c[4:-5]    # filtering [ch] & [/ch]
+                    chord_name = c[4:-5]  # filtering [ch] & [/ch]
                     a_chord = Chord(chord_name)
                     self.chords_sequence.append(a_chord)
             self.lyrics.append(s[1])
@@ -150,3 +152,37 @@ class UltimateGuitarSong(Song):
         self.html = f.read().decode('utf-8')
         self.digest(self.html)
         self.url = url
+
+    def extract_tabs_with_chless_tabs(self, html):
+        """
+        to handle weird formats such as https://tabs.ultimate-guitar.com/tab/trans-siberian-orchestra/christmas-canon-rock-tabs-3465077
+        :param html:
+        :return:
+        """
+        self.tabs = []
+        self.lyrics = []
+        self.line_of_chords = []
+        self.chords_sequence = []
+        tabs_with_extra = html.split("[tab]")[1:]
+        for tab in tabs_with_extra:
+            tab = "[tab]" + tab
+            tab = turn_html_accents(tab)
+            s = tab.split(r"\r\n")
+            for l in s:
+                tab_less = l.split("[/tab]")
+                self.line_of_chords.append(tab_less[0])
+                loc = tab_less[0].split()
+                a_chord = None
+                tab_line = []
+                for c in loc[1:]:
+                    chord_name = c.strip()
+                    try:
+                        a_chord = Chord(chord_name)
+                        tab_line.append(a_chord)
+                        self.chords_sequence.append(a_chord)
+                    except:
+                        self.lyrics.append(s)
+                if not a_chord:
+                    self.lyrics.append(s)
+                else:
+                    self.tabs.append(tab_line)
