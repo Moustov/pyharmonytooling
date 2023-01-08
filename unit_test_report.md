@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-08 00:15:44.906439
+ generation: 2023-01-08 22:39:38.895632
 :red_circle:2
-:green_circle:469
+:green_circle:477
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -375,6 +375,11 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L34)]: test_guess_chord_name_Gb6_only(line 34): 
 * :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L72)]: test_is_chord_included_from_components(line 72): 
 * :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L73)]: test_is_chord_included_from_components(line 73): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L76)]: test_is_like_a_chord(line 76): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L77)]: test_is_like_a_chord(line 77): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L78)]: test_is_like_a_chord(line 78): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L79)]: test_is_like_a_chord(line 79): 
+* :green_circle:[[1_objects_tests/test_cof_chord.py](test/1_objects_tests/test_cof_chord.py#L80)]: test_is_like_a_chord(line 80): 
 * :green_circle:[[1_objects_tests/test_console_for_guitar_neck.py](test/1_objects_tests/test_console_for_guitar_neck.py#L45)]: test_set_multiple_fingers(line 45): 
 * :green_circle:[[1_objects_tests/test_console_for_guitar_neck.py](test/1_objects_tests/test_console_for_guitar_neck.py#L20)]: test_set_single_finger_E(line 20): 
 * :green_circle:[[1_objects_tests/test_console_for_guitar_neck.py](test/1_objects_tests/test_console_for_guitar_neck.py#L32)]: test_set_single_finger_e(line 32): 
@@ -478,3 +483,6 @@ UNIT TEST REPORT
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L22)]: test_digest_get_tone_and_mode(line 22): G found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L23)]: test_digest_get_tone_and_mode(line 23): Natural Major found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L16)]: test_digest_html(line 16): Édith Piaf found
+* :green_circle:[[2_file_system_based_tests/test_ultimate_guitar_song.py](test/2_file_system_based_tests/test_ultimate_guitar_song.py#L43)]: test_extract_tabs_with_chless_tab(line 43): No chord found
+* :green_circle:[[2_file_system_based_tests/test_ultimate_guitar_song.py](test/2_file_system_based_tests/test_ultimate_guitar_song.py#L28)]: test_extract_tabs_with_tab(line 28): No chord found
+* :green_circle:[[2_file_system_based_tests/test_ultimate_guitar_song.py](test/2_file_system_based_tests/test_ultimate_guitar_song.py#L35)]: test_extract_tabs_with_tab2(line 35): No chord found

@@ -71,3 +71,11 @@ class TestCofChord(TestCase):
         gb6 = Chord("Gb6")
         self.ut_report.assertTrue(CofChord.is_chord_included_from_components(ebm, gb6))
         self.ut_report.assertTrue(not CofChord.is_chord_included_from_components(gb6, ebm))
+
+    def test_is_like_a_chord(self):
+        self.ut_report.assertTrue(CofChord.is_like_a_chord('A'))
+        self.ut_report.assertTrue(CofChord.is_like_a_chord('Ab'))
+        self.ut_report.assertTrue(CofChord.is_like_a_chord('A#'))
+        self.ut_report.assertTrue(CofChord.is_like_a_chord('AM7'))
+        self.ut_report.assertTrue(not CofChord.is_like_a_chord('Ax'))
+

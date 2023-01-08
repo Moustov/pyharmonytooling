@@ -27,6 +27,13 @@ class TestUltimateGuitarSong(TestCase):
         ugs.extract_tabs_with_tab(html)
         self.utr.assertTrue(ugs.chords_sequence != [], f"No chord found")
 
+    def test_extract_tabs_with_tab2(self):
+        html = self.get_test_song("song_03.html")
+        # transcription went through since this is the last digest() step
+        ugs = UltimateGuitarSong()
+        ugs.extract_tabs_with_tab(html)
+        self.utr.assertTrue(ugs.chords_sequence != [], f"No chord found")
+
     def test_extract_tabs_with_chless_tab(self):
         # https://tabs.ultimate-guitar.com/tab/trans-siberian-orchestra/christmas-canon-rock-tabs-3465077
         html = self.get_test_song("song_02.html")

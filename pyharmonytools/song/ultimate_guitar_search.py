@@ -63,7 +63,10 @@ class UltimateGuitarSearch:
                 link = self.__extract_link(part)
                 match_found = False
                 if matches_exactly:
-                    match_found = self.check_matches_exactly(query, link)
+                    try:
+                        match_found = self.check_matches_exactly(query, link)
+                    except:
+                        print(f">>> Issue met while checking UG content at {link}")
                 if match_found or not matches_exactly:
                     if link not in res:
                         print(f"Song found at {link}")
@@ -72,6 +75,7 @@ class UltimateGuitarSearch:
                         if link_qty >= limit:
                             break
                 else:
+                    print(f" - does not match search criteria.")
                     numbers_of_negative_checks += 1
             page += 1
         if numbers_of_negative_checks >= self.NUMBER_OF_ACCEPTABLE_NEGATIVE_CHECKS:

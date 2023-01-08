@@ -3,6 +3,7 @@ import urllib
 from pychord import Chord
 
 from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.song.song import Song
 
 
@@ -87,13 +88,15 @@ class UltimateGuitarSong(Song):
                         for chord_name in chords:
                             try:
                                 chord_name = chord_name.strip()
-                                if chord_name != '':
+                                if chord_name != '' and "N.C." not in chord_name:
                                     if chord_name[0] == '/':
                                         chord_name = chord_name[1:]
-                                    a_chord = Chord(chord_name)
-                                    self.chords_sequence.append(a_chord)
+                                    if CofChord.is_like_a_chord(chord_name):
+                                        a_chord = Chord(chord_name)
+                                        self.chords_sequence.append(a_chord)
                             except Exception as err:
                                 print(chord_name, err)
+                                print(f">>> '{chord_name}' could not be set as a chord")
                                 self.chords_sequence.append(chord_name)
             elif line.strip() != '':
                 self.lyrics.append(line)
@@ -117,10 +120,15 @@ class UltimateGuitarSong(Song):
             self.line_of_chords.append(s[0])
             loc = s[0].split()
             for c in loc[1:]:
-                if "[ch]" in c and "[/ch]" in c:
-                    chord_name = c[4:-5]  # filtering [ch] & [/ch]
-                    a_chord = Chord(chord_name)
-                    self.chords_sequence.append(a_chord)
+                if "[ch]" in c and "[/ch]" in c and "N.C." not in c:
+                    chord_name = c.split("[/ch]")[0]  # filtering [ch] & [/ch]
+                    chord_name = chord_name.split("[ch]")[1]
+                    try:
+                        if CofChord.is_like_a_chord(chord_name):
+                            a_chord = Chord(chord_name)
+                            self.chords_sequence.append(a_chord)
+                    except:
+                        print(f">>> '{chord_name}' could not be set as a chord")
             self.lyrics.append(s[1])
             self.tabs.append(tab)
         self.tabs[len(self.tabs) - 1] = self.tabs[len(self.tabs) - 1].split("&quot;,&quot;revision_id&quot;:")[0]
@@ -140,6 +148,7 @@ class UltimateGuitarSong(Song):
         retrieve the song from the URL and digest it into self
         :param url:
         """
+        print(f"Trying to retrieve {url}...")
         self.url = url
         req = urllib.request.Request(
             url,
@@ -176,12 +185,14 @@ class UltimateGuitarSong(Song):
                 tab_line = []
                 for c in loc[1:]:
                     chord_name = c.strip()
-                    try:
-                        a_chord = Chord(chord_name)
-                        tab_line.append(a_chord)
-                        self.chords_sequence.append(a_chord)
-                    except:
-                        self.lyrics.append(s)
+                    if CofChord.is_like_a_chord(chord_name):
+                        try:
+                            a_chord = Chord(chord_name)
+                            tab_line.append(a_chord)
+                            self.chords_sequence.append(a_chord)
+                        except:
+                            print(f">>> '{chord_name}' could not be set as a chord")
+                            self.lyrics.append(s)
                 if not a_chord:
                     self.lyrics.append(s)
                 else:

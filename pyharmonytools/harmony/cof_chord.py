@@ -1,4 +1,5 @@
 from pychord import Chord
+from pychord.constants.qualities import DEFAULT_QUALITIES
 
 from pyharmonytools.displays.console import _HarmonyLogger
 from pyharmonytools.harmony.note import Note
@@ -6,6 +7,7 @@ from pyharmonytools.harmony.note import Note
 
 class CofChord(Chord):
     possible_chords = []
+    sorted_qualities = []
 
     def __init__(self, chord_name: str):
         super().__init__(chord_name)
@@ -22,7 +24,7 @@ class CofChord(Chord):
             raise TypeError(f"Cannot compare non CofChord objects")
         c1 = sorted(a.components())
         c2 = sorted(b.components())
-        if len(c1) != len (c2):
+        if len(c1) != len(c2):
             return False
         return CofChord.is_chord_included_from_components(a, b)
 
@@ -176,7 +178,8 @@ class CofChord(Chord):
             for eqv_note in Note.equivalents(note):
                 CofChord.possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note)
                 CofChord.possible_chords += CofChord.get_chord_names_possible_qualities(eqv_note + "m")
-        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Number of existing chords: {len(CofChord.possible_chords)}")
+        _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE,
+                                    f"Number of existing chords: {len(CofChord.possible_chords)}")
         res = []
         checked_chords = []
         for c in CofChord.possible_chords:
@@ -205,7 +208,8 @@ class CofChord(Chord):
         return similar_chords
 
     @staticmethod
-    def guess_chord_name(chord_notes: [Note], is_strictly_compliant: bool = True, simplest_chord_only: bool = True) -> [Chord]:
+    def guess_chord_name(chord_notes: [Note], is_strictly_compliant: bool = True, simplest_chord_only: bool = True) -> [
+        Chord]:
         """
         return <Chord("C")> from [<Note("C">), <Note("G">), <Note("E">)]
 
@@ -246,7 +250,7 @@ class CofChord(Chord):
         elif simplest_chord_only:
             res = []
             # loooong dummy name to ensure finding the shortest chord name
-            simplest_chord_name = "A#7sus4/13/C#"   # the longest known/valid chord name (see PyChord)
+            simplest_chord_name = "A#7sus4/13/C#"  # the longest known/valid chord name (see PyChord)
             simplest_chord = None
             for c in compatible_chords:
                 diff = CofChord.compare_simplicity(c, simplest_chord_name)
@@ -320,7 +324,7 @@ class CofChord(Chord):
         return expectation_met
 
     @staticmethod
-    def are_chord_equals(chord1: Chord, chord2:Chord) -> bool:
+    def are_chord_equals(chord1: Chord, chord2: Chord) -> bool:
         if not chord1 or not chord2:
             return False
         c1 = sorted(chord1.components())
@@ -364,3 +368,66 @@ class CofChord(Chord):
             return new_chord_name
         else:
             return "???"
+
+    @staticmethod
+    def is_like_a_chord(chord_name: str) -> bool:
+        if not chord_name.startswith("Ab") \
+                and not chord_name.startswith("Bb") \
+                and not chord_name.startswith("Cb") \
+                and not chord_name.startswith("Db") \
+                and not chord_name.startswith("Eb") \
+                and not chord_name.startswith("Fb") \
+                and not chord_name.startswith("Gb"):
+            if not chord_name.startswith("A#") \
+                    and not chord_name.startswith("B#") \
+                    and not chord_name.startswith("C#") \
+                    and not chord_name.startswith("D#") \
+                    and not chord_name.startswith("E#") \
+                    and not chord_name.startswith("F#") \
+                    and not chord_name.startswith("G#"):
+                if not chord_name.startswith("A") \
+                        and not chord_name.startswith("B") \
+                        and not chord_name.startswith("C") \
+                        and not chord_name.startswith("D") \
+                        and not chord_name.startswith("E") \
+                        and not chord_name.startswith("F") \
+                        and not chord_name.startswith("G"):
+                    return False
+                else:
+                    return CofChord.is_chord_quality_valid(chord_name[1:])
+            else:
+                return CofChord.is_chord_quality_valid(chord_name[2:])
+        else:
+            return CofChord.is_chord_quality_valid(chord_name[2:])
+
+    @staticmethod
+    def is_chord_quality_valid(chord_name_quality: str) -> bool:
+        if chord_name_quality == "":
+            return True
+        for q in CofChord.get_sorted_qualities():
+            if chord_name_quality.startswith(q):
+                return True
+        if chord_name_quality.startswith("/"):
+            return True
+        return False
+
+    @staticmethod
+    def get_sorted_qualities():
+        if CofChord.sorted_qualities:
+            return CofChord.sorted_qualities
+        else:
+            sq = []
+            l = {}
+            k_list = []
+            for c in DEFAULT_QUALITIES:
+                k = str(len(c[0]))
+                if k in l.keys():
+                    l[k].append(c[0])
+                else:
+                    k_list.append(k)
+                    l[k] = [c[0]]
+            k_list.sort(reverse=True)
+            for i in k_list[:-1]:  # 0 is skipped because it matches everything
+                sq += l[i]
+            CofChord.sorted_qualities = sq
+            return CofChord.sorted_qualities
