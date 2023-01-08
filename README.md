@@ -191,6 +191,30 @@ See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
         the_song.generate_degrees_from_chord_progression()
         assert (the_song.degrees == ['I', 'V', 'V', 'I', 'I7', 'IV', 'I', 'V', 'I'])
 
+### Guess chord progressions ("cadences" in a song)
+        from deepdiff import DeepDiff
+        from pyharmonytools.displays.unit_test_report import UnitTestReport
+        from pyharmonytools.song.text_song import TextSongWithLineForChords
+        
+        song = """
+                            A           E
+                    Happy Birthday to you
+                          E           A
+                    Happy Birthday to you
+                          A7            D
+                    Happy Birthday dear (name)
+                          A        E    A
+                    Happy Birthday to you
+                """
+        the_song = TextSongWithLineForChords()
+        the_song.digest(song)
+        the_song.generate_degrees_from_chord_progression()
+        res = the_song.get_remarquable_cadences()
+        expected = {'REMARQUABLE_CADENCES_NATURAL_MAJOR:AUTHENTIC CADENCE': [4]}
+        diff = DeepDiff(res, expected, ignore_order=True)
+        self.ut_report.assertTrue(diff == {})
+
+The returned dictionary provides for each cadence the chord position the progression starts
 
 ## Song Querying
 ### Song search & processing tools on Ultimate Guitar through Google.com
@@ -337,6 +361,8 @@ see [here](unit_test_report.md)
 # Release Notes
 * 08/JAN/23
   * spot remarquable cadences in a song
+  * hardening UG searches
+  * package v0.4.0
 * 06/JAN/23
   * degrees from song chords 
   * package v0.3.1

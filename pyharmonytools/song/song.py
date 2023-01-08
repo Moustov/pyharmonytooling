@@ -103,7 +103,7 @@ class Song:
     def get_remarquable_cadences(self) -> dict:
         """
         show remarkable cadences in tabs
-        :return:
+        :return: The returned dictionary provides for each cadence the chord position the progression starts
         """
         if not self.degrees:
             self.generate_degrees_from_chord_progression()
