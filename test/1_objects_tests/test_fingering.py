@@ -3,8 +3,8 @@ from unittest import TestCase
 from deepdiff import DeepDiff
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
-from pyharmonytools.guitar_neck.fingering import Fingering
-from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.guitar.guitar_neck.fingering import Fingering
+from pyharmonytools.guitar.guitar_neck.neck import Neck
 
 
 class TestFingering(TestCase):

@@ -1,7 +1,7 @@
 from pychord import Chord
 
-from pyharmonytools.guitar_neck.neck_exception import NeckException
-from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.guitar.guitar_neck.neck_exception import NeckException
+from pyharmonytools.guitar.guitar_neck.neck import Neck
 from pyharmonytools.displays.console import _HarmonyLogger
 
 

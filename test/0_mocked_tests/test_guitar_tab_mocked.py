@@ -3,8 +3,8 @@ from unittest import TestCase
 from pychord import Chord
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
-from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
-from pyharmonytools.guitar_tab.note_fret_caret import NoteFretCaret
+from pyharmonytools.guitar.guitar_tab.guitar_tab import GuitarTab
+from pyharmonytools.guitar.guitar_tab.note_fret_caret import NoteFretCaret
 from pyharmonytools.harmony.note import Note
 
 

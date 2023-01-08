@@ -343,7 +343,6 @@ _(in no specific order)_
     * https://www.youtube.com/watch?v=nUq6PArEnuY)
     * https://www.jazzguitarlessons.net/blog/ultimate-guide-jazz-guitar-chords
   * transpose song chords
-  * show remarkable cadences in songs
   * build a database from chord transitions (event log mechanism could be used)
   * find similar songs from chord sequences (options: sequence is included / only cadence)
 * Tabs stuff

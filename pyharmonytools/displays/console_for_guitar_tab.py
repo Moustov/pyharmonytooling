@@ -1,4 +1,4 @@
-from pyharmonytools.guitar_tab.guitar_tab import GuitarTab
+from pyharmonytools.guitar.guitar_tab.guitar_tab import GuitarTab
 
 
 class ConsoleForGuitarTab:

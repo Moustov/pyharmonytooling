@@ -1,7 +1,7 @@
 from pychord import Chord
 
-from pyharmonytools.guitar_neck.fingering import Fingering
-from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.guitar.guitar_neck.fingering import Fingering
+from pyharmonytools.guitar.guitar_neck.neck import Neck
 
 
 def all_possible_chords_with_all_string(chord_name: str):

@@ -1,9 +1,9 @@
 from pychord import Chord
-from pyharmonytools.guitar_neck.fingering import Fingering
-from pyharmonytools.guitar_neck.neck import Neck
-from pyharmonytools.guitar_tab.chord_and_fingering import ChordAndFingering
-from pyharmonytools.guitar_tab.note_fret_caret import NoteFretCaret
-from pyharmonytools.guitar_tab.string_and_cell import StringAndCell
+from pyharmonytools.guitar.guitar_neck.fingering import Fingering
+from pyharmonytools.guitar.guitar_neck.neck import Neck
+from pyharmonytools.guitar.guitar_tab.chord_and_fingering import ChordAndFingering
+from pyharmonytools.guitar.guitar_tab.note_fret_caret import NoteFretCaret
+from pyharmonytools.guitar.guitar_tab.string_and_cell import StringAndCell
 from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.harmony.note import Note
 

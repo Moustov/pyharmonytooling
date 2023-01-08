@@ -1,5 +1,5 @@
-from pyharmonytools.guitar_neck.fingering import Fingering
-from pyharmonytools.guitar_neck.neck import Neck
+from pyharmonytools.guitar.guitar_neck.fingering import Fingering
+from pyharmonytools.guitar.guitar_neck.neck import Neck
 
 
 class GuitarNeck:
