@@ -394,6 +394,8 @@ see [here](unit_test_report.md)
 # Release Notes
 * 09/JAN/23
   * transpose song chords
+  * github building ok
+  * package v0.5.1
 * 08/JAN/23
   * spot remarquable cadences in a song
   * hardening UG searches
