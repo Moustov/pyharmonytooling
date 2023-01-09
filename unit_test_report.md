@@ -2,7 +2,7 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-09 22:14:15.023022
+ generation: 2023-01-09 23:46:37.590920
 :red_circle:0
 :green_circle:482
 -------
@@ -482,10 +482,10 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L349)]: test_transpose_happy_birthday(line 349): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L353)]: test_transpose_happy_birthday(line 353): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L357)]: test_transpose_happy_birthday(line 357): 
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L32)]: test_digest_get_borrowed_chords(line 32): ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7'] found
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L22)]: test_digest_get_tone_and_mode(line 22): G found
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L23)]: test_digest_get_tone_and_mode(line 23): Natural Major found
-* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L16)]: test_digest_html(line 16): Édith Piaf found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L33)]: test_digest_get_borrowed_chords(line 33): ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7'] found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L23)]: test_digest_get_tone_and_mode(line 23): G found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L24)]: test_digest_get_tone_and_mode(line 24): Natural Major found
+* :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L17)]: test_digest_html(line 17): Édith Piaf found
 * :green_circle:[[2_file_system_based_tests/test_ultimate_guitar_song.py](test/2_file_system_based_tests/test_ultimate_guitar_song.py#L43)]: test_extract_tabs_with_chless_tab(line 43): No chord found
 * :green_circle:[[2_file_system_based_tests/test_ultimate_guitar_song.py](test/2_file_system_based_tests/test_ultimate_guitar_song.py#L28)]: test_extract_tabs_with_tab(line 28): No chord found
 * :green_circle:[[2_file_system_based_tests/test_ultimate_guitar_song.py](test/2_file_system_based_tests/test_ultimate_guitar_song.py#L35)]: test_extract_tabs_with_tab2(line 35): No chord found

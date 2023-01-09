@@ -1,4 +1,5 @@
 import os
+from os import path
 from unittest import TestCase
 
 from pychord import ChordProgression
@@ -41,7 +42,10 @@ class TestUltimateGuitarSong(TestCase):
         #dir_path = self.ut_report.get_project_path()
         file_path = os.path.realpath(__file__)
         dir_path = os.path.dirname(os.path.abspath(file_path))
-        html_file = rf"{dir_path}\no_tab_tags-progression_song.html"
+        html_file = rf"{dir_path}/no_tab_tags-progression_song.html"
+        if not path.exists(html_file):
+            dir_path = "."
+            html_file = rf"{dir_path}/no_tab_tags-progression_song.html"
         with open(html_file, 'r') as f:
             html = f.read()
         ugs.digest(html)
