@@ -97,3 +97,33 @@ class Note:
         else:
             return [note]
 
+    def transpose(self, number_half_tone: int) -> str:
+        if self.name in Note.CHROMATIC_SCALE_FLAT_BASED:
+            pos = Note.CHROMATIC_SCALE_FLAT_BASED.index(self.name)
+            pos += number_half_tone
+            pos = pos % len(Note.CHROMATIC_SCALE_FLAT_BASED)
+            self.name = Note.CHROMATIC_SCALE_FLAT_BASED[pos]
+            return self.name
+
+        if self.name in Note.CHROMATIC_SCALE_SHARP_BASED:
+            pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(self.name)
+            pos += number_half_tone
+            pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
+            self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]
+            return self.name
+
+        if self.name in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
+            pos = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES.index(self.name)
+            pos += number_half_tone
+            pos = pos % len(Note.CHROMATIC_SCALE_ENHARMONIC_NOTES)
+            self.name = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES[pos]
+            return self.name
+
+        if self.name in Note.EXTENDED_CHROMATIC_SCALE:
+            pos = Note.EXTENDED_CHROMATIC_SCALE.index(self.name)
+            pos += number_half_tone
+            pos = pos % len(Note.EXTENDED_CHROMATIC_SCALE)
+            self.name = Note.EXTENDED_CHROMATIC_SCALE[pos]
+            return self.name
+
+        raise ValueError(f"The note '{self.name}' could be found in any scale")

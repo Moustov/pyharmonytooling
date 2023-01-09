@@ -1,3 +1,12 @@
-pychord >= 1.1.0
-deepdiff >= 6.2.1
+pychord >= 1.1.1
+deepdiff==6.2.3
 Google-Search-API >= 1.1.14
+setuptools >= 65.0.0
+wheel >= 0.38
+pip >= 22.0.0
+multidict >= 6.0.4
+yarl >= 1.8.2
+certifi >= 2022.12.7
+exceptiongroup >= 1.1.0
+fake-useragent >= 1.1.1
+selenium >= 4.7.2

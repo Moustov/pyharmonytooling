@@ -2,6 +2,7 @@ from pychord import Chord
 
 from pyharmonytools.harmony.cadence import Cadence
 from pyharmonytools.harmony.circle_of_5th import CircleOf5th
+from pyharmonytools.harmony.degree import Degree
 from pyharmonytools.harmony.note import Note
 
 
@@ -200,3 +201,26 @@ class Song:
                 return f"VII{sharp}{c.quality.quality}"
         else:
             raise ValueError(f"Degree calculation error with {str(c)} in {str(tonality)}")
+
+    def transpose(self, number_half_tone: int) -> []:
+        """
+        updates self.chords_sequence with a chord sequence transposed to number_half_tone
+        :param number_half_tone: number of 1/2 tones from the CoF root note
+        :return:
+        """
+        res = []
+        chords_string = " ".join(self.get_recognized_chords())
+        cp = self.cof.digest_song(chords_string)
+        if len(self.cof.cof_tone_compliances.keys()) <= 1:
+            suspected_key = self.cof.digest_possible_tones_and_modes(cp)
+        else:
+            suspected_key = self.get_most_compliant_tone_and_mode()
+        root_note = Note(suspected_key["tone"])
+        root_note.transpose(number_half_tone)
+        cof = CircleOf5th.cof_factory(suspected_key["cof_name"])
+        for d in self.degrees:
+            deg = Degree()
+            c = deg.get_chord_from_degree(d, str(root_note), cof)
+            res.append(c)
+        self.chords_sequence = res
+        return res

@@ -196,3 +196,5 @@ the_song.generate_degrees_from_chord_progression()
 print("Deg:", the_song.degrees)
 rc = the_song.get_remarquable_cadences()
 print("Remarkable cadences:", rc)
+
+print(the_song.transpose(number_half_tone = -5))

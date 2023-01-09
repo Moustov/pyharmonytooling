@@ -20,6 +20,7 @@ Series of tools to handle harmony in music
 
 ## Features on Harmony
 ### Find substitutes from a chord
+It is possible to find a chord other names
     
     from pyharmonytools.harmony.cof_chord import CofChord
 
@@ -123,6 +124,7 @@ See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
 ## Song Processing
 ### Song processing tools on simple text song
+It is possible to extracts chords from a song
 
         from pychord import Chord 
         from pyharmonytools.song.text_song import TextSongWithLineForChords
@@ -146,7 +148,9 @@ output:
 
 See [related unit tests](test/1_objects_tests/test_guitar_tab.py)
 
-### Guess the tone & mode of a song"
+### Guess the tonality & mode of a song"
+It is possible to guess a song tonality and the mode that goes along
+
     from pyharmonytools.displays.console import _HarmonyLogger
     from pyharmonytools.harmony.circle_of_5th import CircleOf5th
     
@@ -156,7 +160,9 @@ ouput:
 
     [1.0, 'A', 'Natural Major', ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab', 'Ab']]
 
-### Guess borrowed chords in a song from a tone point of view
+### Guess borrowed chords in a song 
+It is possible to guess borrowed chords from a song from a tonality point of view
+
     song = """
           C Dm Em F G Am Bdim Cm
           """
@@ -172,6 +178,8 @@ ouput:
 See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
 
 ### Get degrees on a song from a guessed tonality
+It is possible to guess a chord song from a degree point of view 
+
         from pychord import Chord
         from pyharmonytools.displays.unit_test_report import UnitTestReport
         from pyharmonytools.song.text_song import TextSongWithLineForChords
@@ -192,6 +200,8 @@ See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
         assert (the_song.degrees == ['I', 'V', 'V', 'I', 'I7', 'IV', 'I', 'V', 'I'])
 
 ### Guess chord progressions ("cadences" in a song)
+It is possible to guess remarkable cadences in a song
+
         from deepdiff import DeepDiff
         from pyharmonytools.displays.unit_test_report import UnitTestReport
         from pyharmonytools.song.text_song import TextSongWithLineForChords
@@ -215,6 +225,31 @@ See [related unit tests](test/1_objects_tests/test_harmony_tools.py)
         self.ut_report.assertTrue(diff == {})
 
 The returned dictionary provides for each cadence the chord position the progression starts
+
+### Transpose song chords
+It is possible to transpose a song with a number_half_tone:
+
+        from pychord import Chord
+        from pyharmonytools.displays.unit_test_report import UnitTestReport
+        from pyharmonytools.song.text_song import TextSongWithLineForChords
+
+        song_happy_birthday = """
+                            A           E
+                    Happy Birthday to you
+                          E           A
+                    Happy Birthday to you
+                          A7            D
+                    Happy Birthday dear (name)
+                          A        E    A
+                    Happy Birthday to you
+                """
+        the_song = TextSongWithLineForChords()
+        the_song.digest(song_happy_birthday)
+        the_song.generate_degrees_from_chord_progression()
+        res = the_song.transpose(number_half_tone=-5)
+        expected = ['E', 'B', 'B', 'E', 'E7', 'A', 'E', 'B', 'E']
+        self.ut_report.assertTrue(res == expected)
+
 
 ## Song Querying
 ### Song search & processing tools on Ultimate Guitar through Google.com
@@ -342,7 +377,6 @@ _(in no specific order)_
   * chord comping : provide chord fingering from a soprano (or bass) note + chord name - see
     * https://www.youtube.com/watch?v=nUq6PArEnuY)
     * https://www.jazzguitarlessons.net/blog/ultimate-guide-jazz-guitar-chords
-  * transpose song chords
   * build a database from chord transitions (event log mechanism could be used)
   * find similar songs from chord sequences (options: sequence is included / only cadence)
 * Tabs stuff
@@ -358,6 +392,8 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 09/JAN/23
+  * transpose song chords
 * 08/JAN/23
   * spot remarquable cadences in a song
   * hardening UG searches

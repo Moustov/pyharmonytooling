@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-08 23:37:16.602047
+ generation: 2023-01-09 21:25:30.959613
 :red_circle:2
-:green_circle:477
+:green_circle:482
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -479,6 +479,11 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L314)]: test_remarquable_cadences_happy_birthday(line 314): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L333)]: test_remarquable_cadences_saravah(line 333): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L324)]: test_remarquable_cadences_sometimes(line 324): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L341)]: test_transpose_happy_birthday(line 341): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L345)]: test_transpose_happy_birthday(line 345): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L349)]: test_transpose_happy_birthday(line 349): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L353)]: test_transpose_happy_birthday(line 353): 
+* :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L357)]: test_transpose_happy_birthday(line 357): 
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L32)]: test_digest_get_borrowed_chords(line 32): ['Bb', 'Bb6', 'BbM7', 'Db', 'A', 'Ab', 'A7', 'Cm', 'Ab7', 'G#', 'G#6', 'G#M7'] found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L22)]: test_digest_get_tone_and_mode(line 22): G found
 * :green_circle:[[2_file_system_based_tests/test_ug_song.py](test/2_file_system_based_tests/test_ug_song.py#L23)]: test_digest_get_tone_and_mode(line 23): Natural Major found

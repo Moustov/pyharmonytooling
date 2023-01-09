@@ -34,6 +34,20 @@ class CircleOf5th:
         self.compliant_chords_qty = 0
         self.borrowed_chords_qty = 0
 
+    @staticmethod
+    def cof_factory(cof_name: str) -> object:
+        if cof_name == "Natural Major":
+            return CircleOf5thNaturalMajor()
+        if cof_name == "Harmonic Major":
+            return CircleOf5thHarmonicMajor()
+        if cof_name == "Harmonic Minor":
+            return CircleOf5thHarmonicMinor()
+        if cof_name == "Melodic Minor":
+            return CircleOf5thMelodicMinor()
+        if cof_name == "Natural Minor":
+            return CircleOf5thNaturalMinor()
+
+
     def get_compliance_note_presence(self, tone: [str], cp: ChordProgression) -> float:
         """
         todo distance with notes

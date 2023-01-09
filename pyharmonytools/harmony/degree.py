@@ -71,5 +71,16 @@ class Degree:
         nb_half_tones = 0
         for i in range(0, degree - 1):
             nb_half_tones += mode.intervals[i]
-        index = (Note.CHROMATIC_SCALE_SHARP_BASED.index(root_note) + nb_half_tones) % len(Note.CHROMATIC_SCALE_SHARP_BASED)
-        return Note.CHROMATIC_SCALE_SHARP_BASED[index]
+        if root_note in Note.CHROMATIC_SCALE_SHARP_BASED:
+            index = (Note.CHROMATIC_SCALE_SHARP_BASED.index(root_note) + nb_half_tones) % len(Note.CHROMATIC_SCALE_SHARP_BASED)
+            return Note.CHROMATIC_SCALE_SHARP_BASED[index]
+        if root_note in Note.CHROMATIC_SCALE_FLAT_BASED:
+            index = (Note.CHROMATIC_SCALE_FLAT_BASED.index(root_note) + nb_half_tones) % len(Note.CHROMATIC_SCALE_FLAT_BASED)
+            return Note.CHROMATIC_SCALE_FLAT_BASED[index]
+        if root_note in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
+            index = (Note.CHROMATIC_SCALE_ENHARMONIC_NOTES.index(root_note) + nb_half_tones) % len(Note.CHROMATIC_SCALE_ENHARMONIC_NOTES)
+            return Note.CHROMATIC_SCALE_ENHARMONIC_NOTES[index]
+        if root_note in Note.EXTENDED_CHROMATIC_SCALE:
+            index = (Note.EXTENDED_CHROMATIC_SCALE.index(root_note) + nb_half_tones) % len(Note.EXTENDED_CHROMATIC_SCALE)
+            return Note.EXTENDED_CHROMATIC_SCALE[index]
+        raise ValueError(f"The note '{root_note}' could be found in any scale")

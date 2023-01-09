@@ -332,4 +332,26 @@ Elle est nègre, bien nègre dans son cœur"""
         diff = DeepDiff(res, expected, ignore_order=True)
         self.ut_report.assertTrue(diff == {})
 
+    def test_transpose_happy_birthday(self):
+        the_song = TextSongWithLineForChords()
+        the_song.digest(self.song_happy_birthday)
+        the_song.generate_degrees_from_chord_progression()
+        res = the_song.transpose(number_half_tone=-5)
+        expected = ['E', 'B', 'B', 'E', 'E7', 'A', 'E', 'B', 'E']
+        self.ut_report.assertTrue(res == expected)
 
+        res = the_song.transpose(number_half_tone=0)
+        expected = ['A', 'E', 'E', 'A', 'A7', 'D', 'A', 'E', 'A']
+        self.ut_report.assertTrue(res == expected)
+
+        res = the_song.transpose(number_half_tone=10)
+        expected = ['G', 'D', 'D', 'G', 'G7', 'C', 'G', 'D', 'G']
+        self.ut_report.assertTrue(res == expected)
+
+        res = the_song.transpose(number_half_tone=12)
+        expected = ['A', 'E', 'E', 'A', 'A7', 'D', 'A', 'E', 'A']
+        self.ut_report.assertTrue(res == expected)
+
+        res = the_song.transpose(number_half_tone=12-5)
+        expected = ['E', 'B', 'B', 'E', 'E7', 'A', 'E', 'B', 'E']
+        self.ut_report.assertTrue(res == expected)
