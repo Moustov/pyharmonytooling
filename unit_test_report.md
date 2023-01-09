@@ -2,8 +2,8 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-09 21:25:30.959613
-:red_circle:2
+ generation: 2023-01-09 22:14:15.023022
+:red_circle:0
 :green_circle:482
 -------
 
@@ -434,8 +434,6 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L74)]: test_digest_tab_gb6_d(line 74): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L291)]: test_digest_tab_simplest_progressive_chords_in_a_bar_ebm(line 291): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L348)]: test_digest_tab_simplest_progressive_chords_in_a_bar_gb6_d(line 348): 
-* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L520)]: test_digest_tab_simplest_progressive_chords_with_notations(line 520): 
-* :red_circle: [[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L370)]: test_digest_tab_simplest_progressive_chords_with_notations_1_3(line 370): 
 * :green_circle:[[1_objects_tests/test_guitar_tab.py](test/1_objects_tests/test_guitar_tab.py#L27)]: test_get_notes_from_chord_layout(line 27): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L125)]: test_evenou(line 125): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L126)]: test_evenou(line 126): 

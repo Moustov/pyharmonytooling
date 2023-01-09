@@ -17,6 +17,11 @@ Run at least the unit tests under before committing
   * _**test/3_online_tests**_: UT that would rely on online servers (eg. google.com, ultimate-guitar.com)
   * _**test/4_load_tests**_: UT that would require a *long time* to have some feedback on load/robustness/...
 
+How to launch unit tests
+
+     .\venv39\Scripts\python.exe -m pytest test
+
+
 > NOTE:
 >
 > Ensure the assert is done this way:
