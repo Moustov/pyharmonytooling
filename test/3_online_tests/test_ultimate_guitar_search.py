@@ -22,7 +22,7 @@ class _TestUltimateGuitarSearch(TestCase):
         ugs = UltimateGuitarSearch()
         cadence = Cadence.REMARQUABLE_CADENCES_NATURAL_MAJOR["ANATOLE"]
 
-        cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
+        cof_maj = CircleOf5thNaturalMajor_triads.guess_tone_and_mode_from_cadence(cadence)
         MAX_SONG_PER_SEARCH = 5
 
         songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,
