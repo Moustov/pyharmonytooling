@@ -4,7 +4,8 @@ from pychord import Chord
 
 from pyharmonytools.displays.console import _HarmonyLogger
 from pyharmonytools.displays.unit_test_report import UnitTestReport
-from pyharmonytools.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor
+from pyharmonytools.harmony.circle_of_5th import CircleOf5th, CircleOf5thNaturalMajor_4notes, \
+    CircleOf5thNaturalMajor_triads
 from pyharmonytools.harmony.cof_chord import CofChord
 from pyharmonytools.song.text_song import TextSongWithLineForChords
 
@@ -21,7 +22,7 @@ class Test(TestCase):
         compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'C')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
 
     def test_guess_tone_and_mode_Db(self):
         song = """
@@ -32,7 +33,7 @@ class Test(TestCase):
         compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'Db')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
 
     def test_guess_tone_and_mode_E(self):
         song = """
@@ -43,7 +44,7 @@ class Test(TestCase):
         compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'E')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
 
     def test_guess_tone_and_mode_F(self):
         song = """
@@ -54,7 +55,7 @@ class Test(TestCase):
         compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'F')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
 
     def test_guess_tone_and_mode_Bb(self):
         song = """
@@ -65,7 +66,7 @@ class Test(TestCase):
         compliance_level_max = cof.digest_possible_tones_and_modes(cp)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'Bb')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
 
     def test_evenou(self):
         song = """
@@ -124,7 +125,7 @@ class Test(TestCase):
         print("Compliance:", compliance_level_max)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'D')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == 'Melodic Minor')
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == 'Harmonic Minor - 4 notes')
         borrowed_chords = the_song.get_borrowed_chords()
         print("Borrowed chords:", borrowed_chords)
         self.ut_report.assertTrue(borrowed_chords == [])
@@ -147,10 +148,10 @@ class Test(TestCase):
         print(compliance_level_max)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == 'A')
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
 
     def test_get_chord_possible_qualities(self):
-        cof = CircleOf5thNaturalMajor()
+        cof = CircleOf5thNaturalMajor_4notes()
         tones = cof.generate_circle_of_fifths()
         for tone in tones:
             for chord_tone in tones[tone]:
@@ -166,7 +167,7 @@ class Test(TestCase):
         song = """
                 C Dm Em F G Am Bdim
                 """
-        cof = CircleOf5thNaturalMajor()
+        cof = CircleOf5thNaturalMajor_triads()
         cp = cof.digest_song(song)
 
         tone = cof.generate_circle_of_fifths()["C"]
@@ -178,7 +179,7 @@ class Test(TestCase):
         song = """
                 C Dm Em F G Am Bdim Cdim
                 """
-        cof = CircleOf5thNaturalMajor()
+        cof = CircleOf5thNaturalMajor_triads()
         cp = cof.digest_song(song)
         borrowed_chords = cof.get_borrowed_chords(cp, cof.cof_name, "C")
         print("   Borrowed chords:", borrowed_chords)

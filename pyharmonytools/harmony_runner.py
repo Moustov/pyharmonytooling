@@ -2,187 +2,87 @@ from pyharmonytools.displays.console import _HarmonyLogger
 from pyharmonytools.song.text_song import TextSongWithLineForChords
 
 song = """
-Coldplay -- The Scientist
-
-Capo 5th Fret
-
-Standard Tuning
+Intro: E  D  C#m7  F#  F#m7  A  E  A-E
 
  
 
- 
+E               D                   C#m7  F#             F#m7
 
-[Verse]
+ These are the days that I've been missing  give me the taste
 
- 
+             A             E  A-E               D
 
-Em                   C                        G
+give me the joy of summer wine   These are the days that bring
 
-Come up to meet you, tell you I'm sorry
+     C#m7  F#             F#m7            A              E
 
-                              Gadd2
-
-You don't know how lovely you are
-
-Em         C
-
-I had to find you
-
-               G
-
-Tell you I need you
-
-              Gadd2
-
-Tell you I set you apart
-
-Em               C
-
-Tell me your secrets
-
-                          G
-
-And ask me your questions
-
-                 Gadd2
-
-Oh, lets go back to the start
-
-Em             C
-
-Running in circles
-
-                G
-
-Coming up tails
-
-                Gadd2
-
-Heads on a science apart.
+you meaning  I feel the stillness of the sun and I feel fine
 
  
 
- 
+A-C#7                                      F#m7
 
-[Chorus]
+     Sometimes when the nights are closing early
 
- 
+B                                E
 
-C
+ I remember you and I start to smile
 
-Nobody said it was easy
+C#7                                  F#m7
 
-G             Gadd2
+   even though now you don't want to know me
 
-It's such a shame for us to part
+          B
 
-C
-
-Nobody said it was easy
-
-G               Gadd2                  D
-
-No one ever said it would be this hard
+I get on by, and I go the extra mile
 
  
 
-Oh, take me back to the start.
+A-E               D                  C#m7  F#             F#m7
+
+   These are the times for love and meaning  Eyes of the heart,
+
+         A             E   A-E               D                C#m7
+
+melted away in firmer light   these are the days of endless dreaming
+
+F#             F#m7            A                   E
+
+  Troubles of life, floating away like a bird in flight
 
  
 
-G - C - G - Gadd2
+E6               E7  E6               E  E6      E7          E6  E  E6
+
+  These are the days   These are the days  These are the days
 
  
 
- 
-
-[Verse]
+Solo: (E  D  C#m7  F#  F#m7  A  E  A-E)  x2
 
  
 
-Em            C
+C#7                                          F#m7  B
 
-I was just guessing
+   I thought you said our love would last forever   believing that the tears
 
-                        G
+      E           C#7                                      F#m7
 
-At numbers and figures
+would end for good   I told you that we'd get through any weather maybe that
 
-                Gadd2
+ B                                           E               D
 
-Pulling the puzzles apart
+didn't work out, but we did the best we could these are the days that I've
 
- 
+      C#m7  F#             F#m7              A             E  A-E
 
-Em               C
+been missing  give me the taste give me the joy of summer wine   these are the
 
-Questions of science
+ D                   C#m7  F#                               F#m7            E  E6  E
 
-                 G
+days that bring you meaning  I feel the stillness of the sun    and I feel fine
 
-Science and progress
 
-                      Gadd2
-
-Do not speak as loud as my heart
-
- 
-
-Em             C
-
-Tell me you love me
-
-                      G
-
-Come back and haunt me
-
-              Gadd2
-
-Oh, and I rush to the start
-
-Em            C
-
-Running in circles
-
-                 G
-
-Chasing our tails
-
-             Gadd2
-
-Coming back as we are
-
- 
-
- 
-
-[Chorus]
-
- 
-
-C
-
-Nobody said it was easy
-
-G                  Gadd2
-
-Oh it's such a shame for us to part
-
-C
-
-Nobody said it was easy
-
-G               Gadd2                  D
-
-No one ever said it would be so hard
-
-                                      G - C - G - Gadd2
-
-I'm going back to the start
-
- 
-
-Em - C - G - Gadd2 x5
 
 """
 _HarmonyLogger.outcome_level_of_detail = _HarmonyLogger.LOD_NONE

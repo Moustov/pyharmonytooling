@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.harmony.cadence import Cadence
-from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
+from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor_triads
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 
@@ -34,7 +34,7 @@ class _TestUltimateGuitarSearch(TestCase):
         ugs = UltimateGuitarSearch()
         cadence = Cadence.REMARQUABLE_CADENCES_HYBRID["PHRYGIAN_HALF_CADENCE"]
 
-        cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
+        cof_maj = CircleOf5thNaturalMajor_triads.guess_tone_and_mode_from_cadence(cadence)
         MAX_SONG_PER_SEARCH = 5
 
         songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,
@@ -46,7 +46,7 @@ class _TestUltimateGuitarSearch(TestCase):
         ugs = UltimateGuitarSearch()
         cadence = Cadence.REMARQUABLE_CADENCES_HYBRID["MINOR_PLAGAL_CADENCE"]
 
-        cof_maj = CircleOf5thNaturalMajor.guess_tone_and_mode_from_cadence(cadence)
+        cof_maj = CircleOf5thNaturalMajor_triads.guess_tone_and_mode_from_cadence(cadence)
         MAX_SONG_PER_SEARCH = 5
 
         songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,

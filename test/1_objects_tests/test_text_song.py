@@ -265,7 +265,7 @@ Elle est nègre, bien nègre dans son cœur"""
         print("Compliance:", compliance_level_max)
         self.ut_report.assertTrue(compliance_level_max["compliance_rate"] == 1.0)
         self.ut_report.assertTrue(compliance_level_max["tone"] == "A")
-        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major")
+        self.ut_report.assertTrue(compliance_level_max["cof_name"] == "Natural Major - triads")
         print(the_song.chords_sequence)
         borrowed_chords = the_song.get_borrowed_chords()
         print("Borrowed chords:", borrowed_chords)

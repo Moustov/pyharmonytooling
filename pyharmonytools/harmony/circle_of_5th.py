@@ -36,17 +36,26 @@ class CircleOf5th:
 
     @staticmethod
     def cof_factory(cof_name: str) -> object:
-        if cof_name == "Natural Major":
-            return CircleOf5thNaturalMajor()
-        if cof_name == "Harmonic Major":
-            return CircleOf5thHarmonicMajor()
-        if cof_name == "Harmonic Minor":
-            return CircleOf5thHarmonicMinor()
-        if cof_name == "Melodic Minor":
-            return CircleOf5thMelodicMinor()
-        if cof_name == "Natural Minor":
-            return CircleOf5thNaturalMinor()
-
+        if cof_name == "Natural Major - 4 notes":
+            return CircleOf5thNaturalMajor_4notes()
+        if cof_name == "Natural Major - triads":
+            return CircleOf5thNaturalMajor_triads()
+        if cof_name == "Harmonic Major - 4 notes":
+            return CircleOf5thHarmonicMajor_4notes()
+        if cof_name == "Harmonic Major - triads":
+            return CircleOf5thHarmonicMajor_triads()
+        if cof_name == "Harmonic Minor - 4 notes":
+            return CircleOf5thHarmonicMinor_4notes()
+        if cof_name == "Harmonic Minor - triads":
+            return CircleOf5thHarmonicMinor_triads()
+        if cof_name == "Melodic Minor - 4 notes":
+            return CircleOf5thMelodicMinor_4notes()
+        if cof_name == "Melodic Minor - triads":
+            return CircleOf5thMelodicMinor_triads()
+        if cof_name == "Natural Minor - 4 notes":
+            return CircleOf5thNaturalMinor_4notes()
+        if cof_name == "Natural Minor - triads":
+            return CircleOf5thNaturalMinor_triads()
 
     def get_compliance_note_presence(self, tone: [str], cp: ChordProgression) -> float:
         """
@@ -76,7 +85,8 @@ class CircleOf5th:
         :param cadence: eg. "ii7-V7-Imaj7" would return a CircleOf5thNaturalMajor()
         :return:
         """
-        return CircleOf5thNaturalMajor()
+        # the calculation must be done in subclasses
+        return None
 
     def get_compliance_chord_presence(self, harmonic_suite_chords: [str], chords: ChordProgression,
                                       cof_name: str, tonality: str) -> float:
@@ -273,36 +283,65 @@ class CircleOf5th:
         """
         best_tone = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
 
-        cof_nat_maj = CircleOf5thNaturalMajor()
+        cof_nat_maj = CircleOf5thNaturalMajor_4notes()
         guess = cof_nat_maj.digest_tone_compliancy_with_circle_of_fifth(cp)
         self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_nat_maj.cof_tone_compliances}
         if guess["compliance_rate"] > best_tone["compliance_rate"]:
             best_tone = guess
 
-        cof_har_major = CircleOf5thHarmonicMajor()
+        cof_nat_maj = CircleOf5thNaturalMajor_triads()
+        guess = cof_nat_maj.digest_tone_compliancy_with_circle_of_fifth(cp)
+        self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_nat_maj.cof_tone_compliances}
+        if guess["compliance_rate"] > best_tone["compliance_rate"]:
+            best_tone = guess
+
+        cof_har_major = CircleOf5thHarmonicMajor_4notes()
         guess = cof_har_major.digest_tone_compliancy_with_circle_of_fifth(cp)
         self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_har_major.cof_tone_compliances}
         if guess["compliance_rate"] > best_tone["compliance_rate"]:
             best_tone = guess
 
-        cof_mel_minor = CircleOf5thMelodicMinor()
+        cof_har_major = CircleOf5thHarmonicMajor_triads()
+        guess = cof_har_major.digest_tone_compliancy_with_circle_of_fifth(cp)
+        self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_har_major.cof_tone_compliances}
+        if guess["compliance_rate"] > best_tone["compliance_rate"]:
+            best_tone = guess
+
+        cof_mel_minor = CircleOf5thMelodicMinor_4notes()
         guess = cof_mel_minor.digest_tone_compliancy_with_circle_of_fifth(cp)
         self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_mel_minor.cof_tone_compliances}
         if guess["compliance_rate"] > best_tone["compliance_rate"]:
             best_tone = guess
 
-        cof_nat_min = CircleOf5thNaturalMinor()
+        cof_mel_minor = CircleOf5thMelodicMinor_triads()
+        guess = cof_mel_minor.digest_tone_compliancy_with_circle_of_fifth(cp)
+        self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_mel_minor.cof_tone_compliances}
+        if guess["compliance_rate"] > best_tone["compliance_rate"]:
+            best_tone = guess
+
+        cof_nat_min = CircleOf5thNaturalMinor_4notes()
         guess = cof_nat_min.digest_tone_compliancy_with_circle_of_fifth(cp)
         self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_nat_min.cof_tone_compliances}
         if guess["compliance_rate"] > best_tone["compliance_rate"]:
             best_tone = guess
 
-        cof_harm_minor = CircleOf5thHarmonicMinor()
+        cof_nat_min = CircleOf5thNaturalMinor_triads()
+        guess = cof_nat_min.digest_tone_compliancy_with_circle_of_fifth(cp)
+        self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_nat_min.cof_tone_compliances}
+        if guess["compliance_rate"] > best_tone["compliance_rate"]:
+            best_tone = guess
+
+        cof_harm_minor = CircleOf5thHarmonicMinor_4notes()
         guess = cof_harm_minor.digest_tone_compliancy_with_circle_of_fifth(cp)
         self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_harm_minor.cof_tone_compliances}
         if guess["compliance_rate"] > best_tone["compliance_rate"]:
             best_tone = guess
 
+        cof_harm_minor = CircleOf5thHarmonicMinor_triads()
+        guess = cof_harm_minor.digest_tone_compliancy_with_circle_of_fifth(cp)
+        self.cof_tone_compliances = {**self.cof_tone_compliances, **cof_harm_minor.cof_tone_compliances}
+        if guess["compliance_rate"] > best_tone["compliance_rate"]:
+            best_tone = guess
         # print(self.cof_tone_compliances)
         return best_tone
 
@@ -332,65 +371,134 @@ class CircleOf5th:
         return scale
 
 
-class CircleOf5thNaturalMajor(CircleOf5th):
+class CircleOf5thNaturalMajor_4notes(CircleOf5th):
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Natural Major - 4 notes"
+        self.intervals = [2, 2, 1, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
+        self.qualities = ["maj7", "m7", "m7", "maj7", "7", "m7", "m7b5"]
+        self.cof_scales = self.generate_circle_of_fifths()
+        self.cof_tone_compliances[self.cof_name] = {}
+
+
+class CircleOf5thNaturalMajor_triads(CircleOf5th):
     # aka "Church more
     def __init__(self):
         super().__init__()
-        self.cof_name = "Natural Major"
+        self.cof_name = "Natural Major - triads"
         self.intervals = [2, 2, 1, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
         self.qualities = ["", "m", "m", "", "", "m", "dim"]
         self.cof_scales = self.generate_circle_of_fifths()
         self.cof_tone_compliances[self.cof_name] = {}
 
 
-class CircleOf5thHarmonicMajor(CircleOf5th):
+class CircleOf5thChurchMode_4notes(CircleOf5thNaturalMajor_4notes):
     def __init__(self):
         super().__init__()
-        self.cof_name = "Harmonic Major"
+        self.cof_name = "Church mode - 4 notes"
+
+
+class CircleOf5thChurchMode_triads(CircleOf5thNaturalMajor_triads):
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Church mode - triads"
+
+
+class CircleOf5thHarmonicMajor_4notes(CircleOf5th):
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Harmonic Major - 4 notes"
         self.intervals = [2, 2, 1, 2, 1, 3]
         self.qualities = ["maj7", "m7b5", "m7", "mM7", "7", "M7+5", "dim7"]
         self.cof_scales = self.generate_circle_of_fifths()
         self.cof_tone_compliances[self.cof_name] = {}
 
 
-class CircleOf5thNaturalMinor(CircleOf5th):
+class CircleOf5thHarmonicMajor_triads(CircleOf5th):
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Harmonic Major - triads"
+        self.intervals = [2, 2, 1, 2, 1, 3]
+        self.qualities = ["", "dim", "m", "m", "", "5", "dim"]
+        self.cof_scales = self.generate_circle_of_fifths()
+        self.cof_tone_compliances[self.cof_name] = {}
+
+
+class CircleOf5thNaturalMinor_4notes(CircleOf5th):
     """
     https://www.youtube.com/watch?v=44t2KJQUh3Y
     https://www.study-guitar.com/blog/minor-key-chord-progressions/
     """
-
     def __init__(self):
         super().__init__()
-        self.cof_name = "Natural Minor"
+        self.cof_name = "Natural Minor - 4 notes"
+        self.intervals = [2, 1, 2, 2, 1, 2]  # https://muted.io/scale-formulas-intervals/
+        self.qualities = ["m", "dim7", "", "m", "m", "", ""]    # todo refine the 4 notes CoF
+        self.cof_scales = self.generate_circle_of_fifths()
+        self.cof_tone_compliances[self.cof_name] = {}
+
+
+class CircleOf5thNaturalMinor_triads(CircleOf5th):
+    """
+    https://www.youtube.com/watch?v=44t2KJQUh3Y
+    https://www.study-guitar.com/blog/minor-key-chord-progressions/
+    """
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Natural Minor - triads"
         self.intervals = [2, 1, 2, 2, 1, 2]  # https://muted.io/scale-formulas-intervals/
         self.qualities = ["m", "dim", "", "m", "m", "", ""]
         self.cof_scales = self.generate_circle_of_fifths()
         self.cof_tone_compliances[self.cof_name] = {}
 
 
-class CircleOf5thMelodicMinor(CircleOf5th):
+class CircleOf5thMelodicMinor_4notes(CircleOf5th):
     """
     https://www.youtube.com/watch?v=44t2KJQUh3Y
     """
-
     def __init__(self):
         super().__init__()
-        self.cof_name = "Melodic Minor"
+        self.cof_name = "Melodic Minor - 4 notes"
         self.intervals = [2, 1, 2, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
-        self.qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+        self.qualities = ["mM7", "m7", "M7+5", "7", "7", "m7b5", "m7b5"]
         self.cof_scales = self.generate_circle_of_fifths()
         self.cof_tone_compliances[self.cof_name] = {}
 
 
-class CircleOf5thHarmonicMinor(CircleOf5th):
+class CircleOf5thMelodicMinor_triads(CircleOf5th):
     """
     https://www.youtube.com/watch?v=44t2KJQUh3Y
     """
-
     def __init__(self):
         super().__init__()
-        self.cof_name = "Harmonic Minor"
+        self.cof_name = "Melodic Minor - triads"
+        self.intervals = [2, 1, 2, 2, 2, 2]  # https://muted.io/scale-formulas-intervals/
+        self.qualities = ["m", "m", "aug", "", "", "dim", "dim"]
+        self.cof_scales = self.generate_circle_of_fifths()
+        self.cof_tone_compliances[self.cof_name] = {}
+
+
+class CircleOf5thHarmonicMinor_4notes(CircleOf5th):
+    """
+    https://www.youtube.com/watch?v=44t2KJQUh3Y
+    """
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Harmonic Minor - 4 notes"
         self.intervals = [2, 1, 2, 2, 1, 3]  # https://muted.io/scale-formulas-intervals/
-        self.qualities = ["m", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+        self.qualities = ["mM7", "m7b5", "M7+5", "m7", "7", "maj7", "dim7"]
+        self.cof_scales = self.generate_circle_of_fifths()
+        self.cof_tone_compliances[self.cof_name] = {}
+
+
+class CircleOf5thHarmonicMinor_triads(CircleOf5th):
+    """
+    https://www.youtube.com/watch?v=44t2KJQUh3Y
+    """
+    def __init__(self):
+        super().__init__()
+        self.cof_name = "Harmonic Minor - triads"
+        self.intervals = [2, 1, 2, 2, 1, 3]  # https://muted.io/scale-formulas-intervals/
+        self.qualities = ["m", "dim", "aug", "m", "", "", "dim"]
         self.cof_scales = self.generate_circle_of_fifths()
         self.cof_tone_compliances[self.cof_name] = {}

@@ -379,6 +379,7 @@ _(in no specific order)_
     * https://www.jazzguitarlessons.net/blog/ultimate-guide-jazz-guitar-chords
   * build a database from chord transitions (event log mechanism could be used)
   * find similar songs from chord sequences (options: sequence is included / only cadence)
+  * guess dominant key, subdominant, and relative minor https://getsongkey.com/song/fool-to-cry/DQAGB
 * Tabs stuff
   * take guitar tuning into account when handling guitar tabs
   * display degrees in guitar tabs
@@ -440,6 +441,7 @@ see [here](unit_test_report.md)
     * Cours d'harmonie (chapitre II): https://www.youtube.com/watch?v=aoe-5-JCadA&list=PLyIR6Ix26WY9ww90jZ7z9OnE1RxbUWr4x
   * Guide to Chord Symbols: https://www.musicnotes.com/now/tips/a-complete-guide-to-chord-symbols-in-music/
   * few tools: https://muted.io/
+  * https://getsongkey.com/song/fool-to-cry/DQAGB
 * Circle of Fifths: 
   * https://websemantics.uk/tools/circle-of-fifths-chord-wheel/
   * https://en.wikipedia.org/wiki/Circle_of_fifths

@@ -21,7 +21,7 @@ class TestUltimateGuitarSong(TestCase):
         res = ugs.get_tone_and_mode()
 
         self.utr.assertTrue(res["tone"] == "G", f"{res['tone']} found")
-        self.utr.assertTrue(res["cof_name"] == "Natural Major", f"{res['cof_name']} found")
+        self.utr.assertTrue(res["cof_name"] == "Natural Major - triads", f"{res['cof_name']} found")
 
     def test_digest_get_borrowed_chords(self):
         ugs = self.get_test_data1()

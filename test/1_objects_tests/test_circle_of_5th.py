@@ -4,7 +4,7 @@ from deepdiff import DeepDiff
 from pychord import Chord
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
-from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor
+from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor_triads
 from pyharmonytools.harmony.cof_chord import CofChord
 
 
@@ -12,7 +12,7 @@ class TestCircleOf5th(TestCase):
     ut_report = UnitTestReport()
 
     def test_generate_circle_of_fifths(self):
-        c = CircleOf5thNaturalMajor()
+        c = CircleOf5thNaturalMajor_triads()
         expected = {
             "C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
             "G": ["G", "Am", "Bm", "C", "D", "Em", "Gbdim"],

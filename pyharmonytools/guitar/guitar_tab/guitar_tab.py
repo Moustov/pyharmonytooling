@@ -190,7 +190,7 @@ class GuitarTab:
             if string.strip() == "":
                 continue
             parts = string.strip()
-            print("-", string)
+            # print("-", string)
             string_name = parts[0].strip()
             string_name = string_name[0]
             part_position = 2
