@@ -393,6 +393,9 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 14/JAN/23
+  * CoF detailed in triads & 4 notes
+  * package v0.6.0
 * 09/JAN/23
   * transpose song chords
   * github building ok
