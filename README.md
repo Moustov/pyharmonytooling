@@ -402,6 +402,7 @@ see [here](unit_test_report.md)
 * 16/JAN/23
   * cadence with b/# before degree
   * enharmonic notes fixed
+  * package v0.6.1
 * 14/JAN/23
   * CoF detailed in triads & 4 notes
   * package v0.6.0
