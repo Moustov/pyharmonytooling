@@ -290,8 +290,14 @@ Searching for songs in the 12 tones from a cadence
         from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
         
         ugs = UltimateGuitarSearch()
-        cof_maj = CircleOf5thNaturalMajor()
-        songs = ugs.search_songs_from_cadence("ii7-V7-Imaj7", cof_maj, 5)
+        cadence = "V-IV-#ii7-VII-vii7-I-V"
+        
+        cadence_and_tone = Cadence.guess_tone_and_mode_from_cadence(cadence)
+        MAX_SONG_PER_SEARCH = 5
+        
+        cof = CircleOf5th.cof_factory(cadence_and_tone["cof_name"])
+        songs = ugs.search_songs_from_cadence(cadence, cof, MAX_SONG_PER_SEARCH, matches_exactly=True,
+                                              try_avoiding_blocked_searches=True)
         print(songs)
 output:
 
@@ -393,6 +399,9 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 16/JAN/23
+  * cadence with b/# before degree
+  * enharmonic notes fixed
 * 14/JAN/23
   * CoF detailed in triads & 4 notes
   * package v0.6.0
@@ -401,7 +410,7 @@ see [here](unit_test_report.md)
   * github building ok
   * package v0.5.1
 * 08/JAN/23
-  * spot remarquable cadences in a song
+  * spot remarkable cadences in a song
   * hardening UG searches
   * package v0.4.0
 * 06/JAN/23

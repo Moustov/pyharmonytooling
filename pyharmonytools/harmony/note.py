@@ -15,6 +15,12 @@ class Note:
             self.name = "C"
         if name == "E#":
             self.name = "F"
+        if "##" in name:
+            index = Note.CHROMATIC_SCALE_SHARP_BASED.index(name[0])
+            self.name = Note.CHROMATIC_SCALE_SHARP_BASED[(index + 2) % len(Note.CHROMATIC_SCALE_SHARP_BASED)]
+        if "bb" in name:
+            index = Note.CHROMATIC_SCALE_SHARP_BASED.index(name[0])
+            self.name = Note.CHROMATIC_SCALE_SHARP_BASED[(index - 2) % len(Note.CHROMATIC_SCALE_SHARP_BASED)]
 
     def __str__(self):
         return self.name

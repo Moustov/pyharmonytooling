@@ -7,7 +7,7 @@ class Degree:
         pass
 
     @staticmethod
-    def get_chord_from_degree(degree, root_note, mode: CircleOf5th) -> str:
+    def get_chord_from_degree(degree: str, root_note: str, mode: CircleOf5th) -> str:
         """
         return a chord name from a degree + root note
         :param mode: the CircleOf5th will provide intervals
@@ -15,49 +15,68 @@ class Degree:
         :param root_note:
         :return:
         """
-        if degree.startswith("iii"):
+        tone_alteration = ""
+        if degree.startswith("b") or degree.startswith("#"):
+            tone_alteration = degree[0]
+        if degree[len(tone_alteration):].startswith("iii"):
             note = Degree.get_note_degree(root_note, 3, mode)
-            return f"{note}m{degree[3:]}"
-        if degree.startswith("ii"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[3 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("ii"):
             note = Degree.get_note_degree(root_note, 2, mode)
-            return f"{note}m{degree[2:]}"
-        if degree.startswith("iv"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[2 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("iv"):
             note = Degree.get_note_degree(root_note, 4, mode)
-            return f"{note}m{degree[2:]}"
-        if degree.startswith("i"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[2 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("i"):
             note = Degree.get_note_degree(root_note, 1, mode)
-            return f"{note}m{degree[1:]}"
-        if degree.startswith("vii"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[1 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("vii"):
             note = Degree.get_note_degree(root_note, 7, mode)
-            return f"{note}m{degree[3:]}"
-        if degree.startswith("vi"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[3 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("vi"):
             note = Degree.get_note_degree(root_note, 6, mode)
-            return f"{note}m{degree[2:]}"
-        if degree.startswith("v"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[2 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("v"):
             note = Degree.get_note_degree(root_note, 5, mode)
-            return f"{note}m{degree[1:]}"
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}m{degree[1 + len(tone_alteration):]}"
 
-        if degree.startswith("III"):
+        elif degree[len(tone_alteration):].startswith("III"):
             note = Degree.get_note_degree(root_note, 3, mode)
-            return note + degree[3:]
-        if degree.startswith("II"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[3 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("II"):
             note = Degree.get_note_degree(root_note, 2, mode)
-            return note + degree[2:]
-        if degree.startswith("IV"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[2 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("IV"):
             note = Degree.get_note_degree(root_note, 4, mode)
-            return note + degree[2:]
-        if degree.startswith("I"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[2 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("I"):
             note = Degree.get_note_degree(root_note, 1, mode)
-            return note + degree[1:]
-        if degree.startswith("VII"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[1 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("VII"):
             note = Degree.get_note_degree(root_note, 7, mode)
-            return note + degree[3:]
-        if degree.startswith("VI"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[3 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("VI"):
             note = Degree.get_note_degree(root_note, 6, mode)
-            return note + degree[2:]
-        if degree.startswith("V"):
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[2 + len(tone_alteration):]}"
+        elif degree[len(tone_alteration):].startswith("V"):
             note = Degree.get_note_degree(root_note, 5, mode)
-            return note + degree[1:]
+            harmonic_note = str(Note(f"{note}{str(tone_alteration)}"))
+            return f"{harmonic_note}{degree[1 + len(tone_alteration):]}"
+        else:
+            raise ValueError(f"Unknown degree {degree[len(tone_alteration):]}")
 
     @staticmethod
     def get_note_degree(root_note: str, degree: int, mode: CircleOf5th) -> int:

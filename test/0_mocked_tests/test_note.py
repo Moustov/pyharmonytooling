@@ -26,6 +26,10 @@ class TestNote(TestCase):
         # limits
         self.ut_report.assertTrue(Note("G#") == "Ab")
 
+    def test_enharmonic_notes(self):
+        self.ut_report.assertTrue(Note("C##") == "D")
+        self.ut_report.assertTrue(Note("Cbb") == "Bb")
+
     def test_all_equals(self):
         # todo add Note.CHROMATIC_SCALE_WEIRD_NOTES
         for n1, n2 in zip(Note.CHROMATIC_SCALE_SHARP_BASED, Note.CHROMATIC_SCALE_FLAT_BASED):

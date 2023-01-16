@@ -1,4 +1,6 @@
-from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor_4notes
+from pyharmonytools.harmony.cadence import Cadence
+from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor_4notes, CircleOf5thNaturalMajor_triads, \
+    CircleOf5th
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
 ug_engine = UltimateGuitarSearch()
@@ -13,11 +15,12 @@ ug_engine = UltimateGuitarSearch()
 #     print(song)
 
 ugs = UltimateGuitarSearch()
-cadence = "V-IV-ii#7-VII-vii7-I-V"
+cadence = "V-IV-#ii7-VII-vii7-I-V"
 
-cof_maj = CircleOf5thNaturalMajor_4notes.guess_tone_and_mode_from_cadence(cadence)
+cadence_and_tone = Cadence.guess_tone_and_mode_from_cadence(cadence)
 MAX_SONG_PER_SEARCH = 5
 
-songs = ugs.search_songs_from_cadence(cadence, cof_maj, MAX_SONG_PER_SEARCH, matches_exactly=True,
+cof = CircleOf5th.cof_factory(cadence_and_tone["cof_name"])
+songs = ugs.search_songs_from_cadence(cadence, cof, MAX_SONG_PER_SEARCH, matches_exactly=True,
                                       try_avoiding_blocked_searches=True)
 print(songs)

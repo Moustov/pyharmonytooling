@@ -2,6 +2,7 @@ from datetime import datetime, date
 from unittest import TestCase
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
+from pyharmonytools.harmony.cadence import Cadence
 from pyharmonytools.harmony.circle_of_5th import CircleOf5thNaturalMajor_triads
 from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
 
@@ -17,7 +18,7 @@ class _TestRobustness(TestCase):
         ugs = UltimateGuitarSearch()
         cadence = "ii7-V7-Imaj7"
         # the mode should rather be guessed from the cadence
-        cof_maj = CircleOf5thNaturalMajor_triads.guess_tone_and_mode_from_cadence(cadence)
+        cof_maj = Cadence.guess_tone_and_mode_from_cadence(cadence)
 
         TEST_BATCH_DURATION = 2   # in hours
         batch_start = datetime.combine(date.today(), datetime.now().time())
@@ -40,7 +41,7 @@ class _TestRobustness(TestCase):
         ugs = UltimateGuitarSearch()
         cadence = "ii7-V7-Imaj7"
         # the mode should rather be guessed from the cadence
-        cof_maj = CircleOf5thNaturalMajor_triads.guess_tone_and_mode_from_cadence(cadence)
+        cof_maj = Cadence.guess_tone_and_mode_from_cadence(cadence)
 
         TEST_BATCH_DURATION = 2   # in hours
         batch_start = datetime.combine(date.today(), datetime.now().time())

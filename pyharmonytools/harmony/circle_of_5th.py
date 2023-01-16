@@ -27,8 +27,7 @@ class CircleOf5th:
         self.qualities = []
         self.cof_scales = None
         self.cycle_sequence = ["C", "G", "D", "E", "A", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
-        self.cof_tone_compliances = {}
-        self.cof_tone_compliances[self.cof_name] = {}
+        self.cof_tone_compliances = {self.cof_name: {}}
         self.compliance_level = 0
         self.borrowed_chords_level = 0
         self.compliant_chords_qty = 0
@@ -76,17 +75,6 @@ class CircleOf5th:
         :return:
         """
         return 0.0
-
-    @staticmethod
-    def guess_tone_and_mode_from_cadence(cadence: str):
-        """
-        return the most compatible circle of 5th with the cadence
-        see https://en.wikipedia.org/wiki/Cadence
-        :param cadence: eg. "ii7-V7-Imaj7" would return a CircleOf5thNaturalMajor()
-        :return:
-        """
-        # the calculation must be done in subclasses
-        return None
 
     def get_compliance_chord_presence(self, harmonic_suite_chords: [str], chords: ChordProgression,
                                       cof_name: str, tonality: str) -> float:
@@ -254,7 +242,7 @@ class CircleOf5th:
         :param cp:
         :return: [probability, note, circle name, scale]
         """
-        compliance_level_max = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        compliance_level_max = {"compliance_rate": -9999, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": [], "intervals": []}
         compliance_rate = 0
         for tone in self.cof_scales:
             _HarmonyLogger.print_detail(_HarmonyLogger.LOD_TONE, f"Check tone {str(tone)} in {self.cof_name}")
@@ -268,7 +256,8 @@ class CircleOf5th:
                                                               "compliance_level": self.compliance_level,
                                                               "borrowed_chords_level": self.borrowed_chords_level,
                                                               "compliant_chords_qty": self.compliant_chords_qty,
-                                                              "borrowed_chords_qty": self.borrowed_chords_qty
+                                                              "borrowed_chords_qty": self.borrowed_chords_qty,
+                                                              "intervals": []
                                                               }
             if compliance_rate > compliance_level_max["compliance_rate"]:
                 compliance_level_max = self.cof_tone_compliances[self.cof_name][tone]
@@ -279,9 +268,9 @@ class CircleOf5th:
         return the most probable tone of a ChordProgression across possible circle of 5th.
         all compatibility values are stored in self.cof_tone_compliances, the best possible guess is returned.
         :param cp:
-        :return: {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        :return: {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": [], "intervals": []}
         """
-        best_tone = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        best_tone = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": [], "intervals": []}
 
         cof_nat_maj = CircleOf5thNaturalMajor_4notes()
         guess = cof_nat_maj.digest_tone_compliancy_with_circle_of_fifth(cp)

@@ -42,7 +42,7 @@ class Song:
         return the max tone compliance from this song
         see:
         * https://stackoverflow.com/questions/45399081/determine-the-key-of-a-song-by-its-chords
-        :return: {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        :return: {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": [], "intervals": []}
         """
         song = " ".join(self.get_recognized_chords())
         cp = self.cof.digest_song(song)
@@ -77,7 +77,7 @@ class Song:
         returns the most probable tone and mode
         :return:
         """
-        best_compliance = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": []}
+        best_compliance = {"compliance_rate": 0, "tone": "?", "cof_name": "?", "scale": [], "harmonic suite": [], "intervals": []}
         for mode in self.cof.cof_tone_compliances.keys():
             for tone in self.cof.cof_tone_compliances[mode].keys():
                 if self.cof.cof_tone_compliances[mode][tone]["compliance_rate"] > best_compliance["compliance_rate"]:

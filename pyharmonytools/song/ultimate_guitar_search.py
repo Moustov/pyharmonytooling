@@ -92,7 +92,7 @@ class UltimateGuitarSearch:
         :param try_avoiding_blocked_searches:
         :param matches_exactly:
         :param limit_per_tone:
-        :param mode: major/minor...
+        :param mode:
         :param cadence: eg. "ii7–V7–Imaj"
         :return: dict keys = the tones
         """
