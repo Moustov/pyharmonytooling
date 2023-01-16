@@ -8,7 +8,7 @@ from pyharmonytools.harmony.degree import Degree
 from pyharmonytools.harmony.note import Note
 
 
-# from pyharmonytools.song.ultimate_guitar_search import UltimateGuitarSearch
+# todo: check https://www.oolimo.de/akkordfolgen/matrix
 
 
 class Cadence:

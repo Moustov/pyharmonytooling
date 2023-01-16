@@ -79,3 +79,8 @@ class TestCofChord(TestCase):
         self.ut_report.assertTrue(CofChord.is_like_a_chord('AM7'))
         self.ut_report.assertTrue(not CofChord.is_like_a_chord('Ax'))
 
+    # def test_find_similar_chords(self):
+    #     c = Chord("Am7")
+    #     notes1 = CofChord.find_substitutes(c)
+    #     notes2 = find_chords_from_notes(c.components())   # this PyChord feature provides much less chords than above
+    #     assert notes1 == notes2

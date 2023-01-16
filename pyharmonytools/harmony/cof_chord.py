@@ -138,6 +138,8 @@ class CofChord(Chord):
     def find_substitutes(chord: Chord) -> [Chord]:
         """
         return the list of equivalent chords from a chord
+        todo: /!\ this method generates weird chords that could be simplified(eg. "C6/9/G" could be written "C6/G" )
+                    this may be checked here https://www.oolimo.com/guitarchords/analyze
         :param chord:
         :return:
         """
