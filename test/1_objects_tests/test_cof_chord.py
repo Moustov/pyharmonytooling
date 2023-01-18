@@ -1,5 +1,5 @@
 from unittest import TestCase
-from pychord import Chord
+from pychord import Chord, find_chords_from_notes
 
 from pyharmonytools.displays.unit_test_report import UnitTestReport
 from pyharmonytools.harmony.cof_chord import CofChord

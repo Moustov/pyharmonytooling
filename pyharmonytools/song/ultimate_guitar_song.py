@@ -1,3 +1,5 @@
+import html
+import os
 import urllib
 
 from pychord import Chord
@@ -63,6 +65,31 @@ class UltimateGuitarSong(Song):
         res += f"URL: {self.url}\n"
         res += "\n".join(self.tabs)
         return res
+
+    @staticmethod
+    def to_path_name(s: str) -> str:
+        res = s.replace("|", "")
+        res = res.replace("/", "")
+        res = res.replace(":", "")
+        res = res.replace("#", "")
+        res = res.replace("&039;", "'")
+        return html.unescape(res)
+
+    def store_song(self, path):
+        """
+        write the song on the HDD @ f"{path}/{self.artist}/{self.song_title}.html"
+        :param path: path to the storage folder - "/" at the end
+        :return:
+        """
+        title = UltimateGuitarSong.to_path_name(self.song_title)
+        artist = UltimateGuitarSong.to_path_name(self.artist)
+        song_title = UltimateGuitarSong.to_path_name(self.song_title)
+        final_path = f"{path}/{artist}/{title}"
+        if not os.path.isdir(final_path):
+            os.makedirs(final_path)
+
+        with open(f"{final_path}/{song_title}.html", "w", encoding="utf-8") as html_file:
+            html_file.write(self.html)
 
     def extract_tabs_without_tab(self, html: str):
         """
