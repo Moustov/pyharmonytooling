@@ -11,6 +11,7 @@ for page in range(1, 50):
         the_page = f"page={page}&"
 
     url = f"https://www.ultimate-guitar.com/explore?order=date_desc&{the_page}type[]=Chords"
+    url = f"https://www.ultimate-guitar.com/artist/the_beatles_1916?filter=chords&{the_page}"
 
     print(f"Trying to retrieve {url}...")
     page = requests.get(url)
