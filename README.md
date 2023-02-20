@@ -400,6 +400,9 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 20/FEB/23
+  * estimating note from frequency
+  * package v0.7.0
 * 18/JAN/23
   * capture songs from UG (see [ultimate_guitar_capture.py](song/ultimate_guitar_capture.py))
 * 16/JAN/23

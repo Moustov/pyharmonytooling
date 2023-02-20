@@ -61,13 +61,13 @@ class TestNote(TestCase):
 
     def test_get_interval_cs_es(self):
         cs = Note("C#")
-        es = Note("E#") # the get_interval() should translate this into F
+        es = Note("E#")  # the get_interval() should translate this into F
         res = cs.get_interval_in_half_tones(es)
         self.ut_report.assertTrue(res == 4)
 
     def test_get_interval_gs_ab(self):
         gs = Note("G#")
-        ab = Note("Ab") # the get_interval() should translate this into F
+        ab = Note("Ab")  # the get_interval() should translate this into F
         res = gs.get_interval_in_half_tones(ab)
         self.ut_report.assertTrue(res == 0)
 
@@ -114,3 +114,11 @@ class TestNote(TestCase):
                 i_n2 += 1
             i_n1 += 1
 
+
+def test_get_note_name():
+    assert Note.get_note_name(440, 0.005) == ("A", 3)
+    assert Note.get_note_name(32.703, 0.005) == ("C", 0)
+    assert Note.get_note_name(16744, 0.005) == ("C", 9)
+    assert Note.get_note_name(31609, 0.005) == ("B", 9)
+    assert Note.get_note_name(32.700, 0.005) == ("C", 0)
+    assert Note.get_note_name(31610, 0.005) == ("B", 9)

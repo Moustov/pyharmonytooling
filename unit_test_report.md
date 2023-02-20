@@ -2,7 +2,7 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-01-16 20:45:40.199980
+ generation: 2023-02-20 13:47:55.190791
 :red_circle:0
 :green_circle:486
 -------
@@ -362,8 +362,8 @@ UNIT TEST REPORT
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L13)]: test_weird_notes(line 13): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L14)]: test_weird_notes(line 14): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L15)]: test_weird_notes(line 15): 
-* :green_circle:[[1_objects_tests/test_cadence.py](test/1_objects_tests/test_cadence.py#L29)]: test_get_chords_sequences_altered(line 29): 
-* :green_circle:[[1_objects_tests/test_cadence.py](test/1_objects_tests/test_cadence.py#L20)]: test_get_chords_sequences_simple(line 20): 
+* :green_circle:[[1_objects_tests/test_cadence.py](test/1_objects_tests/test_cadence.py#L27)]: test_get_chords_sequences_altered(line 27): 
+* :green_circle:[[1_objects_tests/test_cadence.py](test/1_objects_tests/test_cadence.py#L18)]: test_get_chords_sequences_simple(line 18): 
 * :green_circle:[[1_objects_tests/test_circle_of_5th.py](test/1_objects_tests/test_circle_of_5th.py#L50)]: test_find_substitutes_c(line 50): 
 * :green_circle:[[1_objects_tests/test_circle_of_5th.py](test/1_objects_tests/test_circle_of_5th.py#L43)]: test_find_substitutes_g6(line 43): 
 * :green_circle:[[1_objects_tests/test_circle_of_5th.py](test/1_objects_tests/test_circle_of_5th.py#L31)]: test_generate_circle_of_fifths(line 31): 
