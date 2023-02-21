@@ -1,4 +1,8 @@
+import numpy as np
+
+
 class Note:
+    CONCERT_PITCH = 440
     CHROMATIC_SCALE_SHARP_BASED = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
     CHROMATIC_SCALE_FLAT_BASED = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
     # https://youtu.be/ZjKyQ7cUlO8?t=730
@@ -8,6 +12,28 @@ class Note:
                                 "Cbb", "Cb", "C", "C#", "C##", "Dbb", "Db", "D", "D#", "D##",
                                 "Ebb", "Eb", "E", "E#", "E##", "Fbb", "Fb", "F", "F#", "F##",
                                 "Gbb", "Gb", "G", "G#", "G##"]
+    chromatic_frequencies = [0,
+                             32.703, 34.648, 36.708, 38.891, 41.203, 43.654, 46.249, 48.999, 51.913, 55.000, 58.270,
+                             61.735,
+                             65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.830, 110.000, 116.540,
+                             123.470,
+                             130.810, 138.590, 146.830, 155.560, 164.810, 174.610, 185.000, 196.000, 207.650, 220.000,
+                             233.080, 246.940,
+                             261.630, 277.180, 293.660, 311.130, 329.630, 349.230, 369.990, 392.000, 415.300, 440.000,
+                             466.160, 493.880,
+                             523.250, 554.370, 587.330, 622.250, 659.260, 698.460, 739.990, 783.990, 830.610, 880.000,
+                             932.330, 987.770,
+                             1046.500, 1108.700, 1174.700, 1244.500, 1318.500, 1396.900, 1480.000, 1568.000, 1661.200,
+                             1760.000, 1864.700, 1975.500,
+                             2093.000, 2217.500, 2349.300, 2489.000, 2637.000, 2793.800, 2960.000, 3136.000, 3322.400,
+                             3520.000, 3729.300, 3951.100,
+                             4186.000, 4434.900, 4698.600, 4978.000, 5274.000, 5587.700, 5919.900, 6271.900, 6644.900,
+                             7040.000, 7458.600, 7902.100,
+                             8372.000, 8869.800, 9397.300, 9956.100, 10548.000, 11175.000, 11840.000, 12544.000,
+                             13290.000, 14080.000, 14917.000, 15804.000,
+                             16744.000, 17740.000, 18795.000, 19912.000, 21096.000, 22351.000, 23680.000, 25088.000,
+                             26580.000, 28160.000, 29834.000, 31609.000,
+                             9999999999.0]
 
     def __init__(self, name):
         self.name = name
@@ -157,33 +183,36 @@ class Note:
                  "A#": [58.27, 116.54, 233.08, 466.16, 932.33, 1864.7, 3729.3, 7458.6, 14917., 29834.],
                  "B": [61.735, 123.47, 246.94, 493.88, 987.77, 1975.5, 3951.1, 7902.1, 15804., 31609]
                  }
-        chromatic_frequencies = [ 0,
-                       32.703, 34.648, 36.708, 38.891, 41.203, 43.654, 46.249, 48.999, 51.913, 55.000, 58.270, 61.735,
-                       65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.830, 110.000, 116.540, 123.470,
-                       130.810, 138.590, 146.830, 155.560, 164.810, 174.610, 185.000, 196.000, 207.650, 220.000, 233.080, 246.940,
-                       261.630, 277.180, 293.660, 311.130, 329.630, 349.230, 369.990, 392.000, 415.300, 440.000, 466.160, 493.880,
-                       523.250, 554.370, 587.330, 622.250, 659.260, 698.460, 739.990, 783.990, 830.610, 880.000, 932.330, 987.770,
-                       1046.500, 1108.700, 1174.700, 1244.500, 1318.500, 1396.900, 1480.000, 1568.000, 1661.200, 1760.000, 1864.700, 1975.500,
-                       2093.000, 2217.500, 2349.300, 2489.000, 2637.000, 2793.800, 2960.000, 3136.000, 3322.400, 3520.000, 3729.300, 3951.100,
-                       4186.000, 4434.900, 4698.600, 4978.000, 5274.000, 5587.700, 5919.900, 6271.900, 6644.900, 7040.000, 7458.600, 7902.100,
-                       8372.000, 8869.800, 9397.300, 9956.100, 10548.000, 11175.000, 11840.000, 12544.000, 13290.000, 14080.000, 14917.000, 15804.000,
-                       16744.000, 17740.000, 18795.000, 19912.000, 21096.000, 22351.000, 23680.000, 25088.000, 26580.000, 28160.000, 29834.000, 31609.000,
-                       9999999999.0]
         note_index = 1
         pos = 0
         octave = 0
-        for f in chromatic_frequencies:
+        for f in Note.chromatic_frequencies:
             if f != 0 and abs(f - frequency) / f < precision:
                 octave = (note_index - 2) // 12
-                return (Note.CHROMATIC_SCALE_SHARP_BASED[(note_index+1) % 12], octave)
-            if pos != 0 and chromatic_frequencies[pos] < frequency < chromatic_frequencies[pos+1]:
-                raise ValueError(f"Freq ({frequency}) between {Note.CHROMATIC_SCALE_SHARP_BASED[(note_index - 1) % 12]} "
-                                 f"({chromatic_frequencies[pos]}) "
-                                 f"and {Note.CHROMATIC_SCALE_SHARP_BASED[(note_index) % 12]} "
-                                 f"({chromatic_frequencies[pos + 1]}) "
-                                 f"- try rougher precision")
+                return (Note.CHROMATIC_SCALE_SHARP_BASED[(note_index + 1) % 12], octave)
+            if pos != 0 and Note.chromatic_frequencies[pos] < frequency < Note.chromatic_frequencies[pos + 1]:
+                raise ValueError(
+                    f"Freq ({frequency}) between {Note.CHROMATIC_SCALE_SHARP_BASED[(note_index - 1) % 12]} "
+                    f"({Note.chromatic_frequencies[pos]}) "
+                    f"and {Note.CHROMATIC_SCALE_SHARP_BASED[(note_index) % 12]} "
+                    f"({Note.chromatic_frequencies[pos + 1]}) "
+                    f"- try rougher precision")
             pos += 1
             note_index += 1
         raise ValueError(f"Error in finding note with {frequency}Hz")
 
-
+    @staticmethod
+    def find_closest_note(pitch):
+        """
+        This function finds the closest note for a given pitch
+        Parameters:
+        pitch (float): pitch given in hertz
+        Returns:
+        closest_note (str): e.g. a, g#, ..
+        closest_pitch (float): pitch of the closest note in hertz
+        Copyright (c) 2021 chciken - See https://www.chciken.com/digital/signal/processing/2020/05/13/guitar-tuner.html
+        """
+        i = int(np.round(np.log2(pitch / Note.CONCERT_PITCH) * 12))
+        closest_note = Note.CHROMATIC_SCALE_SHARP_BASED[i % 12] + str(4 + (i + 9) // 12)
+        closest_pitch = Note.CONCERT_PITCH * 2 ** (i / 12)
+        return closest_note, closest_pitch

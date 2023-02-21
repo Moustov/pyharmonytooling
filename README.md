@@ -400,6 +400,9 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 22/FEB/23
+  * closest pitch from chciken
+  * package v0.7.1
 * 20/FEB/23
   * estimating note from frequency
   * package v0.7.0
