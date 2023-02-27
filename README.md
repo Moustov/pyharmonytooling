@@ -402,7 +402,7 @@ see [here](unit_test_report.md)
 # Release Notes
 * 27/FEB/23
   * Neck.find_position_from_note handles note synonyms
-  * package v0.7.2
+  * package v0.7.3
 * 22/FEB/23
   * closest pitch from chciken
   * package v0.7.1
