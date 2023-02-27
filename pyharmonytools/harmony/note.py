@@ -166,6 +166,7 @@ class Note:
         https://www.deleze.name/marcel/physique/musique/Frequences.pdf
         returns the note name from a Freq from A3 = 440Hz
         todo: adapt Frequencies with tuning pitch
+        todo Ab and G# are not the same: https://www.youtube.com/watch?v=tGEXJe3px68
         :param precision: relative precision abs(f - frequency) / f < precision
         :param frequency:
         :return: (note name, octave)
@@ -211,6 +212,8 @@ class Note:
         closest_note (str): e.g. a, g#, ..
         closest_pitch (float): pitch of the closest note in hertz
         Copyright (c) 2021 chciken - See https://www.chciken.com/digital/signal/processing/2020/05/13/guitar-tuner.html
+
+        todo Ab and G# are not the same: https://www.youtube.com/watch?v=tGEXJe3px68
         """
         i = int(np.round(np.log2(pitch / Note.CONCERT_PITCH) * 12))
         closest_note = Note.CHROMATIC_SCALE_SHARP_BASED[i % 12] + str(4 + (i + 9) // 12)

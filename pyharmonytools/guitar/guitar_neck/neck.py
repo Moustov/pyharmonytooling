@@ -1,5 +1,7 @@
 from pychord import Chord
 
+from pyharmonytools.harmony.note import Note
+
 
 class Neck:
     TUNING = ["E", "A", "D", "G", "B", "e"]
@@ -36,7 +38,8 @@ class Neck:
         """
         res = []
         for fret in range(0, self.FRET_QUANTITY + 2):  # +1 for the nut / +1 to reach the last fret => +2
-            if Neck.find_note_from_position(string, fret).upper() == note.upper():
+            neck_note = Neck.find_note_from_position(string, fret)
+            if Note(neck_note) == Note(note):
                 res.append([string, fret])
         return res
 
