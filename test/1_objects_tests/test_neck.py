@@ -33,6 +33,15 @@ class Test(TestCase):
         res = n.find_note_from_position(string, fret)
         self.ut_report.assertTrue(res == "G")
 
+    def test_find_positions_from_note_octave(self):
+        n = Neck()
+        res = n.find_positions_from_note("E", 2)
+        self.ut_report.assertTrue(res == [['E', 0]])
+        res = n.find_positions_from_note("E", 5)
+        self.ut_report.assertTrue(res == [['e', 12]])
+        res = n.find_positions_from_note("F", 2)
+        self.ut_report.assertTrue(res == [['E', 1]])
+
     def test_find_positions_from_note(self):
         n = Neck()
         res = n.find_positions_from_note("E")

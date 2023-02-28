@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-02-27 20:53:30.810487
+ generation: 2023-02-28 01:04:11.899081
 :red_circle:0
-:green_circle:486
+:green_circle:489
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -464,12 +464,15 @@ UNIT TEST REPORT
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L149)]: test_guess_tone_and_mode_happy_birthday_chords(line 149): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L150)]: test_guess_tone_and_mode_happy_birthday_chords(line 150): 
 * :green_circle:[[1_objects_tests/test_harmony_tools.py](test/1_objects_tests/test_harmony_tools.py#L151)]: test_guess_tone_and_mode_happy_birthday_chords(line 151): 
-* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L46)]: test_find_finger_layout2(line 46): tab [0, 7, 5, 5, 5, 8] has a possible fingering: {'E': ['0', '-', '-', '-', '-', '-', '-', '-', '-'], 'A': ['-', '-', '-', '-', '-', '-', '-', '3', '-'], 'D': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'G': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'B': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'e': ['-', '-', '-', '-', '-', '-', '-', '-', '4']}
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L55)]: test_find_finger_layout2(line 55): tab [0, 7, 5, 5, 5, 8] has a possible fingering: {'E': ['0', '-', '-', '-', '-', '-', '-', '-', '-'], 'A': ['-', '-', '-', '-', '-', '-', '-', '3', '-'], 'D': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'G': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'B': ['-', '-', '-', '-', '-', '1', '-', '-', '-'], 'e': ['-', '-', '-', '-', '-', '-', '-', '-', '4']}
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L29)]: test_find_note_from_position_string_D(line 29): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L34)]: test_find_note_from_position_string_D(line 34): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L17)]: test_find_note_from_position_string_E(line 17): 
 * :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L22)]: test_find_note_from_position_string_E(line 22): 
-* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L39)]: test_find_positions_from_note(line 39): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L48)]: test_find_positions_from_note(line 48): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L39)]: test_find_positions_from_note_octave(line 39): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L41)]: test_find_positions_from_note_octave(line 41): 
+* :green_circle:[[1_objects_tests/test_neck.py](test/1_objects_tests/test_neck.py#L43)]: test_find_positions_from_note_octave(line 43): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L266)]: test_compliance(line 266): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L267)]: test_compliance(line 267): 
 * :green_circle:[[1_objects_tests/test_text_song.py](test/1_objects_tests/test_text_song.py#L268)]: test_compliance(line 268): 
