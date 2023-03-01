@@ -116,9 +116,9 @@ class TestNote(TestCase):
 
 
 def test_get_note_name():
-    assert Note.get_note_name(440, 0.005) == ("A", 3)
-    assert Note.get_note_name(32.703, 0.005) == ("C", 0)
-    assert Note.get_note_name(16744, 0.005) == ("C", 9)
-    assert Note.get_note_name(31609, 0.005) == ("B", 9)
-    assert Note.get_note_name(32.700, 0.005) == ("C", 0)
-    assert Note.get_note_name(31610, 0.005) == ("B", 9)
+    assert Note.find_closest_note(440) == ("A3", 440)
+    assert Note.find_closest_note(32.703) == ('C0', 32.70319566257483)
+    assert Note.find_closest_note(16744) == ('C9', 16744.036179238312)
+    assert Note.find_closest_note(31609) == ('B9', 31608.53128039195)
+    assert Note.find_closest_note(32.700) == ('C0', 32.70319566257483)
+    assert Note.find_closest_note(31610) == ('B9', 31608.53128039195)

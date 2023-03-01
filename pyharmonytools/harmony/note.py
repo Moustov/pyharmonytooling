@@ -3,10 +3,10 @@ import numpy as np
 
 class Note:
     CONCERT_PITCH = 440
-    CHROMATIC_SCALE_SHARP_BASED = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
-    CHROMATIC_SCALE_FLAT_BASED = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
+    CHROMATIC_SCALE_SHARP_BASED = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    CHROMATIC_SCALE_FLAT_BASED = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
     # https://youtu.be/ZjKyQ7cUlO8?t=730
-    CHROMATIC_SCALE_ENHARMONIC_NOTES = ["Bdd", "Bb", "Cb", "B#", "Db", "Ebb", "Eb", "Fb", "E#", "Gb", "Abb", "Ab"]
+    CHROMATIC_SCALE_ENHARMONIC_NOTES = ["B#", "Db", "Ebb", "Eb", "Fb", "E#", "Gb", "Abb", "Ab", "Bdd", "Bb", "Cb", ]
     # see https://en.wikipedia.org/wiki/Comma_(music) to make it generic as much as possible
     EXTENDED_CHROMATIC_SCALE = ["Abb", "Ab", "A", "A#", "A##", "Bbb", "Bb", "B", "B#", "B##",
                                 "Cbb", "Cb", "C", "C#", "C##", "Dbb", "Db", "D", "D#", "D##",
@@ -34,6 +34,19 @@ class Note:
                              16744.000, 17740.000, 18795.000, 19912.000, 21096.000, 22351.000, 23680.000, 25088.000,
                              26580.000, 28160.000, 29834.000, 31609.000,
                              9999999999.0]
+    notes = {"C": [32.703, 65.406, 130.81, 261.63, 523.25, 1046.5, 2093., 4186., 8372., 16744.],
+             "C#": [34.648, 69.296, 138.59, 277.18, 554.37, 1108.7, 2217.5, 4434.9, 8869.8, 17740.],
+             "D": [36.708, 73.416, 146.83, 293.66, 587.33, 1174.7, 2349.3, 4698.6, 9397.3, 18795.],
+             "D#": [38.891, 77.782, 155.56, 311.13, 622.25, 1244.5, 2489., 4978., 9956.1, 19912.],
+             "E": [41.203, 82.407, 164.81, 329.63, 659.26, 1318.5, 2637., 5274., 10548., 21096.],
+             "F": [43.654, 87.307, 174.61, 349.23, 698.46, 1396.9, 2793.8, 5587.7, 11175., 22351.],
+             "F#": [46.249, 92.499, 185., 369.99, 739.99, 1480., 2960., 5919.9, 11840., 23680.],
+             "G": [48.999, 97.999, 196., 392., 783.99, 1568., 3136., 6271.9, 12544., 25088.],
+             "G#": [51.913, 103.83, 207.65, 415.3, 830.61, 1661.2, 3322.4, 6644.9, 13290., 26580.],
+             "A": [55., 110., 220., 440., 880., 1760., 3520., 7040., 14080., 28160.],
+             "A#": [58.27, 116.54, 233.08, 466.16, 932.33, 1864.7, 3729.3, 7458.6, 14917., 29834.],
+             "B": [61.735, 123.47, 246.94, 493.88, 987.77, 1975.5, 3951.1, 7902.1, 15804., 31609]
+             }
 
     def __init__(self, name):
         self.name = name
@@ -161,61 +174,20 @@ class Note:
         raise ValueError(f"The note '{self.name}' could be found in any scale")
 
     @staticmethod
-    def get_note_name(frequency: float, precision: float = 0.005) -> (str, int):
-        """
-        https://www.deleze.name/marcel/physique/musique/Frequences.pdf
-        returns the note name from a Freq from A3 = 440Hz
-        todo: adapt Frequencies with tuning pitch
-        todo Ab and G# are not the same: https://www.youtube.com/watch?v=tGEXJe3px68
-        :param precision: relative precision abs(f - frequency) / f < precision
-        :param frequency:
-        :return: (note name, octave)
-        """
-        notes = {"C": [32.703, 65.406, 130.81, 261.63, 523.25, 1046.5, 2093., 4186., 8372., 16744.],
-                 "C#": [34.648, 69.296, 138.59, 277.18, 554.37, 1108.7, 2217.5, 4434.9, 8869.8, 17740.],
-                 "D": [36.708, 73.416, 146.83, 293.66, 587.33, 1174.7, 2349.3, 4698.6, 9397.3, 18795.],
-                 "D#": [38.891, 77.782, 155.56, 311.13, 622.25, 1244.5, 2489., 4978., 9956.1, 19912.],
-                 "E": [41.203, 82.407, 164.81, 329.63, 659.26, 1318.5, 2637., 5274., 10548., 21096.],
-                 "F": [43.654, 87.307, 174.61, 349.23, 698.46, 1396.9, 2793.8, 5587.7, 11175., 22351.],
-                 "F#": [46.249, 92.499, 185., 369.99, 739.99, 1480., 2960., 5919.9, 11840., 23680.],
-                 "G": [48.999, 97.999, 196., 392., 783.99, 1568., 3136., 6271.9, 12544., 25088.],
-                 "G#": [51.913, 103.83, 207.65, 415.3, 830.61, 1661.2, 3322.4, 6644.9, 13290., 26580.],
-                 "A": [55., 110., 220., 440., 880., 1760., 3520., 7040., 14080., 28160.],
-                 "A#": [58.27, 116.54, 233.08, 466.16, 932.33, 1864.7, 3729.3, 7458.6, 14917., 29834.],
-                 "B": [61.735, 123.47, 246.94, 493.88, 987.77, 1975.5, 3951.1, 7902.1, 15804., 31609]
-                 }
-        note_index = 1
-        pos = 0
-        octave = 0
-        for f in Note.chromatic_frequencies:
-            if f != 0 and abs(f - frequency) / f < precision:
-                octave = (note_index - 2) // 12
-                return (Note.CHROMATIC_SCALE_SHARP_BASED[(note_index + 1) % 12], octave)
-            if pos != 0 and Note.chromatic_frequencies[pos] < frequency < Note.chromatic_frequencies[pos + 1]:
-                raise ValueError(
-                    f"Freq ({frequency}) between {Note.CHROMATIC_SCALE_SHARP_BASED[(note_index - 1) % 12]} "
-                    f"({Note.chromatic_frequencies[pos]}) "
-                    f"and {Note.CHROMATIC_SCALE_SHARP_BASED[(note_index) % 12]} "
-                    f"({Note.chromatic_frequencies[pos + 1]}) "
-                    f"- try rougher precision")
-            pos += 1
-            note_index += 1
-        raise ValueError(f"Error in finding note with {frequency}Hz")
-
-    @staticmethod
-    def find_closest_note(pitch):
+    def find_closest_note(pitch) -> (str, float):
         """
         This function finds the closest note for a given pitch
         Parameters:
         pitch (float): pitch given in hertz
         Returns:
-        closest_note (str): e.g. a, g#, ..
+        closest_note (str): e.g. A, G#, ..
         closest_pitch (float): pitch of the closest note in hertz
         Copyright (c) 2021 chciken - See https://www.chciken.com/digital/signal/processing/2020/05/13/guitar-tuner.html
 
         todo Ab and G# are not the same: https://www.youtube.com/watch?v=tGEXJe3px68
         """
+        notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
         i = int(np.round(np.log2(pitch / Note.CONCERT_PITCH) * 12))
-        closest_note = Note.CHROMATIC_SCALE_SHARP_BASED[i % 12] + str(4 + (i + 9) // 12)
+        closest_note_name = notes[i % 12] + str(3 + (i + 9) // 12)
         closest_pitch = Note.CONCERT_PITCH * 2 ** (i / 12)
-        return closest_note, closest_pitch
+        return closest_note_name, closest_pitch

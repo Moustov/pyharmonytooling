@@ -13,6 +13,9 @@ Series of tools to handle harmony in music
     pip install pyHarmonyTooling 
 
 # Features
+Usages of this library: 
+* https://github.com/Moustov/pyHarmonyUI
+
 > **Warning**
 >
 > All possible chord names are defined by the PyChord library
@@ -400,6 +403,12 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 02/MAR/23
+  * scales start from C
+  * package v0.8.1
+* 28/FEB/23
+  * notes frequencies exposed
+  * package v0.8.0
 * 27/FEB/23
   * Neck.find_position_from_note handles note synonyms 
   * Neck.find_position_from_note handles octaves
