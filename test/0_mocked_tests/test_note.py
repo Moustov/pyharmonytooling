@@ -114,11 +114,57 @@ class TestNote(TestCase):
                 i_n2 += 1
             i_n1 += 1
 
+    def test_get_note_name(self):
+        assert Note.find_closest_note(440) == ("A3", 440)
+        assert Note.find_closest_note(32.703) == ('C0', 32.70319566257483)
+        assert Note.find_closest_note(16744) == ('C9', 16744.036179238312)
+        assert Note.find_closest_note(31609) == ('B9', 31608.53128039195)
+        assert Note.find_closest_note(32.700) == ('C0', 32.70319566257483)
+        assert Note.find_closest_note(31610) == ('B9', 31608.53128039195)
 
-def test_get_note_name():
-    assert Note.find_closest_note(440) == ("A3", 440)
-    assert Note.find_closest_note(32.703) == ('C0', 32.70319566257483)
-    assert Note.find_closest_note(16744) == ('C9', 16744.036179238312)
-    assert Note.find_closest_note(31609) == ('B9', 31608.53128039195)
-    assert Note.find_closest_note(32.700) == ('C0', 32.70319566257483)
-    assert Note.find_closest_note(31610) == ('B9', 31608.53128039195)
+    def test_note_with_octave(self):
+        n = Note("C")
+        assert n.name == "C"
+        assert n.octave == -1
+        n = Note("C6")
+        assert n.name == "C"
+        assert n.octave == 6
+        n = Note("C#6")
+        assert n.name == "C#"
+        assert n.octave == 6
+
+    def test_str_note_with_octave(self):
+        n = Note("C")
+        assert str(n) == "C"
+        n = Note("C6")
+        assert str(n) == "C6"
+        n = Note("C#6")
+        assert str(n) == "C#6"
+
+    def test_neq_note_with_octave(self):
+        n1 = Note("C")
+        n2 = Note("C")
+        assert not n1 != n2
+        n1 = Note("C2")
+        n2 = Note("C2")
+        assert not n1 != n2
+        n1 = Note("C1")
+        n2 = Note("C2")
+        assert n1 != n2
+        n1 = Note("C1")
+        n2 = Note("C")
+        assert n1 != n2
+
+    def test_eq_note_with_octave(self):
+        n1 = Note("C")
+        n2 = Note("C")
+        assert n1 == n2
+        n1 = Note("C2")
+        n2 = Note("C2")
+        assert n1 == n2
+        n1 = Note("C1")
+        n2 = Note("C2")
+        assert not n1 == n2
+        n1 = Note("C1")
+        n2 = Note("C")
+        assert not n1 == n2

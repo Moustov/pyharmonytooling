@@ -49,7 +49,12 @@ class Note:
              }
 
     def __init__(self, name):
-        self.name = name
+        if name[-1].isdigit():
+            self.name = name[:-1]
+            self.octave = int(name[-1])
+        else:
+            self.name = name
+            self.octave = -1
         if name == "B#":
             self.name = "C"
         if name == "E#":
@@ -62,13 +67,23 @@ class Note:
             self.name = Note.CHROMATIC_SCALE_SHARP_BASED[(index - 2) % len(Note.CHROMATIC_SCALE_SHARP_BASED)]
 
     def __str__(self):
-        return self.name
+        if self.octave == -1:
+            return self.name
+        else:
+            return f"{self.name}{self.octave}"
+
 
     def __repr__(self):
-        return f"<Note: {self.name}>"
+        if self.octave == -1:
+            return f"<Note: {self.name}>"
+        else:
+            return f"<Note: {self.name}{self.octave}>"
 
     def __ne__(self, other):
-        return not self.__eq__(other)
+        if self.octave == -1:
+            return not self.__eq__(other)
+        else:
+            return str(self) != str(other)
 
     def __eq__(self, other) -> bool:
         """
@@ -78,9 +93,9 @@ class Note:
         """
         if not isinstance(other, Note) and not isinstance(other, str):
             raise TypeError(f"Cannot compare Note object with {type(other)} object")
-        if type(other) == str and self.name == other:
+        if type(other) == str and self.name == other and self.octave == -1:
             return True
-        elif type(other) == Note and self.name == other.name:
+        elif type(other) == Note and self.name == other.name and self.octave == other.octave:
             return True
         distance = self.get_interval_in_half_tones(other)
         return distance == 0
@@ -97,7 +112,10 @@ class Note:
         index_self = Note.get_index(s_self)
         s_other = str(other)
         index_other = Note.get_index(s_other)
-        return index_other - index_self
+        if self.octave == -1:
+            return index_other - index_self
+        else:
+            return index_other - index_self + (other.octave - self.octave) * 12
 
     @staticmethod
     def get_index(note_name):
@@ -143,35 +161,42 @@ class Note:
             return [note]
 
     def transpose(self, number_half_tone: int) -> str:
-        if self.name in Note.CHROMATIC_SCALE_FLAT_BASED:
-            pos = Note.CHROMATIC_SCALE_FLAT_BASED.index(self.name)
-            pos += number_half_tone
-            pos = pos % len(Note.CHROMATIC_SCALE_FLAT_BASED)
-            self.name = Note.CHROMATIC_SCALE_FLAT_BASED[pos]
-            return self.name
+        if self.octave == -1:
+            if self.name in Note.CHROMATIC_SCALE_FLAT_BASED:
+                pos = Note.CHROMATIC_SCALE_FLAT_BASED.index(self.name)
+                pos += number_half_tone
+                pos = pos % len(Note.CHROMATIC_SCALE_FLAT_BASED)
+                self.name = Note.CHROMATIC_SCALE_FLAT_BASED[pos]
+                return self.name
 
-        if self.name in Note.CHROMATIC_SCALE_SHARP_BASED:
-            pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(self.name)
-            pos += number_half_tone
-            pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
-            self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]
-            return self.name
+            if self.name in Note.CHROMATIC_SCALE_SHARP_BASED:
+                pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(self.name)
+                pos += number_half_tone
+                pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
+                self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]
+                return self.name
 
-        if self.name in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
-            pos = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES.index(self.name)
-            pos += number_half_tone
-            pos = pos % len(Note.CHROMATIC_SCALE_ENHARMONIC_NOTES)
-            self.name = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES[pos]
-            return self.name
+            if self.name in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
+                pos = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES.index(self.name)
+                pos += number_half_tone
+                pos = pos % len(Note.CHROMATIC_SCALE_ENHARMONIC_NOTES)
+                self.name = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES[pos]
+                return self.name
 
-        if self.name in Note.EXTENDED_CHROMATIC_SCALE:
-            pos = Note.EXTENDED_CHROMATIC_SCALE.index(self.name)
-            pos += number_half_tone
-            pos = pos % len(Note.EXTENDED_CHROMATIC_SCALE)
-            self.name = Note.EXTENDED_CHROMATIC_SCALE[pos]
-            return self.name
-
+            if self.name in Note.EXTENDED_CHROMATIC_SCALE:
+                pos = Note.EXTENDED_CHROMATIC_SCALE.index(self.name)
+                pos += number_half_tone
+                pos = pos % len(Note.EXTENDED_CHROMATIC_SCALE)
+                self.name = Note.EXTENDED_CHROMATIC_SCALE[pos]
+                return self.name
+        else:
+            raise ValueError(f"The note '{self.name}' transposition with octave is not yet implemented")
         raise ValueError(f"The note '{self.name}' could be found in any scale")
+
+    def get_sharp_based_note(self):
+        if 'b' in self.name:
+            return Note.CHROMATIC_SCALE_SHARP_BASED[Note.CHROMATIC_SCALE_FLAT_BASED.index(self.name)]
+        return self.name
 
     @staticmethod
     def find_closest_note(pitch) -> (str, float):
