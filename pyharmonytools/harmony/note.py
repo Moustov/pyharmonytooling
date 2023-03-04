@@ -47,9 +47,8 @@ class Note:
              "A#": [58.27, 116.54, 233.08, 466.16, 932.33, 1864.7, 3729.3, 7458.6, 14917., 29834.],
              "B": [61.735, 123.47, 246.94, 493.88, 987.77, 1975.5, 3951.1, 7902.1, 15804., 31609]
              }
-
+    debug = False
     def __init__(self, name):
-        self.debug = False
         if name[-1].isdigit():
             self.name = name[:-1]
             self.octave = int(name[-1])
@@ -169,6 +168,12 @@ class Note:
             return [note]
 
     def transpose(self, number_half_tone: int) -> str:
+        """
+        Transposes the note with number_half_tone
+        if note with octave transposed out of [0..9] band => ValueError exception raised
+        :param number_half_tone:
+        :return:
+        """
         if self.debug:
             print(f"Note<{str(self)}>.transpose({number_half_tone})")
         n = self.get_sharp_based_note()
@@ -184,9 +189,16 @@ class Note:
                 self.octave += (pos + number_half_tone) // 12
             else:
                 self.octave -= (pos - number_half_tone) // 12
+                if self.octave < 0 or self.octave >= 9:
+                    raise ValueError(f"Could not transpose: note transposition out of octave band "
+                                     f"- {self.name}{self.octave} not in [0..9]")
             return str(self)
 
     def get_sharp_based_note(self):
+        """
+        returns the note name with sharps instead of flats
+        :return:
+        """
         if 'b' in self.name:
             return Note.CHROMATIC_SCALE_SHARP_BASED[Note.CHROMATIC_SCALE_FLAT_BASED.index(self.name)]
         return self.name
