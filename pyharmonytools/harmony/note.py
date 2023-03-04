@@ -57,12 +57,16 @@ class Note:
             self.octave = -1
         if name == "B#":
             self.name = "C"
-        if name == "E#":
+        elif name == "E#":
             self.name = "F"
-        if "##" in name:
+        elif name == "Cb":
+            self.name = "B"
+        elif name == "Fb":
+            self.name = "E"
+        elif "##" in name:
             index = Note.CHROMATIC_SCALE_SHARP_BASED.index(name[0])
             self.name = Note.CHROMATIC_SCALE_SHARP_BASED[(index + 2) % len(Note.CHROMATIC_SCALE_SHARP_BASED)]
-        if "bb" in name:
+        elif "bb" in name:
             index = Note.CHROMATIC_SCALE_SHARP_BASED.index(name[0])
             self.name = Note.CHROMATIC_SCALE_SHARP_BASED[(index - 2) % len(Note.CHROMATIC_SCALE_SHARP_BASED)]
 
@@ -93,12 +97,13 @@ class Note:
         """
         if not isinstance(other, Note) and not isinstance(other, str):
             raise TypeError(f"Cannot compare Note object with {type(other)} object")
-        if type(other) == str and self.name == other and self.octave == -1:
-            return True
-        elif type(other) == Note and self.name == other.name and self.octave == other.octave:
-            return True
-        elif type(other) == Note and self.name != other.name or self.octave != other.octave:
-            return False
+        if type(other) == Note:
+            n1 = self.get_sharp_based_note()
+            n2 = other.get_sharp_based_note()
+            if n1 == n2 and self.octave == other.octave:
+                return True
+            else:
+                return False
         distance = self.get_interval_in_half_tones(other)
         return distance == 0
 
