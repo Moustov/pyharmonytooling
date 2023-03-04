@@ -168,3 +168,28 @@ class TestNote(TestCase):
         n1 = Note("C1")
         n2 = Note("C")
         assert not n1 == n2
+
+    def test_transpose(self):
+        n = Note("C")
+        assert n.transpose(0) == "C"
+        n = Note("C")
+        assert n.transpose(1) == "C#"
+        n = Note("C")
+        assert n.transpose(-1) == "B"
+        n = Note("C")
+        assert n.transpose(11) == "B"
+        n = Note("C")
+        assert n.transpose(11+12) == "B"
+        n = Note("C")
+        assert n.transpose(-11) == "C#"
+        n = Note("C")
+        assert n.transpose(-11-12) == "C#"
+        n = Note("C1")
+        assert n.transpose(0) == "C1"
+        n = Note("C1")
+        assert n.transpose(1) == "C#1"
+        n = Note("C1")
+        assert n.transpose(11) == "B2"
+        n = Note("C2")
+        assert n.transpose(-1) == "B1"
+

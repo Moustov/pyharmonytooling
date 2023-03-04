@@ -97,6 +97,8 @@ class Note:
             return True
         elif type(other) == Note and self.name == other.name and self.octave == other.octave:
             return True
+        elif type(other) == Note and self.name != other.name or self.octave != other.octave:
+            return False
         distance = self.get_interval_in_half_tones(other)
         return distance == 0
 
@@ -161,37 +163,20 @@ class Note:
             return [note]
 
     def transpose(self, number_half_tone: int) -> str:
+        n = self.get_sharp_based_note()
+        pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(n)
+        pos += number_half_tone
+        pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
+        self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]
+
         if self.octave == -1:
-            if self.name in Note.CHROMATIC_SCALE_FLAT_BASED:
-                pos = Note.CHROMATIC_SCALE_FLAT_BASED.index(self.name)
-                pos += number_half_tone
-                pos = pos % len(Note.CHROMATIC_SCALE_FLAT_BASED)
-                self.name = Note.CHROMATIC_SCALE_FLAT_BASED[pos]
-                return self.name
-
-            if self.name in Note.CHROMATIC_SCALE_SHARP_BASED:
-                pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(self.name)
-                pos += number_half_tone
-                pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
-                self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]
-                return self.name
-
-            if self.name in Note.CHROMATIC_SCALE_ENHARMONIC_NOTES:
-                pos = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES.index(self.name)
-                pos += number_half_tone
-                pos = pos % len(Note.CHROMATIC_SCALE_ENHARMONIC_NOTES)
-                self.name = Note.CHROMATIC_SCALE_ENHARMONIC_NOTES[pos]
-                return self.name
-
-            if self.name in Note.EXTENDED_CHROMATIC_SCALE:
-                pos = Note.EXTENDED_CHROMATIC_SCALE.index(self.name)
-                pos += number_half_tone
-                pos = pos % len(Note.EXTENDED_CHROMATIC_SCALE)
-                self.name = Note.EXTENDED_CHROMATIC_SCALE[pos]
-                return self.name
+            return self.name
         else:
-            raise ValueError(f"The note '{self.name}' transposition with octave is not yet implemented")
-        raise ValueError(f"The note '{self.name}' could be found in any scale")
+            if number_half_tone >= 0:
+                self.octave += (pos + number_half_tone) // 12
+            else:
+                self.octave -= (pos - number_half_tone) // 12
+            return str(self)
 
     def get_sharp_based_note(self):
         if 'b' in self.name:
