@@ -49,6 +49,7 @@ class Note:
              }
 
     def __init__(self, name):
+        self.debug = False
         if name[-1].isdigit():
             self.name = name[:-1]
             self.octave = int(name[-1])
@@ -168,11 +169,10 @@ class Note:
             return [note]
 
     def transpose(self, number_half_tone: int) -> str:
+        if self.debug:
+            print(f"Note<{str(self)}>.transpose({number_half_tone})")
         n = self.get_sharp_based_note()
-        if self.octave == -1:
-            pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(n)
-        else:
-            pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(n[:-1])
+        pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(n)
         pos += number_half_tone
         pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
         self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]

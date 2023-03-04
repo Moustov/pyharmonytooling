@@ -405,7 +405,7 @@ see [here](unit_test_report.md)
 # Release Notes
 * 04/MAR/23
   * transposing Notes with octave
-  * package v0.9.1
+  * package v0.9.2
 * 02/MAR/23
   * scales start from C
   * package v0.8.1
