@@ -178,21 +178,19 @@ class Note:
             print(f"Note<{str(self)}>.transpose({number_half_tone})")
         n = self.get_sharp_based_note()
         pos = Note.CHROMATIC_SCALE_SHARP_BASED.index(n)
+
+        if self.octave != -1:
+            self.octave += (pos + number_half_tone) // 12
+            if self.octave < 0 or self.octave >= 9:
+                raise ValueError(f"Could not transpose: note transposition out of octave band "
+                                 f"- {self.name}{self.octave} not in [0..9]")
         pos += number_half_tone
         pos = pos % len(Note.CHROMATIC_SCALE_SHARP_BASED)
         self.name = Note.CHROMATIC_SCALE_SHARP_BASED[pos]
-
         if self.octave == -1:
-            return self.name
+            return f"{self.name}"
         else:
-            if number_half_tone >= 0:
-                self.octave += (pos + number_half_tone) // 12
-            else:
-                self.octave -= (pos - number_half_tone) // 12
-                if self.octave < 0 or self.octave >= 9:
-                    raise ValueError(f"Could not transpose: note transposition out of octave band "
-                                     f"- {self.name}{self.octave} not in [0..9]")
-            return str(self)
+            return f"{self.name}{self.octave}"
 
     def get_sharp_based_note(self):
         """

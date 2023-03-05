@@ -189,7 +189,7 @@ class TestNote(TestCase):
         n = Note("C1")
         assert n.transpose(1) == "C#1"
         n = Note("C1")
-        assert n.transpose(11) == "B2"
+        assert n.transpose(11) == "B1"
         n = Note("C2")
         assert n.transpose(-1) == "B1"
 

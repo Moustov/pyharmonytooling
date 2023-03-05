@@ -403,6 +403,9 @@ _(in no specific order)_
 see [here](unit_test_report.md)
 
 # Release Notes
+* 05/MAR/23
+  * fixing transposing Notes with octave
+  * package v0.9.4
 * 04/MAR/23
   * transposing Notes with octave
   * package v0.9.3
