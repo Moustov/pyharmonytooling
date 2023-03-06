@@ -405,7 +405,8 @@ see [here](unit_test_report.md)
 # Release Notes
 * 06/MAR/23
   * fixing interval distance with octaves
-  * package v0.9.5
+  * comparing notes
+  * package v0.10.0
 * 05/MAR/23
   * fixing transposing Notes with octave
   * package v0.9.4

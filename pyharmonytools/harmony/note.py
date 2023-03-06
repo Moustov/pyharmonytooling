@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 import numpy as np
 
 
@@ -70,6 +72,27 @@ class Note:
             index = Note.CHROMATIC_SCALE_SHARP_BASED.index(name[0])
             self.name = Note.CHROMATIC_SCALE_SHARP_BASED[(index - 2) % len(Note.CHROMATIC_SCALE_SHARP_BASED)]
 
+    def __lt__(self, other):
+        interval = self.get_interval_in_half_tones(other)
+        if self.octave == -1 and other.octave == -1:
+            return interval > 0
+        elif self.octave != -1 and other.octave != -1:
+            return interval > 0
+        else:
+            raise ValueError("Cannot compare a raw note with a note with octave")
+
+    def __gt__(self, other):
+        interval = self.get_interval_in_half_tones(other)
+        return interval < 0
+
+    def __le__(self, other):
+        interval = self.get_interval_in_half_tones(other)
+        return interval >= 0
+
+    def __ge__(self, other):
+        interval = self.get_interval_in_half_tones(other)
+        return interval <= 0
+
     def __str__(self):
         if self.octave == -1:
             return self.name
@@ -97,15 +120,14 @@ class Note:
         """
         if not isinstance(other, Note) and not isinstance(other, str):
             raise TypeError(f"Cannot compare Note object with {type(other)} object")
-        if type(other) == Note:
-            n1 = self.get_sharp_based_note()
-            n2 = other.get_sharp_based_note()
-            if n1 == n2 and self.octave == other.octave:
-                return True
-            else:
-                return False
-        distance = self.get_interval_in_half_tones(other)
-        return distance == 0
+        if isinstance(other, str):
+            other = Note(other)
+        n1 = self.get_sharp_based_note()
+        n2 = other.get_sharp_based_note()
+        if n1 == n2 and self.octave == other.octave:
+            return True
+        else:
+            return False
 
     def get_interval_in_half_tones(self, other) -> int:
         """
@@ -118,10 +140,12 @@ class Note:
             note_other = Note(other)
         index_self = Note.get_index(self.name)
         index_other = Note.get_index(note_other.name)
-        if self.octave == -1:
+        if self.octave == -1 and other.octave == -1:
             return index_other - index_self
-        else:
+        elif self.octave != -1 and other.octave != -1:
             return index_other - index_self + (note_other.octave - self.octave) * 12
+        else:
+            raise ValueError("Cannot get interval from a raw note and a note with octave")
 
     @staticmethod
     def get_index(note_name):

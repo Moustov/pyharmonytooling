@@ -125,81 +125,148 @@ class TestNote(TestCase):
             i_n1 += 1
 
     def test_get_note_name(self):
-        assert Note.find_closest_note(440) == ("A3", 440)
-        assert Note.find_closest_note(32.703) == ('C0', 32.70319566257483)
-        assert Note.find_closest_note(16744) == ('C9', 16744.036179238312)
-        assert Note.find_closest_note(31609) == ('B9', 31608.53128039195)
-        assert Note.find_closest_note(32.700) == ('C0', 32.70319566257483)
-        assert Note.find_closest_note(31610) == ('B9', 31608.53128039195)
+        self.ut_report.assertTrue(Note.find_closest_note(440) == ("A3", 440))
+        self.ut_report.assertTrue(Note.find_closest_note(32.703) == ('C0', 32.70319566257483))
+        self.ut_report.assertTrue(Note.find_closest_note(16744) == ('C9', 16744.036179238312))
+        self.ut_report.assertTrue(Note.find_closest_note(31609) == ('B9', 31608.53128039195))
+        self.ut_report.assertTrue(Note.find_closest_note(32.700) == ('C0', 32.70319566257483))
+        self.ut_report.assertTrue(Note.find_closest_note(31610) == ('B9', 31608.53128039195))
 
     def test_note_with_octave(self):
         n = Note("C")
-        assert n.name == "C"
-        assert n.octave == -1
+        self.ut_report.assertTrue(n.name == "C")
+        self.ut_report.assertTrue(n.octave == -1)
         n = Note("C6")
-        assert n.name == "C"
-        assert n.octave == 6
+        self.ut_report.assertTrue(n.name == "C")
+        self.ut_report.assertTrue(n.octave == 6)
         n = Note("C#6")
-        assert n.name == "C#"
-        assert n.octave == 6
+        self.ut_report.assertTrue(n.name == "C#")
+        self.ut_report.assertTrue(n.octave == 6)
 
     def test_str_note_with_octave(self):
         n = Note("C")
-        assert str(n) == "C"
+        self.ut_report.assertTrue(str(n) == "C")
         n = Note("C6")
-        assert str(n) == "C6"
+        self.ut_report.assertTrue(str(n) == "C6")
         n = Note("C#6")
-        assert str(n) == "C#6"
+        self.ut_report.assertTrue(str(n) == "C#6")
 
     def test_neq_note_with_octave(self):
         n1 = Note("C")
         n2 = Note("C")
-        assert not n1 != n2
+        self.ut_report.assertTrue(not n1 != n2)
         n1 = Note("C2")
         n2 = Note("C2")
-        assert not n1 != n2
+        self.ut_report.assertTrue(not n1 != n2)
         n1 = Note("C1")
         n2 = Note("C2")
-        assert n1 != n2
+        self.ut_report.assertTrue(n1 != n2)
         n1 = Note("C1")
         n2 = Note("C")
-        assert n1 != n2
+        self.ut_report.assertTrue(n1 != n2)
 
     def test_eq_note_with_octave(self):
         n1 = Note("C")
         n2 = Note("C")
-        assert n1 == n2
+        self.ut_report.assertTrue(n1 == n2)
         n1 = Note("C2")
         n2 = Note("C2")
-        assert n1 == n2
+        self.ut_report.assertTrue(n1 == n2)
         n1 = Note("C1")
         n2 = Note("C2")
-        assert not n1 == n2
+        self.ut_report.assertTrue(not n1 == n2)
         n1 = Note("C1")
         n2 = Note("C")
-        assert not n1 == n2
+        self.ut_report.assertTrue(not n1 == n2)
 
     def test_transpose(self):
         n = Note("C")
-        assert n.transpose(0) == "C"
+        self.ut_report.assertTrue(n.transpose(0) == "C")
         n = Note("C")
-        assert n.transpose(1) == "C#"
+        self.ut_report.assertTrue(n.transpose(1) == "C#")
         n = Note("C")
-        assert n.transpose(-1) == "B"
+        self.ut_report.assertTrue(n.transpose(-1) == "B")
         n = Note("C")
-        assert n.transpose(11) == "B"
+        self.ut_report.assertTrue(n.transpose(11) == "B")
         n = Note("C")
-        assert n.transpose(11+12) == "B"
+        self.ut_report.assertTrue(n.transpose(11+12) == "B")
         n = Note("C")
-        assert n.transpose(-11) == "C#"
+        self.ut_report.assertTrue(n.transpose(-11) == "C#")
         n = Note("C")
-        assert n.transpose(-11-12) == "C#"
+        self.ut_report.assertTrue(n.transpose(-11-12) == "C#")
         n = Note("C1")
-        assert n.transpose(0) == "C1"
+        self.ut_report.assertTrue(n.transpose(0) == "C1")
         n = Note("C1")
-        assert n.transpose(1) == "C#1"
+        self.ut_report.assertTrue(n.transpose(1) == "C#1")
         n = Note("C1")
-        assert n.transpose(11) == "B1"
+        self.ut_report.assertTrue(n.transpose(11) == "B1")
         n = Note("C2")
-        assert n.transpose(-1) == "B1"
+        self.ut_report.assertTrue(n.transpose(-1) == "B1")
 
+    def test_lt(self):
+        n1 = Note("C")
+        n2 = Note("D")
+        self.ut_report.assertTrue(n1 < n2)
+        n1 = Note("C")
+        n2 = Note("C")
+        self.ut_report.assertTrue(not (n1 < n2))
+        n1 = Note("D")
+        n2 = Note("C")
+        self.ut_report.assertTrue(not(n1 < n2))
+        n1 = Note("C1")
+        n2 = Note("D6")
+        self.ut_report.assertTrue(n1 < n2)
+        n1 = Note("C6")
+        n2 = Note("D1")
+        self.ut_report.assertTrue(not(n1 < n2))
+
+    def test_gt(self):
+        n1 = Note("C")
+        n2 = Note("D")
+        self.ut_report.assertTrue(not(n1 > n2))
+        n1 = Note("C")
+        n2 = Note("C")
+        self.ut_report.assertTrue(not (n1 > n2))
+        n1 = Note("D")
+        n2 = Note("C")
+        self.ut_report.assertTrue(n1 > n2)
+        n1 = Note("C1")
+        n2 = Note("D6")
+        self.ut_report.assertTrue(not(n1 > n2))
+        n1 = Note("C6")
+        n2 = Note("D1")
+        self.ut_report.assertTrue(n1 > n2)
+
+    def test_le(self):
+        n1 = Note("C")
+        n2 = Note("D")
+        self.ut_report.assertTrue(n1 <= n2)
+        n1 = Note("C")
+        n2 = Note("C")
+        self.ut_report.assertTrue(n1 <= n2)
+        n1 = Note("D")
+        n2 = Note("C")
+        self.ut_report.assertTrue(not(n1 <= n2))
+        n1 = Note("C1")
+        n2 = Note("D6")
+        self.ut_report.assertTrue(n1 <= n2)
+        n1 = Note("C6")
+        n2 = Note("D1")
+        self.ut_report.assertTrue(not(n1 <= n2))
+
+    def test_ge(self):
+        n1 = Note("C")
+        n2 = Note("D")
+        self.ut_report.assertTrue(not(n1 >= n2))
+        n1 = Note("C")
+        n2 = Note("C")
+        self.ut_report.assertTrue(n1 >= n2)
+        n1 = Note("D")
+        n2 = Note("C")
+        self.ut_report.assertTrue(n1 >= n2)
+        n1 = Note("C1")
+        n2 = Note("D6")
+        self.ut_report.assertTrue(not(n1 >= n2))
+        n1 = Note("C6")
+        n2 = Note("D1")
+        self.ut_report.assertTrue(n1 >= n2)

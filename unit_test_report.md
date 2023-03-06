@@ -2,9 +2,9 @@
 UNIT TEST REPORT
 ================
         
- generation: 2023-03-06 13:21:18.517444
+ generation: 2023-03-06 17:35:41.017830
 :red_circle:0
-:green_circle:491
+:green_circle:545
 -------
 
 * :green_circle:[[0_mocked_tests/test_guitar_tab_mocked.py](test/0_mocked_tests/test_guitar_tab_mocked.py#L83)]: test__get_fingerings_from_tab1(line 83): 
@@ -200,6 +200,15 @@ UNIT TEST REPORT
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L104)]: test_all_note_index(line 104): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L30)]: test_enharmonic_notes(line 30): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L31)]: test_enharmonic_notes(line 31): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L171)]: test_eq_note_with_octave(line 171): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L174)]: test_eq_note_with_octave(line 174): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L177)]: test_eq_note_with_octave(line 177): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L180)]: test_eq_note_with_octave(line 180): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L260)]: test_ge(line 260): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L263)]: test_ge(line 263): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L266)]: test_ge(line 266): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L269)]: test_ge(line 269): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L272)]: test_ge(line 272): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L113)]: test_get_all_interval(line 113): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L113)]: test_get_all_interval(line 113): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L113)]: test_get_all_interval(line 113): 
@@ -352,6 +361,37 @@ UNIT TEST REPORT
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L72)]: test_get_interval_gs_ab(line 72): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L84)]: test_get_interval_octave(line 84): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L88)]: test_get_interval_octave(line 88): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L128)]: test_get_note_name(line 128): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L129)]: test_get_note_name(line 129): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L130)]: test_get_note_name(line 130): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L131)]: test_get_note_name(line 131): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L132)]: test_get_note_name(line 132): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L133)]: test_get_note_name(line 133): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L226)]: test_gt(line 226): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L229)]: test_gt(line 229): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L232)]: test_gt(line 232): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L235)]: test_gt(line 235): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L238)]: test_gt(line 238): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L243)]: test_le(line 243): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L246)]: test_le(line 246): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L249)]: test_le(line 249): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L252)]: test_le(line 252): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L255)]: test_le(line 255): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L209)]: test_lt(line 209): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L212)]: test_lt(line 212): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L215)]: test_lt(line 215): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L218)]: test_lt(line 218): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L221)]: test_lt(line 221): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L157)]: test_neq_note_with_octave(line 157): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L160)]: test_neq_note_with_octave(line 160): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L163)]: test_neq_note_with_octave(line 163): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L166)]: test_neq_note_with_octave(line 166): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L137)]: test_note_with_octave(line 137): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L138)]: test_note_with_octave(line 138): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L140)]: test_note_with_octave(line 140): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L141)]: test_note_with_octave(line 141): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L143)]: test_note_with_octave(line 143): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L144)]: test_note_with_octave(line 144): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L19)]: test_notes_equals(line 19): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L20)]: test_notes_equals(line 20): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L21)]: test_notes_equals(line 21): 
@@ -359,6 +399,20 @@ UNIT TEST REPORT
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L24)]: test_notes_equals(line 24): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L25)]: test_notes_equals(line 25): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L27)]: test_notes_equals(line 27): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L148)]: test_str_note_with_octave(line 148): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L150)]: test_str_note_with_octave(line 150): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L152)]: test_str_note_with_octave(line 152): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L184)]: test_transpose(line 184): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L186)]: test_transpose(line 186): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L188)]: test_transpose(line 188): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L190)]: test_transpose(line 190): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L192)]: test_transpose(line 192): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L194)]: test_transpose(line 194): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L196)]: test_transpose(line 196): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L198)]: test_transpose(line 198): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L200)]: test_transpose(line 200): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L202)]: test_transpose(line 202): 
+* :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L204)]: test_transpose(line 204): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L11)]: test_weird_notes(line 11): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L12)]: test_weird_notes(line 12): 
 * :green_circle:[[0_mocked_tests/test_note.py](test/0_mocked_tests/test_note.py#L13)]: test_weird_notes(line 13): 
