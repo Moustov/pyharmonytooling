@@ -113,16 +113,15 @@ class Note:
         :param other:
         :return:
         """
-        if not isinstance(other, Note) and not isinstance(other, str):
-            raise TypeError(f"Cannot compare Note object with {type(other)} object")
-        s_self = str(self)
-        index_self = Note.get_index(s_self)
-        s_other = str(other)
-        index_other = Note.get_index(s_other)
+        note_other = other
+        if not isinstance(other, Note):
+            note_other = Note(other)
+        index_self = Note.get_index(self.name)
+        index_other = Note.get_index(note_other.name)
         if self.octave == -1:
             return index_other - index_self
         else:
-            return index_other - index_self + (other.octave - self.octave) * 12
+            return index_other - index_self + (note_other.octave - self.octave) * 12
 
     @staticmethod
     def get_index(note_name):

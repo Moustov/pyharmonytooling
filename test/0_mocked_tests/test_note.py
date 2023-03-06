@@ -77,6 +77,16 @@ class TestNote(TestCase):
         res = gs.get_interval_in_half_tones(ab)
         self.ut_report.assertTrue(res == 0)
 
+    def test_get_interval_octave(self):
+        c = Note("C1")
+        e = Note("E1")
+        res = e.get_interval_in_half_tones(c)
+        self.ut_report.assertTrue(res == -4)
+        c = Note("C1")
+        e = Note("E2")
+        res = c.get_interval_in_half_tones(e)
+        self.ut_report.assertTrue(res == 16)
+
     def test_all_note_index(self):
         index = 0
         for n in Note.CHROMATIC_SCALE_FLAT_BASED:
