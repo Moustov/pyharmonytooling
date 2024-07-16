@@ -28,7 +28,6 @@
     \clef treble
     \key c \major
     \time 4/4
-
     \relative c' {
       \mark "Natural minor scale"
       c4^"Cm" d^"Dm" es^"Eb" f^"F♯maug5" g^"Gm" as^"Ab" bes^"Bb" c
@@ -42,7 +41,6 @@
     \clef treble
     \key c \major
     \time 4/4
-
     \relative c' {
       \mark "Harmonic Minor scale"
       c4^"Cm" d^"Ddim" es^"Ebaug" f^"Fm" g^"Gadd4" as b^"B-9(no5)" c
@@ -56,7 +54,6 @@
     \clef treble
     \key c \major
     \time 4/4
-
     \relative c' {
       \mark "Melodic Minor scale (ascending)"
       c4^"Cm" d^"Dm" es^"Ebaug" f^"F5b" g^"Gsus4(no5)" a^"Amsus4(no5)" b^"B-9(no5)" c
